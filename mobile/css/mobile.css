@@ -276,9 +276,9 @@ body {
 
 /* Role switch */
 .role-sw { background: var(--b2); border: 1px solid var(--br1); border-radius: 12px; padding: 4px; display: flex; position: relative; }
-.role-btn { flex: 1; padding: 12px; background: none; border: none; color: var(--t3); font-size: 13px; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; -webkit-tap-highlight-color: transparent; }
+.role-btn { flex: 1; padding: 12px; background: none; border: none; color: var(--t3); font-size: 13px; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; -webkit-tap-highlight-color: transparent; position: relative; z-index: 2; }
 .role-btn.active { color: #fff; }
-.role-sl { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: var(--ac); border-radius: 8px; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); z-index: 0; }
+.role-sl { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: var(--ac); border-radius: 8px; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); z-index: 1; }
 .role-sl.str { transform: translateX(100%); }
 
 /* Connections */
