@@ -21,7 +21,10 @@
   <!-- Top bar -->
   <header class="topbar">
     <div class="tb-l">
-      <div class="pg-t" id="pgT">Live Streams</div>
+      <div>
+        <div class="pg-t" id="pgT">Live Streams</div>
+        <div class="pg-sub" id="pgS">Watch streams — win skins</div>
+      </div>
       <div class="live-chip"><span class="live-dot"></span><span id="liveCount">3</span> LIVE</div>
     </div>
     <button class="tb-btn menu-btn" type="button" id="menuBtn" aria-label="Menu"><i data-lucide="menu" class="lc"></i></button>
@@ -34,9 +37,11 @@
         <div class="ticker-tag"><i data-lucide="sparkles" class="lc-sm"></i> DROPS</div>
         <div class="ticker-track"><div class="ticker-scroll" id="tickerContent"></div></div>
       </div>
-      <div class="stats stats-2 mb">
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">3</div><div class="sc-l">Live</div></div>
-        <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">847</div><div class="sc-l">Drops</div></div>
+      <div class="stats stats-4 mb">
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">3</div><div class="sc-l">Streams Online</div></div>
+        <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">847</div><div class="sc-l">Skins Dropped</div></div>
+        <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">2,341</div><div class="sc-l">Viewers Online</div></div>
+        <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$12.4k</div><div class="sc-l">Total Value</div></div>
       </div>
       <div class="section-label">Currently Live <span class="cnt">3</span></div>
       <div class="str-list mb" id="streamGrid"></div>
@@ -47,7 +52,7 @@
     </div>
 
     <div class="page" id="p-stream">
-      <button class="btn btn-g back-btn" onclick="go('browse')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
+      <button class="btn btn-g back-btn" onclick="go('browse')"><i data-lucide="arrow-left" class="lc-sm"></i> Back to Streams</button>
       <div class="str-prev full mb">
         <div class="gv"><i data-lucide="gamepad-2"></i></div>
         <div class="str-br"><div class="b-live"><span class="dot"></span> LIVE</div><div class="b-view"><i data-lucide="eye" class="lc-sm"></i> <span id="sdViewers">0</span></div></div>
@@ -58,48 +63,52 @@
         <div><div class="str-name" id="sdName">s1mple</div><div class="str-game" id="sdGame">CS2 · Ranked · Mirage</div></div>
       </div>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="workflow" class="lc-sm ac"></i> Current Drop</div><span class="st st-wait" id="sdDropSt">Waiting</span></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="workflow" class="lc-sm ac"></i> Current Drop</div><span class="st st-wait" id="sdDropSt">Waiting for trigger</span></div>
         <div class="sm-flow" id="sdSM">
           <div class="sm-node active">IDLE</div><span class="sm-arrow">→</span>
-          <div class="sm-node">TRIG</div><span class="sm-arrow">→</span>
-          <div class="sm-node">WIN</div><span class="sm-arrow">→</span>
-          <div class="sm-node">SENT</div>
+          <div class="sm-node">TRIGGERED</div><span class="sm-arrow">→</span>
+          <div class="sm-node">WINNER</div><span class="sm-arrow">→</span>
+          <div class="sm-node">RESERVED</div><span class="sm-arrow">→</span>
+          <div class="sm-node">SENT</div><span class="sm-arrow">→</span>
+          <div class="sm-node">ACCEPTED</div>
         </div>
-        <div class="cd-p"><div id="sdDropInfo" class="muted">Waiting for trigger...</div></div>
+        <div class="cd-p"><div id="sdDropInfo" class="muted">Waiting for a trigger event from the streamer...</div></div>
       </div>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket-check" class="lc-sm ac"></i> Eligibility</div></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket-check" class="lc-sm ac"></i> Drop Eligibility</div></div>
         <div class="cd-p">
           <div id="eligStatus" class="elig-status fail"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><span class="elig-text ok">Twitch linked</span></div>
-          <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><span class="elig-text no">Steam Trade URL</span></div>
-          <button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam</button>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
+          <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div style="flex:1"><div class="elig-text ok">Watch time ≥ 5 min</div><div class="prog"><div class="prog-fill gn" style="width:100%"></div></div></div></div>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account &gt; 30 days</div></div>
+          <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
         </div>
       </div>
       <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Triggers</div></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Active Triggers</div></div>
         <div id="sdTriggers"></div>
       </div>
     </div>
 
     <div class="page" id="p-my-drops">
       <div class="stats stats-3 mb">
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Won</div></div>
-        <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$22.60</div><div class="sc-l">Value</div></div>
-        <div class="sc"><div class="sc-ico or"><i data-lucide="clock" class="lc"></i></div><div class="sc-v">4.2h</div><div class="sc-l">Watch</div></div>
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Prizes Won</div></div>
+        <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$22.60</div><div class="sc-l">Total Value</div></div>
+        <div class="sc"><div class="sc-ico or"><i data-lucide="clock" class="lc"></i></div><div class="sc-v">4.2h</div><div class="sc-l">Watch Time</div></div>
       </div>
       <div class="cd">
         <div class="cd-h"><div class="cd-t"><i data-lucide="gift" class="lc-sm ac"></i> My Drops</div></div>
         <div class="drops-list">
           <div class="drop-row">
-            <div class="drop-meta">Feb 17 · s1mple</div>
+            <div class="drop-meta">Feb 17 16:24 · s1mple · Triple Kill</div>
             <div class="drop-skin">AK-47 | Redline (FT)</div>
-            <span class="st st-on">Accepted</span>
+            <span class="st st-on">✓ Accepted</span>
           </div>
           <div class="drop-row">
-            <div class="drop-meta">Feb 16 · ZywOo</div>
+            <div class="drop-meta">Feb 16 21:15 · ZywOo · Knife Kill</div>
             <div class="drop-skin">P250 | Muertos (FN)</div>
-            <span class="st st-wait">Pending</span>
+            <span class="st st-wait">⏳ Pending</span>
           </div>
         </div>
       </div>
@@ -110,8 +119,12 @@
         <div class="profile-ava">XD</div>
         <div class="profile-info">
           <div class="profile-name">xDreamer</div>
-          <div class="profile-meta">Member since Jan 2026</div>
+          <div class="profile-meta">Member since Jan 12, 2026</div>
         </div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket" class="lc-sm ac"></i> Drop Participation</div><span class="st st-off">Inactive</span></div>
+        <div class="cd-p muted">Link your Twitch account and add your Steam Trade URL to participate in skin drops.</div>
       </div>
       <div class="role-sw mb">
         <div class="role-sl" id="roleSl"></div>
@@ -120,16 +133,20 @@
       </div>
       <div class="cd mb">
         <div class="cd-h"><div class="cd-t"><i data-lucide="unplug" class="lc-sm ac"></i> Connections</div></div>
-        <div class="conn"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch</div><div class="conn-d">Required for drops</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i></button></div>
-        <div class="conn"><div class="conn-i stm"><i data-lucide="gamepad-2" class="lc"></i></div><div class="conn-info"><div class="conn-t">Steam Trade URL</div><div class="conn-d">For receiving skins</div></div><button class="btn btn-p"><i data-lucide="plus" class="lc-sm"></i></button></div>
+        <div class="conn"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch Account</div><div class="conn-d">Required to participate in drops</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+        <div class="conn"><div class="conn-i stm"><i data-lucide="gamepad-2" class="lc"></i></div><div class="conn-info"><div class="conn-t">Steam Trade URL</div><div class="conn-d">Steam → Inventory → Trade Offers → "Who can send me trade offers?"</div></div><button class="btn btn-p"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
       </div>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="bar-chart-3" class="lc-sm ac"></i> Stats</div></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="bar-chart-3" class="lc-sm ac"></i> Statistics</div></div>
         <div class="mstats">
           <div class="mstat"><div class="mstat-v pu">2</div><div class="mstat-l">Prizes</div></div>
           <div class="mstat"><div class="mstat-v gn">$22.60</div><div class="mstat-l">Total</div></div>
-          <div class="mstat"><div class="mstat-v or">1</div><div class="mstat-l">This month</div></div>
+          <div class="mstat"><div class="mstat-v or">1</div><div class="mstat-l">This Month</div></div>
         </div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="trophy" class="lc-sm ac"></i> My Prizes</div><div class="cd-a">View All ›</div></div>
+        <div class="empty cd-p"><div class="empty-i"><i data-lucide="package-open" style="width:32px;height:32px"></i></div><div class="empty-t">Your skins will show up here!</div></div>
       </div>
       <div class="menu-list">
         <div class="menu-i" onclick="go('v-settings')"><i data-lucide="settings" class="lc"></i> Settings <i data-lucide="chevron-right" class="lc-sm mi-a"></i></div>
@@ -142,59 +159,80 @@
       <div class="cd mb">
         <div class="cd-h"><div class="cd-t"><i data-lucide="bell" class="lc-sm ac"></i> Notifications</div></div>
         <div class="cd-p setting-row"><span>Drop notification</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="cd-p setting-row"><span>Win sound</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-p setting-row"><span>Win sound effect</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
       </div>
       <div class="cd">
         <div class="cd-h"><div class="cd-t"><i data-lucide="user-cog" class="lc-sm ac"></i> Account</div></div>
-        <div class="cd-p"><div class="fg"><label class="fl">Username</label><input type="text" class="fi" value="xDreamer"/></div><div class="fg"><label class="fl">Email</label><input type="email" class="fi" value="xdreamer@gmail.com"/></div><button class="btn btn-p btn-w">Save</button></div>
+        <div class="cd-p"><div class="fg"><label class="fl">Username</label><input type="text" class="fi" value="xDreamer"/></div><div class="fg"><label class="fl">Email</label><input type="email" class="fi" value="xdreamer@gmail.com"/></div><button class="btn btn-p btn-w">Save Changes</button></div>
       </div>
     </div>
 
-    <!-- Streamer pages (simplified for mobile) -->
+    <!-- Streamer pages -->
     <div class="page" id="p-s-dash">
-      <div class="stats stats-2 mb">
-        <div class="sc"><div class="sc-ico rd"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" style="color:var(--rd)">LIVE</div><div class="sc-l">Status</div></div>
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sDashDrops">23</div><div class="sc-l">Drops today</div></div>
+      <div class="stats stats-4 mb">
+        <div class="sc"><div class="sc-ico rd"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" style="color:var(--rd)">LIVE</div><div class="sc-l">Stream Status</div><div class="sc-d up">↑ 1h 23m online</div></div>
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sDashDrops">23</div><div class="sc-l">Drops Today</div><div class="sc-d up">↑ 8 last hour</div></div>
+        <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v" id="sDashVal">$340</div><div class="sc-l">Value Today</div></div>
+        <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="sDashView">1,240</div><div class="sc-l">Viewers</div><div class="sc-d up">↑ 18%</div></div>
       </div>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm ac"></i> Feed</div><button class="btn btn-g small" onclick="simulateTrigger()"><i data-lucide="flask-conical" class="lc-sm"></i></button></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm ac"></i> Event Feed <span class="cnt">Live</span></div><button class="btn btn-g small" onclick="simulateTrigger()"><i data-lucide="flask-conical" class="lc-sm"></i> Test Trigger</button></div>
         <div id="sFeedList"></div>
       </div>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="backpack" class="lc-sm ac"></i> Pool</div><div class="cd-a" onclick="go('s-pool')">Manage</div></div>
-        <div class="mstats"><div class="mstat"><div class="mstat-v pu" id="poolCount">34</div><div class="mstat-l">In pool</div></div><div class="mstat"><div class="mstat-v gn">$1,240</div><div class="mstat-l">Value</div></div></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="backpack" class="lc-sm ac"></i> Skin Pool</div><div class="cd-a" onclick="go('s-pool')">Manage ›</div></div>
+        <div class="mstats">
+          <div class="mstat"><div class="mstat-v pu" id="poolCount">34</div><div class="mstat-l">In Pool</div></div>
+          <div class="mstat"><div class="mstat-v gn">$1,240</div><div class="mstat-l">Value</div></div>
+          <div class="mstat"><div class="mstat-v or" id="poolReserved">2</div><div class="mstat-l">Reserved</div></div>
+        </div>
       </div>
       <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Config</div></div>
-        <div class="trig-r"><div class="trig-ico rd"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico or"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Configure ›</div></div>
+        <div class="trig-r"><div class="trig-ico rd"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico or"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico pk"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div></div><div class="trig-rng">$5–20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
       </div>
     </div>
 
     <div class="page" id="p-s-triggers">
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Game Triggers</div><button class="btn btn-p small"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+        <div class="trig-r"><div class="trig-ico rd"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 consecutive kills without dying</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico or"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div><div class="trig-d">Win 1 vs 2+ enemies</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico pk"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div><div class="trig-d">Eliminate with a knife</div></div><div class="trig-rng">$5–20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="brain" class="lc-sm ac"></i> Drop Logic</div></div>
+        <div class="cd-p"><div class="fg"><label class="fl">Winner Selection</label><select class="fi"><option>Random among all viewers</option><option>Random among active chatters</option><option>Weighted by watch time</option></select></div><div class="fg"><label class="fl">Min watch time (min)</label><input type="number" class="fi" value="5"/></div><div class="fg"><label class="fl">Cooldown between drops (sec)</label><input type="number" class="fi" value="30"/></div></div>
+      </div>
       <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Game Triggers</div></div>
-        <div class="trig-r"><div class="trig-ico rd"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 kills</div></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico or"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 in round</div></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div><div class="trig-d">1 vs 2+</div></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico pk"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="shield-check" class="lc-sm ac"></i> Viewer Requirements</div></div>
+        <div class="cd-p setting-row"><span>Twitch linked</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-p setting-row"><span>Steam Trade URL set</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-p setting-row"><span>Steam account &gt; 30 days</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
       </div>
     </div>
 
     <div class="page" id="p-s-pool">
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
-      <div class="stats stats-2 mb">
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="backpack" class="lc"></i></div><div class="sc-v">34</div><div class="sc-l">In pool</div></div>
-        <div class="sc"><div class="sc-ico gn"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$1,240</div><div class="sc-l">Value</div></div>
+      <div class="stats stats-4 mb">
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="backpack" class="lc"></i></div><div class="sc-v">34</div><div class="sc-l">In Pool</div></div>
+        <div class="sc"><div class="sc-ico gn"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$1,240</div><div class="sc-l">Total Value</div></div>
+        <div class="sc"><div class="sc-ico or"><i data-lucide="lock" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Reserved</div></div>
+        <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">$14.70</div><div class="sc-l">Avg Drop</div></div>
       </div>
       <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="package" class="lc-sm ac"></i> Skins</div><button class="btn btn-p small"><i data-lucide="plus" class="lc-sm"></i></button></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="package" class="lc-sm ac"></i> Drop Pool <span class="cnt">34 skins</span></div><button class="btn btn-p small"><i data-lucide="plus" class="lc-sm"></i> From Inventory</button></div>
         <div class="skins-g">
-          <div class="sk-c r-cv"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">Glock-18 | Fade</div><div class="sk-p cv">$180</div></div>
-          <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">M4A4 | Desolate</div><div class="sk-p cl">$22.50</div></div>
-          <div class="sk-c r-rs"><div class="sk-img"><i data-lucide="bomb" class="sk-ico"></i></div><div class="sk-n">P250 | Muertos</div><div class="sk-p rs">$3.20</div></div>
+          <div class="sk-c r-gd"><div class="sk-img"><i data-lucide="sword" class="sk-ico"></i></div><div class="sk-n">Karambit | Doppler</div><div class="sk-w">FN · Phase 2</div><div class="sk-p gd">$420</div><div class="sk-rt rt-gd">★ Rare</div></div>
+          <div class="sk-c r-cv"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">Glock-18 | Fade</div><div class="sk-w">Factory New</div><div class="sk-p cv">$180</div><div class="sk-rt rt-cv">Covert</div></div>
+          <div class="sk-c r-cv reserved"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">Deagle | Blaze</div><div class="sk-w">Factory New</div><div class="sk-p cv">$55.80</div><div class="sk-rt rt-cv">Covert</div></div>
+          <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">M4A4 | Desolate Space</div><div class="sk-w">MW</div><div class="sk-p cl">$22.50</div><div class="sk-rt rt-cl">Classified</div></div>
+          <div class="sk-c r-rs"><div class="sk-img"><i data-lucide="bomb" class="sk-ico"></i></div><div class="sk-n">P250 | Muertos</div><div class="sk-w">FN</div><div class="sk-p rs">$3.20</div><div class="sk-rt rt-rs">Restricted</div></div>
         </div>
       </div>
     </div>
@@ -203,34 +241,47 @@
       <div class="wiz">
         <div class="wiz-steps" id="wizSteps">
           <div class="wiz-step cur"><div class="wiz-num">1</div><div class="wiz-lbl">Twitch</div></div>
-          <div class="wiz-step"><div class="wiz-num">2</div><div class="wiz-lbl">Bot</div></div>
-          <div class="wiz-step"><div class="wiz-num">3</div><div class="wiz-lbl">CS2</div></div>
-          <div class="wiz-step"><div class="wiz-num">4</div><div class="wiz-lbl">Pool</div></div>
+          <div class="wiz-step"><div class="wiz-num">2</div><div class="wiz-lbl">Steam Bot</div></div>
+          <div class="wiz-step"><div class="wiz-num">3</div><div class="wiz-lbl">CS2 Agent</div></div>
+          <div class="wiz-step"><div class="wiz-num">4</div><div class="wiz-lbl">Skin Pool</div></div>
         </div>
         <div class="wiz-body">
           <div class="wiz-panel" id="wiz-1">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="twitch" class="lc-sm" style="color:#9146ff"></i> Connect Twitch</div></div>
-              <div class="cd-p"><p class="muted">We need access to your Twitch channel.</p><button class="btn btn-p btn-w" onclick="wizNext()"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="twitch" class="lc-sm" style="color:#9146ff"></i> Step 1: Connect Twitch</div></div>
+              <div class="cd-p"><p class="muted">We need access to your Twitch channel to track stream status, viewers, and chat activity.</p>
+                <div class="conn" style="border:1px solid var(--br1);border-radius:12px;padding:16px;margin-bottom:16px"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch OAuth</div><div class="conn-d">Authorize via Twitch for channel access</div></div><button class="btn btn-p" onclick="wizNext()"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+              </div>
             </div>
           </div>
           <div class="wiz-panel" id="wiz-2" style="display:none">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm cy"></i> Steam Bot</div></div>
-              <div class="cd-p"><div class="fg"><label class="fl">Bot username</label><input type="text" class="fi" placeholder="dropzone_bot"/></div><div class="fg"><label class="fl">Shared secret</label><input type="password" class="fi" placeholder="From SDA"/></div><button class="btn btn-p btn-w" onclick="wizNext()">Next</button></div>
+            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm" style="color:var(--cy)"></i> Step 2: Steam Trade Bot</div></div>
+              <div class="cd-p"><p class="muted">The bot account sends trade offers to winners. Create a dedicated Steam account for the bot.</p>
+                <div class="fg"><label class="fl">Steam Bot Username</label><input type="text" class="fi" placeholder="dropzone_bot"/></div>
+                <div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" placeholder="From Steam Desktop Authenticator"/></div>
+                <div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" placeholder="For trade confirmation"/></div>
+                <button class="btn btn-p btn-w" onclick="wizNext()" style="margin-top:12px">Next</button></div>
             </div>
           </div>
           <div class="wiz-panel" id="wiz-3" style="display:none">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="gamepad-2" class="lc-sm or"></i> CS2 Agent</div></div>
-              <div class="cd-p"><p class="muted">Add config to your CS2 cfg folder.</p><button class="btn btn-p"><i data-lucide="download" class="lc-sm"></i> Download config</button><button class="btn btn-p btn-w" onclick="wizNext()" style="margin-top:12px">Next</button></div>
+            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="gamepad-2" class="lc-sm" style="color:var(--or)"></i> Step 3: CS2 Game Agent</div></div>
+              <div class="cd-p"><p class="muted">The agent captures game events (ACE, Triple Kill, Clutch) and sends them to DROPZONE. Without it, drops won't work.</p>
+                <div class="conn" style="border:1px solid var(--br1);border-radius:12px;padding:16px;margin-bottom:12px"><div class="conn-i cs"><i data-lucide="cpu" class="lc"></i></div><div class="conn-info"><div class="conn-t">CS2 Game State Integration</div><div class="conn-d">Add config to your CS2 cfg folder</div></div><button class="btn btn-p"><i data-lucide="download" class="lc-sm"></i> Download</button></div>
+                <div style="background:var(--b2);border:1px solid var(--br1);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t2);line-height:1.6"><span style="color:var(--t4)">// gamestate_integration_dropzone.cfg</span><br>"DROPZONE" { "uri" "https://api.dropzone.gg/events" "timeout" "5.0" }</div>
+                <button class="btn btn-p btn-w" onclick="wizNext()" style="margin-top:12px">Next</button></div>
             </div>
           </div>
           <div class="wiz-panel" id="wiz-4" style="display:none">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="package-plus" class="lc-sm ac"></i> Skin Pool</div></div>
-              <div class="cd-p"><p class="muted">Load skins from bot inventory. Min 5.</p><button class="btn btn-p btn-w" onclick="wizNext(); go('s-dash');">Finish</button></div>
+            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="package-plus" class="lc-sm ac"></i> Step 4: Add Skins to Pool</div></div>
+              <div class="cd-p"><p class="muted">Load skins from the bot's inventory into the drop pool. Minimum 5 skins required to start.</p>
+                <button class="btn btn-p btn-w" style="margin-bottom:16px"><i data-lucide="package-plus" class="lc-sm"></i> Load from Bot Inventory</button>
+                <div style="text-align:center;padding:16px;color:var(--t3);font-size:13px">Skins added: <b style="color:var(--ac)">0 / 5</b></div>
+                <div class="prog"><div class="prog-fill ac" style="width:0%"></div></div>
+                <button class="btn btn-p btn-w" onclick="wizNext(); go('s-dash');" style="margin-top:16px">Finish</button></div>
             </div>
           </div>
         </div>
         <div class="wiz-btns">
-          <button class="btn btn-g" id="wizPrev" onclick="wizPrev()" style="visibility:hidden"><i data-lucide="arrow-left" class="lc-sm"></i></button>
+          <button class="btn btn-g" id="wizPrev" onclick="wizPrev()" style="visibility:hidden"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
           <button class="btn btn-p" id="wizNextBtn" onclick="wizNext()">Next <i data-lucide="arrow-right" class="lc-sm"></i></button>
         </div>
       </div>
@@ -239,31 +290,74 @@
     <div class="page" id="p-s-health">
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
       <div class="stats stats-3 mb">
-        <div class="sc"><div class="sc-ico gn"><i data-lucide="check-circle" class="lc"></i></div><div class="sc-v" style="color:var(--gn)">3/4</div><div class="sc-l">Online</div></div>
+        <div class="sc"><div class="sc-ico gn"><i data-lucide="check-circle" class="lc"></i></div><div class="sc-v" style="color:var(--gn)">3/4</div><div class="sc-l">Systems Online</div></div>
         <div class="sc"><div class="sc-ico or"><i data-lucide="alert-triangle" class="lc"></i></div><div class="sc-v" style="color:var(--or)">1</div><div class="sc-l">Warnings</div></div>
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="gauge" class="lc"></i></div><div class="sc-v">99.2%</div><div class="sc-l">Uptime</div></div>
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="gauge" class="lc"></i></div><div class="sc-v">99.2%</div><div class="sc-l">Uptime (24h)</div></div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="server" class="lc-sm ac"></i> System Status</div></div>
+        <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Steam Trade Bot</div><div class="health-d">dropzone_bot · last heartbeat 3s ago</div></div><span class="health-st ok">ONLINE</span></div>
+        <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Twitch Connection</div><div class="health-d">Channel s1mple · EventSub active</div></div><span class="health-st ok">CONNECTED</span></div>
+        <div class="health-r"><div class="health-dot warn"></div><div class="health-info"><div class="health-n">CS2 Game Agent</div><div class="health-d">Last event: 4 min ago (threshold: 5 min)</div></div><span class="health-st warn">SLOW</span></div>
+        <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Trade Queue</div><div class="health-d">2 pending · 0 errors last hour</div></div><span class="health-st ok">HEALTHY</span></div>
       </div>
       <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="server" class="lc-sm ac"></i> Status</div></div>
-        <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Steam Bot</div><div class="health-d">Online</div></div><span class="health-st ok">ON</span></div>
-        <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Twitch</div><div class="health-d">Connected</div></div><span class="health-st ok">ON</span></div>
-        <div class="health-r"><div class="health-dot warn"></div><div class="health-info"><div class="health-n">CS2 Agent</div><div class="health-d">Slow</div></div><span class="health-st warn">SLOW</span></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="alert-circle" class="lc-sm" style="color:var(--rd)"></i> Recent Errors</div></div>
+        <div class="feed-r"><div class="fd fail"></div><div class="fm">Trade #1045 expired — item <span class="sk">M4A4 | Desolate Space</span> returned to pool</div><div class="ft">14 min</div></div>
+        <div class="feed-r"><div class="fd fail"></div><div class="fm">CS2 Agent: timeout receiving round data</div><div class="ft">1h</div></div>
       </div>
     </div>
 
     <div class="page" id="p-s-settings">
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
-      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="key" class="lc-sm ac"></i> API</div></div><div class="cd-p"><div class="fg"><label class="fl">Steam API Key</label><input type="password" class="fi" value="••••••••"/></div><button class="btn btn-p btn-w">Save</button></div></div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="key" class="lc-sm ac"></i> API Connections</div></div>
+        <div class="cd-p"><div class="fg"><label class="fl">Steam API Key</label><input type="password" class="fi" value="••••••••"/></div><div class="fg"><label class="fl">Twitch Client ID</label><input type="password" class="fi" value="••••••••"/></div><div class="fg"><label class="fl">Twitch Client Secret</label><input type="password" class="fi" value="••••••••"/></div><button class="btn btn-p btn-w">Save</button></div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm cy"></i> Steam Trade Bot</div><span class="st st-on">● Online</span></div>
+        <div class="cd-p"><div class="fg"><label class="fl">Bot Username</label><input type="text" class="fi" value="dropzone_bot"/></div><div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" value="••••••••"/></div></div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="bell-ring" class="lc-sm ac"></i> Notifications</div></div>
+        <div class="cd-p setting-row"><span>OBS Overlay</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-p setting-row"><span>Discord Webhook</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+      <div class="cd">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="monitor-play" class="lc-sm ac"></i> OBS Overlay</div></div>
+        <div class="cd-p"><div class="fg"><label class="fl">Browser Source URL</label><input type="text" class="fi" value="https://dropzone.gg/overlay/abc123" readonly style="font-size:12px"/></div><div class="fg"><label class="fl">Duration (sec)</label><input type="number" class="fi" value="5"/></div></div>
+      </div>
     </div>
 
     <div class="page" id="p-s-hist">
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
-      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="scroll-text" class="lc-sm ac"></i> History</div></div><div class="empty"><div class="empty-i"><i data-lucide="scroll-text"></i></div><div class="empty-t">Recent drops</div></div></div>
+      <div class="cd">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="scroll-text" class="lc-sm ac"></i> Drop History</div><div style="display:flex;gap:8px"><button class="btn btn-g small"><i data-lucide="filter" class="lc-sm"></i> Filter</button><button class="btn btn-g small"><i data-lucide="download" class="lc-sm"></i> Export</button></div></div>
+        <div class="drops-list">
+          <div class="drop-row"><div class="drop-meta">#1047 · xDreamer</div><div class="drop-skin">AK-47 | Redline</div><span style="font-family:'JetBrains Mono';font-weight:600;color:var(--ac)">$8.40</span><span class="st st-on">✓</span></div>
+          <div class="drop-row"><div class="drop-meta">#1046 · NaVi_fan</div><div class="drop-skin">AWP | Asiimov</div><span style="font-family:'JetBrains Mono';font-weight:600;color:var(--ac)">$14.20</span><span class="st st-wait">⏳</span></div>
+          <div class="drop-row"><div class="drop-meta">#1045 · pro100</div><div class="drop-skin">M4A4 | Desolate</div><span style="font-family:'JetBrains Mono';font-weight:600;color:var(--ac)">$22.50</span><span class="st st-off">Expired</span></div>
+        </div>
+      </div>
     </div>
 
     <div class="page" id="p-s-antifraud">
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
-      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="shield-alert" class="lc-sm ac"></i> Anti-Fraud</div></div><div class="cd-p"><div class="setting-row"><span>Block VPN</span><div class="sw" onclick="this.classList.toggle('on')"></div></div><div class="setting-row"><span>Min account age 7d</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div></div></div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="shield-alert" class="lc-sm ac"></i> Bot Protection</div></div>
+        <div class="cd-p setting-row"><span>Human verification on pool entry</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-p setting-row"><span>Rate limit: 1 entry per IP/5min</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-p setting-row"><span>Block VPN / Proxy</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+        <div class="cd-p setting-row"><span>Min Twitch account age: 7 days</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="scale" class="lc-sm ac"></i> Limits</div></div>
+        <div class="cd-p"><div class="fg"><label class="fl">Max wins per account / day</label><input type="number" class="fi" value="2"/></div><div class="fg"><label class="fl">Max wins per IP / day</label><input type="number" class="fi" value="3"/></div><div class="fg"><label class="fl">Min presence before trigger (sec)</label><input type="number" class="fi" value="300"/></div><div class="fg"><label class="fl">Cooldown after win (min)</label><input type="number" class="fi" value="60"/></div></div>
+      </div>
+      <div class="cd">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="ban" class="lc-sm ac"></i> Banlist / Allowlist</div><button class="btn btn-p small"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+        <div class="empty cd-p"><div class="empty-i"><i data-lucide="user-check" style="width:28px;height:28px"></i></div><div class="empty-t">No banned users</div></div>
+      </div>
     </div>
   </main>
 
@@ -294,12 +388,16 @@
         <div class="ni" data-p="v-settings"><i data-lucide="settings" class="lc-sm"></i> Settings</div>
       </div>
       <div class="nav-s streamer-nav" id="navS" style="display:none"><div class="nav-l">Streamer</div>
-        <div class="ni" data-p="s-dash"><i data-lucide="layout-dashboard" class="lc-sm"></i> Dashboard</div>
+        <div class="ni act" data-p="s-dash"><i data-lucide="layout-dashboard" class="lc-sm"></i> Dashboard</div>
         <div class="ni" data-p="s-triggers"><i data-lucide="crosshair" class="lc-sm"></i> Triggers</div>
-        <div class="ni" data-p="s-pool"><i data-lucide="backpack" class="lc-sm"></i> Skin Pool</div>
+        <div class="ni" data-p="s-pool"><i data-lucide="backpack" class="lc-sm"></i> Skin Pool<span class="badge ac">34</span></div>
+        <div class="ni" data-p="s-hist"><i data-lucide="scroll-text" class="lc-sm"></i> History</div>
         <div class="ni" data-p="s-health"><i data-lucide="heart-pulse" class="lc-sm"></i> Health</div>
+      </div>
+      <div class="nav-s streamer-nav" id="navSConfig" style="display:none"><div class="nav-l">Config</div>
+        <div class="ni" data-p="s-onboard"><i data-lucide="rocket" class="lc-sm"></i> Setup Wizard</div>
         <div class="ni" data-p="s-settings"><i data-lucide="sliders-horizontal" class="lc-sm"></i> Settings</div>
-        <div class="ni" data-p="s-onboard"><i data-lucide="rocket" class="lc-sm"></i> Setup</div>
+        <div class="ni" data-p="s-antifraud"><i data-lucide="shield-check" class="lc-sm"></i> Anti-Fraud</div>
       </div>
     </div>
     <div class="drawer-user">

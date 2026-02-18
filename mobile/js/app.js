@@ -214,6 +214,8 @@ function setRole(r) {
   if (rBtnS) rBtnS.classList.toggle('active', r === 's');
   const navS = document.getElementById('navS');
   if (navS) navS.style.display = r === 's' ? 'block' : 'none';
+  const navSConfig = document.getElementById('navSConfig');
+  if (navSConfig) navSConfig.style.display = r === 's' ? 'block' : 'none';
   const uRole = document.getElementById('uRole');
   if (uRole) uRole.textContent = r === 'v' ? 'Viewer' : 'Streamer';
 
@@ -263,7 +265,9 @@ function go(p) {
   if (ni) ni.classList.add('act');
   const m = PM[p];
   const pgT = document.getElementById('pgT');
+  const pgS = document.getElementById('pgS');
   if (m && pgT) pgT.textContent = m[0];
+  if (m && pgS) pgS.textContent = m[1];
   updateBottomNav();
   closeDrawer();
   if (typeof lucide !== 'undefined') lucide.createIcons();
