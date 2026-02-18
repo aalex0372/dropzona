@@ -1,0 +1,10 @@
+{
+  "name": "dropzone",
+  "version": "0.2.0",
+  "description": "DROPZONE — Live Skin Drops. Watch streams, win CS2 skins.",
+  "private": true,
+  "scripts": {
+    "start": "npx serve . -p 3000",
+    "dev": "npx serve . -p 3000"
+  }
+}

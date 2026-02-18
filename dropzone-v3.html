@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DROPZONE — Live Skin Drops</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+  --ac:#8b5cf6;--ac2:#7c3aed;--ac3:#6d28d9;
+  --ac-g:rgba(139,92,246,.25);--ac-s:rgba(139,92,246,.06);--ac-s2:rgba(139,92,246,.12);
+  --cy:#22d3ee;--cy-s:rgba(34,211,238,.1);
+  --gn:#34d399;--gn-s:rgba(52,211,153,.1);
+  --rd:#f43f5e;--rd-s:rgba(244,63,94,.1);
+  --or:#f59e0b;--or-s:rgba(245,158,11,.1);
+  --gd:#fbbf24;--pk:#ec4899;
+  --b0:#06060b;--b1:#0c0c14;--b2:#12121c;--b3:#1a1a28;--bc:#111119;--be:#1e1e2a;
+  --br0:rgba(255,255,255,.04);--br1:rgba(255,255,255,.07);--br2:rgba(255,255,255,.12);--br-ac:rgba(139,92,246,.3);
+  --t0:#f1f5f9;--t1:#cbd5e1;--t2:#94a3b8;--t3:#64748b;--t4:#475569;
+  --sw:260px;--th:60px;
+  --r-consumer:#b0c3d9;--r-industrial:#5e98d9;--r-milspec:#4b69ff;
+  --r-restricted:#8847ff;--r-classified:#d32ce6;--r-covert:#eb4b4b;--r-gold:#e4ae39;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--b0);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+.mesh{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(120px)}
+.mesh-1{top:-10%;left:15%;width:600px;height:600px;background:rgba(139,92,246,.06)}
+.mesh-2{bottom:-15%;right:5%;width:500px;height:500px;background:rgba(34,211,238,.03)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,255,255,.06);border-radius:3px}
+
+/* Lucide base */
+.lc{width:18px;height:18px;stroke-width:2;flex-shrink:0}
+.lc-sm{width:14px;height:14px;stroke-width:2}
+.lc-lg{width:22px;height:22px;stroke-width:1.8}
+
+/* SIDEBAR */
+.sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sw);background:var(--b1);border-right:1px solid var(--br1);display:flex;flex-direction:column;z-index:100}
+.s-brand{padding:24px 20px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--br0)}
+.s-mark{width:38px;height:38px;background:linear-gradient(135deg,var(--ac),#a78bfa);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px var(--ac-g);flex-shrink:0;color:#fff}
+.s-name{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;letter-spacing:3px;color:var(--t0)}
+.s-ver{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--t4);letter-spacing:1px;margin-top:2px}
+.role-sw{margin:16px 16px 8px;background:var(--b2);border:1px solid var(--br1);border-radius:12px;padding:4px;display:flex;position:relative}
+.role-btn{flex:1;padding:8px 0;background:none;border:none;color:var(--t3);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;border-radius:8px;transition:all .3s;z-index:2;display:flex;align-items:center;justify-content:center;gap:6px}
+.role-btn.active{color:#fff}
+.role-sl{position:absolute;top:4px;left:4px;width:calc(50% - 4px);height:calc(100% - 8px);background:var(--ac);border-radius:8px;transition:transform .35s cubic-bezier(.4,0,.2,1);box-shadow:0 2px 8px var(--ac-g);z-index:1}
+.role-sl.str{transform:translateX(100%)}
+.nav-s{padding:16px 12px 6px}
+.nav-l{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:2px;color:var(--t4);text-transform:uppercase;padding:0 8px 8px}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.ni{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;cursor:pointer;transition:all .2s;color:var(--t2);font-size:13px;font-weight:500;border:1px solid transparent}
+.ni:hover{background:var(--b3);color:var(--t0)}
+.ni.act{background:var(--ac-s2);color:var(--ac);border-color:rgba(139,92,246,.15)}
+.ni .ico{display:flex;align-items:center;justify-content:center;width:20px;flex-shrink:0}
+.ni .badge{margin-left:auto;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:var(--rd);color:#fff;font-size:10px;font-weight:700;border-radius:10px;padding:0 6px;font-family:'JetBrains Mono',monospace}
+.ni .badge.ac{background:var(--ac)}
+.s-fill{flex:1}
+.s-user{padding:16px;border-top:1px solid var(--br0);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .2s}
+.s-user:hover{background:var(--b2)}
+.u-ava{width:36px;height:36px;border-radius:10px;background:var(--ac-s2);border:1px solid rgba(139,92,246,.2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--ac);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.u-name{font-size:13px;font-weight:600;color:var(--t0)}
+.u-role{font-size:11px;color:var(--t3)}
+
+/* MAIN */
+.main{margin-left:var(--sw);min-height:100vh;position:relative;z-index:1}
+.topbar{height:var(--th);border-bottom:1px solid var(--br0);display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(6,6,11,.85);backdrop-filter:blur(24px);position:sticky;top:0;z-index:50}
+.tb-l{display:flex;align-items:center;gap:16px}
+.pg-t{font-size:18px;font-weight:700;color:var(--t0)}
+.pg-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t4);letter-spacing:1px}
+.live-chip{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:var(--rd-s);border:1px solid rgba(244,63,94,.15);border-radius:20px;font-size:11px;font-weight:700;color:var(--rd);letter-spacing:.5px}
+.live-dot{width:6px;height:6px;background:var(--rd);border-radius:50%;animation:pulse 1.5s ease infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(244,63,94,.4)}50%{opacity:.6;box-shadow:0 0 0 6px rgba(244,63,94,0)}}
+.tb-r{display:flex;align-items:center;gap:10px}
+.tb-btn{height:36px;padding:0 14px;background:var(--b2);border:1px solid var(--br1);border-radius:8px;color:var(--t2);font-family:'Inter',sans-serif;font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.tb-btn:hover{background:var(--b3);border-color:var(--br2);color:var(--t0)}
+.tb-btn.pr{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:600}
+.tb-btn.pr:hover{background:var(--ac2);box-shadow:0 0 20px var(--ac-g)}
+
+.page{display:none;padding:28px}.page.act{display:block;animation:pageIn .35s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* TICKER */
+.ticker{background:var(--b2);border:1px solid var(--br0);border-radius:16px;padding:14px 20px;margin-bottom:24px;display:flex;align-items:center;gap:14px;overflow:hidden}
+.ticker-tag{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--ac);background:var(--ac-s2);padding:4px 10px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;gap:5px}
+.ticker-track{flex:1;overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.ticker-scroll{display:inline-flex;gap:32px;animation:scroll 30s linear infinite}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-i{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--t2)}.ticker-i b{color:var(--t0);font-weight:600}
+.ticker-sep{color:var(--t4)}
+
+/* STATS */
+.stats{display:grid;gap:16px;margin-bottom:24px}
+.stats-4{grid-template-columns:repeat(4,1fr)}.stats-3{grid-template-columns:repeat(3,1fr)}
+.sc{background:var(--bc);border:1px solid var(--br1);border-radius:16px;padding:20px;position:relative;overflow:hidden;transition:all .25s}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ac-g),transparent);opacity:0;transition:opacity .3s}
+.sc:hover{border-color:var(--br2);transform:translateY(-1px)}.sc:hover::before{opacity:1}
+.sc-ico{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.sc-ico.pu{background:var(--ac-s2);color:var(--ac)}.sc-ico.gn{background:var(--gn-s);color:var(--gn)}.sc-ico.or{background:var(--or-s);color:var(--or)}.sc-ico.rd{background:var(--rd-s);color:var(--rd)}.sc-ico.cy{background:var(--cy-s);color:var(--cy)}
+.sc-v{font-family:'JetBrains Mono',monospace;font-size:26px;font-weight:700;color:var(--t0);line-height:1}
+.sc-l{font-size:12px;color:var(--t3);margin-top:6px}
+.sc-d{font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:8px}.sc-d.up{color:var(--gn)}.sc-d.dn{color:var(--rd)}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.g21{display:grid;grid-template-columns:5fr 3fr;gap:20px}
+.mb{margin-bottom:24px}
+
+/* CARD */
+.cd{background:var(--bc);border:1px solid var(--br1);border-radius:16px;overflow:hidden}
+.cd-h{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--br0)}
+.cd-t{font-size:13px;font-weight:700;color:var(--t0);display:flex;align-items:center;gap:8px}
+.cd-t .cnt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;background:var(--ac-s2);color:var(--ac);padding:2px 8px;border-radius:6px}
+.cd-a{font-size:12px;color:var(--ac);cursor:pointer;font-weight:500}.cd-a:hover{color:var(--ac2)}
+.cd-p{padding:20px}
+
+/* FEED */
+.feed-r{display:flex;align-items:center;gap:12px;padding:12px 20px;border-bottom:1px solid var(--br0);transition:background .15s}
+.feed-r:last-child{border-bottom:none}.feed-r:hover{background:rgba(255,255,255,.015)}
+.fd{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fd.kill{background:var(--rd);box-shadow:0 0 6px var(--rd)}.fd.drop{background:var(--ac);box-shadow:0 0 6px var(--ac)}.fd.trade{background:var(--gn);box-shadow:0 0 6px var(--gn)}.fd.join{background:var(--or);box-shadow:0 0 6px var(--or)}.fd.fail{background:var(--t3)}
+.fm{flex:1;font-size:13px;color:var(--t1);line-height:1.4}.fm b{color:var(--t0);font-weight:600}.fm .hl{color:var(--ac);font-weight:600}.fm .sk{color:var(--cy);font-weight:500}
+.ft{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t4);flex-shrink:0}
+
+/* STREAM CARDS */
+.str-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.str-c{background:var(--bc);border:1px solid var(--br1);border-radius:16px;overflow:hidden;transition:all .3s;cursor:pointer}
+.str-c:hover{border-color:var(--br-ac);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.str-prev{aspect-ratio:16/9;background:linear-gradient(135deg,var(--b2),var(--b3));position:relative;overflow:hidden}
+.str-prev::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.7) 0%,transparent 50%)}
+.str-prev .gv{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.06;color:var(--ac)}
+.str-br{position:absolute;top:10px;left:10px;right:10px;display:flex;justify-content:space-between;z-index:3}
+.b-live{display:flex;align-items:center;gap:5px;padding:3px 10px;background:var(--rd);border-radius:6px;font-size:10px;font-weight:800;color:#fff;letter-spacing:1px}
+.b-live .dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite}
+.b-view{padding:3px 10px;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t1);display:flex;align-items:center;gap:4px}
+.str-pool{position:absolute;bottom:10px;left:10px;display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(139,92,246,.2);backdrop-filter:blur(8px);border:1px solid rgba(139,92,246,.3);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ac);font-weight:600;z-index:3}
+.str-meta{padding:14px 16px;display:flex;align-items:center;gap:12px}
+.str-ava{width:40px;height:40px;border-radius:12px;background:var(--ac-s2);border:1px solid rgba(139,92,246,.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:var(--ac);font-family:'JetBrains Mono',monospace;flex-shrink:0}
+.str-name{font-size:14px;font-weight:700;color:var(--t0)}.str-game{font-size:11px;color:var(--t3);margin-top:1px}
+.str-triggers{display:flex;gap:4px}
+.tr-mini{width:28px;height:28px;background:var(--b3);border:1px solid var(--br1);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--t2)}
+
+/* TRIGGERS */
+.trig-r{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--br0);transition:background .15s}
+.trig-r:last-child{border-bottom:none}.trig-r:hover{background:rgba(255,255,255,.015)}
+.trig-ico{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.trig-info{flex:1}.trig-n{font-size:13px;font-weight:600;color:var(--t0)}.trig-d{font-size:11px;color:var(--t3);margin-top:1px}
+.trig-rng{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ac);background:var(--ac-s);padding:4px 10px;border-radius:6px;font-weight:600;flex-shrink:0}
+
+/* TOGGLE */
+.sw{width:40px;height:22px;background:var(--b3);border:1px solid var(--br1);border-radius:11px;position:relative;cursor:pointer;transition:all .3s;flex-shrink:0}
+.sw::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:var(--t4);border-radius:50%;transition:all .3s cubic-bezier(.4,0,.2,1)}
+.sw.on{background:var(--ac-s2);border-color:var(--ac)}.sw.on::after{transform:translateX(18px);background:var(--ac);box-shadow:0 0 8px var(--ac-g)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:8px 16px;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-p{background:var(--ac);color:#fff}.btn-p:hover{background:var(--ac2);box-shadow:0 0 16px var(--ac-g)}
+.btn-g{background:transparent;border:1px solid var(--br1);color:var(--t2)}.btn-g:hover{border-color:var(--br2);color:var(--t0);background:var(--b3)}
+.btn-s{background:var(--gn-s);border:1px solid rgba(52,211,153,.2);color:var(--gn)}
+.btn-d{background:var(--rd-s);border:1px solid rgba(244,63,94,.2);color:var(--rd)}
+.btn-w{width:100%;justify-content:center}
+
+/* STATUS */
+.st{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace}
+.st-on{background:var(--gn-s);color:var(--gn);border:1px solid rgba(52,211,153,.15)}
+.st-off{background:var(--rd-s);color:var(--rd);border:1px solid rgba(244,63,94,.15)}
+.st-wait{background:var(--or-s);color:var(--or);border:1px solid rgba(245,158,11,.15)}
+.st-proc{background:var(--ac-s);color:var(--ac);border:1px solid rgba(139,92,246,.15)}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse}
+thead th{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:1.5px;color:var(--t4);text-transform:uppercase;text-align:left;padding:10px 16px;border-bottom:1px solid var(--br1);background:var(--b2)}
+tbody td{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--br0)}
+tbody tr:hover td{background:rgba(255,255,255,.01)}
+.td-u{display:flex;align-items:center;gap:8px}
+
+/* FORMS */
+.fg{margin-bottom:16px}
+.fl{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:1.5px;color:var(--t4);text-transform:uppercase;margin-bottom:6px}
+.fi{width:100%;padding:10px 14px;background:var(--b2);border:1px solid var(--br1);border-radius:8px;color:var(--t0);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:all .25s}
+.fi::placeholder{color:var(--t4)}.fi:focus{border-color:var(--br-ac);box-shadow:0 0 0 3px var(--ac-s)}
+
+/* SKINS */
+.skins-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;padding:16px 20px 20px}
+.sk-c{background:var(--b2);border:1px solid var(--br1);border-radius:12px;padding:14px;text-align:center;position:relative;overflow:hidden;transition:all .3s;cursor:pointer}
+.sk-c::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;border-radius:2px 2px 0 0}
+.sk-c:hover{transform:translateY(-2px)}
+.sk-c.r-ms::before{background:var(--r-milspec)}.sk-c.r-ms:hover{border-color:rgba(75,105,255,.3);box-shadow:0 8px 30px rgba(75,105,255,.1)}
+.sk-c.r-rs::before{background:var(--r-restricted)}.sk-c.r-rs:hover{border-color:rgba(136,71,255,.3);box-shadow:0 8px 30px rgba(136,71,255,.1)}
+.sk-c.r-cl::before{background:var(--r-classified)}.sk-c.r-cl:hover{border-color:rgba(211,44,230,.3);box-shadow:0 8px 30px rgba(211,44,230,.1)}
+.sk-c.r-cv::before{background:var(--r-covert)}.sk-c.r-cv:hover{border-color:rgba(235,75,75,.3);box-shadow:0 8px 30px rgba(235,75,75,.1)}
+.sk-c.r-gd::before{background:var(--r-gold)}.sk-c.r-gd:hover{border-color:rgba(228,174,57,.3);box-shadow:0 8px 30px rgba(228,174,57,.15)}
+.sk-c.reserved{opacity:.5;pointer-events:none}
+.sk-c.reserved::after{content:'RESERVED';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--or);background:rgba(0,0,0,.7);padding:4px 10px;border-radius:4px;z-index:5}
+.sk-img{width:72px;height:72px;margin:8px auto 10px;background:rgba(255,255,255,.02);border-radius:8px;display:flex;align-items:center;justify-content:center;transition:transform .3s;color:var(--t3)}
+.sk-c:hover .sk-img{transform:scale(1.08)}
+.sk-n{font-size:12px;font-weight:600;color:var(--t0);margin-bottom:2px}
+.sk-w{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--t4);margin-bottom:8px}
+.sk-p{font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:700}
+.sk-p.ms{color:var(--r-milspec)}.sk-p.rs{color:var(--r-restricted)}.sk-p.cl{color:var(--r-classified)}.sk-p.cv{color:var(--r-covert)}.sk-p.gd{color:var(--r-gold)}
+.sk-rt{display:inline-block;margin-top:6px;padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.rt-ms{background:rgba(75,105,255,.12);color:var(--r-milspec);border:1px solid rgba(75,105,255,.2)}
+.rt-rs{background:rgba(136,71,255,.12);color:var(--r-restricted);border:1px solid rgba(136,71,255,.2)}
+.rt-cl{background:rgba(211,44,230,.12);color:var(--r-classified);border:1px solid rgba(211,44,230,.2)}
+.rt-cv{background:rgba(235,75,75,.12);color:var(--r-covert);border:1px solid rgba(235,75,75,.2)}
+.rt-gd{background:rgba(228,174,57,.12);color:var(--r-gold);border:1px solid rgba(228,174,57,.2)}
+
+/* EMPTY */
+.empty{padding:40px 20px;text-align:center}
+.empty-i{margin-bottom:10px;opacity:.3;color:var(--t3);display:flex;justify-content:center}
+.empty-t{font-size:14px;font-weight:600;color:var(--t2);margin-bottom:4px}
+.empty-s{font-size:12px;color:var(--t4)}
+
+/* CONNECTION */
+.conn{display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--br0);transition:background .15s}
+.conn:last-child{border-bottom:none}.conn:hover{background:rgba(255,255,255,.015)}
+.conn-i{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.conn-i.tw{background:rgba(145,70,255,.12);color:#9146ff}.conn-i.stm{background:var(--cy-s);color:var(--cy)}.conn-i.cs{background:var(--or-s);color:var(--or)}
+.conn-info{flex:1}.conn-t{font-size:13px;font-weight:600;color:var(--t0)}.conn-d{font-size:11px;color:var(--t3);margin-top:2px;line-height:1.4}
+
+/* MINI STATS */
+.mstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:16px 20px}
+.mstat{text-align:center;padding:14px;background:var(--b2);border:1px solid var(--br0);border-radius:12px}
+.mstat-v{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800}
+.mstat-v.pu{color:var(--ac)}.mstat-v.gn{color:var(--gn)}.mstat-v.or{color:var(--or)}
+.mstat-l{font-size:11px;color:var(--t4);margin-top:4px}
+
+/* WIZARD */
+.wiz{max-width:680px;margin:0 auto}
+.wiz-steps{display:flex;gap:8px;margin-bottom:32px}
+.wiz-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+.wiz-num{width:36px;height:36px;border-radius:50%;background:var(--b3);border:2px solid var(--br1);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--t3);transition:all .3s}
+.wiz-step.done .wiz-num{background:var(--gn-s);border-color:var(--gn);color:var(--gn)}
+.wiz-step.cur .wiz-num{background:var(--ac-s2);border-color:var(--ac);color:var(--ac);box-shadow:0 0 12px var(--ac-g)}
+.wiz-lbl{font-size:10px;color:var(--t4);font-weight:600;text-align:center}
+.wiz-step.done .wiz-lbl{color:var(--gn)}.wiz-step.cur .wiz-lbl{color:var(--ac)}
+.wiz-body{min-height:300px}
+.wiz-btns{display:flex;justify-content:space-between;margin-top:24px}
+
+/* STATE MACHINE */
+.sm-flow{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:12px 20px}
+.sm-node{padding:4px 10px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.5px;border:1px solid var(--br1);color:var(--t3);background:var(--b2);transition:all .3s}
+.sm-node.active{border-color:var(--ac);color:var(--ac);background:var(--ac-s2);box-shadow:0 0 8px var(--ac-g)}
+.sm-node.done{border-color:var(--gn);color:var(--gn);background:var(--gn-s)}
+.sm-node.fail{border-color:var(--rd);color:var(--rd);background:var(--rd-s)}
+.sm-arrow{color:var(--t4);font-size:12px}
+
+/* ELIGIBILITY */
+.elig-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--br0)}
+.elig-item:last-child{border-bottom:none}
+.elig-check{width:24px;height:24px;border-radius:50%;border:2px solid var(--br1);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.elig-check.ok{background:var(--gn-s);border-color:var(--gn);color:var(--gn)}
+.elig-check.no{background:var(--rd-s);border-color:rgba(244,63,94,.3);color:var(--rd)}
+.elig-text{flex:1;font-size:13px;color:var(--t1)}.elig-text.ok{color:var(--gn)}.elig-text.no{color:var(--t3)}
+.prog{width:100%;height:6px;background:var(--b3);border-radius:3px;overflow:hidden;margin-top:6px}
+.prog-fill{height:100%;border-radius:3px;transition:width 1s ease}.prog-fill.ac{background:var(--ac)}.prog-fill.gn{background:var(--gn)}
+
+/* HEALTH */
+.health-r{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--br0)}
+.health-r:last-child{border-bottom:none}
+.health-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.health-dot.ok{background:var(--gn);box-shadow:0 0 8px rgba(52,211,153,.4)}
+.health-dot.warn{background:var(--or);box-shadow:0 0 8px rgba(245,158,11,.4)}
+.health-dot.err{background:var(--rd);box-shadow:0 0 8px rgba(244,63,94,.4)}
+.health-info{flex:1}.health-n{font-size:13px;font-weight:600;color:var(--t0)}.health-d{font-size:11px;color:var(--t3);margin-top:1px}
+.health-st{font-family:'JetBrains Mono',monospace;font-size:11px;flex-shrink:0}
+
+/* MENU */
+.menu-i{display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:1px solid var(--br0);cursor:pointer;transition:background .15s;font-size:14px;font-weight:500;color:var(--t1)}
+.menu-i:last-child{border-bottom:none}.menu-i:hover{background:rgba(255,255,255,.02)}
+.menu-i .mi-a{margin-left:auto;color:var(--t4)}
+
+/* RESPONSIVE */
+@media(max-width:1300px){.stats-4{grid-template-columns:repeat(2,1fr)}.g2,.g3,.g21{grid-template-columns:1fr}.str-grid{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}}
+@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="mesh mesh-1"></div>
+<div class="mesh mesh-2"></div>
+
+<aside class="sidebar">
+  <div class="s-brand">
+    <div class="s-mark"><i data-lucide="zap" class="lc"></i></div>
+    <div><div class="s-name">DROPZONE</div><div class="s-ver">BETA v0.2</div></div>
+  </div>
+  <div class="role-sw">
+    <div class="role-sl" id="roleSl"></div>
+    <button class="role-btn active" id="rBtnV" onclick="setRole('v')"><i data-lucide="eye" class="lc-sm"></i> Viewer</button>
+    <button class="role-btn" id="rBtnS" onclick="setRole('s')"><i data-lucide="radio" class="lc-sm"></i> Streamer</button>
+  </div>
+  <div id="navV">
+    <div class="nav-s"><div class="nav-l">Browse</div>
+      <div class="nav-list">
+        <div class="ni act" data-p="browse" onclick="go('browse')"><span class="ico"><i data-lucide="compass" class="lc-sm"></i></span>Live Streams<span class="badge ac">3</span></div>
+        <div class="ni" data-p="my-drops" onclick="go('my-drops')"><span class="ico"><i data-lucide="gift" class="lc-sm"></i></span>My Drops</div>
+      </div>
+    </div>
+    <div class="nav-s"><div class="nav-l">Account</div>
+      <div class="nav-list">
+        <div class="ni" data-p="profile" onclick="go('profile')"><span class="ico"><i data-lucide="user" class="lc-sm"></i></span>Profile</div>
+        <div class="ni" data-p="v-settings" onclick="go('v-settings')"><span class="ico"><i data-lucide="settings" class="lc-sm"></i></span>Settings</div>
+      </div>
+    </div>
+  </div>
+  <div id="navS" style="display:none">
+    <div class="nav-s"><div class="nav-l">Streamer</div>
+      <div class="nav-list">
+        <div class="ni act" data-p="s-dash" onclick="go('s-dash')"><span class="ico"><i data-lucide="layout-dashboard" class="lc-sm"></i></span>Dashboard</div>
+        <div class="ni" data-p="s-triggers" onclick="go('s-triggers')"><span class="ico"><i data-lucide="crosshair" class="lc-sm"></i></span>Triggers</div>
+        <div class="ni" data-p="s-pool" onclick="go('s-pool')"><span class="ico"><i data-lucide="backpack" class="lc-sm"></i></span>Skin Pool<span class="badge ac">34</span></div>
+        <div class="ni" data-p="s-hist" onclick="go('s-hist')"><span class="ico"><i data-lucide="scroll-text" class="lc-sm"></i></span>History</div>
+        <div class="ni" data-p="s-health" onclick="go('s-health')"><span class="ico"><i data-lucide="heart-pulse" class="lc-sm"></i></span>Health</div>
+      </div>
+    </div>
+    <div class="nav-s"><div class="nav-l">Config</div>
+      <div class="nav-list">
+        <div class="ni" data-p="s-onboard" onclick="go('s-onboard')"><span class="ico"><i data-lucide="rocket" class="lc-sm"></i></span>Setup Wizard</div>
+        <div class="ni" data-p="s-settings" onclick="go('s-settings')"><span class="ico"><i data-lucide="sliders-horizontal" class="lc-sm"></i></span>Settings</div>
+        <div class="ni" data-p="s-antifraud" onclick="go('s-antifraud')"><span class="ico"><i data-lucide="shield-check" class="lc-sm"></i></span>Anti-Fraud</div>
+      </div>
+    </div>
+  </div>
+  <div class="s-fill"></div>
+  <div class="s-user" onclick="go('profile')">
+    <div class="u-ava">XD</div>
+    <div><div class="u-name">xDreamer</div><div class="u-role" id="uRole">Viewer</div></div>
+  </div>
+</aside>
+
+<div class="main">
+<div class="topbar">
+  <div class="tb-l">
+    <div><div class="pg-t" id="pgT">Live Streams</div><div class="pg-sub" id="pgS">Watch streams — win skins</div></div>
+    <div class="live-chip"><span class="live-dot"></span><span id="liveCount">3</span> LIVE</div>
+  </div>
+  <div class="tb-r">
+    <button class="tb-btn" onclick="go('profile')"><i data-lucide="user" class="lc-sm"></i> Profile</button>
+    <button class="tb-btn pr" id="topAct" onclick="setRole('s')"><i data-lucide="radio" class="lc-sm"></i> Become Streamer</button>
+  </div>
+</div>
+
+<!-- BROWSE -->
+<div class="page act" id="p-browse">
+  <div class="ticker">
+    <div class="ticker-tag"><i data-lucide="sparkles" class="lc-sm"></i> DROPS</div>
+    <div class="ticker-track"><div class="ticker-scroll" id="tickerContent"></div></div>
+  </div>
+  <div class="stats stats-4 mb">
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">3</div><div class="sc-l">Streams Online</div></div>
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">847</div><div class="sc-l">Skins Dropped</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">2,341</div><div class="sc-l">Viewers Online</div></div>
+    <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$12.4k</div><div class="sc-l">Total Value</div></div>
+  </div>
+  <div style="font-size:14px;font-weight:700;color:var(--t0);margin-bottom:14px;display:flex;align-items:center;gap:8px">Currently Live<span class="cnt" style="font-family:'JetBrains Mono';font-size:10px;background:var(--ac-s2);color:var(--ac);padding:2px 8px;border-radius:6px;font-weight:600">3</span></div>
+  <div class="str-grid mb" id="streamGrid"></div>
+  <div class="cd">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm" style="color:var(--ac)"></i> Event Feed <span class="cnt" id="feedCount">0</span></div></div>
+    <div id="feedList"></div>
+  </div>
+</div>
+
+<!-- STREAM DETAIL -->
+<div class="page" id="p-stream">
+  <button class="btn btn-g mb" onclick="go('browse')" style="margin-bottom:16px"><i data-lucide="arrow-left" class="lc-sm"></i> Back to Streams</button>
+  <div class="g21 mb">
+    <div>
+      <div class="cd mb">
+        <div class="str-prev" style="border-radius:16px 16px 0 0">
+          <div class="gv"><i data-lucide="gamepad-2" style="width:80px;height:80px;stroke-width:1"></i></div>
+          <div class="str-br"><div class="b-live"><span class="dot"></span> LIVE</div><div class="b-view"><i data-lucide="eye" class="lc-sm"></i> <span id="sdViewers">0</span></div></div>
+          <div class="str-pool" id="sdPool"><i data-lucide="gift" class="lc-sm"></i> 0 skins</div>
+        </div>
+        <div class="str-meta" style="padding:20px">
+          <div class="str-ava" id="sdAva">S1</div>
+          <div style="flex:1"><div class="str-name" id="sdName">s1mple</div><div class="str-game" id="sdGame">CS2 · Ranked · Mirage</div></div>
+        </div>
+      </div>
+      <div class="cd">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="workflow" class="lc-sm" style="color:var(--ac)"></i> Current Drop</div><span class="st st-wait" id="sdDropSt">Waiting for trigger</span></div>
+        <div class="sm-flow" id="sdSM">
+          <div class="sm-node active">IDLE</div><span class="sm-arrow">→</span>
+          <div class="sm-node">TRIGGERED</div><span class="sm-arrow">→</span>
+          <div class="sm-node">WINNER</div><span class="sm-arrow">→</span>
+          <div class="sm-node">RESERVED</div><span class="sm-arrow">→</span>
+          <div class="sm-node">SENT</div><span class="sm-arrow">→</span>
+          <div class="sm-node">ACCEPTED</div>
+        </div>
+        <div style="padding:12px 20px 16px"><div id="sdDropInfo" style="font-size:13px;color:var(--t3)">Waiting for a trigger event from the streamer...</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket-check" class="lc-sm" style="color:var(--ac)"></i> Drop Eligibility</div></div>
+        <div style="padding:16px 20px">
+          <div id="eligStatus" style="font-size:15px;font-weight:700;color:var(--rd);margin-bottom:16px;display:flex;align-items:center;gap:8px"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
+          <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div style="flex:1"><div class="elig-text ok">Watch time ≥ 5 min</div><div class="prog"><div class="prog-fill gn" style="width:100%"></div></div></div></div>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account > 30 days</div></div>
+          <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
+        </div>
+      </div>
+      <div class="cd">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Active Triggers</div></div>
+        <div id="sdTriggers"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MY DROPS -->
+<div class="page" id="p-my-drops">
+  <div class="stats stats-3 mb">
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Prizes Won</div></div>
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$22.60</div><div class="sc-l">Total Value</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="clock" class="lc"></i></div><div class="sc-v">4.2h</div><div class="sc-l">Watch Time</div></div>
+  </div>
+  <div class="cd">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="gift" class="lc-sm" style="color:var(--ac)"></i> My Drops</div></div>
+    <div style="overflow-x:auto"><table><thead><tr><th>Date</th><th>Skin</th><th>Streamer</th><th>Trigger</th><th>Trade Status</th><th>State</th></tr></thead><tbody>
+      <tr>
+        <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 17 16:24</td>
+        <td>AK-47 | Redline (FT)</td><td>s1mple</td>
+        <td><span class="sk-rt rt-cv">Triple Kill</span></td>
+        <td><span class="st st-on">✓ Accepted</span></td>
+        <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td>
+      </tr>
+      <tr>
+        <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 16 21:15</td>
+        <td>P250 | Muertos (FN)</td><td>ZywOo</td>
+        <td><span class="sk-rt rt-rs">Knife Kill</span></td>
+        <td><span class="st st-wait">⏳ Pending</span></td>
+        <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node active" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node" style="padding:2px 6px;font-size:8px">?</div></div></td>
+      </tr>
+    </tbody></table></div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div class="page" id="p-profile">
+  <div style="display:flex;align-items:center;gap:20px;margin-bottom:24px">
+    <div style="width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--ac),#c084fc);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;box-shadow:0 0 30px var(--ac-g)">XD</div>
+    <div><div style="font-size:22px;font-weight:800;color:var(--t0)">xDreamer</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t3);margin-top:2px">Member since Jan 12, 2026</div></div>
+  </div>
+  <div class="g2 mb">
+    <div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket" class="lc-sm" style="color:var(--ac)"></i> Drop Participation</div><span class="st st-off">Inactive</span></div>
+        <div style="padding:16px 20px;font-size:13px;color:var(--t2);line-height:1.5">Link your Twitch account and add your Steam Trade URL to participate in skin drops.</div>
+      </div>
+      <div class="cd">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="unplug" class="lc-sm" style="color:var(--ac)"></i> Connections</div></div>
+        <div class="conn"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch Account</div><div class="conn-d">Required to participate in drops</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+        <div class="conn"><div class="conn-i stm"><i data-lucide="gamepad-2" class="lc"></i></div><div class="conn-info"><div class="conn-t">Steam Trade URL</div><div class="conn-d">Steam → Inventory → Trade Offers → "Who can send me trade offers?"</div></div><button class="btn btn-p"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+      </div>
+    </div>
+    <div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="bar-chart-3" class="lc-sm" style="color:var(--ac)"></i> Statistics</div></div>
+        <div class="mstats">
+          <div class="mstat"><div class="mstat-v pu">2</div><div class="mstat-l">Prizes</div></div>
+          <div class="mstat"><div class="mstat-v gn">$22.60</div><div class="mstat-l">Total</div></div>
+          <div class="mstat"><div class="mstat-v or">1</div><div class="mstat-l">This Month</div></div>
+        </div>
+      </div>
+      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="trophy" class="lc-sm" style="color:var(--ac)"></i> My Prizes</div><div class="cd-a">View All ›</div></div><div class="empty" style="padding:24px"><div class="empty-i"><i data-lucide="package-open" style="width:32px;height:32px"></i></div><div class="empty-t">Your skins will show up here!</div></div></div>
+    </div>
+  </div>
+  <div class="cd">
+    <div class="menu-i" onclick="go('v-settings')"><i data-lucide="settings" class="lc" style="color:var(--t3)"></i> Settings <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
+    <div class="menu-i"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
+    <div class="menu-i" onclick="setRole('s')"><i data-lucide="radio" class="lc" style="color:var(--t3)"></i> Start Streaming <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
+  </div>
+</div>
+
+<!-- VIEWER SETTINGS -->
+<div class="page" id="p-v-settings">
+  <div class="g2"><div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bell" class="lc-sm" style="color:var(--ac)"></i> Notifications</div></div><div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Drop notification</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Win sound effect</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div></div></div><div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="user-cog" class="lc-sm" style="color:var(--ac)"></i> Account</div></div><div style="padding:16px 20px"><div class="fg"><label class="fl">Username</label><input type="text" class="fi" value="xDreamer"/></div><div class="fg"><label class="fl">Email</label><input type="email" class="fi" value="xdreamer@gmail.com"/></div><button class="btn btn-p btn-w">Save Changes</button></div></div></div>
+</div>
+
+<!-- STREAMER ONBOARDING -->
+<div class="page" id="p-s-onboard">
+  <div class="wiz">
+    <div class="wiz-steps" id="wizSteps">
+      <div class="wiz-step cur"><div class="wiz-num">1</div><div class="wiz-lbl">Twitch</div></div>
+      <div class="wiz-step"><div class="wiz-num">2</div><div class="wiz-lbl">Steam Bot</div></div>
+      <div class="wiz-step"><div class="wiz-num">3</div><div class="wiz-lbl">CS2 Agent</div></div>
+      <div class="wiz-step"><div class="wiz-num">4</div><div class="wiz-lbl">Skin Pool</div></div>
+    </div>
+    <div class="wiz-body">
+      <div class="wiz-panel" id="wiz-1">
+        <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="twitch" class="lc-sm" style="color:#9146ff"></i> Step 1: Connect Twitch</div></div>
+          <div class="cd-p"><p style="color:var(--t2);margin-bottom:16px;line-height:1.5">We need access to your Twitch channel to track stream status, viewers, and chat activity.</p>
+            <div class="conn" style="border:1px solid var(--br1);border-radius:12px;padding:16px"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch OAuth</div><div class="conn-d">Authorize via Twitch for channel access</div></div><button class="btn btn-p" onclick="wizNext()"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+          </div></div>
+      </div>
+      <div class="wiz-panel" id="wiz-2" style="display:none">
+        <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm" style="color:var(--cy)"></i> Step 2: Steam Trade Bot</div></div>
+          <div class="cd-p"><p style="color:var(--t2);margin-bottom:16px;line-height:1.5">The bot account sends trade offers to winners. Create a dedicated Steam account for the bot.</p>
+            <div class="fg"><label class="fl">Steam Bot Username</label><input type="text" class="fi" placeholder="dropzone_bot"/></div>
+            <div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" placeholder="From Steam Desktop Authenticator"/></div>
+            <div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" placeholder="For trade confirmation"/></div>
+          </div></div>
+      </div>
+      <div class="wiz-panel" id="wiz-3" style="display:none">
+        <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="gamepad-2" class="lc-sm" style="color:var(--or)"></i> Step 3: CS2 Game Agent</div></div>
+          <div class="cd-p"><p style="color:var(--t2);margin-bottom:16px;line-height:1.5">The agent captures game events (ACE, Triple Kill, Clutch) and sends them to DROPZONE. Without it, drops won't work.</p>
+            <div class="conn" style="border:1px solid var(--br1);border-radius:12px;padding:16px;margin-bottom:12px"><div class="conn-i cs"><i data-lucide="cpu" class="lc"></i></div><div class="conn-info"><div class="conn-t">CS2 Game State Integration</div><div class="conn-d">Add config to your CS2 cfg folder</div></div><button class="btn btn-p"><i data-lucide="download" class="lc-sm"></i> Download</button></div>
+            <div style="background:var(--b2);border:1px solid var(--br1);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t2);line-height:1.6">
+              <span style="color:var(--t4)">// gamestate_integration_dropzone.cfg</span><br>
+              "DROPZONE" {<br>
+              &nbsp;&nbsp;"uri" "https://api.dropzone.gg/events"<br>
+              &nbsp;&nbsp;"timeout" "5.0"<br>
+              &nbsp;&nbsp;"data" { "player_id" "1" "player_state" "1" "round" "1" "map" "1" }<br>}
+            </div></div></div>
+      </div>
+      <div class="wiz-panel" id="wiz-4" style="display:none">
+        <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="package-plus" class="lc-sm" style="color:var(--ac)"></i> Step 4: Add Skins to Pool</div></div>
+          <div class="cd-p"><p style="color:var(--t2);margin-bottom:16px;line-height:1.5">Load skins from the bot's inventory into the drop pool. Minimum 5 skins required to start.</p>
+            <button class="btn btn-p btn-w" style="margin-bottom:16px"><i data-lucide="package-plus" class="lc-sm"></i> Load from Bot Inventory</button>
+            <div style="text-align:center;padding:24px;color:var(--t3);font-size:13px">Skins added: <b style="color:var(--ac)">0 / 5</b></div>
+            <div class="prog"><div class="prog-fill ac" style="width:0%"></div></div>
+          </div></div>
+      </div>
+    </div>
+    <div class="wiz-btns">
+      <button class="btn btn-g" id="wizPrev" onclick="wizPrev()" style="visibility:hidden"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
+      <button class="btn btn-p" id="wizNextBtn" onclick="wizNext()">Next <i data-lucide="arrow-right" class="lc-sm"></i></button>
+    </div>
+  </div>
+</div>
+
+<!-- STREAMER DASHBOARD -->
+<div class="page" id="p-s-dash">
+  <div class="stats stats-4 mb">
+    <div class="sc"><div class="sc-ico rd"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" style="color:var(--rd)">LIVE</div><div class="sc-l">Stream Status</div><div class="sc-d up">↑ 1h 23m online</div></div>
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sDashDrops">23</div><div class="sc-l">Drops Today</div><div class="sc-d up">↑ 8 last hour</div></div>
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v" id="sDashVal">$340</div><div class="sc-l">Value Today</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="sDashView">1,240</div><div class="sc-l">Viewers</div><div class="sc-d up">↑ 18%</div></div>
+  </div>
+  <div class="g21 mb">
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm" style="color:var(--ac)"></i> Event Feed <span class="cnt">Live</span></div>
+        <button class="btn btn-g" onclick="simulateTrigger()" style="font-size:11px"><i data-lucide="flask-conical" class="lc-sm"></i> Test Trigger</button>
+      </div>
+      <div id="sFeedList"></div>
+    </div>
+    <div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="backpack" class="lc-sm" style="color:var(--ac)"></i> Skin Pool</div><div class="cd-a" onclick="go('s-pool')">Manage ›</div></div>
+        <div class="mstats">
+          <div class="mstat"><div class="mstat-v pu" id="poolCount">34</div><div class="mstat-l">In Pool</div></div>
+          <div class="mstat"><div class="mstat-v gn">$1,240</div><div class="mstat-l">Value</div></div>
+          <div class="mstat"><div class="mstat-v or" id="poolReserved">2</div><div class="mstat-l">Reserved</div></div>
+        </div>
+      </div>
+      <div class="cd">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Configure ›</div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div></div><div class="trig-rng">$5–20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STREAMER TRIGGERS -->
+<div class="page" id="p-s-triggers">
+  <div class="g2 mb">
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Game Triggers</div><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 consecutive kills without dying</div></div><div class="trig-rng">$5–$15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-rng">$15–$50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div><div class="trig-d">Win 1 vs 2+ enemies</div></div><div class="trig-rng">$10–$30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">No-Scope Kill</div><div class="trig-d">AWP kill without scoping</div></div><div class="trig-rng">$3–$10</div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div><div class="trig-d">Eliminate with a knife</div></div><div class="trig-rng">$5–$20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="timer" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defuse (last sec)</div><div class="trig-d">Defuse in the final second</div></div><div class="trig-rng">$8–$25</div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+    <div>
+      <div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="brain" class="lc-sm" style="color:var(--ac)"></i> Drop Logic</div></div><div style="padding:16px 20px">
+        <div class="fg"><label class="fl">Winner Selection</label><select class="fi"><option>Random among all viewers</option><option>Random among active chatters</option><option>Weighted by watch time</option><option>Subscribers first</option></select></div>
+        <div class="fg"><label class="fl">Min watch time (min)</label><input type="number" class="fi" value="5"/></div>
+        <div class="fg"><label class="fl">Cooldown between drops (sec)</label><input type="number" class="fi" value="30"/></div>
+        <div class="fg"><label class="fl">Max drops per viewer</label><input type="number" class="fi" value="1"/></div>
+        <div class="fg"><label class="fl">Event dedup window (sec)</label><input type="number" class="fi" value="5"/></div>
+      </div></div>
+      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="shield-check" class="lc-sm" style="color:var(--ac)"></i> Viewer Requirements</div></div><div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Twitch linked</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Steam Trade URL set</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Channel follower</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Channel subscriber</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Steam account > 30 days</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Min presence before trigger</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- STREAMER POOL -->
+<div class="page" id="p-s-pool">
+  <div class="stats stats-4 mb">
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="backpack" class="lc"></i></div><div class="sc-v">34</div><div class="sc-l">In Pool</div></div>
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$1,240</div><div class="sc-l">Total Value</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="lock" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Reserved</div></div>
+    <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">$14.70</div><div class="sc-l">Avg Drop</div></div>
+  </div>
+  <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="package" class="lc-sm" style="color:var(--ac)"></i> Drop Pool <span class="cnt">34 skins</span></div><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> From Inventory</button></div>
+    <div class="skins-g">
+      <div class="sk-c r-gd"><div class="sk-img"><i data-lucide="sword" style="width:32px;height:32px;color:var(--r-gold)"></i></div><div class="sk-n">Karambit | Doppler</div><div class="sk-w">FN · Phase 2</div><div class="sk-p gd">$420</div><div class="sk-rt rt-gd">★ Rare</div></div>
+      <div class="sk-c r-cv"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div><div class="sk-n">Glock-18 | Fade</div><div class="sk-w">Factory New</div><div class="sk-p cv">$180</div><div class="sk-rt rt-cv">Covert</div></div>
+      <div class="sk-c r-cv reserved"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div><div class="sk-n">Deagle | Blaze</div><div class="sk-w">Factory New</div><div class="sk-p cv">$55.80</div><div class="sk-rt rt-cv">Covert</div></div>
+      <div class="sk-c r-cv"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div><div class="sk-n">USP-S | Kill Confirmed</div><div class="sk-w">MW</div><div class="sk-p cv">$32.10</div><div class="sk-rt rt-cv">Covert</div></div>
+      <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">M4A4 | Desolate Space</div><div class="sk-w">MW</div><div class="sk-p cl">$22.50</div><div class="sk-rt rt-cl">Classified</div></div>
+      <div class="sk-c r-cl reserved"><div class="sk-img"><i data-lucide="target" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">AWP | Asiimov</div><div class="sk-w">BS</div><div class="sk-p cl">$14.20</div><div class="sk-rt rt-cl">Classified</div></div>
+      <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">AK-47 | Vulcan</div><div class="sk-w">FT</div><div class="sk-p cl">$12.60</div><div class="sk-rt rt-cl">Classified</div></div>
+      <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">AK-47 | Redline</div><div class="sk-w">FT</div><div class="sk-p cl">$8.40</div><div class="sk-rt rt-cl">Classified</div></div>
+      <div class="sk-c r-rs"><div class="sk-img"><i data-lucide="bomb" style="width:32px;height:32px;color:var(--r-restricted)"></i></div><div class="sk-n">P250 | Muertos</div><div class="sk-w">FN</div><div class="sk-p rs">$3.20</div><div class="sk-rt rt-rs">Restricted</div></div>
+      <div class="sk-c r-ms"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div><div class="sk-n">FAMAS | Mecha</div><div class="sk-w">MW</div><div class="sk-p ms">$4.50</div><div class="sk-rt rt-ms">Mil-Spec</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- STREAMER HISTORY -->
+<div class="page" id="p-s-hist">
+  <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="scroll-text" class="lc-sm" style="color:var(--ac)"></i> Drop History</div><div style="display:flex;gap:8px"><button class="btn btn-g" style="font-size:11px"><i data-lucide="filter" class="lc-sm"></i> Filter</button><button class="btn btn-g" style="font-size:11px"><i data-lucide="download" class="lc-sm"></i> Export</button></div></div>
+    <div style="overflow-x:auto"><table><thead><tr><th>ID</th><th>Viewer</th><th>Skin</th><th>$</th><th>Trigger</th><th>State Machine</th><th>Status</th></tr></thead><tbody>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">#1047</td><td><div class="td-u"><div class="u-ava" style="width:28px;height:28px;font-size:10px">XD</div>xDreamer</div></td><td style="font-size:12px">AK-47 | Redline</td><td style="font-family:'JetBrains Mono';font-weight:600;color:var(--ac)">$8.40</td><td><span class="sk-rt rt-cv" style="font-size:7px">Triple Kill</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:1px 5px;font-size:7px">TRIG</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">WIN</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">RSRV</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">SENT</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">OK</div></div></td><td><span class="st st-on">✓</span></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">#1046</td><td><div class="td-u"><div class="u-ava" style="width:28px;height:28px;font-size:10px">NF</div>NaVi_fan</div></td><td style="font-size:12px">AWP | Asiimov</td><td style="font-family:'JetBrains Mono';font-weight:600;color:var(--ac)">$14.20</td><td><span class="sk-rt rt-rs" style="font-size:7px">Clutch</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:1px 5px;font-size:7px">TRIG</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">WIN</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">RSRV</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node active" style="padding:1px 5px;font-size:7px">SENT</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node" style="padding:1px 5px;font-size:7px">?</div></div></td><td><span class="st st-wait">⏳</span></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">#1045</td><td><div class="td-u"><div class="u-ava" style="width:28px;height:28px;font-size:10px">PG</div>pro100</div></td><td style="font-size:12px">M4A4 | Desolate</td><td style="font-family:'JetBrains Mono';font-weight:600;color:var(--ac)">$22.50</td><td><span class="sk-rt rt-gd" style="font-size:7px">ACE</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:1px 5px;font-size:7px">TRIG</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">WIN</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">RSRV</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">SENT</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node fail" style="padding:1px 5px;font-size:7px">EXP</div></div></td><td><span class="st st-off">Expired</span></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">#1044</td><td><div class="td-u"><div class="u-ava" style="width:28px;height:28px;font-size:10px">SS</div>steelskin</div></td><td style="font-size:12px">USP-S | Kill Conf.</td><td style="font-family:'JetBrains Mono';font-weight:600;color:var(--ac)">$32.10</td><td><span class="sk-rt rt-cv" style="font-size:7px">Triple Kill</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:1px 5px;font-size:7px">TRIG</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">WIN</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">RSRV</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">SENT</div><span class="sm-arrow" style="font-size:7px">→</span><div class="sm-node done" style="padding:1px 5px;font-size:7px">OK</div></div></td><td><span class="st st-on">✓</span></td></tr>
+    </tbody></table></div>
+  </div>
+</div>
+
+<!-- STREAMER HEALTH -->
+<div class="page" id="p-s-health">
+  <div class="stats stats-3 mb">
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="check-circle" class="lc"></i></div><div class="sc-v" style="color:var(--gn)">3/4</div><div class="sc-l">Systems Online</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="alert-triangle" class="lc"></i></div><div class="sc-v" style="color:var(--or)">1</div><div class="sc-l">Warnings</div></div>
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="gauge" class="lc"></i></div><div class="sc-v">99.2%</div><div class="sc-l">Uptime (24h)</div></div>
+  </div>
+  <div class="g2 mb">
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="server" class="lc-sm" style="color:var(--ac)"></i> System Status</div></div>
+      <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Steam Trade Bot</div><div class="health-d">dropzone_bot · last heartbeat 3s ago</div></div><div class="health-st" style="color:var(--gn)">ONLINE</div></div>
+      <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Twitch Connection</div><div class="health-d">Channel s1mple · EventSub active</div></div><div class="health-st" style="color:var(--gn)">CONNECTED</div></div>
+      <div class="health-r"><div class="health-dot warn"></div><div class="health-info"><div class="health-n">CS2 Game Agent</div><div class="health-d">Last event: 4 min ago (threshold: 5 min)</div></div><div class="health-st" style="color:var(--or)">SLOW</div></div>
+      <div class="health-r"><div class="health-dot ok"></div><div class="health-info"><div class="health-n">Trade Queue</div><div class="health-d">2 pending · 0 errors last hour</div></div><div class="health-st" style="color:var(--gn)">HEALTHY</div></div>
+    </div>
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="alert-circle" class="lc-sm" style="color:var(--rd)"></i> Recent Errors</div></div>
+      <div class="feed-r"><div class="fd fail"></div><div class="fm">Trade #1045 expired — item <span class="sk">M4A4 | Desolate Space</span> returned to pool</div><div class="ft">14 min</div></div>
+      <div class="feed-r"><div class="fd fail"></div><div class="fm">CS2 Agent: timeout receiving round data</div><div class="ft">1h</div></div>
+      <div class="feed-r"><div class="fd fail"></div><div class="fm">Trade #1039 declined — <b>kr1stal_</b> rejected</div><div class="ft">3h</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- STREAMER ANTI-FRAUD -->
+<div class="page" id="p-s-antifraud">
+  <div class="g2 mb">
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="shield-alert" class="lc-sm" style="color:var(--ac)"></i> Bot Protection</div></div>
+      <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Human verification on pool entry</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Rate limit: 1 entry per IP/5min</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Block VPN / Proxy</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Min Twitch account age: 7 days</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="scale" class="lc-sm" style="color:var(--ac)"></i> Limits</div></div>
+      <div style="padding:16px 20px">
+        <div class="fg"><label class="fl">Max wins per account / day</label><input type="number" class="fi" value="2"/></div>
+        <div class="fg"><label class="fl">Max wins per IP / day</label><input type="number" class="fi" value="3"/></div>
+        <div class="fg"><label class="fl">Min presence before trigger (sec)</label><input type="number" class="fi" value="300"/></div>
+        <div class="fg"><label class="fl">Cooldown after win (min)</label><input type="number" class="fi" value="60"/></div>
+      </div>
+    </div>
+  </div>
+  <div class="cd">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="ban" class="lc-sm" style="color:var(--ac)"></i> Banlist / Allowlist</div><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+    <div class="empty" style="padding:24px"><div class="empty-i"><i data-lucide="user-check" style="width:28px;height:28px"></i></div><div class="empty-t">No banned users</div></div>
+  </div>
+</div>
+
+<!-- STREAMER SETTINGS -->
+<div class="page" id="p-s-settings">
+  <div class="g2 mb">
+    <div><div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="key" class="lc-sm" style="color:var(--ac)"></i> API Connections</div></div><div style="padding:16px 20px"><div class="fg"><label class="fl">Steam API Key</label><input type="password" class="fi" value="••••••••••••••••"/></div><div class="fg"><label class="fl">Twitch Client ID</label><input type="password" class="fi" value="••••••••••••••••"/></div><div class="fg"><label class="fl">Twitch Client Secret</label><input type="password" class="fi" value="••••••••••••••••"/></div><button class="btn btn-p btn-w"><i data-lucide="save" class="lc-sm"></i> Save</button></div></div>
+    <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm" style="color:var(--cy)"></i> Steam Trade Bot</div><span class="st st-on">● Online</span></div><div style="padding:16px 20px"><div class="fg"><label class="fl">Bot Username</label><input type="text" class="fi" value="dropzone_bot"/></div><div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" value="••••••••••"/></div><div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" value="••••••••••"/></div></div></div></div>
+    <div><div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="bell-ring" class="lc-sm" style="color:var(--ac)"></i> Notifications</div></div><div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">OBS Overlay</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Discord Webhook</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Telegram Bot</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+    </div></div>
+    <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="monitor-play" class="lc-sm" style="color:var(--ac)"></i> OBS Overlay</div></div><div style="padding:16px 20px">
+      <div class="fg"><label class="fl">Browser Source URL</label><div style="display:flex;gap:8px"><input type="text" class="fi" value="https://dropzone.gg/overlay/abc123" readonly style="font-family:'JetBrains Mono';font-size:12px"/><button class="btn btn-g" style="flex-shrink:0"><i data-lucide="copy" class="lc-sm"></i></button></div></div>
+      <div class="fg"><label class="fl">Position</label><select class="fi"><option>Bottom Right</option><option>Bottom Left</option><option>Top Right</option><option>Center</option></select></div>
+      <div class="fg"><label class="fl">Duration (sec)</label><input type="number" class="fi" value="5"/></div>
+    </div></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const STREAMS=[
+  {id:1,name:'s1mple',ava:'S1',game:'CS2 · Ranked · Mirage',viewers:1240,pool:12,poolVal:420,triggers:['skull','crown','flame']},
+  {id:2,name:'ZywOo',ava:'ZW',game:'CS2 · FaceIT · Inferno',viewers:856,pool:8,poolVal:210,triggers:['skull','crown','swords']},
+  {id:3,name:'donk',ava:'DN',game:'CS2 · Premier · Dust2',viewers:245,pool:5,poolVal:95,triggers:['crown','flame']}
+];
+const SKINS=['AK-47 | Redline','AWP | Asiimov','M4A4 | Desolate Space','USP-S | Kill Confirmed','Glock-18 | Fade','P250 | Muertos','Desert Eagle | Blaze'];
+const USERS=['xDreamer','NaVi_fan228','pro100_gamer','steelskin99','kr1stal_','maxplay_cs','AWP_god','noob_slayer'];
+const TRIGGERS=[
+  {n:'Triple Kill',ico:'skull',cls:'kill'},
+  {n:'ACE',ico:'crown',cls:'kill'},
+  {n:'Clutch 1v3',ico:'flame',cls:'kill'},
+  {n:'Knife Kill',ico:'swords',cls:'kill'}
+];
+let events=[],dropCounter=1050,feedCount=0;
+function rnd(a){return a[Math.floor(Math.random()*a.length)]}
+function rndPrice(){return(Math.random()*50+3).toFixed(2)}
+
+function buildTicker(){
+  const items=[];
+  for(let i=0;i<10;i++){items.push(`<span class="ticker-i"><b>${rnd(USERS)}</b> won <span style="color:var(--cy)">${rnd(SKINS)}</span></span><span class="ticker-sep">·</span>`);}
+  document.getElementById('tickerContent').innerHTML=items.join('')+items.join('');
+}
+
+function buildStreams(){
+  document.getElementById('streamGrid').innerHTML=STREAMS.map(s=>`
+    <div class="str-c" onclick="openStream(${s.id})">
+      <div class="str-prev"><div class="gv"><i data-lucide="gamepad-2" style="width:80px;height:80px;stroke-width:1"></i></div>
+        <div class="str-br"><div class="b-live"><span class="dot"></span> LIVE</div><div class="b-view"><i data-lucide="eye" class="lc-sm"></i> ${s.viewers.toLocaleString()}</div></div>
+        <div class="str-pool"><i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins · $${s.poolVal}</div>
+      </div>
+      <div class="str-meta">
+        <div class="str-ava">${s.ava}</div>
+        <div style="flex:1"><div class="str-name">${s.name}</div><div class="str-game">${s.game}</div></div>
+        <div class="str-triggers">${s.triggers.map(t=>`<div class="tr-mini"><i data-lucide="${t}" class="lc-sm"></i></div>`).join('')}</div>
+      </div>
+    </div>`).join('');
+  lucide.createIcons();
+}
+
+function openStream(id){
+  const s=STREAMS.find(x=>x.id===id);if(!s)return;
+  document.getElementById('sdAva').textContent=s.ava;
+  document.getElementById('sdName').textContent=s.name;
+  document.getElementById('sdGame').textContent=s.game;
+  document.getElementById('sdViewers').textContent=s.viewers.toLocaleString();
+  document.getElementById('sdPool').innerHTML=`<i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins · $${s.poolVal}`;
+  document.getElementById('sdTriggers').innerHTML=s.triggers.map(t=>{
+    const tr=TRIGGERS.find(x=>x.ico===t);
+    return `<div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="${t}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${tr?.n||t}</div></div><span class="st st-on">Active</span></div>`;
+  }).join('');
+  go('stream');
+  lucide.createIcons();
+}
+
+function addFeedEvent(type,msg){
+  feedCount++;
+  const el=document.getElementById('feedList');
+  const row=document.createElement('div');row.className='feed-r';row.style.animation='pageIn .3s ease';
+  row.innerHTML=`<div class="fd ${type}"></div><div class="fm">${msg}</div><div class="ft">now</div>`;
+  el.insertBefore(row,el.firstChild);
+  if(el.children.length>15)el.removeChild(el.lastChild);
+  document.getElementById('feedCount').textContent=feedCount+' today';
+}
+function addSFeedEvent(type,msg){
+  const el=document.getElementById('sFeedList');if(!el)return;
+  const row=document.createElement('div');row.className='feed-r';row.style.animation='pageIn .3s ease';
+  row.innerHTML=`<div class="fd ${type}"></div><div class="fm">${msg}</div><div class="ft">now</div>`;
+  el.insertBefore(row,el.firstChild);
+  if(el.children.length>12)el.removeChild(el.lastChild);
+}
+
+function simulateTrigger(){
+  const trig=rnd(TRIGGERS),stream=rnd(STREAMS),user=rnd(USERS),skin=rnd(SKINS),price=rndPrice();
+  dropCounter++;
+  addFeedEvent('kill',`<b>${stream.name}</b> — ${trig.n}! Drop activated`);
+  addSFeedEvent('kill',`<b>${trig.n}</b> on ${stream.game.split('·')[2]?.trim()||'map'} — drop #${dropCounter}`);
+  setTimeout(()=>{
+    addFeedEvent('drop',`<b>${user}</b> selected as winner → <span class="sk">${skin}</span>`);
+    addSFeedEvent('drop',`Winner: <b>${user}</b> → <span class="hl">${skin}</span> ($${price})`);
+  },1200);
+  setTimeout(()=>{addSFeedEvent('trade',`Trade offer #${dropCounter} sent to <b>${user}</b>`);},2800);
+  setTimeout(()=>{
+    if(Math.random()>.2){
+      addFeedEvent('trade',`<b>${user}</b> accepted trade <span class="hl">${skin}</span>`);
+      addSFeedEvent('trade',`✓ Trade #${dropCounter} accepted — <b>${user}</b>`);
+    }else{addSFeedEvent('fail',`✗ Trade #${dropCounter} expired — item returned to pool`);}
+  },5000);
+}
+
+let simInterval;
+function startSim(){simInterval=setInterval(()=>{if(Math.random()>.4)simulateTrigger();else{const u=rnd(USERS);addFeedEvent('join',`<b>${u}</b> joined · Twitch ✓ · Trade URL ✓`);}},8000);}
+
+let wizStep=1;
+function wizNext(){
+  if(wizStep<4){
+    document.getElementById('wiz-'+wizStep).style.display='none';
+    const steps=document.getElementById('wizSteps').children;
+    steps[wizStep-1].classList.remove('cur');steps[wizStep-1].classList.add('done');
+    wizStep++;steps[wizStep-1].classList.add('cur');
+    document.getElementById('wiz-'+wizStep).style.display='block';
+    document.getElementById('wizPrev').style.visibility='visible';
+    if(wizStep===4)document.getElementById('wizNextBtn').innerHTML='Finish <i data-lucide="check" class="lc-sm"></i>';
+    lucide.createIcons();
+  }else{go('s-dash');}
+}
+function wizPrev(){
+  if(wizStep>1){
+    document.getElementById('wiz-'+wizStep).style.display='none';
+    const steps=document.getElementById('wizSteps').children;steps[wizStep-1].classList.remove('cur');
+    wizStep--;steps[wizStep-1].classList.remove('done');steps[wizStep-1].classList.add('cur');
+    document.getElementById('wiz-'+wizStep).style.display='block';
+    if(wizStep===1)document.getElementById('wizPrev').style.visibility='hidden';
+    document.getElementById('wizNextBtn').innerHTML='Next <i data-lucide="arrow-right" class="lc-sm"></i>';
+    lucide.createIcons();
+  }
+}
+
+let role='v',curPage='browse';
+const PM={
+  'browse':['Live Streams','Watch streams — win skins'],
+  'stream':['Stream','Participate in drops in real time'],
+  'my-drops':['My Drops','History of won skins'],
+  'profile':['Profile','Account & connections'],
+  'v-settings':['Settings','Notifications & account'],
+  's-dash':['Dashboard','Manage your stream in real time'],
+  's-triggers':['Triggers','Configure game event drops'],
+  's-pool':['Skin Pool','Inventory for giveaways'],
+  's-hist':['History','All drops with state machine'],
+  's-health':['Health','System status & errors'],
+  's-onboard':['Setup Wizard','Step-by-step onboarding'],
+  's-settings':['Settings','API, bot & overlay'],
+  's-antifraud':['Anti-Fraud','Abuse protection'],
+};
+
+function setRole(r){
+  role=r;
+  document.getElementById('roleSl').classList.toggle('str',r==='s');
+  document.getElementById('rBtnV').classList.toggle('active',r==='v');
+  document.getElementById('rBtnS').classList.toggle('active',r==='s');
+  document.getElementById('navV').style.display=r==='v'?'block':'none';
+  document.getElementById('navS').style.display=r==='s'?'block':'none';
+  document.getElementById('uRole').textContent=r==='v'?'Viewer':'Streamer';
+  const ta=document.getElementById('topAct');
+  if(r==='s'){ta.innerHTML='<i data-lucide="radio" class="lc-sm"></i> Go Live';ta.onclick=null;}
+  else{ta.innerHTML='<i data-lucide="radio" class="lc-sm"></i> Become Streamer';ta.onclick=()=>setRole('s');}
+  go(r==='v'?'browse':'s-dash');
+  lucide.createIcons();
+}
+
+function go(p){
+  curPage=p;
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('act'));
+  const t=document.getElementById('p-'+p);if(t)t.classList.add('act');
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('act'));
+  const ni=document.querySelector(`.ni[data-p="${p}"]`);if(ni)ni.classList.add('act');
+  const m=PM[p];if(m){document.getElementById('pgT').textContent=m[0];document.getElementById('pgS').textContent=m[1];}
+  lucide.createIcons();
+}
+
+buildTicker();buildStreams();
+['kill','drop','trade','kill','drop','join'].forEach((t,i)=>{
+  const msgs=[
+    `<b>s1mple</b> — Triple Kill on Mirage! Drop activated`,
+    `<b>xDreamer</b> won <span class="hl">AK-47 | Redline</span> from s1mple`,
+    `<b>NaVi_fan228</b> accepted trade <span class="hl">AWP | Asiimov</span> — $14.20`,
+    `<b>ZywOo</b> — ACE on Inferno! Drop activated`,
+    `<b>pro100_gamer</b> won <span class="hl">M4A4 | Desolate Space</span>`,
+    `<b>steelskin99</b> joined · Twitch ✓ · Trade URL ✓`,
+  ];
+  addFeedEvent(t,msgs[i]);addSFeedEvent(t,msgs[i]);
+});
+addSFeedEvent('kill','<b>Triple Kill</b> on Mirage — drop #1047');
+addSFeedEvent('drop','Winner: <b>xDreamer</b> → <span class="hl">AK-47 | Redline</span> ($8.40)');
+addSFeedEvent('trade','✓ Trade #1047 accepted — <b>xDreamer</b>');
+startSim();
+lucide.createIcons();
+</script>
+</body>
+</html>
