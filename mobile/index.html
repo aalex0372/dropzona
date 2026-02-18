@@ -25,7 +25,7 @@
         <div class="pg-t" id="pgT">Live Streams</div>
         <div class="pg-sub" id="pgS">Watch streams — win skins</div>
       </div>
-      <div class="live-chip"><span class="live-dot"></span><span id="liveCount">3</span> LIVE</div>
+      <div class="live-chip"><span class="live-dot"></span><span id="liveCount">10</span> LIVE</div>
     </div>
     <button class="tb-btn menu-btn" type="button" id="menuBtn" aria-label="Menu"><i data-lucide="menu" class="lc"></i></button>
   </header>
@@ -38,13 +38,21 @@
         <div class="ticker-track"><div class="ticker-scroll" id="tickerContent"></div></div>
       </div>
       <div class="stats stats-4 mb">
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">3</div><div class="sc-l">Streams Online</div></div>
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">10</div><div class="sc-l">Streams Online</div></div>
         <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">847</div><div class="sc-l">Skins Dropped</div></div>
         <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">2,341</div><div class="sc-l">Viewers Online</div></div>
         <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$12.4k</div><div class="sc-l">Total Value</div></div>
       </div>
-      <div class="section-label">Currently Live <span class="cnt">3</span></div>
-      <div class="str-list mb" id="streamGrid"></div>
+      <div class="live-section-h">
+        <span class="live-section-title">Currently Live <span class="live-count" id="streamCount">(10)</span></span>
+      </div>
+      <div class="following-wrap">
+        <span class="following-label">Following</span>
+        <div class="following-chips" id="followingList"></div>
+      </div>
+      <div class="str-list-scroll mb">
+        <div class="str-list" id="streamGrid"></div>
+      </div>
       <div class="cd">
         <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm ac"></i> Event Feed <span class="cnt" id="feedCount">0</span></div></div>
         <div id="feedList"></div>
@@ -380,7 +388,7 @@
     </div>
     <div class="drawer-nav">
       <div class="nav-s"><div class="nav-l">Browse</div>
-        <div class="ni act" data-p="browse"><i data-lucide="compass" class="lc-sm"></i> Live Streams<span class="badge ac">3</span></div>
+        <div class="ni act" data-p="browse"><i data-lucide="compass" class="lc-sm"></i> Live Streams<span class="badge ac">10</span></div>
         <div class="ni" data-p="my-drops"><i data-lucide="gift" class="lc-sm"></i> My Drops</div>
       </div>
       <div class="nav-s"><div class="nav-l">Account</div>

@@ -209,6 +209,24 @@ body::after {
 .fm .sk { color: var(--cy); font-weight: 500; }
 .ft { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--t4); flex-shrink: 0; }
 
+.live-section-h { margin-bottom: 14px; }
+.live-section-title { font-size: 14px; font-weight: 700; color: var(--t0); }
+.live-section-title .live-count { font-weight: 600; color: var(--ac); font-family: 'JetBrains Mono', monospace; }
+
+.following-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.following-label { font-size: 12px; font-weight: 600; color: var(--t4); flex-shrink: 0; }
+.following-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.following-chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: default; border: 1px solid var(--br0); background: var(--b2); color: var(--t2); transition: all 0.2s; }
+.following-chip.live { border-color: rgba(244, 63, 94, 0.25); color: var(--t0); cursor: pointer; }
+.following-chip.live:hover { border-color: var(--rd); background: rgba(244, 63, 94, 0.08); }
+.following-chip .chip-dot { width: 5px; height: 5px; background: var(--rd); border-radius: 50%; flex-shrink: 0; animation: pulse 1.5s ease infinite; }
+.following-chip .chip-status { font-size: 10px; font-weight: 700; color: var(--rd); letter-spacing: 0.3px; }
+.following-chip:not(.live) .chip-status { color: var(--t4); font-weight: 500; }
+
+.str-grid-scroll { overflow-x: auto; overflow-y: hidden; margin: 0 -28px 24px; padding: 0 28px 8px; -webkit-overflow-scrolling: touch; }
+.str-grid-scroll::-webkit-scrollbar { height: 6px; }
+.str-grid-scroll .str-grid { display: flex; flex-wrap: nowrap; gap: 16px; grid-template: unset; }
+.str-grid-scroll .str-c { flex: 0 0 auto; min-width: 300px; }
 .str-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
 .str-c { background: var(--bc); border: 1px solid var(--br1); border-radius: 16px; overflow: hidden; transition: all 0.3s; cursor: pointer; }
 .str-c:hover { border-color: var(--br-ac); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }

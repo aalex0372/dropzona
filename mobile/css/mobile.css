@@ -118,6 +118,25 @@ body {
 .back-btn { margin-bottom: 12px; min-height: 44px; padding: 10px 16px; }
 .section-label { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .section-label .cnt, .cd-t .cnt { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; background: var(--ac-s2); color: var(--ac); padding: 2px 8px; border-radius: 6px; }
+.live-section-h { margin-bottom: 12px; }
+.live-section-title { font-size: 14px; font-weight: 700; color: var(--t0); }
+.live-section-title .live-count { font-weight: 600; color: var(--ac); font-family: 'JetBrains Mono', monospace; }
+
+.following-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.following-label { font-size: 12px; font-weight: 600; color: var(--t4); flex-shrink: 0; }
+.following-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.following-chip { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; cursor: default; border: 1px solid var(--br0); background: var(--b2); color: var(--t2); transition: all 0.2s; -webkit-tap-highlight-color: transparent; }
+.following-chip.live { border-color: rgba(244, 63, 94, 0.25); color: var(--t0); cursor: pointer; }
+.following-chip.live:active { border-color: var(--rd); background: rgba(244, 63, 94, 0.08); }
+.following-chip .chip-dot { width: 5px; height: 5px; background: var(--rd); border-radius: 50%; flex-shrink: 0; animation: pulse 1.5s ease infinite; }
+.following-chip .chip-status { font-size: 10px; font-weight: 700; color: var(--rd); letter-spacing: 0.3px; }
+.following-chip:not(.live) .chip-status { color: var(--t4); font-weight: 500; }
+
+.str-list-scroll { overflow-x: auto; overflow-y: hidden; margin: 0 -16px 20px; padding: 0 16px 8px; -webkit-overflow-scrolling: touch; }
+.str-list-scroll::-webkit-scrollbar { height: 6px; }
+.str-list-scroll .str-list { display: flex; flex-direction: row; flex-wrap: nowrap; gap: 12px; }
+.str-list-scroll .str-c { flex: 0 0 auto; min-width: 280px; }
+
 .muted { font-size: 13px; color: var(--t3); }
 
 /* Ticker */
@@ -161,8 +180,9 @@ body {
 .setting-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; font-size: 14px; color: var(--t1); }
 .setting-row + .setting-row { border-top: 1px solid var(--br0); }
 
-/* Stream list (mobile: full-width cards) */
+/* Stream list (mobile: horizontal scroll when inside .str-list-scroll) */
 .str-list { display: flex; flex-direction: column; gap: 12px; }
+.str-list-scroll .str-list { flex-direction: row; }
 .str-c {
   background: var(--bc);
   border: 1px solid var(--br1);

@@ -41,7 +41,7 @@
       <div class="nav-s">
         <div class="nav-l">Browse</div>
         <div class="nav-list">
-          <div class="ni act" data-p="browse"><span class="ico"><i data-lucide="compass" class="lc-sm"></i></span>Live Streams<span class="badge ac">3</span></div>
+          <div class="ni act" data-p="browse"><span class="ico"><i data-lucide="compass" class="lc-sm"></i></span>Live Streams<span class="badge ac">10</span></div>
           <div class="ni" data-p="my-drops"><span class="ico"><i data-lucide="gift" class="lc-sm"></i></span>My Drops</div>
         </div>
       </div>
@@ -90,7 +90,7 @@
           <div class="pg-t" id="pgT">Live Streams</div>
           <div class="pg-sub" id="pgS">Watch streams — win skins</div>
         </div>
-        <div class="live-chip"><span class="live-dot"></span><span id="liveCount">3</span> LIVE</div>
+        <div class="live-chip"><span class="live-dot"></span><span id="liveCount">10</span> LIVE</div>
       </div>
       <div class="tb-r">
         <button class="tb-btn" type="button" data-go="profile"><i data-lucide="user" class="lc-sm"></i> Profile</button>
@@ -104,13 +104,21 @@
     <div class="ticker-track"><div class="ticker-scroll" id="tickerContent"></div></div>
   </div>
   <div class="stats stats-4 mb">
-    <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">3</div><div class="sc-l">Streams Online</div></div>
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">10</div><div class="sc-l">Streams Online</div></div>
     <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">847</div><div class="sc-l">Skins Dropped</div></div>
     <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">2,341</div><div class="sc-l">Viewers Online</div></div>
     <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$12.4k</div><div class="sc-l">Total Value</div></div>
   </div>
-  <div style="font-size:14px;font-weight:700;color:var(--t0);margin-bottom:14px;display:flex;align-items:center;gap:8px">Currently Live<span class="cnt" style="font-family:'JetBrains Mono';font-size:10px;background:var(--ac-s2);color:var(--ac);padding:2px 8px;border-radius:6px;font-weight:600">3</span></div>
-  <div class="str-grid mb" id="streamGrid"></div>
+  <div class="live-section-h">
+    <span class="live-section-title">Currently Live <span class="live-count" id="streamCount">(10)</span></span>
+  </div>
+  <div class="following-wrap">
+    <span class="following-label">Following</span>
+    <div class="following-chips" id="followingList"></div>
+  </div>
+  <div class="str-grid-scroll mb">
+    <div class="str-grid" id="streamGrid"></div>
+  </div>
   <div class="cd">
     <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm" style="color:var(--ac)"></i> Event Feed <span class="cnt" id="feedCount">0</span></div></div>
     <div id="feedList"></div>

@@ -6,7 +6,14 @@
 const STREAMS = [
   { id: 1, name: 's1mple', ava: 'S1', game: 'CS2 · Ranked · Mirage', viewers: 1240, pool: 12, poolVal: 420, triggers: ['skull', 'crown', 'flame'] },
   { id: 2, name: 'ZywOo', ava: 'ZW', game: 'CS2 · FaceIT · Inferno', viewers: 856, pool: 8, poolVal: 210, triggers: ['skull', 'crown', 'swords'] },
-  { id: 3, name: 'donk', ava: 'DN', game: 'CS2 · Premier · Dust2', viewers: 245, pool: 5, poolVal: 95, triggers: ['crown', 'flame'] }
+  { id: 3, name: 'donk', ava: 'DN', game: 'CS2 · Premier · Dust2', viewers: 245, pool: 5, poolVal: 95, triggers: ['crown', 'flame'] },
+  { id: 4, name: 'NiKo', ava: 'NK', game: 'CS2 · Ranked · Nuke', viewers: 920, pool: 10, poolVal: 310, triggers: ['skull', 'crown', 'swords'] },
+  { id: 5, name: 'device', ava: 'DV', game: 'CS2 · FaceIT · Overpass', viewers: 780, pool: 9, poolVal: 185, triggers: ['skull', 'flame'] },
+  { id: 6, name: 'm0NESY', ava: 'M0', game: 'CS2 · Premier · Ancient', viewers: 1100, pool: 14, poolVal: 520, triggers: ['crown', 'flame', 'swords'] },
+  { id: 7, name: 'electronic', ava: 'EL', game: 'CS2 · Ranked · Anubis', viewers: 420, pool: 6, poolVal: 140, triggers: ['skull', 'crown'] },
+  { id: 8, name: 'ropz', ava: 'RZ', game: 'CS2 · FaceIT · Vertigo', viewers: 650, pool: 7, poolVal: 220, triggers: ['flame', 'swords'] },
+  { id: 9, name: 'Twistzz', ava: 'TZ', game: 'CS2 · Ranked · Mirage', viewers: 580, pool: 8, poolVal: 195, triggers: ['skull', 'crown', 'flame'] },
+  { id: 10, name: 'broky', ava: 'BR', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['crown', 'swords'] }
 ];
 const SKINS = ['AK-47 | Redline', 'AWP | Asiimov', 'M4A4 | Desolate Space', 'USP-S | Kill Confirmed', 'Glock-18 | Fade', 'P250 | Muertos', 'Desert Eagle | Blaze'];
 const USERS = ['xDreamer', 'NaVi_fan228', 'pro100_gamer', 'steelskin99', 'kr1stal_', 'maxplay_cs', 'AWP_god', 'noob_slayer'];
@@ -16,6 +23,9 @@ const TRIGGERS = [
   { n: 'Clutch 1v3', ico: 'flame', cls: 'kill' },
   { n: 'Knife Kill', ico: 'swords', cls: 'kill' }
 ];
+
+/** Streamer names the user follows (some may be offline) */
+const FOLLOWING_NAMES = ['s1mple', 'ZywOo', 'donk', 'NiKo', 'device', 'm0NESY', 'shroud'];
 
 let dropCounter = 1050;
 let feedCount = 0;
@@ -52,10 +62,29 @@ function buildTicker() {
   if (el) el.innerHTML = items.join('') + items.join('');
 }
 
+function buildFollowing() {
+  const el = document.getElementById('followingList');
+  if (!el) return;
+  const liveNames = new Set(STREAMS.map(s => s.name));
+  el.innerHTML = FOLLOWING_NAMES.map(name => {
+    const stream = STREAMS.find(s => s.name === name);
+    const isLive = liveNames.has(name);
+    const id = stream ? stream.id : null;
+    const dataId = id ? ` data-stream-id="${id}"` : '';
+    return `<span class="following-chip ${isLive ? 'live' : ''}"${dataId}>${name} ${isLive ? '<span class="chip-dot"></span><span class="chip-status">LIVE</span>' : '<span class="chip-status">Offline</span>'}</span>`;
+  }).join('');
+  el.querySelectorAll('.following-chip.live[data-stream-id]').forEach(chip => {
+    chip.addEventListener('click', () => openStream(parseInt(chip.dataset.streamId, 10)));
+  });
+}
+
 function buildStreams() {
   const el = document.getElementById('streamGrid');
   if (!el) return;
-  el.innerHTML = STREAMS.map(s => `
+  const list = STREAMS;
+  const countEl = document.getElementById('streamCount');
+  if (countEl) countEl.textContent = '(' + list.length + ')';
+  el.innerHTML = list.map(s => `
     <div class="str-c" data-stream-id="${s.id}">
       <div class="str-prev"><div class="gv"><i data-lucide="gamepad-2" style="width:80px;height:80px;stroke-width:1"></i></div>
         <div class="str-br"><div class="b-live"><span class="dot"></span> LIVE</div><div class="b-view"><i data-lucide="eye" class="lc-sm"></i> ${s.viewers.toLocaleString()}</div></div>
@@ -71,6 +100,7 @@ function buildStreams() {
   el.querySelectorAll('.str-c').forEach(card => {
     card.addEventListener('click', () => openStream(parseInt(card.dataset.streamId, 10)));
   });
+  buildFollowing();
 }
 
 function openStream(id) {
@@ -269,6 +299,7 @@ function init() {
 
   buildTicker();
   buildStreams();
+  buildFollowing();
 
   const msgs = [
     '<b>s1mple</b> — Triple Kill on Mirage! Drop activated',
