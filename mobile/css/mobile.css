@@ -452,6 +452,7 @@ body {
 .drawer.open { transform: translateX(0); }
 
 .drawer-h { display: flex; align-items: center; justify-content: space-between; padding: 16px; border-bottom: 1px solid var(--br0); }
+.drawer-role-sw { margin: 16px; margin-top: 0; }
 .drawer-close { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: none; border: none; color: var(--t2); cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .s-brand { display: flex; align-items: center; gap: 12px; }
 .s-mark { width: 36px; height: 36px; background: linear-gradient(135deg, var(--ac), #a78bfa); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; }
