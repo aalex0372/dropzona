@@ -50,6 +50,12 @@ const PM = {
   's-antifraud': ['Anti-Fraud', 'Abuse protection']
 };
 
+function selectGame(el) {
+  document.querySelectorAll('.game-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  console.log('[DROPZONE] Game selected:', el.dataset.game);
+}
+
 function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
 function rndPrice() { return (Math.random() * 50 + 3).toFixed(2); }
 

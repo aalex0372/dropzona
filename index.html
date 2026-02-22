@@ -336,26 +336,86 @@
   <div class="g2 mb">
     <div class="cd">
       <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Game Triggers</div><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
-      <div style="padding:12px 20px;border-bottom:1px solid var(--br0);display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-        <div class="fg" style="margin:0;min-width:180px">
-          <label class="fl">Game</label>
-          <select class="fi" id="triggersGame">
-            <option value="cs2">CS2</option>
-            <option value="dota2">Dota 2</option>
-            <option value="overwatch">Overwatch</option>
-            <option value="valorant">Valorant</option>
-            <option value="r6">Rainbow Six Siege</option>
-            <option value="lol">League of Legends</option>
-            <option value="other">Other</option>
-          </select>
+      <div style="padding:12px 20px;border-bottom:1px solid var(--br0);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <div class="game-chip active" data-game="cs2" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/730/header.jpg" alt="CS2"/>
+          </div>
+          <span>Counter-Strike 2</span>
+        </div>
+        <div class="game-chip" data-game="dota2" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg" alt="Dota 2"/>
+          </div>
+          <span>Dota 2</span>
+        </div>
+        <div class="game-chip" data-game="tf2" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg" alt="Team Fortress 2"/>
+          </div>
+          <span>Team Fortress 2</span>
+        </div>
+        <div class="game-chip" data-game="rust" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/252490/header.jpg" alt="Rust"/>
+          </div>
+          <span>Rust</span>
+        </div>
+        <div class="game-chip" data-game="pubg" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg" alt="PUBG"/>
+          </div>
+          <span>PUBG</span>
+        </div>
+        <div class="game-chip" data-game="payday2" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/218620/header.jpg" alt="PAYDAY 2"/>
+          </div>
+          <span>PAYDAY 2</span>
+        </div>
+        <div class="game-chip" data-game="h1z1" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/433850/header.jpg" alt="H1Z1"/>
+          </div>
+          <span>H1Z1</span>
+        </div>
+        <div class="game-chip" data-game="kf2" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/232090/header.jpg" alt="Killing Floor 2"/>
+          </div>
+          <span>Killing Floor 2</span>
+        </div>
+        <div class="game-chip" data-game="naraka" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1203220/header.jpg" alt="Naraka: Bladepoint"/>
+          </div>
+          <span>Naraka: Bladepoint</span>
+        </div>
+        <div class="game-chip" data-game="dst" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/322330/header.jpg" alt="Don't Starve Together"/>
+          </div>
+          <span>Don't Starve Together</span>
+        </div>
+        <div class="game-chip" data-game="unturned" onclick="selectGame(this)">
+          <div class="game-chip-icon">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/304930/header.jpg" alt="Unturned"/>
+          </div>
+          <span>Unturned</span>
+        </div>
+        <div class="game-chip" data-game="other" onclick="selectGame(this)" style="opacity:.5">
+          <div class="game-chip-icon" style="background:var(--b3);display:flex;align-items:center;justify-content:center;color:var(--t4)">
+            <i data-lucide="more-horizontal" style="width:14px;height:14px"></i>
+          </div>
+          <span>Search for other games</span>
         </div>
       </div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 consecutive kills without dying</div></div><div class="trig-price"><span class="trig-price-lbl">Drop value</span><input type="number" class="fi trig-inp" placeholder="Min" value="5" min="0" step="0.01" title="Min $"/> <span style="color:var(--t4)">–</span> <input type="number" class="fi trig-inp" placeholder="Max" value="15" min="0" step="0.01" title="Max $"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-price"><span class="trig-price-lbl">Drop value</span><input type="number" class="fi trig-inp" placeholder="Min" value="15" min="0" step="0.01"/> <span style="color:var(--t4)">–</span> <input type="number" class="fi trig-inp" placeholder="Max" value="50" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div><div class="trig-d">Win 1 vs 2+ enemies</div></div><div class="trig-price"><span class="trig-price-lbl">Drop value</span><input type="number" class="fi trig-inp" placeholder="Min" value="10" min="0" step="0.01"/> <span style="color:var(--t4)">–</span> <input type="number" class="fi trig-inp" placeholder="Max" value="30" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">No-Scope Kill</div><div class="trig-d">AWP kill without scoping</div></div><div class="trig-price"><span class="trig-price-lbl">Drop value</span><input type="number" class="fi trig-inp" placeholder="Min" value="3" min="0" step="0.01"/> <span style="color:var(--t4)">–</span> <input type="number" class="fi trig-inp" placeholder="Max" value="10" min="0" step="0.01"/></div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div><div class="trig-d">Eliminate with a knife</div></div><div class="trig-price"><span class="trig-price-lbl">Drop value</span><input type="number" class="fi trig-inp" placeholder="Min" value="5" min="0" step="0.01"/> <span style="color:var(--t4)">–</span> <input type="number" class="fi trig-inp" placeholder="Max" value="20" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="timer" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defuse (last sec)</div><div class="trig-d">Defuse in the final second</div></div><div class="trig-price"><span class="trig-price-lbl">Drop value</span><input type="number" class="fi trig-inp" placeholder="Min" value="8" min="0" step="0.01"/> <span style="color:var(--t4)">–</span> <input type="number" class="fi trig-inp" placeholder="Max" value="25" min="0" step="0.01"/></div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 consecutive kills without dying</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="5" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="15" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="15" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="50" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div><div class="trig-d">Win 1 vs 2+ enemies</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="10" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="30" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">No-Scope Kill</div><div class="trig-d">AWP kill without scoping</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="3" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="10" min="0" step="0.01"/></div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div><div class="trig-d">Eliminate with a knife</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="5" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="20" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="timer" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defuse (last sec)</div><div class="trig-d">Defuse in the final second</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="8" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="25" min="0" step="0.01"/></div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
     </div>
     <div>
       <div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="brain" class="lc-sm" style="color:var(--ac)"></i> Drop Logic</div></div><div style="padding:16px 20px">
