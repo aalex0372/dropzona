@@ -377,28 +377,247 @@
 </div>
 
 <!-- STREAMER POOL -->
-<div class="page" id="p-s-pool">
-  <div class="stats stats-4 mb">
-    <div class="sc"><div class="sc-ico pu"><i data-lucide="backpack" class="lc"></i></div><div class="sc-v">34</div><div class="sc-l">In Pool</div></div>
-    <div class="sc"><div class="sc-ico gn"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$1,240</div><div class="sc-l">Total Value</div></div>
-    <div class="sc"><div class="sc-ico or"><i data-lucide="lock" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Reserved</div></div>
-    <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">$14.70</div><div class="sc-l">Avg Drop</div></div>
-  </div>
-  <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="package" class="lc-sm" style="color:var(--ac)"></i> Drop Pool <span class="cnt">34 skins</span></div><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> From Inventory</button></div>
-    <div class="skins-g">
-      <div class="sk-c r-gd"><div class="sk-img"><i data-lucide="sword" style="width:32px;height:32px;color:var(--r-gold)"></i></div><div class="sk-n">Karambit | Doppler</div><div class="sk-w">FN · Phase 2</div><div class="sk-p gd">$420</div><div class="sk-rt rt-gd">★ Rare</div></div>
-      <div class="sk-c r-cv"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div><div class="sk-n">Glock-18 | Fade</div><div class="sk-w">Factory New</div><div class="sk-p cv">$180</div><div class="sk-rt rt-cv">Covert</div></div>
-      <div class="sk-c r-cv reserved"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div><div class="sk-n">Deagle | Blaze</div><div class="sk-w">Factory New</div><div class="sk-p cv">$55.80</div><div class="sk-rt rt-cv">Covert</div></div>
-      <div class="sk-c r-cv"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div><div class="sk-n">USP-S | Kill Confirmed</div><div class="sk-w">MW</div><div class="sk-p cv">$32.10</div><div class="sk-rt rt-cv">Covert</div></div>
-      <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">M4A4 | Desolate Space</div><div class="sk-w">MW</div><div class="sk-p cl">$22.50</div><div class="sk-rt rt-cl">Classified</div></div>
-      <div class="sk-c r-cl reserved"><div class="sk-img"><i data-lucide="target" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">AWP | Asiimov</div><div class="sk-w">BS</div><div class="sk-p cl">$14.20</div><div class="sk-rt rt-cl">Classified</div></div>
-      <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">AK-47 | Vulcan</div><div class="sk-w">FT</div><div class="sk-p cl">$12.60</div><div class="sk-rt rt-cl">Classified</div></div>
-      <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div><div class="sk-n">AK-47 | Redline</div><div class="sk-w">FT</div><div class="sk-p cl">$8.40</div><div class="sk-rt rt-cl">Classified</div></div>
-      <div class="sk-c r-rs"><div class="sk-img"><i data-lucide="bomb" style="width:32px;height:32px;color:var(--r-restricted)"></i></div><div class="sk-n">P250 | Muertos</div><div class="sk-w">FN</div><div class="sk-p rs">$3.20</div><div class="sk-rt rt-rs">Restricted</div></div>
-      <div class="sk-c r-ms"><div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div><div class="sk-n">FAMAS | Mecha</div><div class="sk-w">MW</div><div class="sk-p ms">$4.50</div><div class="sk-rt rt-ms">Mil-Spec</div></div>
+<!-- STREAMER POOL — replace the entire <div class="page" id="p-s-pool"> section -->
+  <div class="page" id="p-s-pool">
+    <div class="stats stats-4 mb">
+      <div class="sc"><div class="sc-ico pu"><i data-lucide="backpack" class="lc"></i></div><div class="sc-v">34</div><div class="sc-l">In Pool</div></div>
+      <div class="sc"><div class="sc-ico gn"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$2,847</div><div class="sc-l">Total Value</div></div>
+      <div class="sc"><div class="sc-ico or"><i data-lucide="lock" class="lc"></i></div><div class="sc-v">3</div><div class="sc-l">Reserved</div></div>
+      <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">$83.70</div><div class="sc-l">Avg Price</div></div>
+    </div>
+    <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="package" class="lc-sm" style="color:var(--ac)"></i> Drop Pool <span class="cnt">34 skins</span></div><div style="display:flex;gap:8px" id="skinPoolActions"><button class="btn btn-g" id="skinPoolSortBtn" style="font-size:11px;padding:6px 12px" onclick="sortSkinPool()" title="Sort by price"><i data-lucide="arrow-up-down" class="lc-sm"></i> Sort</button><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> From Inventory</button></div></div>
+      <div class="skins-g">
+  
+        <!-- ★ GOLD / KNIVES & GLOVES -->
+        <div class="sk-c r-gd">
+          <div class="sk-img"><i data-lucide="sword" style="width:32px;height:32px;color:var(--r-gold)"></i></div>
+          <div class="sk-n">★ Karambit | Doppler</div>
+          <div class="sk-w">FN · Phase 2 · 0.008</div>
+          <div class="sk-p gd">$520.00</div>
+          <div class="sk-rt rt-gd">★ Extraordinary</div>
+        </div>
+        <div class="sk-c r-gd">
+          <div class="sk-img"><i data-lucide="sword" style="width:32px;height:32px;color:var(--r-gold)"></i></div>
+          <div class="sk-n">★ Butterfly Knife | Fade</div>
+          <div class="sk-w">FN · 98% Fade · 0.011</div>
+          <div class="sk-p gd">$445.00</div>
+          <div class="sk-rt rt-gd">★ Extraordinary</div>
+        </div>
+        <div class="sk-c r-gd">
+          <div class="sk-img"><i data-lucide="hand" style="width:32px;height:32px;color:var(--r-gold)"></i></div>
+          <div class="sk-n">★ Sport Gloves | Hedge Maze</div>
+          <div class="sk-w">FT · 0.21</div>
+          <div class="sk-p gd">$310.00</div>
+          <div class="sk-rt rt-gd">★ Extraordinary</div>
+        </div>
+        <div class="sk-c r-gd reserved">
+          <div class="sk-img"><i data-lucide="sword" style="width:32px;height:32px;color:var(--r-gold)"></i></div>
+          <div class="sk-n">★ M9 Bayonet | Tiger Tooth</div>
+          <div class="sk-w">FN · 0.006</div>
+          <div class="sk-p gd">$285.00</div>
+          <div class="sk-rt rt-gd">★ Extraordinary</div>
+        </div>
+  
+        <!-- COVERT (RED) -->
+        <div class="sk-c r-cv">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div>
+          <div class="sk-n">AWP | Dragon Lore</div>
+          <div class="sk-w">BS · 0.62</div>
+          <div class="sk-p cv">$380.00</div>
+          <div class="sk-rt rt-cv">Covert</div>
+        </div>
+        <div class="sk-c r-cv">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div>
+          <div class="sk-n">Glock-18 | Fade</div>
+          <div class="sk-w">FN · 0.009</div>
+          <div class="sk-p cv">$182.00</div>
+          <div class="sk-rt rt-cv">Covert</div>
+        </div>
+        <div class="sk-c r-cv">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div>
+          <div class="sk-n">M4A1-S | Welcome to the Jungle</div>
+          <div class="sk-w">MW · 0.08</div>
+          <div class="sk-p cv">$68.50</div>
+          <div class="sk-rt rt-cv">Covert</div>
+        </div>
+        <div class="sk-c r-cv reserved">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div>
+          <div class="sk-n">Desert Eagle | Blaze</div>
+          <div class="sk-w">FN · 0.004</div>
+          <div class="sk-p cv">$55.80</div>
+          <div class="sk-rt rt-cv">Covert</div>
+        </div>
+        <div class="sk-c r-cv">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div>
+          <div class="sk-n">USP-S | Kill Confirmed</div>
+          <div class="sk-w">MW · 0.10</div>
+          <div class="sk-p cv">$32.10</div>
+          <div class="sk-rt rt-cv">Covert</div>
+        </div>
+        <div class="sk-c r-cv">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-covert)"></i></div>
+          <div class="sk-n">AK-47 | Neon Rider</div>
+          <div class="sk-w">FN · 0.02</div>
+          <div class="sk-p cv">$28.40</div>
+          <div class="sk-rt rt-cv">Covert</div>
+        </div>
+  
+        <!-- CLASSIFIED (PINK) -->
+        <div class="sk-c r-cl">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div>
+          <div class="sk-n">AWP | Asiimov</div>
+          <div class="sk-w">FT · 0.28</div>
+          <div class="sk-p cl">$24.60</div>
+          <div class="sk-rt rt-cl">Classified</div>
+        </div>
+        <div class="sk-c r-cl">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div>
+          <div class="sk-n">M4A4 | Desolate Space</div>
+          <div class="sk-w">MW · 0.11</div>
+          <div class="sk-p cl">$22.50</div>
+          <div class="sk-rt rt-cl">Classified</div>
+        </div>
+        <div class="sk-c r-cl">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div>
+          <div class="sk-n">AK-47 | Bloodsport</div>
+          <div class="sk-w">FT · 0.22</div>
+          <div class="sk-p cl">$18.90</div>
+          <div class="sk-rt rt-cl">Classified</div>
+        </div>
+        <div class="sk-c r-cl">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div>
+          <div class="sk-n">M4A1-S | Hyper Beast</div>
+          <div class="sk-w">MW · 0.09</div>
+          <div class="sk-p cl">$16.30</div>
+          <div class="sk-rt rt-cl">Classified</div>
+        </div>
+        <div class="sk-c r-cl reserved">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div>
+          <div class="sk-n">AK-47 | Vulcan</div>
+          <div class="sk-w">FT · 0.24</div>
+          <div class="sk-p cl">$12.60</div>
+          <div class="sk-rt rt-cl">Classified</div>
+        </div>
+        <div class="sk-c r-cl">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-classified)"></i></div>
+          <div class="sk-n">AWP | Fever Dream</div>
+          <div class="sk-w">FN · 0.03</div>
+          <div class="sk-p cl">$10.80</div>
+          <div class="sk-rt rt-cl">Classified</div>
+        </div>
+  
+        <!-- RESTRICTED (PURPLE) -->
+        <div class="sk-c r-rs">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-restricted)"></i></div>
+          <div class="sk-n">AK-47 | Redline</div>
+          <div class="sk-w">FT · 0.19</div>
+          <div class="sk-p rs">$8.40</div>
+          <div class="sk-rt rt-rs">Restricted</div>
+        </div>
+        <div class="sk-c r-rs">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-restricted)"></i></div>
+          <div class="sk-n">M4A4 | 龍王 (Dragon King)</div>
+          <div class="sk-w">FN · 0.01</div>
+          <div class="sk-p rs">$7.20</div>
+          <div class="sk-rt rt-rs">Restricted</div>
+        </div>
+        <div class="sk-c r-rs">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-restricted)"></i></div>
+          <div class="sk-n">USP-S | Orion</div>
+          <div class="sk-w">FN · 0.04</div>
+          <div class="sk-p rs">$6.80</div>
+          <div class="sk-rt rt-rs">Restricted</div>
+        </div>
+        <div class="sk-c r-rs">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-restricted)"></i></div>
+          <div class="sk-n">AWP | Redline</div>
+          <div class="sk-w">MW · 0.12</div>
+          <div class="sk-p rs">$5.50</div>
+          <div class="sk-rt rt-rs">Restricted</div>
+        </div>
+        <div class="sk-c r-rs">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-restricted)"></i></div>
+          <div class="sk-n">P250 | Muertos</div>
+          <div class="sk-w">FN · 0.03</div>
+          <div class="sk-p rs">$3.20</div>
+          <div class="sk-rt rt-rs">Restricted</div>
+        </div>
+        <div class="sk-c r-rs">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-restricted)"></i></div>
+          <div class="sk-n">Glock-18 | Water Elemental</div>
+          <div class="sk-w">FN · 0.05</div>
+          <div class="sk-p rs">$3.10</div>
+          <div class="sk-rt rt-rs">Restricted</div>
+        </div>
+        <div class="sk-c r-rs">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-restricted)"></i></div>
+          <div class="sk-n">Desert Eagle | Kumicho Dragon</div>
+          <div class="sk-w">MW · 0.08</div>
+          <div class="sk-p rs">$2.90</div>
+          <div class="sk-rt rt-rs">Restricted</div>
+        </div>
+  
+        <!-- MIL-SPEC (BLUE) -->
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">FAMAS | Mecha Industries</div>
+          <div class="sk-w">FN · 0.02</div>
+          <div class="sk-p ms">$4.50</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">UMP-45 | Primal Saber</div>
+          <div class="sk-w">MW · 0.10</div>
+          <div class="sk-p ms">$3.80</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">MP9 | Hydra</div>
+          <div class="sk-w">FN · 0.04</div>
+          <div class="sk-p ms">$2.40</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">Tec-9 | Fuel Injector</div>
+          <div class="sk-w">MW · 0.13</div>
+          <div class="sk-p ms">$1.80</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">P90 | Asiimov</div>
+          <div class="sk-w">FT · 0.26</div>
+          <div class="sk-p ms">$1.50</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">MAC-10 | Neon Rider</div>
+          <div class="sk-w">FN · 0.01</div>
+          <div class="sk-p ms">$1.20</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">SG 553 | Cyrex</div>
+          <div class="sk-w">MW · 0.09</div>
+          <div class="sk-p ms">$0.85</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+        <div class="sk-c r-ms">
+          <div class="sk-img"><i data-lucide="crosshair" style="width:32px;height:32px;color:var(--r-milspec)"></i></div>
+          <div class="sk-n">Nova | Hyper Beast</div>
+          <div class="sk-w">FT · 0.18</div>
+          <div class="sk-p ms">$0.60</div>
+          <div class="sk-rt rt-ms">Mil-Spec</div>
+        </div>
+  
+      </div>
     </div>
   </div>
-</div>
 
 <!-- STREAMER HISTORY -->
 <div class="page" id="p-s-hist">

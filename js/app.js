@@ -275,6 +275,27 @@ function go(p) {
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
+/** Skin Pool sort: toggles between price high→low and low→high */
+let skinPoolSortDesc = true;
+function sortSkinPool() {
+  const container = document.querySelector('#p-s-pool .skins-g');
+  if (!container) return;
+  const cards = Array.from(container.querySelectorAll('.sk-c'));
+  const parsePrice = (el) => {
+    const p = el.querySelector('.sk-p');
+    if (!p) return 0;
+    const n = parseFloat((p.textContent || '').replace(/[^0-9.]/g, ''));
+    return isNaN(n) ? 0 : n;
+  };
+  skinPoolSortDesc = !skinPoolSortDesc;
+  cards.sort((a, b) => {
+    const pa = parsePrice(a);
+    const pb = parsePrice(b);
+    return skinPoolSortDesc ? pb - pa : pa - pb;
+  });
+  cards.forEach((c) => container.appendChild(c));
+}
+
 // Expose for onclick in HTML
 window.go = go;
 window.setRole = setRole;
@@ -282,6 +303,7 @@ window.openStream = openStream;
 window.wizNext = wizNext;
 window.wizPrev = wizPrev;
 window.simulateTrigger = simulateTrigger;
+window.sortSkinPool = sortSkinPool;
 
 // Init: bind nav and role buttons, then build UI
 function init() {
