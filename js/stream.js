@@ -49,8 +49,6 @@ export function buildFollowing() {
 export function buildStreams() {
   const el = document.getElementById('streamGrid');
   if (!el) return;
-  const countEl = document.getElementById('streamCount');
-  if (countEl) countEl.textContent = '(228)';
   el.innerHTML = STREAMS.map((s) => `
     <div class="str-c" data-stream-id="${s.id}">
       <div class="str-prev"><div class="gv"><i data-lucide="gamepad-2" style="width:80px;height:80px;stroke-width:1"></i></div>
