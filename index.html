@@ -13,6 +13,13 @@
     })();
   </script>
   <title>DROPZONE — Live Skin Drops</title>
+  <meta name="description" content="Watch live streams, participate in drops, and win CS2 skins. DROPZONE connects streamers and viewers for real-time skin giveaways."/>
+  <link rel="canonical" href="https://dropzona.gg/"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="DROPZONE — Live Skin Drops"/>
+  <meta property="og:description" content="Watch live streams, participate in drops, and win CS2 skins."/>
+  <meta property="og:url" content="https://dropzona.gg/"/>
+  <meta property="og:site_name" content="DROPZONE"/>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E" type="image/svg+xml">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +56,7 @@
         <div class="nav-l">Account</div>
         <div class="nav-list">
           <div class="ni" data-p="profile"><span class="ico"><i data-lucide="user" class="lc-sm"></i></span>Profile</div>
-          <div class="ni" data-p="v-settings"><span class="ico"><i data-lucide="settings" class="lc-sm"></i></span>Settings</div>
+          <div class="ni" data-p="v-settings"><span class="ico"><i data-lucide="settings" class="lc-sm"></i></span>Viewer settings</div>
         </div>
       </div>
     </div>
@@ -59,7 +66,6 @@
         <div class="nav-list">
           <div class="ni act" data-p="s-dash"><span class="ico"><i data-lucide="layout-dashboard" class="lc-sm"></i></span>Dashboard</div>
           <div class="ni" data-p="s-triggers"><span class="ico"><i data-lucide="crosshair" class="lc-sm"></i></span>Triggers</div>
-          <div class="ni" data-p="s-pool"><span class="ico"><i data-lucide="backpack" class="lc-sm"></i></span>Skin Pool<span class="badge ac">34</span></div>
           <div class="ni" data-p="s-hist"><span class="ico"><i data-lucide="scroll-text" class="lc-sm"></i></span>History</div>
           <div class="ni" data-p="s-health"><span class="ico"><i data-lucide="heart-pulse" class="lc-sm"></i></span>Health</div>
         </div>
@@ -68,7 +74,7 @@
         <div class="nav-l">Config</div>
         <div class="nav-list">
           <div class="ni" data-p="s-onboard"><span class="ico"><i data-lucide="rocket" class="lc-sm"></i></span>Setup Wizard</div>
-          <div class="ni" data-p="s-settings"><span class="ico"><i data-lucide="sliders-horizontal" class="lc-sm"></i></span>Settings</div>
+          <div class="ni" data-p="s-settings"><span class="ico"><i data-lucide="sliders-horizontal" class="lc-sm"></i></span>Streamer settings</div>
           <div class="ni" data-p="s-antifraud"><span class="ico"><i data-lucide="shield-check" class="lc-sm"></i></span>Anti-Fraud</div>
         </div>
       </div>
@@ -93,8 +99,8 @@
         <div class="live-chip"><span class="live-dot"></span><span id="liveCount">10</span> LIVE</div>
       </div>
       <div class="tb-r">
-        <button class="tb-btn" type="button" data-go="profile"><i data-lucide="user" class="lc-sm"></i> Profile</button>
-        <button class="tb-btn pr" id="topAct" type="button"><i data-lucide="radio" class="lc-sm"></i> Become Streamer</button>
+        <button class="tb-btn tb-btn-eq" type="button" data-go="profile"><i data-lucide="user" class="lc-sm"></i> Profile</button>
+        <button class="tb-btn tb-btn-eq pr" id="topAct" type="button"><i data-lucide="radio" class="lc-sm"></i> Become Streamer</button>
       </div>
     </div>
 
@@ -104,10 +110,10 @@
     <div class="ticker-track"><div class="ticker-scroll" id="tickerContent"></div></div>
   </div>
   <div class="stats stats-4 mb">
-    <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">10</div><div class="sc-l">Streams Online</div></div>
-    <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">847</div><div class="sc-l">Skins Dropped</div></div>
-    <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">2,341</div><div class="sc-l">Viewers Online</div></div>
-    <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$12.4k</div><div class="sc-l">Total Value</div></div>
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">228</div><div class="sc-l">Streams Online</div></div>
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">12.4k</div><div class="sc-l">Skins Dropped</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">3,722</div><div class="sc-l">Viewers Online</div></div>
+    <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$68.8k</div><div class="sc-l">Total Value</div></div>
   </div>
   <div class="live-section-h">
     <span class="live-section-title">Currently Live <span class="live-count" id="streamCount">(10)</span></span>
@@ -161,7 +167,7 @@
           <div id="eligStatus" style="font-size:15px;font-weight:700;color:var(--rd);margin-bottom:16px;display:flex;align-items:center;gap:8px"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
           <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
           <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div style="flex:1"><div class="elig-text ok">Watch time ≥ 5 min</div><div class="prog"><div class="prog-fill gn" style="width:100%"></div></div></div></div>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Present when drop started</div></div>
           <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account > 30 days</div></div>
           <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
         </div>
@@ -175,15 +181,45 @@
 </div>
 
 <!-- MY DROPS -->
-<div class="page" id="p-my-drops">
-  <div class="stats stats-3 mb">
-    <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Prizes Won</div></div>
-    <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$22.60</div><div class="sc-l">Total Value</div></div>
-    <div class="sc"><div class="sc-ico or"><i data-lucide="clock" class="lc"></i></div><div class="sc-v">4.2h</div><div class="sc-l">Watch Time</div></div>
+<div class="page page-my-drops" id="p-my-drops">
+  <div class="my-drops-head">
+    <div class="stats stats-3">
+      <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">26</div><div class="sc-l">Drops received</div></div>
+      <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$142.80</div><div class="sc-l">Total Value</div></div>
+      <div class="sc"><div class="sc-ico or"><i data-lucide="radio" class="lc"></i></div><div class="sc-v">12</div><div class="sc-l">Streams joined</div></div>
+    </div>
   </div>
-  <div class="cd">
+  <div class="cd my-drops-card">
     <div class="cd-h"><div class="cd-t"><i data-lucide="gift" class="lc-sm" style="color:var(--ac)"></i> My Drops</div></div>
-    <div style="overflow-x:auto"><table><thead><tr><th>Date</th><th>Skin</th><th>Streamer</th><th>Trigger</th><th>Trade Status</th><th>State</th></tr></thead><tbody>
+    <div class="my-drops-table-wrap"><table><thead><tr><th>Date</th><th>Skin</th><th>Streamer</th><th>Trigger</th><th>Trade Status</th><th>State</th></tr></thead><tbody>
+      <tr>
+        <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Mar 12 14:08</td>
+        <td>AWP | Asiimov (FT)</td><td>m0NESY</td>
+        <td><span class="sk-rt rt-cl">ACE</span></td>
+        <td><span class="st st-on">✓ Accepted</span></td>
+        <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td>
+      </tr>
+      <tr>
+        <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Mar 11 22:41</td>
+        <td>M4A4 | Desolate Space (MW)</td><td>NiKo</td>
+        <td><span class="sk-rt rt-cv">Clutch 1v3</span></td>
+        <td><span class="st st-wait">⏳ Pending</span></td>
+        <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node active" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node" style="padding:2px 6px;font-size:8px">?</div></div></td>
+      </tr>
+      <tr>
+        <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Mar 10 19:33</td>
+        <td>USP-S | Kill Confirmed (MW)</td><td>device</td>
+        <td><span class="sk-rt rt-cv">Triple Kill</span></td>
+        <td><span class="st st-on">✓ Accepted</span></td>
+        <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td>
+      </tr>
+      <tr>
+        <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Mar 09 16:22</td>
+        <td>Glock-18 | Water Elemental (FN)</td><td>donk</td>
+        <td><span class="sk-rt rt-rs">Knife Kill</span></td>
+        <td><span class="st st-off">Expired</span></td>
+        <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node fail" style="padding:2px 6px;font-size:8px">EXP</div></div></td>
+      </tr>
       <tr>
         <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 17 16:24</td>
         <td>AK-47 | Redline (FT)</td><td>s1mple</td>
@@ -198,6 +234,32 @@
         <td><span class="st st-wait">⏳ Pending</span></td>
         <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node active" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node" style="padding:2px 6px;font-size:8px">?</div></div></td>
       </tr>
+      <tr>
+        <td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 14 12:05</td>
+        <td>MAC-10 | Neon Rider (FT)</td><td>ropz</td>
+        <td><span class="sk-rt rt-ms">Triple Kill</span></td>
+        <td><span class="st st-on">✓ Accepted</span></td>
+        <td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td>
+      </tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 13 20:11</td><td>AWP | Redline (MW)</td><td>Twistzz</td><td><span class="sk-rt rt-rs">Triple Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 12 18:44</td><td>M4A1-S | Hyper Beast (FT)</td><td>electronic</td><td><span class="sk-rt rt-cl">ACE</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 11 15:02</td><td>Desert Eagle | Conspiracy (FN)</td><td>broky</td><td><span class="sk-rt rt-ms">Knife Kill</span></td><td><span class="st st-wait">⏳ Pending</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node active" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node" style="padding:2px 6px;font-size:8px">?</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 10 21:30</td><td>UMP-45 | Primal Saber (MW)</td><td>s1mple</td><td><span class="sk-rt rt-rs">Clutch 1v3</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 09 14:17</td><td>Nova | Hyper Beast (FT)</td><td>ZywOo</td><td><span class="sk-rt rt-ms">Triple Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 08 19:55</td><td>P90 | Asiimov (MW)</td><td>NiKo</td><td><span class="sk-rt rt-cv">Triple Kill</span></td><td><span class="st st-off">Expired</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node fail" style="padding:2px 6px;font-size:8px">EXP</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 07 11:22</td><td>FAMAS | Pulse (FN)</td><td>device</td><td><span class="sk-rt rt-ms">ACE</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 06 17:08</td><td>SSG 08 | Slashed (FT)</td><td>m0NESY</td><td><span class="sk-rt rt-rs">Knife Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 05 22:41</td><td>Galil AR | Cerberus (MW)</td><td>donk</td><td><span class="sk-rt rt-cl">Triple Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 04 13:26</td><td>SG 553 | Cyrex (FN)</td><td>ropz</td><td><span class="sk-rt rt-ms">Clutch 1v3</span></td><td><span class="st st-wait">⏳ Pending</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node active" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node" style="padding:2px 6px;font-size:8px">?</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 03 16:33</td><td>MP9 | Hydra (FT)</td><td>Twistzz</td><td><span class="sk-rt rt-ms">Triple Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 02 09:15</td><td>Negev | Lionfish (MW)</td><td>electronic</td><td><span class="sk-rt rt-rs">ACE</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Feb 01 20:44</td><td>MP7 | Nemesis (FN)</td><td>broky</td><td><span class="sk-rt rt-cl">Knife Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Jan 31 18:02</td><td>PP-Bizon | Fuel Rod (FT)</td><td>s1mple</td><td><span class="sk-rt rt-ms">Triple Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Jan 30 14:50</td><td>SCAR-20 | Cardiac (MW)</td><td>ZywOo</td><td><span class="sk-rt rt-rs">Clutch 1v3</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Jan 29 21:18</td><td>Dual Berettas | Dezastre (FN)</td><td>NiKo</td><td><span class="sk-rt rt-ms">Knife Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Jan 28 12:07</td><td>Five-SeveN | Monkey Business (FT)</td><td>device</td><td><span class="sk-rt rt-cl">ACE</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Jan 27 17:33</td><td>Tec-9 | Fuel Injector (MW)</td><td>m0NESY</td><td><span class="sk-rt rt-rs">Triple Kill</span></td><td><span class="st st-on">✓ Accepted</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">OK</div></div></td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:11px;color:var(--t4)">Jan 26 10:22</td><td>R8 Revolver | Crimson Web (FT)</td><td>donk</td><td><span class="sk-rt rt-ms">Clutch 1v3</span></td><td><span class="st st-wait">⏳ Pending</span></td><td><div class="sm-flow" style="padding:0;gap:2px"><div class="sm-node done" style="padding:2px 6px;font-size:8px">TRIG</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node done" style="padding:2px 6px;font-size:8px">WIN</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node active" style="padding:2px 6px;font-size:8px">SENT</div><span class="sm-arrow" style="font-size:8px">→</span><div class="sm-node" style="padding:2px 6px;font-size:8px">?</div></div></td></tr>
     </tbody></table></div>
   </div>
 </div>
@@ -229,19 +291,39 @@
           <div class="mstat"><div class="mstat-v or">1</div><div class="mstat-l">This Month</div></div>
         </div>
       </div>
-      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="trophy" class="lc-sm" style="color:var(--ac)"></i> My Prizes</div><div class="cd-a">View All ›</div></div><div class="empty" style="padding:24px"><div class="empty-i"><i data-lucide="package-open" style="width:32px;height:32px"></i></div><div class="empty-t">Your skins will show up here!</div></div></div>
+      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="trophy" class="lc-sm" style="color:var(--ac)"></i> Drops Received</div><div class="cd-a" onclick="go('my-drops')">View All ›</div></div><div class="empty" style="padding:24px"><div class="empty-i"><i data-lucide="package-open" style="width:32px;height:32px"></i></div><div class="empty-t">Your skins will show up here!</div></div></div>
     </div>
   </div>
   <div class="cd">
     <div class="menu-i" onclick="go('v-settings')"><i data-lucide="settings" class="lc" style="color:var(--t3)"></i> Settings <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
-    <div class="menu-i"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
+    <a class="menu-i" href="support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></a>
     <div class="menu-i" onclick="setRole('s')"><i data-lucide="radio" class="lc" style="color:var(--t3)"></i> Start Streaming <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
   </div>
 </div>
 
-<!-- VIEWER SETTINGS -->
+<!-- VIEWER SETTINGS (watching & drop experience) -->
 <div class="page" id="p-v-settings">
-  <div class="g2"><div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bell" class="lc-sm" style="color:var(--ac)"></i> Notifications</div></div><div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Drop notification</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div><div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Win sound effect</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div></div></div><div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="user-cog" class="lc-sm" style="color:var(--ac)"></i> Account</div></div><div style="padding:16px 20px"><div class="fg"><label class="fl">Username</label><input type="text" class="fi" value="xDreamer"/></div><div class="fg"><label class="fl">Email</label><input type="email" class="fi" value="xdreamer@gmail.com"/></div><button class="btn btn-p btn-w">Save Changes</button></div></div></div>
+  <div class="cd mb">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="bell" class="lc-sm" style="color:var(--ac)"></i> Notifications</div></div>
+    <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Drop started (browser notification)</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">You won — sound effect</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Trade status updates</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+  </div>
+  <div class="cd mb">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="eye" class="lc-sm" style="color:var(--ac)"></i> Watching</div></div>
+    <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Show live viewer count on stream cards</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Show my wins in the ticker</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+  </div>
+  <div class="cd">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="shield" class="lc-sm" style="color:var(--ac)"></i> Privacy</div></div>
+    <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Profile visible to streamers (when eligible)</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+    </div>
+  </div>
 </div>
 
 <!-- STREAMER ONBOARDING -->
@@ -297,35 +379,40 @@
 </div>
 
 <!-- STREAMER DASHBOARD -->
-<div class="page" id="p-s-dash">
-  <div class="stats stats-4 mb">
-    <div class="sc"><div class="sc-ico rd"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" style="color:var(--rd)">LIVE</div><div class="sc-l">Stream Status</div><div class="sc-d up">↑ 1h 23m online</div></div>
-    <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sDashDrops">23</div><div class="sc-l">Drops Today</div><div class="sc-d up">↑ 8 last hour</div></div>
-    <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v" id="sDashVal">$340</div><div class="sc-l">Value Today</div></div>
-    <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="sDashView">1,240</div><div class="sc-l">Viewers</div><div class="sc-d up">↑ 18%</div></div>
+<div class="page page-s-dash" id="p-s-dash">
+  <div class="s-dash-head">
+    <div class="stats stats-4">
+      <div class="sc"><div class="sc-ico rd"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" style="color:var(--rd)">LIVE</div><div class="sc-l">Stream Status</div><div class="sc-d up">↑ 1h 23m online</div></div>
+      <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sDashDrops">23</div><div class="sc-l">Drops Today</div><div class="sc-d up">↑ 8 last hour</div></div>
+      <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v" id="sDashVal">$340</div><div class="sc-l">Value Today</div></div>
+      <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="sDashView">1,240</div><div class="sc-l">Viewers</div><div class="sc-d up">↑ 18%</div></div>
+    </div>
   </div>
-  <div class="g21 mb">
-    <div class="cd">
+  <div class="s-dash-body g21">
+    <div class="cd s-dash-feed">
       <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm" style="color:var(--ac)"></i> Event Feed <span class="cnt">Live</span></div>
         <button class="btn btn-g" onclick="simulateTrigger()" style="font-size:11px"><i data-lucide="flask-conical" class="lc-sm"></i> Test Trigger</button>
       </div>
-      <div id="sFeedList"></div>
+      <div class="s-dash-feed-inner" id="sFeedList"></div>
     </div>
-    <div>
-      <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="backpack" class="lc-sm" style="color:var(--ac)"></i> Skin Pool</div><div class="cd-a" onclick="go('s-pool')">Manage ›</div></div>
-        <div class="mstats">
-          <div class="mstat"><div class="mstat-v pu" id="poolCount">34</div><div class="mstat-l">In Pool</div></div>
-          <div class="mstat"><div class="mstat-v gn">$1,240</div><div class="mstat-l">Value</div></div>
-          <div class="mstat"><div class="mstat-v or" id="poolReserved">2</div><div class="mstat-l">Reserved</div></div>
+    <div class="s-dash-right">
+      <div class="cd s-dash-quick">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="zap" class="lc-sm" style="color:var(--ac)"></i> Quick Actions</div></div>
+        <div class="s-dash-quick-links">
+          <button type="button" class="btn btn-g" onclick="go('s-triggers')"><i data-lucide="crosshair" class="lc-sm"></i> Triggers</button>
+          <button type="button" class="btn btn-g" onclick="go('s-hist')"><i data-lucide="scroll-text" class="lc-sm"></i> History</button>
+          <button type="button" class="btn btn-g" onclick="go('s-health')"><i data-lucide="heart-pulse" class="lc-sm"></i> Health</button>
+          <button type="button" class="btn btn-g" onclick="go('s-settings')"><i data-lucide="sliders-horizontal" class="lc-sm"></i> Settings</button>
         </div>
       </div>
-      <div class="cd">
+      <div class="cd s-dash-triggers">
         <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Configure ›</div></div>
-        <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div></div><div class="trig-rng">$5–20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="s-dash-triggers-inner">
+          <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div></div><div class="trig-rng">$5–20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -419,8 +506,8 @@
     </div>
     <div>
       <div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="brain" class="lc-sm" style="color:var(--ac)"></i> Drop Logic</div></div><div style="padding:16px 20px">
-        <div class="fg"><label class="fl">Winner Selection</label><select class="fi"><option>Random among all viewers</option><option>Random among active chatters</option><option>Weighted by watch time</option><option>Subscribers first</option></select></div>
-        <div class="fg"><label class="fl">Min watch time (min)</label><input type="number" class="fi" value="5"/></div>
+        <div class="fg"><label class="fl">Winner Selection</label><select class="fi"><option>Random among all viewers</option><option>Random among active chatters</option><option>Weighted by chat activity</option><option>Subscribers first</option></select></div>
+        <div class="fg"><label class="fl">Min presence before drop (sec)</label><input type="number" class="fi" value="60"/></div>
         <div class="fg"><label class="fl">Cooldown between drops (sec)</label><input type="number" class="fi" value="30"/></div>
         <div class="fg"><label class="fl">Max drops per viewer</label><input type="number" class="fi" value="1"/></div>
         <div class="fg"><label class="fl">Event dedup window (sec)</label><input type="number" class="fi" value="5"/></div>
@@ -743,26 +830,47 @@
   </div>
 </div>
 
-<!-- STREAMER SETTINGS -->
+<!-- STREAMER SETTINGS (API, bot, overlay & alerts) -->
 <div class="page" id="p-s-settings">
-  <div class="g2 mb">
-    <div><div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="key" class="lc-sm" style="color:var(--ac)"></i> API Connections</div></div><div style="padding:16px 20px"><div class="fg"><label class="fl">Steam API Key</label><input type="password" class="fi" value="••••••••••••••••"/></div><div class="fg"><label class="fl">Twitch Client ID</label><input type="password" class="fi" value="••••••••••••••••"/></div><div class="fg"><label class="fl">Twitch Client Secret</label><input type="password" class="fi" value="••••••••••••••••"/></div><button class="btn btn-p btn-w"><i data-lucide="save" class="lc-sm"></i> Save</button></div></div>
-    <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm" style="color:var(--cy)"></i> Steam Trade Bot</div><span class="st st-on">● Online</span></div><div style="padding:16px 20px"><div class="fg"><label class="fl">Bot Username</label><input type="text" class="fi" value="dropzone_bot"/></div><div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" value="••••••••••"/></div><div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" value="••••••••••"/></div></div></div></div>
-    <div><div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="bell-ring" class="lc-sm" style="color:var(--ac)"></i> Notifications</div></div><div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
-      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">OBS Overlay</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Discord Webhook</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Telegram Bot</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-    </div></div>
-    <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="monitor-play" class="lc-sm" style="color:var(--ac)"></i> OBS Overlay</div></div><div style="padding:16px 20px">
-      <div class="fg"><label class="fl">Browser Source URL</label><div style="display:flex;gap:8px"><input type="text" class="fi" value="https://dropzone.gg/overlay/abc123" readonly style="font-family:'JetBrains Mono';font-size:12px"/><button class="btn btn-g" style="flex-shrink:0"><i data-lucide="copy" class="lc-sm"></i></button></div></div>
-      <div class="fg"><label class="fl">Position</label><select class="fi"><option>Bottom Right</option><option>Bottom Left</option><option>Top Right</option><option>Center</option></select></div>
-      <div class="fg"><label class="fl">Duration (sec)</label><input type="number" class="fi" value="5"/></div>
-    </div></div></div>
+  <div class="cd mb">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="key" class="lc-sm" style="color:var(--ac)"></i> API & Twitch</div></div>
+    <div style="padding:16px 20px">
+      <div class="fg"><label class="fl">Twitch Client ID</label><input type="password" class="fi" value="••••••••••••••••" placeholder="From Twitch Developer Console"/></div>
+      <div class="fg"><label class="fl">Twitch Client Secret</label><input type="password" class="fi" value="••••••••••••••••" placeholder="Keep secret"/></div>
+      <div class="fg"><label class="fl">Steam API Key</label><input type="password" class="fi" value="••••••••••••••••" placeholder="steamcommunity.com/dev/apikey"/></div>
+      <button class="btn btn-p btn-w"><i data-lucide="save" class="lc-sm"></i> Save API keys</button>
+    </div>
+  </div>
+  <div class="cd mb">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm" style="color:var(--cy)"></i> Steam Trade Bot</div><span class="st st-on">● Online</span></div>
+    <div style="padding:16px 20px">
+      <p style="font-size:12px;color:var(--t3);margin-bottom:14px;line-height:1.5">The bot sends trade offers to winners. Credentials from Steam Desktop Authenticator.</p>
+      <div class="fg"><label class="fl">Bot Username</label><input type="text" class="fi" value="dropzone_bot" placeholder="Steam login name"/></div>
+      <div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" value="••••••••••" placeholder="2FA shared secret"/></div>
+      <div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" value="••••••••••" placeholder="Confirmations"/></div>
+    </div>
+  </div>
+  <div class="cd mb">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="monitor-play" class="lc-sm" style="color:var(--ac)"></i> OBS Browser Overlay</div></div>
+    <div style="padding:16px 20px">
+      <p style="font-size:12px;color:var(--t3);margin-bottom:14px;line-height:1.5">Add a Browser Source in OBS with the URL below to show drop results on stream.</p>
+      <div class="fg"><label class="fl">Browser Source URL</label><div style="display:flex;gap:8px"><input type="text" class="fi" value="https://dropzone.gg/overlay/abc123" readonly style="font-family:'JetBrains Mono';font-size:12px"/><button class="btn btn-g" type="button" style="flex-shrink:0"><i data-lucide="copy" class="lc-sm"></i> Copy</button></div></div>
+      <div class="fg"><label class="fl">Position on stream</label><select class="fi"><option>Bottom Right</option><option>Bottom Left</option><option>Top Right</option><option>Center</option></select></div>
+      <div class="fg"><label class="fl">Popup duration (sec)</label><input type="number" class="fi" value="5" min="3" max="15"/></div>
+    </div>
+  </div>
+  <div class="cd">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="bell-ring" class="lc-sm" style="color:var(--ac)"></i> Alerts & webhooks</div></div>
+    <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Discord — post winner to channel</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Telegram — drop summary</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <div class="fg" style="margin-top:8px"><label class="fl">Webhook URL (Discord or custom)</label><input type="url" class="fi" placeholder="https://discord.com/api/webhooks/..."/></div>
+    </div>
   </div>
 </div>
 
   </div>
 
-  <script src="js/app.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

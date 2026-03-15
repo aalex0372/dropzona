@@ -38,10 +38,10 @@
         <div class="ticker-track"><div class="ticker-scroll" id="tickerContent"></div></div>
       </div>
       <div class="stats stats-4 mb">
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">10</div><div class="sc-l">Streams Online</div></div>
-        <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">847</div><div class="sc-l">Skins Dropped</div></div>
-        <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">2,341</div><div class="sc-l">Viewers Online</div></div>
-        <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$12.4k</div><div class="sc-l">Total Value</div></div>
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" id="statLive">228</div><div class="sc-l">Streams Online</div></div>
+        <div class="sc"><div class="sc-ico gn"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="statDrops">12.4k</div><div class="sc-l">Skins Dropped</div></div>
+        <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="statViewers">3,722</div><div class="sc-l">Viewers Online</div></div>
+        <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$68.8k</div><div class="sc-l">Total Value</div></div>
       </div>
       <div class="live-section-h">
         <span class="live-section-title">Currently Live <span class="live-count" id="streamCount">(10)</span></span>
@@ -88,7 +88,7 @@
           <div id="eligStatus" class="elig-status fail"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
           <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
           <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div style="flex:1"><div class="elig-text ok">Watch time ≥ 5 min</div><div class="prog"><div class="prog-fill gn" style="width:100%"></div></div></div></div>
+          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Present when drop started</div></div>
           <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account &gt; 30 days</div></div>
           <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
         </div>
@@ -101,9 +101,9 @@
 
     <div class="page" id="p-my-drops">
       <div class="stats stats-3 mb">
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Prizes Won</div></div>
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Drops received</div></div>
         <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$22.60</div><div class="sc-l">Total Value</div></div>
-        <div class="sc"><div class="sc-ico or"><i data-lucide="clock" class="lc"></i></div><div class="sc-v">4.2h</div><div class="sc-l">Watch Time</div></div>
+        <div class="sc"><div class="sc-ico or"><i data-lucide="radio" class="lc"></i></div><div class="sc-v">12</div><div class="sc-l">Streams joined</div></div>
       </div>
       <div class="cd">
         <div class="cd-h"><div class="cd-t"><i data-lucide="gift" class="lc-sm ac"></i> My Drops</div></div>
@@ -148,12 +148,12 @@
         </div>
       </div>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="trophy" class="lc-sm ac"></i> My Prizes</div><div class="cd-a">View All ›</div></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="trophy" class="lc-sm ac"></i> Drops Received</div><div class="cd-a" onclick="go('my-drops')">View All ›</div></div>
         <div class="empty cd-p"><div class="empty-i"><i data-lucide="package-open" style="width:32px;height:32px"></i></div><div class="empty-t">Your skins will show up here!</div></div>
       </div>
       <div class="menu-list">
         <div class="menu-i" onclick="go('v-settings')"><i data-lucide="settings" class="lc"></i> Settings <i data-lucide="chevron-right" class="lc-sm mi-a"></i></div>
-        <div class="menu-i"><i data-lucide="life-buoy" class="lc"></i> Support <i data-lucide="chevron-right" class="lc-sm mi-a"></i></div>
+        <a class="menu-i" href="../support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc"></i> Support <i data-lucide="chevron-right" class="lc-sm mi-a"></i></a>
         <div class="menu-i" onclick="setRole('s')"><i data-lucide="radio" class="lc"></i> Start Streaming <i data-lucide="chevron-right" class="lc-sm mi-a"></i></div>
       </div>
     </div>
@@ -210,7 +210,7 @@
       </div>
       <div class="cd mb">
         <div class="cd-h"><div class="cd-t"><i data-lucide="brain" class="lc-sm ac"></i> Drop Logic</div></div>
-        <div class="cd-p"><div class="fg"><label class="fl">Winner Selection</label><select class="fi"><option>Random among all viewers</option><option>Random among active chatters</option><option>Weighted by watch time</option></select></div><div class="fg"><label class="fl">Min watch time (min)</label><input type="number" class="fi" value="5"/></div><div class="fg"><label class="fl">Cooldown between drops (sec)</label><input type="number" class="fi" value="30"/></div></div>
+        <div class="cd-p"><div class="fg"><label class="fl">Winner Selection</label><select class="fi"><option>Random among all viewers</option><option>Random among active chatters</option><option>Weighted by chat activity</option></select></div><div class="fg"><label class="fl">Min presence before drop (sec)</label><input type="number" class="fi" value="60"/></div><div class="fg"><label class="fl">Cooldown between drops (sec)</label><input type="number" class="fi" value="30"/></div></div>
       </div>
       <div class="cd">
         <div class="cd-h"><div class="cd-t"><i data-lucide="shield-check" class="lc-sm ac"></i> Viewer Requirements</div></div>

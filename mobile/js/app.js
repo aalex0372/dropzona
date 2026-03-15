@@ -15,7 +15,19 @@ const STREAMS = [
   { id: 9, name: 'Twistzz', ava: 'TZ', game: 'CS2 · Ranked · Mirage', viewers: 580, pool: 8, poolVal: 195, triggers: ['skull', 'crown', 'flame'] },
   { id: 10, name: 'broky', ava: 'BR', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['crown', 'swords'] }
 ];
-const SKINS = ['AK-47 | Redline', 'AWP | Asiimov', 'M4A4 | Desolate Space', 'USP-S | Kill Confirmed', 'Glock-18 | Fade', 'P250 | Muertos', 'Desert Eagle | Blaze'];
+const SKINS = [
+  { name: 'Desert Eagle | Blaze', rarity: 'cv' },
+  { name: 'AWP | Asiimov', rarity: 'cv' },
+  { name: 'Glock-18 | Fade', rarity: 'cv' },
+  { name: 'USP-S | Kill Confirmed', rarity: 'cv' },
+  { name: 'AK-47 | Redline', rarity: 'cl' },
+  { name: 'M4A4 | Desolate Space', rarity: 'cl' },
+  { name: 'P250 | Muertos', rarity: 'rs' },
+  { name: 'M4A1-S | Hyper Beast', rarity: 'cl' },
+  { name: 'AWP | Lightning Strike', rarity: 'cv' },
+  { name: 'Nova | Antique', rarity: 'ms' },
+  { name: 'MAC-10 | Fade', rarity: 'rs' }
+];
 const USERS = ['xDreamer', 'NaVi_fan228', 'pro100_gamer', 'steelskin99', 'kr1stal_', 'maxplay_cs', 'AWP_god', 'noob_slayer'];
 const TRIGGERS = [
   { n: 'Triple Kill', ico: 'skull', cls: 'kill' },
@@ -59,7 +71,8 @@ function rndPrice() { return (Math.random() * 50 + 3).toFixed(2); }
 function buildTicker() {
   const items = [];
   for (let i = 0; i < 10; i++) {
-    items.push(`<span class="ticker-i"><b>${rnd(USERS)}</b> won <span style="color:var(--cy)">${rnd(SKINS)}</span></span><span class="ticker-sep">·</span>`);
+    const skin = rnd(SKINS);
+    items.push(`<span class="ticker-i"><b>${rnd(USERS)}</b> won <span class="sk-r sk-${skin.rarity}">${skin.name}</span></span><span class="ticker-sep">·</span>`);
   }
   const el = document.getElementById('tickerContent');
   if (el) el.innerHTML = items.join('') + items.join('');
@@ -160,18 +173,20 @@ function simulateTrigger() {
   const stream = rnd(STREAMS);
   const user = rnd(USERS);
   const skin = rnd(SKINS);
+  const skinName = skin.name;
+  const skCls = 'sk-' + (skin.rarity || 'cv');
   const price = rndPrice();
   dropCounter++;
   addFeedEvent('kill', `<b>${stream.name}</b> — ${trig.n}! Drop activated`);
   addSFeedEvent('kill', `<b>${trig.n}</b> on ${stream.game.split('·')[2] ? stream.game.split('·')[2].trim() : 'map'} — drop #${dropCounter}`);
   setTimeout(() => {
-    addFeedEvent('drop', `<b>${user}</b> selected as winner → <span class="sk">${skin}</span>`);
-    addSFeedEvent('drop', `Winner: <b>${user}</b> → <span class="hl">${skin}</span> ($${price})`);
+    addFeedEvent('drop', `<b>${user}</b> selected as winner → <span class="sk ${skCls}">${skinName}</span>`);
+    addSFeedEvent('drop', `Winner: <b>${user}</b> → <span class="hl ${skCls}">${skinName}</span> ($${price})`);
   }, 1200);
   setTimeout(() => { addSFeedEvent('trade', `Trade offer #${dropCounter} sent to <b>${user}</b>`); }, 2800);
   setTimeout(() => {
     if (Math.random() > 0.2) {
-      addFeedEvent('trade', `<b>${user}</b> accepted trade <span class="hl">${skin}</span>`);
+      addFeedEvent('trade', `<b>${user}</b> accepted trade <span class="hl ${skCls}">${skinName}</span>`);
       addSFeedEvent('trade', `✓ Trade #${dropCounter} accepted — <b>${user}</b>`);
     } else {
       addSFeedEvent('fail', `✗ Trade #${dropCounter} expired — item returned to pool`);

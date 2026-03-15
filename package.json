@@ -3,8 +3,16 @@
   "version": "0.2.0",
   "description": "DROPZONE — Live Skin Drops. Watch streams, win CS2 skins.",
   "private": true,
+  "type": "module",
   "scripts": {
     "start": "npx serve . -p 3000",
-    "dev": "npx serve . -p 3000"
+    "dev": "npx serve . -p 3000",
+    "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run",
+    "test:watch": "node --experimental-vm-modules node_modules/vitest/vitest.mjs",
+    "lint": "eslint js/ --no-warn-ignored"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "vitest": "^2.0.0"
   }
 }
