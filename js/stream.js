@@ -2,7 +2,7 @@
  * DROPZONE — Stream list, following chips, stream detail.
  */
 
-import { STREAMS, TRIGGERS, FOLLOWING_NAMES, USERS, SKINS } from './constants.js';
+import { STREAMS, TRIGGERS, FOLLOWING_NAMES, USERS, SKINS, RECENT_DROPS_BY_STREAM } from './constants.js';
 import { rnd } from './utils.js';
 import { go } from './router.js';
 
@@ -144,28 +144,74 @@ export function buildStreams() {
 
 /**
  * Open stream detail and navigate to stream page.
+ * Viewer-focused profile: hook (name, live, game, Twitch, pool) → trust stats → triggers with ranges → recent drops.
  * @param {number} id - Stream id
  */
 export function openStream(id) {
   const s = STREAMS.find((x) => x.id === id);
   if (!s) return;
+
   const sdAva = document.getElementById('sdAva');
   const sdName = document.getElementById('sdName');
   const sdGame = document.getElementById('sdGame');
+  const sdLiveBadge = document.getElementById('sdLiveBadge');
+  const sdOfflineBadge = document.getElementById('sdOfflineBadge');
   const sdViewers = document.getElementById('sdViewers');
+  const sdTwitch = document.getElementById('sdTwitch');
   const sdPool = document.getElementById('sdPool');
+  const sdTotalDrops = document.getElementById('sdTotalDrops');
+  const sdTotalVal = document.getElementById('sdTotalVal');
+  const sdAvgDrop = document.getElementById('sdAvgDrop');
+  const sdSuccessRate = document.getElementById('sdSuccessRate');
   const sdTriggers = document.getElementById('sdTriggers');
+  const sdRecentDrops = document.getElementById('sdRecentDrops');
+
   if (sdAva) sdAva.textContent = s.ava;
   if (sdName) sdName.textContent = s.name;
   if (sdGame) sdGame.textContent = s.game;
   if (sdViewers) sdViewers.textContent = s.viewers.toLocaleString();
-  if (sdPool) sdPool.innerHTML = `<i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins · $${s.poolVal}`;
+
+  const isLive = s.live !== false;
+  if (sdLiveBadge) sdLiveBadge.style.display = isLive ? '' : 'none';
+  if (sdOfflineBadge) sdOfflineBadge.style.display = isLive ? 'none' : '';
+
+  if (sdTwitch) {
+    const slug = s.twitch || s.name.toLowerCase().replace(/\s+/g, '');
+    sdTwitch.href = `https://www.twitch.tv/${slug}`;
+    sdTwitch.style.display = s.twitch ? '' : 'none';
+  }
+
+  if (sdPool) sdPool.innerHTML = `<i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins in pool · $${s.poolVal} total value`;
+
+  const totalDrops = s.totalDrops ?? 0;
+  const totalVal = s.totalDroppedVal ?? 0;
+  const avgVal = totalDrops > 0 ? Math.round(totalVal / totalDrops) : 0;
+  const successRate = s.successRate ?? 0;
+
+  if (sdTotalDrops) sdTotalDrops.textContent = totalDrops.toLocaleString();
+  if (sdTotalVal) sdTotalVal.textContent = `$${totalVal.toLocaleString()}`;
+  if (sdAvgDrop) sdAvgDrop.textContent = `$${avgVal}`;
+  if (sdSuccessRate) sdSuccessRate.textContent = `${successRate}%`;
+
   if (sdTriggers) {
     sdTriggers.innerHTML = s.triggers.map((t) => {
       const tr = TRIGGERS.find((x) => x.ico === t);
-      return `<div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="${t}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${tr ? tr.n : t}</div></div><span class="st st-on">Active</span></div>`;
+      const range = tr && tr.min != null && tr.max != null ? ` → $${tr.min}–$${tr.max}` : '';
+      return `<div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="${t}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${tr ? tr.n : t}${range}</div></div><span class="st st-on">Active</span></div>`;
     }).join('');
   }
+
+  const recent = RECENT_DROPS_BY_STREAM[s.id] || [];
+  if (sdRecentDrops) {
+    if (recent.length === 0) {
+      sdRecentDrops.innerHTML = '<div class="sd-recent-empty">No recent drops yet. Drops show here once the streamer sends skins.</div>';
+    } else {
+      sdRecentDrops.innerHTML = recent.map((d) =>
+        `<div class="sd-recent-item"><div class="sd-recent-skin">${d.skin}</div><div class="sd-recent-meta"><span class="sd-recent-winner">${d.winner}</span> · ${d.time}</div></div>`
+      ).join('');
+    }
+  }
+
   go('stream');
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }

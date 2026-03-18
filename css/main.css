@@ -221,6 +221,32 @@ body::after {
 .fl-status.on { background: var(--rd-s); color: var(--rd); }
 .fl-status.off { background: var(--b3); color: var(--t4); }
 
+/* Stream profile (viewer): preview video + meta, trust stats, triggers, recent drops */
+.sd-prev { min-height: 120px; }
+.sd-meta { padding: 16px 20px; }
+.sd-meta .sd-ava { width: 48px; height: 48px; font-size: 18px; }
+.sd-meta-info { flex: 1; min-width: 0; }
+.sd-meta-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.sd-meta .sd-name { font-size: 18px; font-weight: 800; color: var(--t0); margin: 0; line-height: 1.2; }
+.sd-meta .str-game { font-size: 13px; color: var(--t3); margin: 0; }
+.sd-twitch-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; font-size: 12px; flex-shrink: 0; }
+.sd-twitch-btn svg { flex-shrink: 0; }
+/* Stream profile: one sleek stat block (single card, unscrollable) */
+.sd-stat-block { margin-bottom: 24px; }
+.sd-stat-block-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; padding: 20px; overflow: hidden; }
+.sd-stat-block .sd-stat { padding: 16px; display: flex; flex-direction: column; gap: 0; border: none; background: none; border-radius: 12px; transition: background 0.2s; }
+.sd-stat-block .sd-stat:hover { background: rgba(255,255,255,0.03); }
+.sd-stat-block .sd-stat .sc-ico { margin-bottom: 12px; }
+.sd-stat-block .sd-stat .sc-v { font-size: 22px; }
+.sd-stat-block .sd-stat .sc-l { margin-top: 6px; }
+.sd-recent { display: flex; flex-direction: column; gap: 0; }
+.sd-recent-item { padding: 12px 20px; border-bottom: 1px solid var(--br1); display: flex; flex-direction: column; gap: 4px; }
+.sd-recent-item:last-child { border-bottom: none; }
+.sd-recent-skin { font-size: 14px; font-weight: 600; color: var(--t0); }
+.sd-recent-meta { font-size: 12px; color: var(--t3); }
+.sd-recent-winner { color: var(--ac); font-weight: 600; }
+.sd-recent-empty { padding: 20px; font-size: 14px; color: var(--t3); text-align: center; }
+
 /* Settings coming-soon (viewer & streamer) */
 .page-settings-coming.act { display: flex; align-items: center; justify-content: center; padding: 32px; min-height: calc(100vh - var(--th)); }
 .page-settings-coming.act .settings-coming-in { margin-top: -80px; }
@@ -664,6 +690,7 @@ select.fi option { background: var(--bc); color: var(--t0); padding: 10px 14px; 
 
 @media (max-width: 1300px) {
   .stats-4 { grid-template-columns: repeat(2, 1fr); }
+  .sd-stat-block-inner { grid-template-columns: repeat(2, 1fr); }
   .g2, .g3, .g21 { grid-template-columns: 1fr; }
   .str-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   .page.page-s-dash.act { height: auto; overflow: visible; }

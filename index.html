@@ -147,32 +147,43 @@
 <!-- STREAM DETAIL -->
 <div class="page" id="p-stream">
   <button class="btn btn-g mb" onclick="go('browse')" style="margin-bottom:16px"><i data-lucide="arrow-left" class="lc-sm"></i> Back to Streams</button>
-  <div class="g21 mb">
+
+  <div class="g21">
+    <!-- Left: Streamer window (unchanged) + stats (replacing Current Drop) -->
     <div>
+      <!-- Stream preview (video) + meta -->
       <div class="cd mb">
-        <div class="str-prev" style="border-radius:16px 16px 0 0">
+        <div class="str-prev sd-prev" style="border-radius:16px 16px 0 0">
           <div class="gv"><i data-lucide="gamepad-2" style="width:80px;height:80px;stroke-width:1"></i></div>
-          <div class="str-br"><div class="b-live"><span class="dot"></span> LIVE</div><div class="b-view"><i data-lucide="eye" class="lc-sm"></i> <span id="sdViewers">0</span></div></div>
-          <div class="str-pool" id="sdPool"><i data-lucide="gift" class="lc-sm"></i> 0 skins</div>
+          <div class="str-br">
+            <div class="b-live" id="sdLiveBadge"><span class="dot"></span> LIVE</div>
+            <div class="b-offline" id="sdOfflineBadge" style="display:none">Offline</div>
+            <div class="b-view"><i data-lucide="eye" class="lc-sm"></i> <span id="sdViewers">0</span></div>
+          </div>
+          <div class="str-pool" id="sdPool"><i data-lucide="gift" class="lc-sm"></i> 0 skins · $0</div>
         </div>
-        <div class="str-meta" style="padding:20px">
-          <div class="str-ava" id="sdAva">S1</div>
-          <div style="flex:1"><div class="str-name" id="sdName">AlexPlays</div><div class="str-game" id="sdGame">CS2 · Ranked · Mirage</div></div>
+        <div class="str-meta sd-meta">
+          <div class="str-ava sd-ava" id="sdAva">AP</div>
+          <div class="sd-meta-info">
+            <div class="sd-meta-row">
+              <h1 class="sd-name" id="sdName">AlexPlays</h1>
+              <a class="btn btn-p sd-twitch-btn" id="sdTwitch" href="#" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg> Watch on Twitch</a>
+            </div>
+            <div class="str-game" id="sdGame">CS2 · Ranked · Mirage</div>
+          </div>
         </div>
       </div>
-      <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="workflow" class="lc-sm" style="color:var(--ac)"></i> Current Drop</div><span class="st st-wait" id="sdDropSt">Waiting for trigger</span></div>
-        <div class="sm-flow" id="sdSM">
-          <div class="sm-node active">IDLE</div><span class="sm-arrow">→</span>
-          <div class="sm-node">TRIGGERED</div><span class="sm-arrow">→</span>
-          <div class="sm-node">WINNER</div><span class="sm-arrow">→</span>
-          <div class="sm-node">RESERVED</div><span class="sm-arrow">→</span>
-          <div class="sm-node">SENT</div><span class="sm-arrow">→</span>
-          <div class="sm-node">ACCEPTED</div>
+      <!-- Stats: one sleek block (like Current Drop card) -->
+      <div class="cd sd-stat-block mb">
+        <div class="sd-stat-block-inner">
+          <div class="sd-stat"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sdTotalDrops">—</div><div class="sc-l">Drops given away</div></div>
+          <div class="sd-stat"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v" id="sdTotalVal">—</div><div class="sc-l">Total value dropped</div></div>
+          <div class="sd-stat"><div class="sc-ico or"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v" id="sdAvgDrop">—</div><div class="sc-l">Avg. drop value</div></div>
+          <div class="sd-stat"><div class="sc-ico cy"><i data-lucide="check-circle" class="lc"></i></div><div class="sc-v" id="sdSuccessRate">—</div><div class="sc-l">Drop success rate</div></div>
         </div>
-        <div style="padding:12px 20px 16px"><div id="sdDropInfo" style="font-size:13px;color:var(--t3)">Waiting for a trigger event from the streamer...</div></div>
       </div>
     </div>
+    <!-- Right: Drop Eligibility (unchanged) + Recent drops (was Active Triggers) -->
     <div>
       <div class="cd mb">
         <div class="cd-h"><div class="cd-t"><i data-lucide="ticket-check" class="lc-sm" style="color:var(--ac)"></i> Drop Eligibility</div></div>
@@ -186,8 +197,8 @@
         </div>
       </div>
       <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Active Triggers</div></div>
-        <div id="sdTriggers"></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="sparkles" class="lc-sm" style="color:var(--ac)"></i> Recent drops</div></div>
+        <div class="sd-recent" id="sdRecentDrops"></div>
       </div>
     </div>
   </div>
