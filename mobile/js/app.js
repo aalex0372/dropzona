@@ -96,7 +96,7 @@ let streamActionsRepositionHandler = null;
 
 function getViewerStreamFilterMode() {
   const sel = document.getElementById('viewerStreamFilter');
-  return sel?.value || 'popular';
+  return sel?.value || 'most-viewers';
 }
 
 const PM = {
@@ -151,16 +151,16 @@ function buildStreams() {
   const mode = getViewerStreamFilterMode();
   let list = STREAMS.filter(s => s.live !== false);
 
-  if (mode === 'popular') {
+  if (mode === 'most-viewers') {
     list = list.sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
-  } else if (mode === 'drops-active') {
-    list = list
-      .filter((s) => (s.pool ?? 0) > 0 && (s.triggers?.length ?? 0) > 0)
-      .sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
-  } else if (mode === 'most-value') {
-    list = list.sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
+  } else if (mode === 'fewest-viewers') {
+    list = list.sort((a, b) => (a.viewers ?? 0) - (b.viewers ?? 0));
   } else if (mode === 'most-drops') {
     list = list.sort((a, b) => (b.totalDrops ?? 0) - (a.totalDrops ?? 0));
+  } else if (mode === 'following-only') {
+    list = list
+      .filter((s) => FOLLOWING_NAMES.includes(s.name))
+      .sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
   }
 
   el.innerHTML = list.map(s => `

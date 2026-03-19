@@ -152,7 +152,7 @@ function getLiveStreams() {
 
 function getViewerStreamFilterMode() {
   const sel = document.getElementById('viewerStreamFilter');
-  return sel?.value || 'popular';
+  return sel?.value || 'most-viewers';
 }
 
 function applyViewerStreamFilter(streams) {
@@ -160,24 +160,24 @@ function applyViewerStreamFilter(streams) {
   const list = streams.slice();
 
   switch (mode) {
-    case 'popular':
+    case 'most-viewers':
       // Most viewers first
       list.sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
       break;
-    case 'drops-active':
-      // "Active now" proxy: non-empty pool + some enabled triggers
-      list
-        .filter((s) => (s.pool ?? 0) > 0 && (s.triggers?.length ?? 0) > 0)
-        .sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
-      break;
-    case 'most-value':
-      list.sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
+    case 'fewest-viewers':
+      list.sort((a, b) => (a.viewers ?? 0) - (b.viewers ?? 0));
       break;
     case 'most-drops':
       list.sort((a, b) => (b.totalDrops ?? 0) - (a.totalDrops ?? 0));
       break;
+    case 'following-only':
+      // Show only streamers that user follows (still only live streams).
+      return list
+        .filter((s) => FOLLOWING_NAMES.includes(s.name))
+        .sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
     default:
-      break;
+      // Fallback: Most viewers.
+      list.sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
   }
 
   return list;
@@ -287,6 +287,8 @@ export function buildStreams() {
   const el = document.getElementById('streamGrid');
   const scrollEl = el?.closest('.str-grid-scroll');
   if (!el || !scrollEl) return;
+  const prevScrollLeft = scrollEl.scrollLeft || 0;
+  const preserveScroll = scrollEl.dataset.viewerScrollInitialized === '1';
 
   const filterSel = document.getElementById('viewerStreamFilter');
   if (filterSel && !filterSel.dataset.bound) {
@@ -321,7 +323,11 @@ export function buildStreams() {
     scrollEl.dataset.viewerScrollBound = '1';
   }
 
-  window.requestAnimationFrame(() => { scrollEl.scrollLeft = 0; });
+  // Avoid horizontal "shake" when user changes filters by preserving position.
+  window.requestAnimationFrame(() => {
+    scrollEl.scrollLeft = preserveScroll ? prevScrollLeft : 0;
+    scrollEl.dataset.viewerScrollInitialized = '1';
+  });
 
   buildFollowing();
 }

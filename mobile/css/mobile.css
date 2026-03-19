@@ -436,6 +436,16 @@ body {
 .fi { width: 100%; padding: 12px 14px; min-height: 44px; background: var(--b2); border: 1px solid var(--br1); border-radius: 10px; color: var(--t0); font-size: 16px; outline: none; -webkit-appearance: none; }
 .fi:focus { border-color: var(--ac); }
 
+/* Compact stream filter dropdown on browse page */
+#viewerStreamFilter {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 12px;
+  padding-right: 36px; /* keep space for custom chevron from main.css */
+  min-height: 38px;
+  font-size: 13px;
+}
+
 .empty { padding: 32px 16px; text-align: center; }
 .empty-i { margin-bottom: 8px; opacity: 0.3; color: var(--t3); display: flex; justify-content: center; }
 .empty-t { font-size: 14px; font-weight: 600; color: var(--t2); }
