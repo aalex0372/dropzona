@@ -188,7 +188,7 @@ function initGridBackground() {
         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(n.x, n.y); ctx.stroke();
       }
     }
-    requestAnimationFrame(draw);
+    window.requestAnimationFrame(draw);
   }
   resize();
   draw();

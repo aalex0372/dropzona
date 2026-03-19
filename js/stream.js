@@ -7,6 +7,125 @@ import { rnd } from './utils.js';
 import { go } from './router.js';
 import { getRole } from './state.js';
 
+let streamActionsOutsideClickHandler = null;
+let streamActionsRepositionHandler = null;
+
+function wireStreamActions(s) {
+  const shareMenuBtn = document.getElementById('sdShareMenuBtn');
+  const reportBtn = document.getElementById('sdReportBtn');
+  const actionsMenu = document.getElementById('sdActionsMenu');
+  const shareFacebook = document.getElementById('sdShareFacebook');
+  const shareX = document.getElementById('sdShareX');
+  const shareTelegram = document.getElementById('sdShareTelegram');
+  const shareWhatsApp = document.getElementById('sdShareWhatsApp');
+  const copyAction = document.getElementById('sdCopyAction');
+  const reportModal = document.getElementById('sdReportModal');
+  const reportClose = document.getElementById('sdReportClose');
+  const reportCancel = document.getElementById('sdReportCancel');
+  const reportSubmit = document.getElementById('sdReportSubmit');
+  const reportTopic = document.getElementById('sdReportTopic');
+  const reportDetails = document.getElementById('sdReportDetails');
+  if (!shareMenuBtn || !reportBtn || !actionsMenu || !copyAction) return;
+
+  const profileUrl = `${window.location.origin}${window.location.pathname}#stream-${s.id}-${encodeURIComponent(s.name.toLowerCase())}`;
+  const shareText = `Watch ${s.name} on DROPZONE`;
+
+  const positionActionsMenu = () => {
+    if (actionsMenu.style.display === 'none') return;
+    const rect = shareMenuBtn.getBoundingClientRect();
+    const menuWidth = 236;
+    const gutter = 10;
+    let left = rect.right - menuWidth;
+    left = Math.max(gutter, Math.min(left, window.innerWidth - menuWidth - gutter));
+    let top = rect.bottom + 8;
+    const estimatedHeight = 220;
+    if (top + estimatedHeight > window.innerHeight - gutter) {
+      top = Math.max(gutter, rect.top - estimatedHeight - 8);
+    }
+    actionsMenu.style.left = `${left}px`;
+    actionsMenu.style.top = `${top}px`;
+  };
+
+  if (shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(profileUrl)}`;
+  if (shareX) shareX.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(profileUrl)}`;
+  if (shareTelegram) shareTelegram.href = `https://t.me/share/url?url=${encodeURIComponent(profileUrl)}&text=${encodeURIComponent(shareText)}`;
+  if (shareWhatsApp) shareWhatsApp.href = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${profileUrl}`)}`;
+
+  shareMenuBtn.onclick = (e) => {
+    e.stopPropagation();
+    const willOpen = actionsMenu.style.display === 'none';
+    actionsMenu.style.display = willOpen ? 'flex' : 'none';
+    if (willOpen) positionActionsMenu();
+  };
+  [shareFacebook, shareX, shareTelegram, shareWhatsApp].forEach((node) => {
+    if (!node) return;
+    node.onclick = () => { actionsMenu.style.display = 'none'; };
+  });
+  reportBtn.onclick = (e) => {
+    e.stopPropagation();
+    actionsMenu.style.display = 'none';
+    if (reportModal) {
+      reportModal.style.display = 'flex';
+      if (reportTopic) reportTopic.value = 'suspicious-drops';
+      if (reportDetails) reportDetails.value = '';
+    }
+  };
+  copyAction.onclick = async (e) => {
+    e.stopPropagation();
+    actionsMenu.style.display = 'none';
+    try {
+      await window.navigator.clipboard.writeText(profileUrl);
+      copyAction.innerHTML = '<i data-lucide="check" class="lc-sm"></i> Copied';
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      setTimeout(() => {
+        copyAction.innerHTML = '<i data-lucide="copy" class="lc-sm"></i> Copy link';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }, 1200);
+    } catch {
+      window.prompt('Copy streamer card link:', profileUrl);
+    }
+  };
+
+  const closeReportModal = () => {
+    if (reportModal) reportModal.style.display = 'none';
+  };
+  if (reportClose) reportClose.onclick = closeReportModal;
+  if (reportCancel) reportCancel.onclick = closeReportModal;
+  if (reportModal) {
+    reportModal.onclick = (e) => {
+      if (e.target === reportModal) closeReportModal();
+    };
+  }
+  if (reportSubmit) {
+    reportSubmit.onclick = () => {
+      if (!reportTopic || !reportDetails) return;
+      const details = reportDetails.value.trim();
+      if (details.length < 8) {
+        reportDetails.focus();
+        return;
+      }
+      closeReportModal();
+      window.alert(`Report submitted for ${s.name}. Thanks for helping keep DROPZONE safe.`);
+    };
+  }
+
+  if (streamActionsOutsideClickHandler) {
+    document.removeEventListener('click', streamActionsOutsideClickHandler);
+  }
+  streamActionsOutsideClickHandler = (ev) => {
+    if (!actionsMenu.contains(ev.target) && !shareMenuBtn.contains(ev.target)) actionsMenu.style.display = 'none';
+  };
+  document.addEventListener('click', streamActionsOutsideClickHandler);
+
+  if (streamActionsRepositionHandler) {
+    window.removeEventListener('resize', streamActionsRepositionHandler);
+    window.removeEventListener('scroll', streamActionsRepositionHandler, true);
+  }
+  streamActionsRepositionHandler = () => positionActionsMenu();
+  window.addEventListener('resize', streamActionsRepositionHandler);
+  window.addEventListener('scroll', streamActionsRepositionHandler, true);
+}
+
 /**
  * Build the ticker strip (fake “who won” scroll).
  */
@@ -64,27 +183,47 @@ export function buildFollowing() {
 export function buildFollowingsPage() {
   const el = document.getElementById('followingsList');
   if (!el) return;
+  const searchInput = document.getElementById('followingsSearch');
   const liveNames = new Set(getLiveStreams().map((s) => s.name));
-  el.innerHTML = FOLLOWING_NAMES.map((name) => {
-    const stream = STREAMS.find((s) => s.name === name);
-    const isLive = liveNames.has(name);
-    const id = stream ? stream.id : null;
-    const dataId = id ? ` data-stream-id="${id}"` : '';
-    const game = stream ? stream.game : '';
-    const ava = stream ? stream.ava : name.slice(0, 2).toUpperCase();
-    return `
-    <div class="fl-row"${dataId}>
-      <div class="str-ava">${ava}</div>
-      <div class="fl-info">
-        <div class="str-name">${name}</div>
-        ${game ? `<div class="str-game">${game}</div>` : ''}
-      </div>
-      <span class="fl-status ${isLive ? 'on' : 'off'}">${isLive ? 'LIVE' : 'Offline'}</span>
-    </div>`;
-  }).join('');
-  el.querySelectorAll('.fl-row[data-stream-id]').forEach((row) => {
-    row.addEventListener('click', () => openStream(parseInt(row.dataset.streamId, 10)));
-  });
+
+  const render = () => {
+    const q = (searchInput?.value || '').trim().toLowerCase();
+    const isSearch = q.length > 0;
+    const list = isSearch
+      ? STREAMS.filter((s) => s.name.toLowerCase().includes(q) || s.game.toLowerCase().includes(q))
+      : FOLLOWING_NAMES.map((name) => STREAMS.find((s) => s.name === name)).filter(Boolean);
+
+    if (list.length === 0) {
+      el.innerHTML = '<div class="cd-p" style="font-size:13px;color:var(--t3)">No streamers found. Try another name or game.</div>';
+      return;
+    }
+
+    el.innerHTML = list.map((stream) => {
+      const isLive = liveNames.has(stream.name);
+      const isFollowing = FOLLOWING_NAMES.includes(stream.name);
+      const followNote = isSearch && !isFollowing ? '<div class="fl-note">Not followed yet</div>' : '';
+      return `
+      <div class="fl-row" data-stream-id="${stream.id}">
+        <div class="str-ava">${stream.ava}</div>
+        <div class="fl-info">
+          <div class="str-name">${stream.name}</div>
+          ${followNote}
+        </div>
+        <span class="fl-status ${isLive ? 'on' : 'off'}">${isLive ? 'LIVE' : 'Offline'}</span>
+      </div>`;
+    }).join('');
+
+    el.querySelectorAll('.fl-row[data-stream-id]').forEach((row) => {
+      row.addEventListener('click', () => openStream(parseInt(row.dataset.streamId, 10)));
+    });
+  };
+
+  if (searchInput && !searchInput.dataset.bound) {
+    searchInput.addEventListener('input', render);
+    searchInput.dataset.bound = '1';
+  }
+  render();
+
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
@@ -102,7 +241,7 @@ function streamCardHtml(s) {
     </div>
     <div class="str-meta">
       <div class="str-ava">${s.ava}</div>
-      <div style="flex:1"><div class="str-name">${s.name}</div><div class="str-game">${s.game}</div></div>
+      <div style="flex:1"><div class="str-name">${s.name}</div></div>
       <button type="button" class="${followClass}" data-stream-id="${s.id}" data-following="${isFollowing}" onclick="event.stopPropagation()">${followLabel}</button>
     </div>
   </div>`;
@@ -134,9 +273,9 @@ export function buildStreams() {
   scrollEl.addEventListener('scroll', () => {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(() => { loopScroll(); ticking = false; });
+    window.requestAnimationFrame(() => { loopScroll(); ticking = false; });
   });
-  requestAnimationFrame(() => {
+  window.requestAnimationFrame(() => {
     scrollEl.scrollLeft = 0;
   });
 
@@ -195,6 +334,7 @@ export function openStream(id) {
     sdTwitch.href = `https://www.twitch.tv/${slug}`;
     sdTwitch.style.display = s.twitch ? '' : 'none';
   }
+  wireStreamActions(s);
 
   if (sdPool) sdPool.innerHTML = `<i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins in pool · $${s.poolVal} total value`;
 
