@@ -741,6 +741,12 @@ body::after {
   display: none;
 }
 
+/* Hide "Trade Status" column in My Drops table */
+.page-my-drops .my-drops-table-wrap table th:nth-child(5),
+.page-my-drops .my-drops-table-wrap table td:nth-child(5) {
+  display: none;
+}
+
 .cd { background: var(--bc); border: 1px solid var(--br1); border-radius: 16px; overflow: hidden; }
 .cd.sd-preview-card { overflow: visible; }
 .cd-h { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--br0); }

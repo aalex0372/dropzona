@@ -324,6 +324,11 @@ body {
 .drop-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--t4); width: 100%; }
 .drop-skin { font-size: 13px; font-weight: 600; color: var(--t0); flex: 1; min-width: 0; }
 
+/* Hide My Drops "Trade status" (Accepted / Pending / Expired) */
+#p-my-drops .drop-row .st {
+  display: none;
+}
+
 /* Profile */
 .profile-hero { display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--bc); border: 1px solid var(--br1); border-radius: 14px; }
 .profile-ava { width: 56px; height: 56px; border-radius: 14px; background: linear-gradient(135deg, var(--ac), #c084fc); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900; color: #fff; flex-shrink: 0; }
