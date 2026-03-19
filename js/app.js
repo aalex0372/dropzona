@@ -47,7 +47,6 @@ const PM = {
   's-health': ['Health', 'System status & errors'],
   's-onboard': ['Setup Wizard', 'Step-by-step onboarding'],
   's-settings': ['Settings', 'API, bot & overlay'],
-  's-antifraud': ['Anti-Fraud', 'Abuse protection']
 };
 
 function selectGame(el) {

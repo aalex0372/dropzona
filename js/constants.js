@@ -81,5 +81,4 @@ export const PAGE_META = {
   's-health': ['Health', 'System status & errors'],
   's-onboard': ['Setup Wizard', 'Step-by-step onboarding'],
   's-settings': ['Streamer settings', 'API, bot & overlay'],
-  's-antifraud': ['Anti-Fraud', 'Abuse protection']
 };

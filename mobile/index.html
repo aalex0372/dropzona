@@ -203,7 +203,7 @@
     <div class="page" id="p-s-triggers">
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Game Triggers</div><button class="btn btn-p small"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Game Triggers</div></div>
         <div class="trig-r"><div class="trig-ico rd"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 consecutive kills without dying</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         <div class="trig-r"><div class="trig-ico or"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         <div class="trig-r"><div class="trig-ico ac"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div><div class="trig-d">Win 1 vs 2+ enemies</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
@@ -337,24 +337,6 @@
       </div>
     </div>
 
-    <div class="page" id="p-s-antifraud">
-      <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
-      <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="shield-alert" class="lc-sm ac"></i> Bot Protection</div></div>
-        <div class="cd-p setting-row"><span>Human verification on pool entry</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="cd-p setting-row"><span>Rate limit: 1 entry per IP/5min</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="cd-p setting-row"><span>Block VPN / Proxy</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-        <div class="cd-p setting-row"><span>Min Twitch account age: 7 days</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      </div>
-      <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="scale" class="lc-sm ac"></i> Limits</div></div>
-        <div class="cd-p"><div class="fg"><label class="fl">Max wins per account / day</label><input type="number" class="fi" value="2"/></div><div class="fg"><label class="fl">Max wins per IP / day</label><input type="number" class="fi" value="3"/></div><div class="fg"><label class="fl">Min presence before trigger (sec)</label><input type="number" class="fi" value="300"/></div><div class="fg"><label class="fl">Cooldown after win (min)</label><input type="number" class="fi" value="60"/></div></div>
-      </div>
-      <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="ban" class="lc-sm ac"></i> Banlist / Allowlist</div><button class="btn btn-p small"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
-        <div class="empty cd-p"><div class="empty-i"><i data-lucide="user-check" style="width:28px;height:28px"></i></div><div class="empty-t">No banned users</div></div>
-      </div>
-    </div>
   </main>
 
   <!-- Bottom nav (iOS-style) -->
@@ -398,7 +380,6 @@
       <div class="nav-s streamer-nav" id="navSConfig" style="display:none"><div class="nav-l">Config</div>
         <div class="ni" data-p="s-onboard"><i data-lucide="rocket" class="lc-sm"></i> Setup Wizard</div>
         <div class="ni" data-p="s-settings"><i data-lucide="sliders-horizontal" class="lc-sm"></i> Settings</div>
-        <div class="ni" data-p="s-antifraud"><i data-lucide="shield-check" class="lc-sm"></i> Anti-Fraud</div>
       </div>
     </div>
     <div class="drawer-user">

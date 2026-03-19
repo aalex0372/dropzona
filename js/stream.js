@@ -5,6 +5,7 @@
 import { STREAMS, TRIGGERS, FOLLOWING_NAMES, USERS, SKINS, RECENT_DROPS_BY_STREAM } from './constants.js';
 import { rnd } from './utils.js';
 import { go } from './router.js';
+import { getRole } from './state.js';
 
 /**
  * Build the ticker strip (fake “who won” scroll).
@@ -163,8 +164,22 @@ export function openStream(id) {
   const sdTotalVal = document.getElementById('sdTotalVal');
   const sdAvgDrop = document.getElementById('sdAvgDrop');
   const sdSuccessRate = document.getElementById('sdSuccessRate');
-  const sdTriggers = document.getElementById('sdTriggers');
+  const sdStreamerTriggers = document.getElementById('sdStreamerTriggers');
   const sdRecentDrops = document.getElementById('sdRecentDrops');
+
+  const role = getRole();
+  const showStreamerPanel = role === 's';
+  const sdRoleCardTitle = document.getElementById('sdRoleCardTitle');
+  const sdViewerEligibility = document.getElementById('sdViewerEligibility');
+  const sdStreamerTriggersPanel = document.getElementById('sdStreamerTriggersPanel');
+
+  if (sdRoleCardTitle) {
+    sdRoleCardTitle.innerHTML = showStreamerPanel
+      ? '<i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Active triggers'
+      : '<i data-lucide="ticket-check" class="lc-sm" style="color:var(--ac)"></i> Drop Eligibility';
+  }
+  if (sdViewerEligibility) sdViewerEligibility.style.display = showStreamerPanel ? 'none' : '';
+  if (sdStreamerTriggersPanel) sdStreamerTriggersPanel.style.display = showStreamerPanel ? '' : 'none';
 
   if (sdAva) sdAva.textContent = s.ava;
   if (sdName) sdName.textContent = s.name;
@@ -193,8 +208,8 @@ export function openStream(id) {
   if (sdAvgDrop) sdAvgDrop.textContent = `$${avgVal}`;
   if (sdSuccessRate) sdSuccessRate.textContent = `${successRate}%`;
 
-  if (sdTriggers) {
-    sdTriggers.innerHTML = s.triggers.map((t) => {
+  if (sdStreamerTriggers) {
+    sdStreamerTriggers.innerHTML = s.triggers.map((t) => {
       const tr = TRIGGERS.find((x) => x.ico === t);
       const range = tr && tr.min != null && tr.max != null ? ` → $${tr.min}–$${tr.max}` : '';
       return `<div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="${t}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${tr ? tr.n : t}${range}</div></div><span class="st st-on">Active</span></div>`;

@@ -79,7 +79,6 @@
         <div class="nav-list">
           <div class="ni" data-p="s-onboard"><span class="ico"><i data-lucide="rocket" class="lc-sm"></i></span>Setup Wizard</div>
           <div class="ni" data-p="s-settings"><span class="ico"><i data-lucide="sliders-horizontal" class="lc-sm"></i></span>Streamer settings</div>
-          <div class="ni" data-p="s-antifraud"><span class="ico"><i data-lucide="shield-check" class="lc-sm"></i></span>Anti-Fraud</div>
         </div>
       </div>
     </div>
@@ -183,17 +182,35 @@
         </div>
       </div>
     </div>
-    <!-- Right: Drop Eligibility (unchanged) + Recent drops (was Active Triggers) -->
+    <!-- Right: viewer panel (Drop Eligibility) or streamer panel (Active triggers) + Recent drops -->
     <div>
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket-check" class="lc-sm" style="color:var(--ac)"></i> Drop Eligibility</div></div>
+        <div class="cd-h">
+          <div class="cd-t" id="sdRoleCardTitle">
+            <i data-lucide="ticket-check" class="lc-sm" style="color:var(--ac)"></i> Drop Eligibility
+          </div>
+        </div>
         <div style="padding:16px 20px">
-          <div id="eligStatus" style="font-size:15px;font-weight:700;color:var(--rd);margin-bottom:16px;display:flex;align-items:center;gap:8px"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
-          <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Present when drop started</div></div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account > 30 days</div></div>
-          <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
+          <!-- Viewer-only: leave unchanged -->
+          <div id="sdViewerEligibility">
+            <div id="eligStatus" style="font-size:15px;font-weight:700;color:var(--rd);margin-bottom:16px;display:flex;align-items:center;gap:8px"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
+            <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
+            <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
+            <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Present when drop started</div></div>
+            <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account > 30 days</div></div>
+            <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
+          </div>
+
+          <!-- Streamer-only: watching others' streams -->
+          <div id="sdStreamerTriggersPanel" style="display:none">
+            <div style="font-size:15px;font-weight:700;color:var(--t0);margin-bottom:12px;display:flex;align-items:center;gap:10px">
+              <i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Active triggers
+            </div>
+            <div id="sdStreamerTriggers"></div>
+            <div style="font-size:12px;color:var(--t3);margin-top:12px;line-height:1.5">
+              These triggers determine the value range of drops viewers can get from this stream.
+            </div>
+          </div>
         </div>
       </div>
       <div class="cd">
@@ -435,7 +452,7 @@
 <div class="page" id="p-s-triggers">
   <div class="g2 mb">
     <div class="cd">
-      <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Game Triggers</div><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+      <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Game Triggers</div></div>
       <div style="padding:12px 20px;border-bottom:1px solid var(--br0);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <div class="game-chip active" data-game="cs2" onclick="selectGame(this)">
           <div class="game-chip-icon">
@@ -443,71 +460,17 @@
           </div>
           <span>Counter-Strike 2</span>
         </div>
-        <div class="game-chip" data-game="dota2" onclick="selectGame(this)">
+        <div class="game-chip game-chip--disabled" data-game="dota2">
           <div class="game-chip-icon">
             <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/570/header.jpg" alt="Dota 2"/>
           </div>
           <span>Dota 2</span>
         </div>
-        <div class="game-chip" data-game="tf2" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/440/header.jpg" alt="Team Fortress 2"/>
-          </div>
-          <span>Team Fortress 2</span>
-        </div>
-        <div class="game-chip" data-game="rust" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/252490/header.jpg" alt="Rust"/>
-          </div>
-          <span>Rust</span>
-        </div>
-        <div class="game-chip" data-game="pubg" onclick="selectGame(this)">
+        <div class="game-chip game-chip--disabled" data-game="pubg">
           <div class="game-chip-icon">
             <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/578080/header.jpg" alt="PUBG"/>
           </div>
           <span>PUBG</span>
-        </div>
-        <div class="game-chip" data-game="payday2" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/218620/header.jpg" alt="PAYDAY 2"/>
-          </div>
-          <span>PAYDAY 2</span>
-        </div>
-        <div class="game-chip" data-game="h1z1" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/433850/header.jpg" alt="H1Z1"/>
-          </div>
-          <span>H1Z1</span>
-        </div>
-        <div class="game-chip" data-game="kf2" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/232090/header.jpg" alt="Killing Floor 2"/>
-          </div>
-          <span>Killing Floor 2</span>
-        </div>
-        <div class="game-chip" data-game="naraka" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/1203220/header.jpg" alt="Naraka: Bladepoint"/>
-          </div>
-          <span>Naraka: Bladepoint</span>
-        </div>
-        <div class="game-chip" data-game="dst" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/322330/header.jpg" alt="Don't Starve Together"/>
-          </div>
-          <span>Don't Starve Together</span>
-        </div>
-        <div class="game-chip" data-game="unturned" onclick="selectGame(this)">
-          <div class="game-chip-icon">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/304930/header.jpg" alt="Unturned"/>
-          </div>
-          <span>Unturned</span>
-        </div>
-        <div class="game-chip" data-game="other" onclick="selectGame(this)" style="opacity:.5">
-          <div class="game-chip-icon" style="background:var(--b3);display:flex;align-items:center;justify-content:center;color:var(--t4)">
-            <i data-lucide="more-horizontal" style="width:14px;height:14px"></i>
-          </div>
-          <span>Search for other games</span>
         </div>
       </div>
       <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 consecutive kills without dying</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="5" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="15" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
@@ -812,34 +775,6 @@
       <div class="feed-r"><div class="fd fail"></div><div class="fm">CS2 Agent: timeout receiving round data</div><div class="ft">1h</div></div>
       <div class="feed-r"><div class="fd fail"></div><div class="fm">Trade #1039 declined — <b>kr1stal_</b> rejected</div><div class="ft">3h</div></div>
     </div>
-  </div>
-</div>
-
-<!-- STREAMER ANTI-FRAUD -->
-<div class="page" id="p-s-antifraud">
-  <div class="g2 mb">
-    <div class="cd">
-      <div class="cd-h"><div class="cd-t"><i data-lucide="shield-alert" class="lc-sm" style="color:var(--ac)"></i> Bot Protection</div></div>
-      <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Human verification on pool entry</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Rate limit: 1 entry per IP/5min</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Block VPN / Proxy</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Min Twitch account age: 7 days</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      </div>
-    </div>
-    <div class="cd">
-      <div class="cd-h"><div class="cd-t"><i data-lucide="scale" class="lc-sm" style="color:var(--ac)"></i> Limits</div></div>
-      <div style="padding:16px 20px">
-        <div class="fg"><label class="fl">Max wins per account / day</label><input type="number" class="fi" value="2"/></div>
-        <div class="fg"><label class="fl">Max wins per IP / day</label><input type="number" class="fi" value="3"/></div>
-        <div class="fg"><label class="fl">Min presence before trigger (sec)</label><input type="number" class="fi" value="300"/></div>
-        <div class="fg"><label class="fl">Cooldown after win (min)</label><input type="number" class="fi" value="60"/></div>
-      </div>
-    </div>
-  </div>
-  <div class="cd">
-    <div class="cd-h"><div class="cd-t"><i data-lucide="ban" class="lc-sm" style="color:var(--ac)"></i> Banlist / Allowlist</div><button class="btn btn-p" style="font-size:11px;padding:6px 12px"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
-    <div class="empty" style="padding:24px"><div class="empty-i"><i data-lucide="user-check" style="width:28px;height:28px"></i></div><div class="empty-t">No banned users</div></div>
   </div>
 </div>
 

@@ -60,10 +60,9 @@ const PM = {
   's-health': ['Health', 'System status & errors'],
   's-onboard': ['Setup Wizard', 'Step-by-step onboarding'],
   's-settings': ['Settings', 'API, bot & overlay'],
-  's-antifraud': ['Anti-Fraud', 'Abuse protection']
 };
 
-const STREAMER_PAGES = ['s-dash', 's-triggers', 's-pool', 's-health', 's-settings', 's-onboard', 's-hist', 's-antifraud'];
+const STREAMER_PAGES = ['s-dash', 's-triggers', 's-pool', 's-health', 's-settings', 's-onboard', 's-hist'];
 
 function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
 function rndPrice() { return (Math.random() * 50 + 3).toFixed(2); }
