@@ -47,18 +47,6 @@
       <button class="role-btn active" id="rBtnV" type="button"><i data-lucide="eye" class="lc-sm"></i> Viewer</button>
       <button class="role-btn" id="rBtnS" type="button"><i data-lucide="radio" class="lc-sm"></i> Streamer</button>
     </div>
-    <div class="lang-sw">
-      <div class="nav-l">Language</div>
-      <div class="lang-select">
-        <select id="langSelect" aria-label="Language">
-          <option value="en">English</option>
-          <option value="ru">Русский</option>
-          <option value="de">Deutsch</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-        </select>
-      </div>
-    </div>
     <div id="navV">
       <div class="nav-s">
         <div class="nav-l">Browse</div>
@@ -114,7 +102,31 @@
         <div class="live-chip"><span class="live-dot"></span><span id="liveCount">228</span> LIVE</div>
       </div>
       <div class="tb-r">
-        <button class="tb-btn tb-btn-eq" type="button" data-go="profile"><i data-lucide="user" class="lc-sm"></i> Profile</button>
+        <div class="hdr-lang">
+          <button type="button" class="hdr-lang-btn" id="hdrLangBtn" aria-haspopup="true" aria-expanded="false">
+            <i data-lucide="globe" class="lc-sm" aria-hidden="true"></i>
+            <span id="hdrLangLabel">English</span>
+            <i data-lucide="chevron-down" class="lc-sm" aria-hidden="true"></i>
+          </button>
+          <div class="hdr-lang-pop" id="hdrLangPop" style="display:none">
+            <button type="button" class="hdr-lang-item" data-lang="en">English</button>
+            <button type="button" class="hdr-lang-item" data-lang="ru">Русский</button>
+            <button type="button" class="hdr-lang-item" data-lang="he">עברית</button>
+            <button type="button" class="hdr-lang-item" data-lang="ar">العربية</button>
+            <button type="button" class="hdr-lang-item" data-lang="es">Español</button>
+            <button type="button" class="hdr-lang-item" data-lang="fr">Français</button>
+            <button type="button" class="hdr-lang-item" data-lang="am">አማርኛ</button>
+          </div>
+          <select id="langSelect" aria-label="Language" style="display:none">
+            <option value="en">English</option>
+            <option value="ru">Русский</option>
+            <option value="he">עברית</option>
+            <option value="ar">العربية</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="am">አማርኛ</option>
+          </select>
+        </div>
         <button class="tb-btn tb-btn-eq pr" id="topAct" type="button"><i data-lucide="radio" class="lc-sm"></i> Become Streamer</button>
       </div>
     </div>
