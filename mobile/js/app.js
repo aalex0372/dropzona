@@ -94,6 +94,11 @@ let simInterval;
 let streamActionsOutsideClickHandler = null;
 let streamActionsRepositionHandler = null;
 
+function getViewerStreamFilterMode() {
+  const sel = document.getElementById('viewerStreamFilter');
+  return sel?.value || 'popular';
+}
+
 const PM = {
   'browse': ['Live Streams', 'Watch streams — win skins'],
   'stream': ['Stream', 'Participate in drops in real time'],
@@ -143,7 +148,21 @@ function buildFollowing() {
 function buildStreams() {
   const el = document.getElementById('streamGrid');
   if (!el) return;
-  const list = STREAMS;
+  const mode = getViewerStreamFilterMode();
+  let list = STREAMS.filter(s => s.live !== false);
+
+  if (mode === 'popular') {
+    list = list.sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
+  } else if (mode === 'drops-active') {
+    list = list
+      .filter((s) => (s.pool ?? 0) > 0 && (s.triggers?.length ?? 0) > 0)
+      .sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
+  } else if (mode === 'most-value') {
+    list = list.sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
+  } else if (mode === 'most-drops') {
+    list = list.sort((a, b) => (b.totalDrops ?? 0) - (a.totalDrops ?? 0));
+  }
+
   el.innerHTML = list.map(s => `
     <div class="str-c" data-stream-id="${s.id}">
       <div class="str-prev"><div class="gv"><i data-lucide="gamepad-2" style="width:64px;height:64px;stroke-width:1"></i></div>
@@ -570,6 +589,12 @@ function init() {
   document.getElementById('rBtnV')?.addEventListener('click', () => setRole('v'));
   document.getElementById('rBtnS')?.addEventListener('click', () => setRole('s'));
   document.querySelector('.drawer-user')?.addEventListener('click', () => { go('profile'); closeDrawer(); });
+
+  const filterSel = document.getElementById('viewerStreamFilter');
+  if (filterSel && !filterSel.dataset.bound) {
+    filterSel.addEventListener('change', () => buildStreams());
+    filterSel.dataset.bound = '1';
+  }
 
   buildTicker();
   buildStreams();

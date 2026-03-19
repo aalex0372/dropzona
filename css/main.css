@@ -717,7 +717,13 @@ body::after {
 .fm .hl.sk-gd { color: var(--r-gold); }
 .ft { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--t4); flex-shrink: 0; }
 
-.live-section-h { margin-bottom: 14px; }
+.live-section-h {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 .live-section-title { font-size: 14px; font-weight: 700; color: var(--t0); }
 .live-section-title .live-count { font-weight: 600; color: var(--ac); font-family: 'JetBrains Mono', monospace; }
 

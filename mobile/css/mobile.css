@@ -152,7 +152,13 @@ body {
 .back-btn { margin-bottom: 12px; min-height: 44px; padding: 10px 16px; }
 .section-label { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .section-label .cnt, .cd-t .cnt { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; background: var(--ac-s2); color: var(--ac); padding: 2px 8px; border-radius: 6px; }
-.live-section-h { margin-bottom: 12px; }
+.live-section-h {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 .live-section-title { font-size: 14px; font-weight: 700; color: var(--t0); }
 .live-section-title .live-count { font-weight: 600; color: var(--ac); font-family: 'JetBrains Mono', monospace; }
 

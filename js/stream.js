@@ -150,6 +150,39 @@ function getLiveStreams() {
   return STREAMS.filter((s) => s.live !== false);
 }
 
+function getViewerStreamFilterMode() {
+  const sel = document.getElementById('viewerStreamFilter');
+  return sel?.value || 'popular';
+}
+
+function applyViewerStreamFilter(streams) {
+  const mode = getViewerStreamFilterMode();
+  const list = streams.slice();
+
+  switch (mode) {
+    case 'popular':
+      // Most viewers first
+      list.sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
+      break;
+    case 'drops-active':
+      // "Active now" proxy: non-empty pool + some enabled triggers
+      list
+        .filter((s) => (s.pool ?? 0) > 0 && (s.triggers?.length ?? 0) > 0)
+        .sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
+      break;
+    case 'most-value':
+      list.sort((a, b) => (b.poolVal ?? 0) - (a.poolVal ?? 0));
+      break;
+    case 'most-drops':
+      list.sort((a, b) => (b.totalDrops ?? 0) - (a.totalDrops ?? 0));
+      break;
+    default:
+      break;
+  }
+
+  return list;
+}
+
 /** Offline streams (for carousel “back” / right side) */
 const FOLLOWING_CHIPS_MAX = 7;
 
@@ -254,15 +287,22 @@ export function buildStreams() {
   const el = document.getElementById('streamGrid');
   const scrollEl = el?.closest('.str-grid-scroll');
   if (!el || !scrollEl) return;
+
+  const filterSel = document.getElementById('viewerStreamFilter');
+  if (filterSel && !filterSel.dataset.bound) {
+    filterSel.addEventListener('change', () => buildStreams());
+    filterSel.dataset.bound = '1';
+  }
+
   const liveStreams = getLiveStreams();
-  const cardsHtml = liveStreams.map((s) => streamCardHtml(s)).join('');
+  const filteredStreams = applyViewerStreamFilter(liveStreams);
+  const cardsHtml = filteredStreams.map((s) => streamCardHtml(s)).join('');
   el.innerHTML = cardsHtml + cardsHtml;
   if (typeof lucide !== 'undefined') lucide.createIcons();
   el.querySelectorAll('.str-c').forEach((card) => {
     card.addEventListener('click', () => openStream(parseInt(card.dataset.streamId, 10)));
   });
 
-  let ticking = false;
   function loopScroll() {
     const oneSet = el.scrollWidth / 2;
     let left = scrollEl.scrollLeft;
@@ -270,14 +310,18 @@ export function buildStreams() {
     if (left >= oneSet) scrollEl.scrollLeft = left - oneSet;
     else if (left <= 0) scrollEl.scrollLeft = left + oneSet;
   }
-  scrollEl.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(() => { loopScroll(); ticking = false; });
-  });
-  window.requestAnimationFrame(() => {
-    scrollEl.scrollLeft = 0;
-  });
+
+  if (!scrollEl.dataset.viewerScrollBound) {
+    let ticking = false;
+    scrollEl.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(() => { loopScroll(); ticking = false; });
+    });
+    scrollEl.dataset.viewerScrollBound = '1';
+  }
+
+  window.requestAnimationFrame(() => { scrollEl.scrollLeft = 0; });
 
   buildFollowing();
 }
