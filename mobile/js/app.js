@@ -4,16 +4,16 @@
  */
 
 const STREAMS = [
-  { id: 1, name: 'AlexPlays', ava: 'AP', game: 'CS2 · Ranked · Mirage', viewers: 1240, pool: 12, poolVal: 420, triggers: ['skull', 'crown', 'flame'] },
-  { id: 2, name: 'LunaLive', ava: 'LL', game: 'CS2 · FaceIT · Inferno', viewers: 856, pool: 8, poolVal: 210, triggers: ['skull', 'crown', 'swords'] },
-  { id: 3, name: 'DonnyG', ava: 'DG', game: 'CS2 · Premier · Dust2', viewers: 245, pool: 5, poolVal: 95, triggers: ['crown', 'flame'] },
-  { id: 4, name: 'NikoVibes', ava: 'NV', game: 'CS2 · Ranked · Nuke', viewers: 920, pool: 10, poolVal: 310, triggers: ['skull', 'crown', 'swords'] },
-  { id: 5, name: 'DevLive', ava: 'DL', game: 'CS2 · FaceIT · Overpass', viewers: 780, pool: 9, poolVal: 185, triggers: ['skull', 'flame'] },
-  { id: 6, name: 'MonoPlays', ava: 'MP', game: 'CS2 · Premier · Ancient', viewers: 1100, pool: 14, poolVal: 520, triggers: ['crown', 'flame', 'swords'] },
-  { id: 7, name: 'ShadowAim', ava: 'SA', game: 'CS2 · Ranked · Anubis', viewers: 420, pool: 6, poolVal: 140, triggers: ['skull', 'crown'] },
-  { id: 8, name: 'ElectroGo', ava: 'EG', game: 'CS2 · FaceIT · Vertigo', viewers: 650, pool: 7, poolVal: 220, triggers: ['flame', 'swords'] },
-  { id: 9, name: 'RustyAim', ava: 'RA', game: 'CS2 · Ranked · Mirage', viewers: 580, pool: 8, poolVal: 195, triggers: ['skull', 'crown', 'flame'] },
-  { id: 10, name: 'TwistPlays', ava: 'TP', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['crown', 'swords'] }
+  { id: 1, name: 'AlexPlays', ava: 'AP', game: 'CS2 · Ranked · Mirage', viewers: 1240, pool: 12, poolVal: 420, triggers: ['target', 'skull', 'crown', 'timer'] },
+  { id: 2, name: 'LunaLive', ava: 'LL', game: 'CS2 · FaceIT · Inferno', viewers: 856, pool: 8, poolVal: 210, triggers: ['target', 'flame', 'crown', 'flag'] },
+  { id: 3, name: 'DonnyG', ava: 'DG', game: 'CS2 · Premier · Dust2', viewers: 245, pool: 5, poolVal: 95, triggers: ['flame', 'swords', 'rocket', 'shield-check'] },
+  { id: 4, name: 'NikoVibes', ava: 'NV', game: 'CS2 · Ranked · Nuke', viewers: 920, pool: 10, poolVal: 310, triggers: ['skull', 'crown', 'flag', 'trophy'] },
+  { id: 5, name: 'DevLive', ava: 'DL', game: 'CS2 · FaceIT · Overpass', viewers: 780, pool: 9, poolVal: 185, triggers: ['target', 'flame', 'swords', 'rocket'] },
+  { id: 6, name: 'MonoPlays', ava: 'MP', game: 'CS2 · Premier · Ancient', viewers: 1100, pool: 14, poolVal: 520, triggers: ['crown', 'skull', 'shield-check', 'flag'] },
+  { id: 7, name: 'ShadowAim', ava: 'SA', game: 'CS2 · Ranked · Anubis', viewers: 420, pool: 6, poolVal: 140, triggers: ['target', 'swords', 'rocket'] },
+  { id: 8, name: 'ElectroGo', ava: 'EG', game: 'CS2 · FaceIT · Vertigo', viewers: 650, pool: 7, poolVal: 220, triggers: ['flame', 'skull', 'flag', 'timer'] },
+  { id: 9, name: 'RustyAim', ava: 'RA', game: 'CS2 · Ranked · Mirage', viewers: 580, pool: 8, poolVal: 195, triggers: ['target', 'flame', 'crown'] },
+  { id: 10, name: 'TwistPlays', ava: 'TP', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['shield-check', 'trophy'] }
 ];
 const SKINS = [
   { name: 'Desert Eagle | Blaze', rarity: 'cv' },
@@ -30,15 +30,33 @@ const SKINS = [
 ];
 const USERS = ['xDreamer', 'NaVi_fan228', 'pro100_gamer', 'steelskin99', 'kr1stal_', 'maxplay_cs', 'AWP_god', 'noob_slayer'];
 const TRIGGERS = [
-  { n: 'Triple Kill', ico: 'skull', cls: 'kill' },
+  // from "light" → "heavy" (cosmetic order for mobile)
+  { n: 'kill', ico: 'target', cls: 'kill' },
+  { n: 'double kill', ico: 'flame', cls: 'kill' },
+  { n: 'Triple kill', ico: 'skull', cls: 'kill' },
+  { n: 'Quadra kill', ico: 'swords', cls: 'kill' },
   { n: 'ACE', ico: 'crown', cls: 'kill' },
-  { n: 'Clutch 1v3', ico: 'flame', cls: 'kill' },
-  { n: 'Knife Kill', ico: 'swords', cls: 'kill' }
+  { n: 'round win', ico: 'flag', cls: 'win' },
+  { n: 'bomb planted', ico: 'rocket', cls: 'bomb' },
+  { n: 'Bomb Defused', ico: 'shield-check', cls: 'bomb' },
+  { n: 'Bomb Defused (last sec)', ico: 'timer', cls: 'bomb' },
+  { n: 'game win', ico: 'trophy', cls: 'win' }
 ];
 
 /** Streamer names the user follows (some may be offline) */
 const FOLLOWING_NAMES = ['AlexPlays', 'LunaLive', 'DonnyG', 'NikoVibes', 'DevLive', 'MonoPlays', 'ShadowAim'];
-const TRIGGER_ICO_CLASS = { skull: 'rd', crown: 'or', flame: 'ac', swords: 'pk' };
+const TRIGGER_ICO_CLASS = {
+  target: 'ac',
+  flame: 'or',
+  skull: 'rd',
+  swords: 'pk',
+  crown: 'or',
+  flag: 'ac',
+  rocket: 'or',
+  'shield-check': 'ac',
+  timer: 'rd',
+  trophy: 'or'
+};
 
 let dropCounter = 1050;
 let feedCount = 0;
@@ -357,7 +375,7 @@ function init() {
   buildFollowing();
 
   const msgs = [
-    '<b>AlexPlays</b> — Triple Kill on Mirage! Drop activated',
+    '<b>AlexPlays</b> — Triple kill on Mirage! Drop activated',
     '<b>xDreamer</b> won <span class="hl">AK-47 | Redline</span> from AlexPlays',
     '<b>NaVi_fan228</b> accepted trade <span class="hl">AWP | Asiimov</span> — $14.20',
     '<b>LunaLive</b> — ACE on Inferno! Drop activated',
@@ -368,7 +386,7 @@ function init() {
     addFeedEvent(t, msgs[i]);
     addSFeedEvent(t, msgs[i]);
   });
-  addSFeedEvent('kill', '<b>Triple Kill</b> on Mirage — drop #1047');
+  addSFeedEvent('kill', '<b>Triple kill</b> on Mirage — drop #1047');
   addSFeedEvent('drop', 'Winner: <b>xDreamer</b> → <span class="hl">AK-47 | Redline</span> ($8.40)');
   addSFeedEvent('trade', '✓ Trade #1047 accepted — <b>xDreamer</b>');
   startSim();

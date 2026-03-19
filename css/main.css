@@ -116,6 +116,49 @@ body::after {
 .role-btn.active { color: #fff; }
 .role-sl { position: absolute; top: 4px; left: 4px; width: calc(50% - 4px); height: calc(100% - 8px); background: var(--ac); border-radius: 8px; transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 2px 8px var(--ac-g); z-index: 1; }
 .role-sl.str { transform: translateX(100%); }
+.lang-sw {
+  margin: 0 16px 12px;
+  padding: 10px 12px 12px;
+  background: linear-gradient(180deg, rgba(18,18,28,0.95), rgba(10,10,18,0.95));
+  border: 1px solid var(--br1);
+  border-radius: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.lang-select {
+  margin-top: 10px;
+  position: relative;
+}
+#langSelect {
+  width: 100%;
+  background: rgba(6,6,11,0.35);
+  border: 1px solid var(--br1);
+  border-radius: 10px;
+  color: var(--t0);
+  padding: 10px 38px 10px 12px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+#langSelect:focus {
+  border-color: var(--br-ac);
+  box-shadow: 0 0 0 3px var(--ac-s2);
+}
+.lang-select::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid var(--t4);
+  pointer-events: none;
+  opacity: 0.9;
+}
 .nav-s { padding: 16px 12px 6px; }
 .nav-l { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 2px; color: var(--t4); text-transform: uppercase; padding: 0 8px 8px; }
 .nav-list { display: flex; flex-direction: column; gap: 2px; }
@@ -216,6 +259,8 @@ body::after {
   background: var(--bc);
   border: 1px solid var(--br1);
   border-radius: 10px;
+  max-width: 520px;
+  width: 100%;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .followings-search:focus-within {
@@ -764,6 +809,21 @@ body::after {
 .sw::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: var(--t4); border-radius: 50%; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 .sw.on { background: var(--ac-s2); border-color: var(--ac); }
 .sw.on::after { transform: translateX(18px); background: var(--ac); box-shadow: 0 0 8px var(--ac-g); }
+
+/* Locked ON switches (active, but disabled/greyed) */
+.sw--locked {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+.sw--locked.on {
+  background: var(--b3);
+  border-color: var(--br1);
+}
+.sw--locked.on::after {
+  background: var(--t4);
+  box-shadow: none;
+}
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 16px; border: none; border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
 .btn-p { background: var(--ac); color: #fff; }

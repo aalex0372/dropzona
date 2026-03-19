@@ -66,6 +66,16 @@ window.sortSkinPool = sortSkinPool;
  * Init: bind nav and role, build UI, seed feed, start sim.
  */
 function init() {
+  // Language switcher UI (UX only)
+  const langSelect = document.getElementById('langSelect');
+  if (langSelect && !langSelect.dataset.bound) {
+    langSelect.value = window.localStorage.getItem('sd_lang') || 'en';
+    langSelect.addEventListener('change', () => {
+      window.localStorage.setItem('sd_lang', langSelect.value);
+    });
+    langSelect.dataset.bound = '1';
+  }
+
   document.querySelectorAll('.ni[data-p]').forEach((el) => {
     el.addEventListener('click', () => go(el.dataset.p));
   });
@@ -86,7 +96,7 @@ function init() {
   go('browse');
 
   const seedMsgs = [
-    '<b>AlexPlays</b> — Triple Kill on Mirage! Drop activated',
+    '<b>AlexPlays</b> — Triple kill on Mirage! Drop activated',
     '<b>xDreamer</b> won <span class="hl sk-cl">AK-47 | Redline</span> from AlexPlays',
     '<b>NaVi_fan228</b> accepted trade <span class="hl sk-cv">AWP | Asiimov</span> — $14.20',
     '<b>LunaLive</b> — ACE on Inferno! Drop activated',
@@ -98,7 +108,7 @@ function init() {
     addFeedEvent(t, seedMsgs[i]);
     addSFeedEvent(t, seedMsgs[i]);
   });
-  addSFeedEvent('kill', '<b>Triple Kill</b> on Mirage — drop #1047');
+  addSFeedEvent('kill', '<b>Triple kill</b> on Mirage — drop #1047');
   addSFeedEvent('drop', 'Winner: <b>xDreamer</b> → <span class="hl sk-cl">AK-47 | Redline</span> ($8.40)');
   addSFeedEvent('trade', '✓ Trade #1047 accepted — <b>xDreamer</b>');
 

@@ -47,6 +47,18 @@
       <button class="role-btn active" id="rBtnV" type="button"><i data-lucide="eye" class="lc-sm"></i> Viewer</button>
       <button class="role-btn" id="rBtnS" type="button"><i data-lucide="radio" class="lc-sm"></i> Streamer</button>
     </div>
+    <div class="lang-sw">
+      <div class="nav-l">Language</div>
+      <div class="lang-select">
+        <select id="langSelect" aria-label="Language">
+          <option value="en">English</option>
+          <option value="ru">Русский</option>
+          <option value="de">Deutsch</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+        </select>
+      </div>
+    </div>
     <div id="navV">
       <div class="nav-s">
         <div class="nav-l">Browse</div>
@@ -481,10 +493,10 @@
       <div class="cd s-dash-triggers">
         <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Configure ›</div></div>
         <div class="s-dash-triggers-inner">
-          <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-          <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div></div><div class="trig-rng">$5–20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">kill</div></div><div class="trig-rng">$2–8</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">double kill</div></div><div class="trig-rng">$4–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple kill</div></div><div class="trig-rng">$7–25</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+          <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$20–60</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         </div>
       </div>
     </div>
@@ -516,28 +528,52 @@
           <span>PUBG</span>
         </div>
       </div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div><div class="trig-d">3 consecutive kills without dying</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="5" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="15" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="15" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="50" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div><div class="trig-d">Win 1 vs 2+ enemies</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="10" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="30" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">No-Scope Kill</div><div class="trig-d">AWP kill without scoping</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="3" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="10" min="0" step="0.01"/></div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div><div class="trig-d">Eliminate with a knife</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="5" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="20" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="timer" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defuse (last sec)</div><div class="trig-d">Defuse in the final second</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="8" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="25" min="0" step="0.01"/></div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      <!-- Triggers ordered by event weight (light → heavy) -->
+      <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">kill</div><div class="trig-d">Single elimination</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="2" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="8" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">double kill</div><div class="trig-d">2 kills in a short window</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="4" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="15" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple kill</div><div class="trig-d">3 kills without dying</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="7" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="25" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Quadra kill</div><div class="trig-d">4 kills in a short streak</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="12" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="40" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="20" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="60" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flag" class="lc"></i></div><div class="trig-info"><div class="trig-n">round win</div><div class="trig-d">Win a full round</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="25" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="70" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="trophy" class="lc"></i></div><div class="trig-info"><div class="trig-n">game win</div><div class="trig-d">Win the match</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="60" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="200" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--cy-s);color:var(--cy)"><i data-lucide="rocket" class="lc"></i></div><div class="trig-info"><div class="trig-n">bomb planted</div><div class="trig-d">Plant the bomb</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="30" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="90" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="shield-check" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused</div><div class="trig-d">Defuse the bomb</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="35" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="100" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="timer" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused (last sec)</div><div class="trig-d">Defuse in the final second</div></div><div class="trig-range"><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="45" min="0" step="0.01"/><span class="trig-range-sep">–</span><span class="trig-range-lbl">$</span><input type="number" class="trig-range-inp" value="130" min="0" step="0.01"/></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
     </div>
     <div>
-      <div class="cd mb"><div class="cd-h"><div class="cd-t"><i data-lucide="brain" class="lc-sm" style="color:var(--ac)"></i> Drop Logic</div></div><div style="padding:16px 20px">
-        <div class="fg"><label class="fl">Winner Selection</label><select class="fi"><option>Random among all viewers</option><option>Random among active chatters</option><option>Weighted by chat activity</option><option>Subscribers first</option></select></div>
-        <div class="fg"><label class="fl">Min presence before drop (sec)</label><input type="number" class="fi" value="60"/></div>
-        <div class="fg"><label class="fl">Cooldown between drops (sec)</label><input type="number" class="fi" value="30"/></div>
-        <div class="fg"><label class="fl">Max drops per viewer</label><input type="number" class="fi" value="1"/></div>
-        <div class="fg"><label class="fl">Event dedup window (sec)</label><input type="number" class="fi" value="5"/></div>
-      </div></div>
-      <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="shield-check" class="lc-sm" style="color:var(--ac)"></i> Viewer Requirements</div></div><div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Twitch linked</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Steam Trade URL set</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Channel subscriber</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Steam account > 30 days</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font-size:13px">Min presence before trigger</span><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-      </div></div>
+      <div class="cd mb">
+        <div class="cd-h">
+          <div class="cd-t"><i data-lucide="brain" class="lc-sm" style="color:var(--ac)"></i> Drop Logic and Viewer Requirements</div>
+        </div>
+        <div style="padding:16px 20px;display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:13px">Twitch account linked</span>
+            <div class="sw on sw--locked" role="switch" aria-checked="true" aria-disabled="true"></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:13px">Steam trade URL linked</span>
+            <div class="sw on sw--locked" role="switch" aria-checked="true" aria-disabled="true"></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+            <span style="font-size:13px;white-space:nowrap">Max wins per viewer per stream</span>
+            <div class="trig-range" style="margin-left:auto">
+              <span class="trig-range-lbl">Min</span>
+              <input type="number" class="trig-range-inp" value="1" min="0" step="1"/>
+              <span class="trig-range-sep">–</span>
+              <span class="trig-range-lbl">Max</span>
+              <input type="number" class="trig-range-inp" value="5" min="0" step="1"/>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:13px">Channel subscriber only</span>
+            <div class="sw" onclick="this.classList.toggle('on')"></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:13px">based on chat presence before the drop</span>
+            <div class="sw" onclick="this.classList.toggle('on')"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
