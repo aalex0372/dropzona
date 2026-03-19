@@ -4,16 +4,16 @@
  */
 
 const STREAMS = [
-  { id: 1, name: 'AlexPlays', ava: 'AP', game: 'CS2 · Ranked · Mirage', viewers: 1240, pool: 12, poolVal: 420, triggers: ['target', 'skull', 'crown', 'timer'] },
-  { id: 2, name: 'LunaLive', ava: 'LL', game: 'CS2 · FaceIT · Inferno', viewers: 856, pool: 8, poolVal: 210, triggers: ['target', 'flame', 'crown', 'flag'] },
-  { id: 3, name: 'DonnyG', ava: 'DG', game: 'CS2 · Premier · Dust2', viewers: 245, pool: 5, poolVal: 95, triggers: ['flame', 'swords', 'rocket', 'shield-check'] },
-  { id: 4, name: 'NikoVibes', ava: 'NV', game: 'CS2 · Ranked · Nuke', viewers: 920, pool: 10, poolVal: 310, triggers: ['skull', 'crown', 'flag', 'trophy'] },
-  { id: 5, name: 'DevLive', ava: 'DL', game: 'CS2 · FaceIT · Overpass', viewers: 780, pool: 9, poolVal: 185, triggers: ['target', 'flame', 'swords', 'rocket'] },
-  { id: 6, name: 'MonoPlays', ava: 'MP', game: 'CS2 · Premier · Ancient', viewers: 1100, pool: 14, poolVal: 520, triggers: ['crown', 'skull', 'shield-check', 'flag'] },
-  { id: 7, name: 'ShadowAim', ava: 'SA', game: 'CS2 · Ranked · Anubis', viewers: 420, pool: 6, poolVal: 140, triggers: ['target', 'swords', 'rocket'] },
-  { id: 8, name: 'ElectroGo', ava: 'EG', game: 'CS2 · FaceIT · Vertigo', viewers: 650, pool: 7, poolVal: 220, triggers: ['flame', 'skull', 'flag', 'timer'] },
-  { id: 9, name: 'RustyAim', ava: 'RA', game: 'CS2 · Ranked · Mirage', viewers: 580, pool: 8, poolVal: 195, triggers: ['target', 'flame', 'crown'] },
-  { id: 10, name: 'TwistPlays', ava: 'TP', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['shield-check', 'trophy'] }
+  { id: 1, name: 'AlexPlays', ava: 'AP', game: 'CS2 · Ranked · Mirage', viewers: 1240, pool: 12, poolVal: 420, triggers: ['target', 'skull', 'crown', 'timer'], live: true, twitch: 'alexplays', totalDrops: 847, totalDroppedVal: 12420, successRate: 98 },
+  { id: 2, name: 'LunaLive', ava: 'LL', game: 'CS2 · FaceIT · Inferno', viewers: 856, pool: 8, poolVal: 210, triggers: ['target', 'flame', 'crown', 'flag'], live: true, twitch: 'lunalive', totalDrops: 612, totalDroppedVal: 8920, successRate: 97 },
+  { id: 3, name: 'DonnyG', ava: 'DG', game: 'CS2 · Premier · Dust2', viewers: 245, pool: 5, poolVal: 95, triggers: ['flame', 'swords', 'rocket', 'shield-check'], live: false, twitch: 'donnyg', totalDrops: 334, totalDroppedVal: 4100, successRate: 96 },
+  { id: 4, name: 'NikoVibes', ava: 'NV', game: 'CS2 · Ranked · Nuke', viewers: 920, pool: 10, poolVal: 310, triggers: ['skull', 'crown', 'flag', 'trophy'], live: true, twitch: 'nikovibes', totalDrops: 721, totalDroppedVal: 10850, successRate: 99 },
+  { id: 5, name: 'DevLive', ava: 'DL', game: 'CS2 · FaceIT · Overpass', viewers: 780, pool: 9, poolVal: 185, triggers: ['target', 'flame', 'swords', 'rocket'], live: false, twitch: 'devlive', totalDrops: 445, totalDroppedVal: 6200, successRate: 95 },
+  { id: 6, name: 'MonoPlays', ava: 'MP', game: 'CS2 · Premier · Ancient', viewers: 1100, pool: 14, poolVal: 520, triggers: ['crown', 'skull', 'shield-check', 'flag'], live: true, twitch: 'monoplays', totalDrops: 923, totalDroppedVal: 15200, successRate: 98 },
+  { id: 7, name: 'ShadowAim', ava: 'SA', game: 'CS2 · Ranked · Anubis', viewers: 420, pool: 6, poolVal: 140, triggers: ['target', 'swords', 'rocket'], live: false, twitch: 'shadowaim', totalDrops: 288, totalDroppedVal: 3650, successRate: 94 },
+  { id: 8, name: 'ElectroGo', ava: 'EG', game: 'CS2 · FaceIT · Vertigo', viewers: 650, pool: 7, poolVal: 220, triggers: ['flame', 'skull', 'flag', 'timer'], live: true, twitch: 'electrogo', totalDrops: 512, totalDroppedVal: 7800, successRate: 97 },
+  { id: 9, name: 'RustyAim', ava: 'RA', game: 'CS2 · Ranked · Mirage', viewers: 580, pool: 8, poolVal: 195, triggers: ['target', 'flame', 'crown'], live: true, twitch: 'rustyaim', totalDrops: 398, totalDroppedVal: 5400, successRate: 96 },
+  { id: 10, name: 'TwistPlays', ava: 'TP', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['shield-check', 'trophy'], live: true, twitch: 'twistplays', totalDrops: 267, totalDroppedVal: 3200, successRate: 95 }
 ];
 const SKINS = [
   { name: 'Desert Eagle | Blaze', rarity: 'cv' },
@@ -31,17 +31,43 @@ const SKINS = [
 const USERS = ['xDreamer', 'NaVi_fan228', 'pro100_gamer', 'steelskin99', 'kr1stal_', 'maxplay_cs', 'AWP_god', 'noob_slayer'];
 const TRIGGERS = [
   // from "light" → "heavy" (cosmetic order for mobile)
-  { n: 'kill', ico: 'target', cls: 'kill' },
-  { n: 'double kill', ico: 'flame', cls: 'kill' },
-  { n: 'Triple kill', ico: 'skull', cls: 'kill' },
-  { n: 'Quadra kill', ico: 'swords', cls: 'kill' },
-  { n: 'ACE', ico: 'crown', cls: 'kill' },
-  { n: 'round win', ico: 'flag', cls: 'win' },
-  { n: 'bomb planted', ico: 'rocket', cls: 'bomb' },
-  { n: 'Bomb Defused', ico: 'shield-check', cls: 'bomb' },
-  { n: 'Bomb Defused (last sec)', ico: 'timer', cls: 'bomb' },
-  { n: 'game win', ico: 'trophy', cls: 'win' }
+  { n: 'kill', ico: 'target', cls: 'kill', min: 2, max: 8 },
+  { n: 'double kill', ico: 'flame', cls: 'kill', min: 4, max: 15 },
+  { n: 'Triple kill', ico: 'skull', cls: 'kill', min: 7, max: 25 },
+  { n: 'Quadra kill', ico: 'swords', cls: 'kill', min: 12, max: 40 },
+  { n: 'ACE', ico: 'crown', cls: 'kill', min: 20, max: 60 },
+  { n: 'round win', ico: 'flag', cls: 'win', min: 25, max: 70 },
+  { n: 'bomb planted', ico: 'rocket', cls: 'bomb', min: 30, max: 90 },
+  { n: 'Bomb Defused', ico: 'shield-check', cls: 'bomb', min: 35, max: 100 },
+  { n: 'Bomb Defused (last sec)', ico: 'timer', cls: 'bomb', min: 45, max: 130 },
+  { n: 'game win', ico: 'trophy', cls: 'win', min: 60, max: 200 }
 ];
+
+const RECENT_DROPS_BY_STREAM = {
+  1: [
+    { skin: 'AK-47 | Redline (FT)', winner: 'xDreamer', time: '2h ago' },
+    { skin: 'AWP | Asiimov (FT)', winner: 'NaVi_fan228', time: '5h ago' },
+    { skin: 'M4A4 | Desolate Space (MW)', winner: 'pro100_gamer', time: '8h ago' },
+    { skin: 'USP-S | Kill Confirmed (MW)', winner: 'steelskin99', time: '12h ago' },
+    { skin: 'Glock-18 | Fade (FN)', winner: 'kr1stal_', time: '1d ago' }
+  ],
+  2: [
+    { skin: 'P250 | Muertos (FN)', winner: 'maxplay_cs', time: '1h ago' },
+    { skin: 'Nova | Antique (FT)', winner: 'AWP_god', time: '4h ago' },
+    { skin: 'MAC-10 | Fade (MW)', winner: 'noob_slayer', time: '9h ago' }
+  ],
+  4: [
+    { skin: 'Desert Eagle | Blaze (FN)', winner: 'xDreamer', time: '3h ago' },
+    { skin: 'AWP | Lightning Strike (FT)', winner: 'NaVi_fan228', time: '6h ago' },
+    { skin: 'M4A1-S | Hyper Beast (FT)', winner: 'pro100_gamer', time: '11h ago' }
+  ],
+  6: [
+    { skin: 'AWP | Asiimov (FT)', winner: 'steelskin99', time: '30m ago' },
+    { skin: 'AK-47 | Redline (FT)', winner: 'kr1stal_', time: '2h ago' },
+    { skin: 'Clutch 1v3 → M4A4 | Desolate Space', winner: 'maxplay_cs', time: '5h ago' },
+    { skin: 'Knife Kill → Glock-18 | Fade', winner: 'AWP_god', time: '1d ago' }
+  ]
+};
 
 /** Streamer names the user follows (some may be offline) */
 const FOLLOWING_NAMES = ['AlexPlays', 'LunaLive', 'DonnyG', 'NikoVibes', 'DevLive', 'MonoPlays', 'ShadowAim'];
@@ -64,6 +90,9 @@ let role = 'v';
 let curPage = 'browse';
 let wizStep = 1;
 let simInterval;
+
+let streamActionsOutsideClickHandler = null;
+let streamActionsRepositionHandler = null;
 
 const PM = {
   'browse': ['Live Streams', 'Watch streams — win skins'],
@@ -123,7 +152,7 @@ function buildStreams() {
       </div>
       <div class="str-meta">
         <div class="str-ava">${s.ava}</div>
-        <div style="flex:1"><div class="str-name">${s.name}</div><div class="str-game">${s.game}</div></div>
+        <div style="flex:1"><div class="str-name">${s.name}</div></div>
       </div>
     </div>`).join('');
   if (typeof lucide !== 'undefined') lucide.createIcons();
@@ -133,27 +162,199 @@ function buildStreams() {
   buildFollowing();
 }
 
+function wireStreamActions(s) {
+  const shareMenuBtn = document.getElementById('sdShareMenuBtn');
+  const reportBtn = document.getElementById('sdReportBtn');
+  const actionsMenu = document.getElementById('sdActionsMenu');
+  const shareFacebook = document.getElementById('sdShareFacebook');
+  const shareX = document.getElementById('sdShareX');
+  const shareTelegram = document.getElementById('sdShareTelegram');
+  const shareWhatsApp = document.getElementById('sdShareWhatsApp');
+  const copyAction = document.getElementById('sdCopyAction');
+  const reportModal = document.getElementById('sdReportModal');
+  const reportClose = document.getElementById('sdReportClose');
+  const reportCancel = document.getElementById('sdReportCancel');
+  const reportSubmit = document.getElementById('sdReportSubmit');
+  const reportTopic = document.getElementById('sdReportTopic');
+  const reportDetails = document.getElementById('sdReportDetails');
+
+  if (!shareMenuBtn || !reportBtn || !actionsMenu || !copyAction) return;
+
+  const profileUrl = `${window.location.origin}${window.location.pathname}#stream-${s.id}-${encodeURIComponent(s.name.toLowerCase())}`;
+  const shareText = `Watch ${s.name} on DROPZONE`;
+
+  const positionActionsMenu = () => {
+    if (actionsMenu.style.display === 'none') return;
+    const rect = shareMenuBtn.getBoundingClientRect();
+    const menuWidth = 236;
+    const gutter = 10;
+    let left = rect.right - menuWidth;
+    left = Math.max(gutter, Math.min(left, window.innerWidth - menuWidth - gutter));
+    let top = rect.bottom + 8;
+    const estimatedHeight = 220;
+    if (top + estimatedHeight > window.innerHeight - gutter) {
+      top = Math.max(gutter, rect.top - estimatedHeight - 8);
+    }
+    actionsMenu.style.left = `${left}px`;
+    actionsMenu.style.top = `${top}px`;
+  };
+
+  if (shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(profileUrl)}`;
+  if (shareX) shareX.href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(profileUrl)}`;
+  if (shareTelegram) shareTelegram.href = `https://t.me/share/url?url=${encodeURIComponent(profileUrl)}&text=${encodeURIComponent(shareText)}`;
+  if (shareWhatsApp) shareWhatsApp.href = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${profileUrl}`)}`;
+
+  shareMenuBtn.onclick = (e) => {
+    e.stopPropagation();
+    const willOpen = actionsMenu.style.display === 'none';
+    actionsMenu.style.display = willOpen ? 'flex' : 'none';
+    if (willOpen) positionActionsMenu();
+  };
+
+  [shareFacebook, shareX, shareTelegram, shareWhatsApp].forEach((node) => {
+    if (!node) return;
+    node.onclick = () => { actionsMenu.style.display = 'none'; };
+  });
+
+  reportBtn.onclick = (e) => {
+    e.stopPropagation();
+    actionsMenu.style.display = 'none';
+    if (reportModal) {
+      reportModal.style.display = 'flex';
+      if (reportTopic) reportTopic.value = 'suspicious-drops';
+      if (reportDetails) reportDetails.value = '';
+    }
+  };
+
+  copyAction.onclick = async (e) => {
+    e.stopPropagation();
+    actionsMenu.style.display = 'none';
+    try {
+      await window.navigator.clipboard.writeText(profileUrl);
+      copyAction.innerHTML = '<i data-lucide="check" class="lc-sm"></i> Copied';
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+      setTimeout(() => {
+        copyAction.innerHTML = '<i data-lucide="copy" class="lc-sm"></i> Copy link';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }, 1200);
+    } catch {
+      window.prompt('Copy streamer card link:', profileUrl);
+    }
+  };
+
+  const closeReportModal = () => {
+    if (reportModal) reportModal.style.display = 'none';
+  };
+  if (reportClose) reportClose.onclick = closeReportModal;
+  if (reportCancel) reportCancel.onclick = closeReportModal;
+
+  if (reportModal) {
+    reportModal.onclick = (e) => {
+      if (e.target === reportModal) closeReportModal();
+    };
+  }
+
+  if (reportSubmit) {
+    reportSubmit.onclick = () => {
+      if (!reportTopic || !reportDetails) return;
+      const details = reportDetails.value.trim();
+      if (details.length < 8) {
+        reportDetails.focus();
+        return;
+      }
+      closeReportModal();
+      window.alert(`Report submitted for ${s.name}. Thanks for helping keep DROPZONE safe.`);
+    };
+  }
+
+  if (streamActionsOutsideClickHandler) {
+    document.removeEventListener('click', streamActionsOutsideClickHandler);
+  }
+  streamActionsOutsideClickHandler = (ev) => {
+    if (!actionsMenu.contains(ev.target) && !shareMenuBtn.contains(ev.target)) {
+      actionsMenu.style.display = 'none';
+    }
+  };
+  document.addEventListener('click', streamActionsOutsideClickHandler);
+
+  if (streamActionsRepositionHandler) {
+    window.removeEventListener('resize', streamActionsRepositionHandler);
+    window.removeEventListener('scroll', streamActionsRepositionHandler, true);
+  }
+  streamActionsRepositionHandler = () => positionActionsMenu();
+  window.addEventListener('resize', streamActionsRepositionHandler);
+  window.addEventListener('scroll', streamActionsRepositionHandler, true);
+}
+
 function openStream(id) {
   const s = STREAMS.find(x => x.id === id);
   if (!s) return;
   const sdAva = document.getElementById('sdAva');
   const sdName = document.getElementById('sdName');
-  const sdGame = document.getElementById('sdGame');
   const sdViewers = document.getElementById('sdViewers');
   const sdPool = document.getElementById('sdPool');
+  const sdTwitch = document.getElementById('sdTwitch');
+  const sdTotalDrops = document.getElementById('sdTotalDrops');
+  const sdTotalVal = document.getElementById('sdTotalVal');
+  const sdAvgDrop = document.getElementById('sdAvgDrop');
+  const sdSuccessRate = document.getElementById('sdSuccessRate');
   const sdTriggers = document.getElementById('sdTriggers');
+
+  const sdRoleCardTitle = document.getElementById('sdRoleCardTitle');
+  const sdViewerEligibility = document.getElementById('sdViewerEligibility');
+  const sdStreamerTriggersPanel = document.getElementById('sdStreamerTriggersPanel');
+  const sdRecentDrops = document.getElementById('sdRecentDrops');
+
+  const showStreamerPanel = role === 's';
+  if (sdRoleCardTitle) {
+    sdRoleCardTitle.innerHTML = showStreamerPanel
+      ? '<i data-lucide="crosshair" class="lc-sm ac"></i> Active triggers'
+      : '<i data-lucide="ticket-check" class="lc-sm ac"></i> Drop Eligibility';
+  }
+  if (sdViewerEligibility) sdViewerEligibility.style.display = showStreamerPanel ? 'none' : '';
+  if (sdStreamerTriggersPanel) sdStreamerTriggersPanel.style.display = showStreamerPanel ? '' : 'none';
+
   if (sdAva) sdAva.textContent = s.ava;
   if (sdName) sdName.textContent = s.name;
-  if (sdGame) sdGame.textContent = s.game;
+  if (sdTwitch) {
+    const slug = s.twitch || s.name.toLowerCase().replace(/\s+/g, '');
+    sdTwitch.href = `https://www.twitch.tv/${slug}`;
+    sdTwitch.style.display = s.twitch ? '' : 'none';
+  }
   if (sdViewers) sdViewers.textContent = s.viewers.toLocaleString();
-  if (sdPool) sdPool.innerHTML = `<i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins · $${s.poolVal}`;
+  if (sdPool) sdPool.innerHTML = `<i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins in pool · $${s.poolVal} total value`;
+
+  const totalDrops = s.totalDrops ?? 0;
+  const totalVal = s.totalDroppedVal ?? 0;
+  const avgVal = totalDrops > 0 ? Math.round(totalVal / totalDrops) : 0;
+  const successRate = s.successRate ?? 0;
+
+  if (sdTotalDrops) sdTotalDrops.textContent = totalDrops.toLocaleString();
+  if (sdTotalVal) sdTotalVal.textContent = `$${totalVal.toLocaleString()}`;
+  if (sdAvgDrop) sdAvgDrop.textContent = `$${avgVal}`;
+  if (sdSuccessRate) sdSuccessRate.textContent = `${successRate}%`;
+
   if (sdTriggers) {
     sdTriggers.innerHTML = s.triggers.map(t => {
       const tr = TRIGGERS.find(x => x.ico === t);
       const cls = TRIGGER_ICO_CLASS[t] || 'ac';
-      return `<div class="trig-r"><div class="trig-ico ${cls}"><i data-lucide="${t}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${tr ? tr.n : t}</div></div><span class="st st-on">Active</span></div>`;
+      const range = tr && tr.min != null && tr.max != null ? ` → $${tr.min}–$${tr.max}` : '';
+      return `<div class="trig-r"><div class="trig-ico ${cls}"><i data-lucide="${t}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${tr ? tr.n : t}${range}</div></div><span class="st st-on">Active</span></div>`;
     }).join('');
   }
+
+  if (sdRecentDrops) {
+    const recent = RECENT_DROPS_BY_STREAM[s.id] || [];
+    if (recent.length === 0) {
+      sdRecentDrops.innerHTML = '<div class="sd-recent-empty">No recent drops yet. Drops show here once the streamer sends skins.</div>';
+    } else {
+      sdRecentDrops.innerHTML = recent.map(d =>
+        `<div class="sd-recent-item"><div class="sd-recent-skin">${d.skin}</div><div class="sd-recent-meta"><span class="sd-recent-winner">${d.winner}</span> · ${d.time}</div></div>`
+      ).join('');
+    }
+  }
+
+  wireStreamActions(s);
   go('stream');
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }

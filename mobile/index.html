@@ -61,41 +61,140 @@
 
     <div class="page" id="p-stream">
       <button class="btn btn-g back-btn" onclick="go('browse')"><i data-lucide="arrow-left" class="lc-sm"></i> Back to Streams</button>
+
       <div class="str-prev full mb">
         <div class="gv"><i data-lucide="gamepad-2"></i></div>
         <div class="str-br"><div class="b-live"><span class="dot"></span> LIVE</div><div class="b-view"><i data-lucide="eye" class="lc-sm"></i> <span id="sdViewers">0</span></div></div>
         <div class="str-pool" id="sdPool"><i data-lucide="gift" class="lc-sm"></i> 0 skins</div>
       </div>
+
       <div class="str-meta mb">
         <div class="str-ava" id="sdAva">S1</div>
-        <div><div class="str-name" id="sdName">AlexPlays</div><div class="str-game" id="sdGame">CS2 · Ranked · Mirage</div></div>
-      </div>
-      <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="workflow" class="lc-sm ac"></i> Current Drop</div><span class="st st-wait" id="sdDropSt">Waiting for trigger</span></div>
-        <div class="sm-flow" id="sdSM">
-          <div class="sm-node active">IDLE</div><span class="sm-arrow">→</span>
-          <div class="sm-node">TRIGGERED</div><span class="sm-arrow">→</span>
-          <div class="sm-node">WINNER</div><span class="sm-arrow">→</span>
-          <div class="sm-node">RESERVED</div><span class="sm-arrow">→</span>
-          <div class="sm-node">SENT</div><span class="sm-arrow">→</span>
-          <div class="sm-node">ACCEPTED</div>
+
+        <div style="flex:1;min-width:0">
+          <a class="btn btn-p sd-twitch-btn" id="sdTwitch" href="#" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+            </svg>
+            Twitch
+          </a>
+          <div class="str-name" id="sdName" style="margin-top:6px">AlexPlays</div>
         </div>
-        <div class="cd-p"><div id="sdDropInfo" class="muted">Waiting for a trigger event from the streamer...</div></div>
+
+        <div class="sd-actions-wrap">
+          <button type="button" class="btn btn-g sd-action-btn" id="sdShareMenuBtn" aria-label="Share actions">
+            <span class="sd-action-icon sd-action-icon--share" aria-hidden="true">⋯</span>
+          </button>
+          <button type="button" class="btn btn-g sd-action-btn" id="sdReportBtn" aria-label="Report streamer">
+            <span class="sd-action-icon sd-action-icon--report" aria-hidden="true">⚑</span>
+          </button>
+          <div class="sd-actions-menu" id="sdActionsMenu" style="display:none">
+            <div class="sd-actions-menu-label">Share this streamer</div>
+            <div class="sd-share-grid">
+              <a class="sd-share-tile" id="sdShareFacebook" href="#" target="_blank" rel="noopener">
+                <span class="sd-share-mark" aria-hidden="true">f</span><span>Facebook</span>
+              </a>
+              <a class="sd-share-tile" id="sdShareX" href="#" target="_blank" rel="noopener">
+                <span class="sd-share-mark" aria-hidden="true">X</span><span>X</span>
+              </a>
+              <a class="sd-share-tile" id="sdShareTelegram" href="#" target="_blank" rel="noopener">
+                <i data-lucide="send" class="lc-sm"></i><span>Telegram</span>
+              </a>
+              <a class="sd-share-tile" id="sdShareWhatsApp" href="#" target="_blank" rel="noopener">
+                <i data-lucide="message-circle" class="lc-sm"></i><span>WhatsApp</span>
+              </a>
+            </div>
+            <button type="button" class="sd-actions-item" id="sdCopyAction">
+              <i data-lucide="copy" class="lc-sm"></i> Copy link
+            </button>
+          </div>
+        </div>
       </div>
+
+      <div class="stats stats-4 mb">
+        <div class="sc">
+          <div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div>
+          <div class="sc-v" id="sdTotalDrops">—</div>
+          <div class="sc-l">Drops given away</div>
+        </div>
+        <div class="sc">
+          <div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div>
+          <div class="sc-v" id="sdTotalVal">—</div>
+          <div class="sc-l">Total value dropped</div>
+        </div>
+        <div class="sc">
+          <div class="sc-ico or"><i data-lucide="trending-up" class="lc"></i></div>
+          <div class="sc-v" id="sdAvgDrop">—</div>
+          <div class="sc-l">Avg. drop value</div>
+        </div>
+        <div class="sc">
+          <div class="sc-ico cy"><i data-lucide="check-circle" class="lc"></i></div>
+          <div class="sc-v" id="sdSuccessRate">—</div>
+          <div class="sc-l">Drop success rate</div>
+        </div>
+      </div>
+
       <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket-check" class="lc-sm ac"></i> Drop Eligibility</div></div>
+        <div class="cd-h">
+          <div class="cd-t" id="sdRoleCardTitle">
+            <i data-lucide="ticket-check" class="lc-sm ac"></i> Drop Eligibility
+          </div>
+        </div>
         <div class="cd-p">
-          <div id="eligStatus" class="elig-status fail"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
-          <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Present when drop started</div></div>
-          <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account &gt; 30 days</div></div>
-          <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
+          <div id="sdViewerEligibility">
+            <div id="eligStatus" class="elig-status fail"><i data-lucide="x-circle" class="lc"></i> Not Participating</div>
+            <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Twitch account linked</div></div>
+            <div class="elig-item"><div class="elig-check no"><i data-lucide="x" class="lc-sm"></i></div><div class="elig-text no">Steam Trade URL not set</div></div>
+            <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Present when drop started</div></div>
+            <div class="elig-item"><div class="elig-check ok"><i data-lucide="check" class="lc-sm"></i></div><div class="elig-text ok">Steam account &gt; 30 days</div></div>
+            <div style="margin-top:16px"><button class="btn btn-p btn-w" onclick="go('profile')"><i data-lucide="link" class="lc-sm"></i> Connect Steam Trade URL</button></div>
+          </div>
+
+          <div id="sdStreamerTriggersPanel" style="display:none">
+            <div style="font-size:15px;font-weight:700;color:var(--t0);margin-bottom:12px;display:flex;align-items:center;gap:10px">
+              <i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Active triggers
+            </div>
+            <div id="sdTriggers"></div>
+            <div style="font-size:12px;color:var(--t3);margin-top:12px;line-height:1.5">
+              These triggers determine the value range of drops viewers can get from this stream.
+            </div>
+          </div>
         </div>
       </div>
+
       <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Active Triggers</div></div>
-        <div id="sdTriggers"></div>
+        <div class="cd-h">
+          <div class="cd-t"><i data-lucide="sparkles" class="lc-sm ac"></i> Recent drops</div>
+        </div>
+        <div class="sd-recent" id="sdRecentDrops"></div>
+      </div>
+
+      <div class="sd-modal-backdrop" id="sdReportModal" style="display:none">
+        <div class="sd-modal-card" role="dialog" aria-modal="true" aria-labelledby="sdReportTitle">
+          <div class="sd-modal-head">
+            <h3 id="sdReportTitle">Report streamer</h3>
+            <button type="button" class="btn btn-g sd-modal-close" id="sdReportClose" aria-label="Close report">
+              <span class="sd-modal-close-mark" aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="sd-modal-body">
+            <div class="sd-modal-sub">Select a topic, add details, then submit.</div>
+            <label class="sd-label" for="sdReportTopic">Topic</label>
+            <select id="sdReportTopic" class="sd-field">
+              <option value="suspicious-drops">Suspicious drops / giveaway manipulation</option>
+              <option value="scam-link">Scam link or phishing</option>
+              <option value="abuse">Harassment or abusive behavior</option>
+              <option value="fake-identity">Impersonation / fake identity</option>
+              <option value="other">Other</option>
+            </select>
+            <label class="sd-label" for="sdReportDetails">Details</label>
+            <textarea id="sdReportDetails" class="sd-field sd-field-area" placeholder="Tell us what happened..." maxlength="450"></textarea>
+            <div class="sd-modal-foot">
+              <button type="button" class="btn btn-g" id="sdReportCancel">Cancel</button>
+              <button type="button" class="btn btn-p" id="sdReportSubmit"><i data-lucide="send" class="lc-sm"></i> Submit report</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
