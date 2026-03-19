@@ -677,6 +677,12 @@ body::after {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Hide "State" column in My Drops table */
+.page-my-drops .my-drops-table-wrap table th:last-child,
+.page-my-drops .my-drops-table-wrap table td:last-child {
+  display: none;
+}
+
 .cd { background: var(--bc); border: 1px solid var(--br1); border-radius: 16px; overflow: hidden; }
 .cd.sd-preview-card { overflow: visible; }
 .cd-h { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--br0); }
