@@ -285,10 +285,16 @@
       </div>
       <div class="cd">
         <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Configure ›</div></div>
-        <div class="trig-r"><div class="trig-ico rd"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple Kill</div></div><div class="trig-rng">$5–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico or"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$15–50</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">Clutch 1vX</div></div><div class="trig-rng">$10–30</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico pk"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Knife Kill</div></div><div class="trig-rng">$5–20</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">kill</div></div><div class="trig-rng">$2–8</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crosshair" class="lc"></i></div><div class="trig-info"><div class="trig-n">double kill</div></div><div class="trig-rng">$4–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple kill</div></div><div class="trig-rng">$7–25</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:rgba(236,72,153,.1);color:var(--pk)"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Quadra kill</div></div><div class="trig-rng">$12–40</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--or-s);color:var(--or)"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div></div><div class="trig-rng">$20–60</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flag" class="lc"></i></div><div class="trig-info"><div class="trig-n">round win</div></div><div class="trig-rng">$25–70</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="trophy" class="lc"></i></div><div class="trig-info"><div class="trig-n">game win</div></div><div class="trig-rng">$60–200</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--cy-s);color:var(--cy)"><i data-lucide="bomb" class="lc"></i></div><div class="trig-info"><div class="trig-n">bomb planted</div></div><div class="trig-rng">$30–90</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="shield-check" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused</div></div><div class="trig-rng">$35–100</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="award" class="lc"></i></div><div class="trig-info"><div class="trig-n">MVP</div></div><div class="trig-rng">$45–130</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
       </div>
     </div>
 
@@ -296,22 +302,24 @@
       <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
       <div class="cd mb">
         <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Game Triggers</div></div>
-        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">kill</div><div class="trig-d">Single elimination</div></div><div class="trig-rng">$2–8</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico or"><i data-lucide="flame" class="lc"></i></div><div class="trig-info"><div class="trig-n">double kill</div><div class="trig-d">2 kills in a short window</div></div><div class="trig-rng">$4–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">kill</div><div class="trig-d">Single elimination</div></div><div class="trig-rng">$2–8</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico or"><i data-lucide="crosshair" class="lc"></i></div><div class="trig-info"><div class="trig-n">double kill</div><div class="trig-d">2 kills in a short window</div></div><div class="trig-rng">$4–15</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         <div class="trig-r"><div class="trig-ico rd"><i data-lucide="skull" class="lc"></i></div><div class="trig-info"><div class="trig-n">Triple kill</div><div class="trig-d">3 kills without dying</div></div><div class="trig-rng">$7–25</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         <div class="trig-r"><div class="trig-ico pk"><i data-lucide="swords" class="lc"></i></div><div class="trig-info"><div class="trig-n">Quadra kill</div><div class="trig-d">4 kills in a short streak</div></div><div class="trig-rng">$12–40</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         <div class="trig-r"><div class="trig-ico or"><i data-lucide="crown" class="lc"></i></div><div class="trig-info"><div class="trig-n">ACE</div><div class="trig-d">5 kills in a single round</div></div><div class="trig-rng">$20–60</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="flag" class="lc"></i></div><div class="trig-info"><div class="trig-n">round win</div><div class="trig-d">Win a full round</div></div><div class="trig-rng">$25–70</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico or"><i data-lucide="trophy" class="lc"></i></div><div class="trig-info"><div class="trig-n">game win</div><div class="trig-d">Win the match</div></div><div class="trig-rng">$60–200</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico or"><i data-lucide="rocket" class="lc"></i></div><div class="trig-info"><div class="trig-n">bomb planted</div><div class="trig-d">Plant the bomb</div></div><div class="trig-rng">$30–90</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico ac"><i data-lucide="shield-check" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused</div><div class="trig-d">Defuse the bomb</div></div><div class="trig-rng">$35–100</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
-        <div class="trig-r"><div class="trig-ico rd"><i data-lucide="timer" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused (last sec)</div><div class="trig-d">Defuse in the final second</div></div><div class="trig-rng">$45–130</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="flag" class="lc"></i></div><div class="trig-info"><div class="trig-n">round win</div><div class="trig-d">Win a full round</div></div><div class="trig-rng">$25–70</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--ac-s);color:var(--ac)"><i data-lucide="trophy" class="lc"></i></div><div class="trig-info"><div class="trig-n">game win</div><div class="trig-d">Win the match</div></div><div class="trig-rng">$60–200</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--cy-s);color:var(--cy)"><i data-lucide="bomb" class="lc"></i></div><div class="trig-info"><div class="trig-n">bomb planted</div><div class="trig-d">Plant the bomb</div></div><div class="trig-rng">$30–90</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="shield-check" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused</div><div class="trig-d">Defuse the bomb</div></div><div class="trig-rng">$35–100</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="award" class="lc"></i></div><div class="trig-info"><div class="trig-n">MVP</div><div class="trig-d">Round most valuable player</div></div><div class="trig-rng">$45–130</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
       </div>
       <div class="cd mb">
         <div class="cd-h"><div class="cd-t"><i data-lucide="brain" class="lc-sm ac"></i> Drop Logic and Viewer Requirements</div></div>
         <div class="cd-p" style="display:flex;flex-direction:column;gap:14px">
           <div class="setting-row"><span>Twitch account linked</span><div class="sw on sw--locked" role="switch" aria-checked="true" aria-disabled="true"></div></div>
           <div class="setting-row"><span>Steam trade URL linked</span><div class="sw on sw--locked" role="switch" aria-checked="true" aria-disabled="true"></div></div>
+          <div class="setting-row"><span>Channel subscriber only</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+          <div class="setting-row"><span>based on chat presence before the drop</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
           <div class="fg" style="margin-bottom:0">
             <label class="fl">Max wins per viewer per stream</label>
             <div style="display:flex;align-items:center;gap:10px">
@@ -320,8 +328,6 @@
               <input type="number" class="fi" value="5" min="0" step="1" style="width:45%"/>
             </div>
           </div>
-          <div class="setting-row"><span>Channel subscriber only</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
-          <div class="setting-row"><span>based on chat presence before the drop</span><div class="sw" onclick="this.classList.toggle('on')"></div></div>
         </div>
       </div>
     </div>

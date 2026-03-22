@@ -375,6 +375,9 @@ body {
 .trig-ico.or { background: var(--or-s); color: var(--or); }
 .trig-ico.ac { background: var(--ac-s2); color: var(--ac); }
 .trig-ico.pk { background: rgba(236,72,153,0.12); color: var(--pk); }
+.trig-ico.gn { background: var(--gn-s); color: var(--gn); }
+.trig-ico.cy { background: var(--cy-s); color: var(--cy); }
+.trig-ico.bl { background: rgba(59,130,246,0.12); color: #3b82f6; }
 .trig-info { flex: 1; min-width: 0; }
 .trig-n { font-size: 13px; font-weight: 600; color: var(--t0); }
 .trig-d { font-size: 11px; color: var(--t3); margin-top: 1px; }

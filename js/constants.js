@@ -49,14 +49,14 @@ export const USERS = ['xDreamer', 'NaVi_fan228', 'pro100_gamer', 'steelskin99', 
 export const TRIGGERS = [
   // from "light" → "heavy" (viewer drop value ranges)
   { n: 'kill', ico: 'target', cls: 'kill', min: 2, max: 8 },
-  { n: 'double kill', ico: 'flame', cls: 'kill', min: 4, max: 15 },
+  { n: 'double kill', ico: 'crosshair', cls: 'kill', min: 4, max: 15 },
   { n: 'Triple kill', ico: 'skull', cls: 'kill', min: 7, max: 25 },
   { n: 'Quadra kill', ico: 'swords', cls: 'kill', min: 12, max: 40 },
   { n: 'ACE', ico: 'crown', cls: 'kill', min: 20, max: 60 },
   { n: 'round win', ico: 'flag', cls: 'win', min: 25, max: 70 },
-  { n: 'bomb planted', ico: 'rocket', cls: 'bomb', min: 30, max: 90 },
+  { n: 'bomb planted', ico: 'bomb', cls: 'bomb', min: 30, max: 90 },
   { n: 'Bomb Defused', ico: 'shield-check', cls: 'bomb', min: 35, max: 100 },
-  { n: 'Bomb Defused (last sec)', ico: 'timer', cls: 'bomb', min: 45, max: 130 },
+  { n: 'MVP', ico: 'award', cls: 'bomb', min: 45, max: 130 },
   { n: 'game win', ico: 'trophy', cls: 'win', min: 60, max: 200 }
 ];
 
