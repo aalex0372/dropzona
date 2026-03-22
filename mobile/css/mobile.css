@@ -153,15 +153,17 @@ body {
 .section-label { font-size: 14px; font-weight: 700; color: var(--t0); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .section-label .cnt, .cd-t .cnt { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; background: var(--ac-s2); color: var(--ac); padding: 2px 8px; border-radius: 6px; }
 .live-section-h {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 12px;
 }
 .live-section-title { font-size: 14px; font-weight: 700; color: var(--t0); }
 .live-section-title .live-count { font-weight: 600; color: var(--ac); font-family: 'JetBrains Mono', monospace; }
 
+.live-section-h .following-wrap { margin-bottom: 0; }
 .following-wrap { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
 .following-label { font-size: 12px; font-weight: 600; color: var(--t4); flex-shrink: 0; }
 .following-chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
@@ -468,14 +470,25 @@ body {
 .fi { width: 100%; padding: 12px 14px; min-height: 44px; background: var(--b2); border: 1px solid var(--br1); border-radius: 10px; color: var(--t0); font-size: 16px; outline: none; -webkit-appearance: none; }
 .fi:focus { border-color: var(--ac); }
 
-/* Compact stream filter dropdown on browse page */
+/* Compact stream filter — secondary to section title */
 #viewerStreamFilter {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 12px;
-  padding-right: 36px; /* keep space for custom chevron from main.css */
-  min-height: 38px;
-  font-size: 13px;
+  width: auto;
+  max-width: min(140px, 40vw);
+  padding: 6px 28px 6px 10px;
+  min-height: 34px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--t3);
+  border-color: var(--br0);
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+}
+#viewerStreamFilter:hover {
+  color: var(--t2);
+  border-color: var(--br1);
+}
+#viewerStreamFilter:focus {
+  border-color: rgba(139, 92, 246, 0.35);
 }
 
 .empty { padding: 32px 16px; text-align: center; }
