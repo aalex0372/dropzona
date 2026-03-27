@@ -53,6 +53,224 @@ function startSim() {
   setSimInterval(interval);
 }
 
+function initWalletTopup() {
+  const modeTitle = document.getElementById('walletModeTitle');
+  const topupView = document.getElementById('walletTopupView');
+  const withdrawView = document.getElementById('walletWithdrawView');
+  const openWithdrawBtn = document.getElementById('walletOpenWithdrawBtn');
+  const backToTopupBtn = document.getElementById('walletBackToTopupBtn');
+  const amountInput = document.getElementById('walletAmountInput');
+  const withdrawAmountInput = document.getElementById('walletWithdrawAmountInput');
+  const converted = document.getElementById('walletAmountConverted');
+  const withdrawConverted = document.getElementById('walletWithdrawConverted');
+  const getsVal = document.getElementById('walletGetsVal');
+  const receiveVal = document.getElementById('walletReceiveVal');
+  const feeVal = document.getElementById('walletFeeVal');
+  const walletAddressInput = document.getElementById('walletAddressInput');
+  const walletAddressNetworkHint = document.getElementById('walletAddressNetworkHint');
+  const cryptoBtns = Array.from(document.querySelectorAll('.wallet-crypto-btn[data-crypto][data-rate]'));
+  const quickBtns = Array.from(document.querySelectorAll('.wallet-quick-btn[data-amount]'));
+  const depositBtn = document.getElementById('walletDepositBtn');
+  const withdrawBtn = document.getElementById('walletWithdrawBtn');
+  const walletTxWrap = document.querySelector('.wallet-tx-table-wrap');
+  const depositModal = document.getElementById('walletDepositModal');
+  const depositModalClose = document.getElementById('walletDepositClose');
+  const depositModalCloseInline = document.getElementById('walletDepositCloseInline');
+  const depositModalCopy = document.getElementById('walletDepositCopyBtn');
+  const depositSetAmountBtn = document.getElementById('walletDepositSetAmountBtn');
+  const depositShareBtn = document.getElementById('walletDepositShareBtn');
+  const depositNetworkLabel = document.getElementById('walletDepositNetworkLabel');
+  const depositNetworkName = document.getElementById('walletDepositNetworkName');
+  const depositCoinMark = document.getElementById('walletDepositCoinMark');
+  const depositWarningText = document.getElementById('walletDepositWarningText');
+  const depositExpected = document.getElementById('walletDepositExpected');
+  const depositExpectedCrypto = document.getElementById('walletDepositExpectedCrypto');
+  const depositAddress = document.getElementById('walletDepositAddress');
+
+  if (!amountInput || !getsVal || !cryptoBtns.length) return;
+
+  const formatCoinAmount = (v) => (v >= 1 ? v.toFixed(2) : v.toFixed(7));
+  const formatUsd = (v) => `$${v.toFixed(2)}`;
+
+  const getSelectedCryptoBtn = () => cryptoBtns.find((btn) => btn.classList.contains('active')) || cryptoBtns[0];
+
+  const setSelectedCryptoBtn = (targetBtn) => {
+    cryptoBtns.forEach((btn) => btn.classList.toggle('active', btn === targetBtn));
+  };
+
+  const switchWalletMode = (mode) => {
+    const isWithdraw = mode === 'withdraw';
+    if (topupView) topupView.style.display = isWithdraw ? 'none' : 'block';
+    if (withdrawView) withdrawView.style.display = isWithdraw ? 'block' : 'none';
+    if (modeTitle) {
+      modeTitle.innerHTML = isWithdraw
+        ? '<i data-lucide="send" class="lc-sm" style="color:var(--ac)"></i> Withdraw'
+        : '<i data-lucide="plus-circle" class="lc-sm" style="color:var(--ac)"></i> Top Up';
+    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  };
+
+  const syncQuickButtons = (amount) => {
+    quickBtns.forEach((btn) => {
+      const val = Number(btn.dataset.amount || 0);
+      const isActive = val === amount;
+      btn.classList.toggle('btn-p', isActive);
+      btn.classList.toggle('btn-g', !isActive);
+    });
+  };
+
+  const openDepositModal = () => {
+    if (!depositModal) return;
+    const selectedBtn = getSelectedCryptoBtn();
+    const crypto = selectedBtn.dataset.crypto || 'TRC-20';
+    const amount = Math.max(0, Number(amountInput?.value || 0));
+    const coinName = crypto === 'ERC-20' ? 'Ethereum' : 'TRON';
+    const coinMark = crypto === 'ERC-20' ? 'E' : 'T';
+    const symbol = 'USDT';
+
+    if (depositNetworkLabel) depositNetworkLabel.textContent = crypto;
+    if (depositNetworkName) depositNetworkName.textContent = coinName;
+    if (depositCoinMark) depositCoinMark.textContent = coinMark;
+    if (depositWarningText) depositWarningText.textContent = `Only send ${crypto} assets to this address. Other assets will be lost forever.`;
+    if (depositExpected) depositExpected.textContent = formatUsd(amount);
+    if (depositExpectedCrypto) depositExpectedCrypto.textContent = `${amount.toFixed(2)} ${symbol}`;
+    if (depositAddress) {
+      depositAddress.textContent = crypto === 'ERC-20'
+        ? '0x4a6b2D3f9A0c4c1E8d72A9f17b3DFe91Aa19Ef'
+        : 'TXf2mV7k8Jp4a1rN6cB9uL3qW5zY2sDa9K2';
+    }
+    depositModal.style.display = 'flex';
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  };
+
+  const closeDepositModal = () => {
+    if (!depositModal) return;
+    depositModal.style.display = 'none';
+  };
+
+  const updateValues = () => {
+    const selectedBtn = getSelectedCryptoBtn();
+    const crypto = selectedBtn.dataset.crypto || 'BTC';
+    const rate = Number(selectedBtn.dataset.rate || 1);
+    const topupAmount = Math.max(0, Number(amountInput?.value || 0));
+    const withdrawAmount = Math.max(0, Number(withdrawAmountInput?.value || 0));
+    const topupCoinAmount = rate > 0 ? (topupAmount / rate) : 0;
+    const withdrawCoinAmount = rate > 0 ? (withdrawAmount / rate) : 0;
+    const topupNetAmount = topupAmount * 0.9827;
+    const withdrawNetAmount = withdrawAmount * 0.9827;
+    const withdrawFeeAmount = Math.max(0, withdrawAmount - withdrawNetAmount);
+
+    if (converted) converted.textContent = `~ ${crypto} ${formatCoinAmount(topupCoinAmount)}`;
+    if (withdrawConverted) withdrawConverted.textContent = `~ ${crypto} ${formatCoinAmount(withdrawCoinAmount)}`;
+    if (getsVal) getsVal.textContent = formatUsd(topupNetAmount);
+    if (receiveVal) receiveVal.textContent = formatUsd(withdrawNetAmount);
+    if (feeVal) feeVal.textContent = formatUsd(withdrawFeeAmount);
+    if (walletAddressNetworkHint) walletAddressNetworkHint.textContent = crypto;
+    syncQuickButtons(topupAmount);
+  };
+
+  cryptoBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      setSelectedCryptoBtn(btn);
+      updateValues();
+    });
+  });
+
+  amountInput?.addEventListener('input', updateValues);
+  withdrawAmountInput?.addEventListener('input', updateValues);
+  quickBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const amount = Number(btn.dataset.amount || 100);
+      if (amountInput) amountInput.value = String(amount);
+      updateValues();
+    });
+  });
+
+  const flashAction = (btn, doneText) => {
+    if (!btn) return;
+    const original = btn.innerHTML;
+    btn.innerHTML = `<i data-lucide="check" class="lc-sm"></i> ${doneText}`;
+    btn.disabled = true;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    window.setTimeout(() => {
+      btn.innerHTML = original;
+      btn.disabled = false;
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }, 1400);
+  };
+
+  depositBtn?.addEventListener('click', openDepositModal);
+  openWithdrawBtn?.addEventListener('click', () => switchWalletMode('withdraw'));
+  backToTopupBtn?.addEventListener('click', () => switchWalletMode('topup'));
+  withdrawBtn?.addEventListener('click', () => {
+    const walletAddress = (walletAddressInput?.value || '').trim();
+    if (!walletAddress) {
+      walletAddressInput?.focus();
+      walletAddressInput?.classList.add('wallet-addr-input--error');
+      window.setTimeout(() => walletAddressInput?.classList.remove('wallet-addr-input--error'), 1200);
+      return;
+    }
+    flashAction(withdrawBtn, 'Withdrawal Started');
+  });
+  depositModalClose?.addEventListener('click', closeDepositModal);
+  depositModalCloseInline?.addEventListener('click', closeDepositModal);
+  depositModalCopy?.addEventListener('click', async () => {
+    const addressText = (depositAddress?.textContent || '').trim();
+    if (!addressText) return;
+    try {
+      await navigator.clipboard.writeText(addressText);
+      flashAction(depositModalCopy, 'Copied');
+    } catch {
+      flashAction(depositModalCopy, 'Copy Failed');
+    }
+  });
+  depositSetAmountBtn?.addEventListener('click', () => {
+    closeDepositModal();
+    amountInput?.focus();
+  });
+  depositShareBtn?.addEventListener('click', async () => {
+    const text = `Deposit ${depositExpectedCrypto?.textContent || ''} to ${depositAddress?.textContent || ''}`;
+    try {
+      if (navigator.share) await navigator.share({ text });
+      else await navigator.clipboard.writeText(text);
+      flashAction(depositShareBtn, 'Shared');
+    } catch {
+      flashAction(depositShareBtn, 'Cancelled');
+    }
+  });
+  depositModal?.addEventListener('click', (e) => {
+    if (e.target === depositModal) closeDepositModal();
+  });
+  walletTxWrap?.addEventListener('click', async (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
+    const copyBtn = target.closest('.wallet-hash-copy');
+    if (!copyBtn) return;
+    const hash = copyBtn.getAttribute('data-hash') || '';
+    if (!hash) return;
+    try {
+      await navigator.clipboard.writeText(hash);
+      const prev = copyBtn.textContent;
+      copyBtn.textContent = 'Copied';
+      window.setTimeout(() => { copyBtn.textContent = prev || 'Copy'; }, 900);
+    } catch {
+      const prev = copyBtn.textContent;
+      copyBtn.textContent = 'Failed';
+      window.setTimeout(() => { copyBtn.textContent = prev || 'Copy'; }, 900);
+    }
+  });
+
+  document.addEventListener('dropzona:page-change', (e) => {
+    if (e?.detail?.pageId === 's-wallet') {
+      switchWalletMode('topup');
+      closeDepositModal();
+    }
+  });
+
+  switchWalletMode('topup');
+  updateValues();
+}
+
 // Expose for onclick in HTML
 window.go = go;
 window.setRole = setRole;
@@ -152,6 +370,7 @@ function init() {
   buildStreams();
   buildFollowing();
   buildFollowingsPage();
+  initWalletTopup();
 
   go('browse');
 

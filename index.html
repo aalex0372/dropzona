@@ -71,6 +71,7 @@
           <div class="ni act" data-p="s-dash"><span class="ico"><i data-lucide="layout-dashboard" class="lc-sm"></i></span>Dashboard</div>
           <div class="ni" data-p="s-triggers"><span class="ico"><i data-lucide="crosshair" class="lc-sm"></i></span>Triggers</div>
           <div class="ni" data-p="s-hist"><span class="ico"><i data-lucide="scroll-text" class="lc-sm"></i></span>History</div>
+          <div class="ni" data-p="s-wallet"><span class="ico"><i data-lucide="wallet" class="lc-sm"></i></span>Wallet</div>
           <div class="ni" data-p="s-health"><span class="ico"><i data-lucide="heart-pulse" class="lc-sm"></i></span>Health</div>
         </div>
       </div>
@@ -499,6 +500,7 @@
         <div class="cd-h"><div class="cd-t"><i data-lucide="zap" class="lc-sm" style="color:var(--ac)"></i> Quick Actions</div></div>
         <div class="s-dash-quick-links">
           <button type="button" class="btn btn-g" onclick="go('s-triggers')"><i data-lucide="crosshair" class="lc-sm"></i> Triggers</button>
+          <button type="button" class="btn btn-g" onclick="go('s-wallet')"><i data-lucide="wallet" class="lc-sm"></i> Wallet</button>
           <button type="button" class="btn btn-g" onclick="go('s-hist')"><i data-lucide="scroll-text" class="lc-sm"></i> History</button>
           <button type="button" class="btn btn-g" onclick="go('s-health')"><i data-lucide="heart-pulse" class="lc-sm"></i> Health</button>
           <button type="button" class="btn btn-g" onclick="go('s-settings')"><i data-lucide="sliders-horizontal" class="lc-sm"></i> Settings</button>
@@ -517,6 +519,153 @@
           <div class="trig-r"><div class="trig-ico" style="background:var(--cy-s);color:var(--cy)"><i data-lucide="bomb" class="lc"></i></div><div class="trig-info"><div class="trig-n">bomb planted</div></div><div class="trig-rng">$30–90</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
           <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="shield-check" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused</div></div><div class="trig-rng">$35–100</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
           <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="award" class="lc"></i></div><div class="trig-info"><div class="trig-n">MVP</div></div><div class="trig-rng">$45–130</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- STREAMER WALLET -->
+<div class="page" id="p-s-wallet">
+  <div class="stats stats-4 mb">
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$1,842.50</div><div class="sc-l">Current Balance</div><div class="sc-d up">↑ +$214.30 this week</div></div>
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="arrow-down-circle" class="lc"></i></div><div class="sc-v">$3,980</div><div class="sc-l">Top Ups (30d)</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="arrow-up-circle" class="lc"></i></div><div class="sc-v">$2,410</div><div class="sc-l">Withdrawn (30d)</div></div>
+    <div class="sc"><div class="sc-ico cy"><i data-lucide="clock-3" class="lc"></i></div><div class="sc-v">$320</div><div class="sc-l">Pending Payouts</div></div>
+  </div>
+
+  <div class="mb">
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t" id="walletModeTitle"><i data-lucide="plus-circle" class="lc-sm" style="color:var(--ac)"></i> Top Up</div></div>
+      <div class="cd-p">
+        <div class="fg">
+          <label class="fl">Choose crypto</label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button type="button" class="game-chip active wallet-crypto-btn" data-crypto="TRC-20" data-rate="1">
+              <span class="game-chip-icon" style="display:flex;align-items:center;justify-content:center;background:var(--b3)">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ef1f5a'/%3E%3Cpath d='M20 24h40l20 18-30 36-30-54Zm8 7 23 42 21-25-16-14-28-3Zm6 4 20 2 9 8-13 16-16-26Z' fill='none' stroke='%23fff' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E" alt="TRON TRC-20"/>
+              </span>
+              <span>TRC-20</span>
+            </button>
+            <button type="button" class="game-chip wallet-crypto-btn" data-crypto="ERC-20" data-rate="1">
+              <span class="game-chip-icon" style="display:flex;align-items:center;justify-content:center;background:var(--b3)">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 417'%3E%3Cpath fill='%23627EEA' d='M127.9 0 124.8 10.7v272.7l3.1 3.1 127.9-75.6z'/%3E%3Cpath fill='%238CA2F8' d='M127.9 0 0 210.9l127.9 75.6V154.2z'/%3E%3Cpath fill='%23627EEA' d='m127.9 310.8-1.7 2v97.1l1.7 4.9L256 234.7z'/%3E%3Cpath fill='%238CA2F8' d='M127.9 414.8V310.8L0 234.7z'/%3E%3Cpath fill='%23454A75' d='M127.9 286.5 256 210.9 127.9 154.2z'/%3E%3Cpath fill='%235F6FB2' d='m0 210.9 127.9 75.6V154.2z'/%3E%3C/svg%3E" alt="ERC-20"/>
+              </span>
+              <span>ERC-20</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="walletTopupView">
+          <div class="fg">
+            <label class="fl">Enter your amount</label>
+            <input id="walletAmountInput" class="fi" type="number" min="10" step="1" value="100"/>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+            <button type="button" class="btn btn-g wallet-quick-btn" data-amount="20">$20</button>
+            <button type="button" class="btn btn-g wallet-quick-btn" data-amount="40">$40</button>
+            <button type="button" class="btn btn-g wallet-quick-btn" data-amount="80">$80</button>
+            <button type="button" class="btn btn-p wallet-quick-btn" data-amount="100">$100</button>
+            <button type="button" class="btn btn-g wallet-quick-btn" data-amount="150">$150</button>
+            <button type="button" class="btn btn-g wallet-quick-btn" data-amount="200">$200</button>
+            <button type="button" class="btn btn-g wallet-quick-btn" data-amount="250">$250</button>
+            <button type="button" class="btn btn-g wallet-quick-btn" data-amount="300">$300</button>
+          </div>
+
+          <div class="sc" style="padding:16px;margin-bottom:14px;height:auto;min-height:0">
+            <div class="sc-l" style="margin-top:0">Market balance gets</div>
+            <div class="sc-v" id="walletGetsVal" style="font-size:36px;margin-top:6px">$98.27</div>
+          </div>
+
+          <div class="g2" style="gap:10px">
+            <button id="walletDepositBtn" type="button" class="btn btn-p btn-w"><i data-lucide="qr-code" class="lc-sm"></i> Generate Deposit Invoice</button>
+            <button id="walletOpenWithdrawBtn" type="button" class="btn btn-g btn-w"><i data-lucide="send" class="lc-sm"></i> Withdraw</button>
+          </div>
+        </div>
+
+        <div id="walletWithdrawView" style="display:none">
+          <div class="fg">
+            <label class="fl">Enter withdrawal amount</label>
+            <input id="walletWithdrawAmountInput" class="fi" type="number" min="10" step="1" value="100"/>
+            <div style="margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t2)" id="walletWithdrawConverted">~ TRC-20 100.0000000</div>
+          </div>
+
+          <div class="fg">
+            <label class="fl">Wallet address</label>
+            <input id="walletAddressInput" class="fi wallet-addr-input" type="text" placeholder="Paste your withdrawal wallet address"/>
+            <div class="wallet-hint">Only send to a compatible <span id="walletAddressNetworkHint">TRC-20</span> address.</div>
+          </div>
+
+          <div class="wallet-review" aria-live="polite">
+            <div class="wallet-review-row"><span>Network fee</span><strong id="walletFeeVal">$1.73</strong></div>
+            <div class="wallet-review-row"><span>You will receive</span><strong id="walletReceiveVal">$98.27</strong></div>
+          </div>
+
+          <div class="g2" style="gap:10px">
+            <button id="walletBackToTopupBtn" type="button" class="btn btn-g btn-w"><i data-lucide="arrow-left" class="lc-sm"></i> Back to Top Up</button>
+            <button id="walletWithdrawBtn" type="button" class="btn btn-p btn-w"><i data-lucide="send" class="lc-sm"></i> Submit Withdrawal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cd">
+    <div class="cd-h">
+      <div class="cd-t"><i data-lucide="scroll-text" class="lc-sm" style="color:var(--ac)"></i> Wallet Transactions</div>
+      <div style="display:flex;gap:8px"><button class="btn btn-g" style="font-size:11px"><i data-lucide="filter" class="lc-sm"></i> Filter</button><button class="btn btn-g" style="font-size:11px"><i data-lucide="download" class="lc-sm"></i> Export</button></div>
+    </div>
+    <div class="wallet-tx-table-wrap"><table><thead><tr><th>Time (UTC)</th><th>Direction</th><th>Hash</th><th>Status</th><th>Amount</th><th>Net</th></tr></thead><tbody>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-27 13:18</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">9f2a...c1b7</span><button type="button" class="wallet-hash-copy" data-hash="9f2a7cb10ee44f95c8f32f29b1f3aa77c1b7">Copy</button></td><td><span class="st st-on">Confirmed (31/31)</span></td><td style="color:var(--gn)">+250.0000 USDT</td><td style="color:var(--gn)">+250.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-27 09:04</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">b3aa...89d2</span><button type="button" class="wallet-hash-copy" data-hash="b3aa4df71d4f28f1783eafc40b807f3f89d2">Copy</button></td><td><span class="st st-wait">Broadcasting</span></td><td style="color:var(--or)">-320.0000 USDT</td><td style="color:var(--or)">-321.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-26 22:11</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0x7d2e...14ff</span><button type="button" class="wallet-hash-copy" data-hash="0x7d2e18f0a99278b4fbb11d47cc2e7e9214ff">Copy</button></td><td><span class="st st-on">Confirmed (16/16)</span></td><td style="color:var(--gn)">+600.0000 USDC</td><td style="color:var(--gn)">+600.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-26 17:39</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0x22be...ec61</span><button type="button" class="wallet-hash-copy" data-hash="0x22be64d5a7ec72bc93490e81aa0b39c9ec61">Copy</button></td><td><span class="st st-on">Completed</span></td><td style="color:var(--or)">-210.0000 USDT</td><td style="color:var(--or)">-212.8000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-25 20:53</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">f114...a7ce</span><button type="button" class="wallet-hash-copy" data-hash="f11408eac9b4fd1b13a66e7dd9832433a7ce">Copy</button></td><td><span class="st st-on">Confirmed (28/28)</span></td><td style="color:var(--gn)">+180.0000 USDT</td><td style="color:var(--gn)">+180.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-25 11:18</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">6ce1...5d91</span><button type="button" class="wallet-hash-copy" data-hash="6ce188210efa45a31ac2149b5ee446805d91">Copy</button></td><td><span class="st st-wait">Pending Review</span></td><td style="color:var(--or)">-95.0000 USDT</td><td style="color:var(--or)">-96.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-24 18:43</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0xc9d4...7a3e</span><button type="button" class="wallet-hash-copy" data-hash="0xc9d4ac8f2b106ce7112c3ec9f1f58ee07a3e">Copy</button></td><td><span class="st st-on">Confirmed (20/20)</span></td><td style="color:var(--gn)">+260.0000 USDC</td><td style="color:var(--gn)">+260.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-24 12:04</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">ad93...0ee4</span><button type="button" class="wallet-hash-copy" data-hash="ad937f20b41f6af0e143ca34d5f951aa0ee4">Copy</button></td><td><span class="st st-off">Rejected</span></td><td style="color:var(--or)">-0.00620 BTC</td><td style="color:var(--or)">0.00000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-23 16:27</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">3a0b...30c6</span><button type="button" class="wallet-hash-copy" data-hash="3a0b02d8617ed26ba9140e8c5c39ab2130c6">Copy</button></td><td><span class="st st-on">Confirmed (24/24)</span></td><td style="color:var(--gn)">+340.0000 USDT</td><td style="color:var(--gn)">+340.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-22 10:12</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">41d0...b88f</span><button type="button" class="wallet-hash-copy" data-hash="41d0f7bba8ce129a5de9bf1c44e9aeb8b88f">Copy</button></td><td><span class="st st-wait">Queued</span></td><td style="color:var(--or)">-88.0000 USDT</td><td style="color:var(--or)">-89.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-21 19:55</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0xe11f...d2c0</span><button type="button" class="wallet-hash-copy" data-hash="0xe11f3acd92a4b175ef918da64e2a017fd2c0">Copy</button></td><td><span class="st st-on">Confirmed (18/18)</span></td><td style="color:var(--gn)">+500.0000 USDC</td><td style="color:var(--gn)">+500.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-20 15:21</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">fd11...ca73</span><button type="button" class="wallet-hash-copy" data-hash="fd1155eb0c33ff8d4a7b20cafe0f90e8ca73">Copy</button></td><td><span class="st st-on">Completed</span></td><td style="color:var(--or)">-0.01280 BTC</td><td style="color:var(--or)">-0.01295</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-20 09:33</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">95af...3bf8</span><button type="button" class="wallet-hash-copy" data-hash="95af4ee36b1f8ca3d7b9f5d57eb42ce23bf8">Copy</button></td><td><span class="st st-on">Confirmed (30/30)</span></td><td style="color:var(--gn)">+750.0000 USDT</td><td style="color:var(--gn)">+750.0000</td></tr>
+      <tr><td style="font-family:'JetBrains Mono';font-size:10px;color:var(--t4)">2026-03-19 13:57</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0x6c28...f1b9</span><button type="button" class="wallet-hash-copy" data-hash="0x6c2837bfce9934bb44d20fc39ba8f020f1b9">Copy</button></td><td><span class="st st-on">Completed</span></td><td style="color:var(--or)">-310.0000 USDT</td><td style="color:var(--or)">-312.1000</td></tr>
+    </tbody></table></div>
+  </div>
+
+  <div class="wallet-modal-backdrop" id="walletDepositModal" style="display:none">
+    <div class="wallet-modal-card" role="dialog" aria-modal="true" aria-labelledby="walletDepositTitle">
+      <div class="wallet-modal-warning">
+        <i data-lucide="info" class="lc-sm"></i>
+        <span id="walletDepositWarningText">Only send TRC-20 assets to this address. Other assets will be lost forever.</span>
+      </div>
+      <div class="wallet-modal-body">
+        <h3 id="walletDepositTitle" class="wallet-modal-title">Deposit invoice</h3>
+        <button type="button" class="btn btn-g wallet-modal-close" id="walletDepositClose" aria-label="Close deposit modal">×</button>
+        <div class="wallet-coin-row">
+          <span class="wallet-coin-mark" id="walletDepositCoinMark">T</span>
+          <span class="wallet-coin-ticker" id="walletDepositNetworkLabel">TRC-20</span>
+          <span class="wallet-coin-name" id="walletDepositNetworkName">TRON</span>
+        </div>
+
+        <div class="wallet-qr-card">
+          <div class="wallet-qr-box" aria-hidden="true">
+            <i data-lucide="qr-code" class="lc"></i>
+          </div>
+          <div class="wallet-deposit-address" id="walletDepositAddress">TXf2mV...dropzona...a9K2</div>
+        </div>
+
+        <div class="wallet-amount-line">
+          <strong id="walletDepositExpectedCrypto">100 USDT</strong>
+          <span>≈</span>
+          <strong id="walletDepositExpected">$100.00</strong>
+          <button type="button" class="wallet-amount-clear" id="walletDepositCloseInline" aria-label="Close">×</button>
+        </div>
+
+        <div class="wallet-modal-actions">
+          <button type="button" class="wallet-modal-action" id="walletDepositCopyBtn"><i data-lucide="copy" class="lc"></i><span>Copy</span></button>
+          <button type="button" class="wallet-modal-action" id="walletDepositSetAmountBtn"><i data-lucide="arrow-down" class="lc"></i><span>Set Amount</span></button>
+          <button type="button" class="wallet-modal-action" id="walletDepositShareBtn"><i data-lucide="share-2" class="lc"></i><span>Share</span></button>
         </div>
       </div>
     </div>

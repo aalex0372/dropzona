@@ -11,6 +11,7 @@ import { PAGE_META } from './constants.js';
  */
 export function go(pageId) {
   setCurrentPageId(pageId);
+  document.dispatchEvent(new window.CustomEvent('dropzona:page-change', { detail: { pageId } }));
   document.querySelectorAll('.page').forEach((x) => x.classList.remove('act'));
   const pageEl = document.getElementById('p-' + pageId);
   if (pageEl) pageEl.classList.add('act');
