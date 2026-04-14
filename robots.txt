@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /js/
+Disallow: /css/
+Disallow: /mobile/
 
 Sitemap: https://dropzona.gg/sitemap.xml
