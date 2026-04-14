@@ -275,7 +275,7 @@ textarea.form-input{min-height:100px;line-height:1.5}
       <span class="nav-tag">BETA</span>
     </a>
     <div class="nav-right">
-      <a href="index.html" class="nav-back"><i data-lucide="arrow-left"></i> Back to app</a>
+      <a href="landing.html" class="nav-back" id="navBack"><i data-lucide="arrow-left"></i> Back to app</a>
     </div>
   </div>
 </nav>
@@ -381,11 +381,17 @@ textarea.form-input{min-height:100px;line-height:1.5}
 
 <!-- FOOTER -->
 <div class="foot">
-  <a href="index.html">← Back to app</a> &nbsp;·&nbsp; © 2026 DROPZONE · Not affiliated with Valve
+  <a href="landing.html" id="footBack">← Back to app</a> &nbsp;·&nbsp; © 2026 DROPZONE · Not affiliated with Valve
 </div>
 
 <script>
 lucide.createIcons();
+
+// Auth-aware back links
+if(localStorage.getItem('dropzona_auth')){
+  var nb=document.getElementById('navBack');if(nb)nb.href='index.html';
+  var fb=document.getElementById('footBack');if(fb)fb.href='index.html';
+}
 
 // Nav scroll
 const nav=document.getElementById('nav');

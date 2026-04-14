@@ -1,16 +1,27 @@
 /**
- * DROPZONE — Router and role switcher.
+ * DROPZONE — Router (hash-based) and role switcher.
  */
 
-import { setCurrentPageId, setRole as setStateRole } from './state.js';
+import { setCurrentPageId, setRole as setStateRole, getRole } from './state.js';
 import { PAGE_META } from './constants.js';
+import { refreshIcons } from './utils.js';
+
+/** Suppress hash→go loop while we're updating the hash ourselves */
+let _suppressHashChange = false;
 
 /**
- * Navigate to a page by id.
+ * Navigate to a page by id. Updates URL hash for deep linking.
  * @param {string} pageId - Page id (e.g. 'browse', 's-dash')
  */
 export function go(pageId) {
+  if (!PAGE_META[pageId]) return; // ignore unknown pages
   setCurrentPageId(pageId);
+
+  // Update URL hash (without triggering hashchange→go loop)
+  _suppressHashChange = true;
+  window.location.hash = pageId;
+  _suppressHashChange = false;
+
   document.dispatchEvent(new window.CustomEvent('dropzona:page-change', { detail: { pageId } }));
   document.querySelectorAll('.page').forEach((x) => x.classList.remove('act'));
   const pageEl = document.getElementById('p-' + pageId);
@@ -23,7 +34,7 @@ export function go(pageId) {
   const pgS = document.getElementById('pgS');
   if (meta && pgT) pgT.textContent = meta[0];
   if (meta && pgS) pgS.textContent = meta[1];
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+  refreshIcons();
 }
 
 /**
@@ -32,6 +43,7 @@ export function go(pageId) {
  */
 export function setRole(r) {
   setStateRole(r);
+  localStorage.setItem('dropzona_role', r);
   const roleSl = document.getElementById('roleSl');
   if (roleSl) roleSl.classList.toggle('str', r === 's');
   const rBtnV = document.getElementById('rBtnV');
@@ -55,5 +67,27 @@ export function setRole(r) {
     }
   }
   go(r === 'v' ? 'browse' : 's-dash');
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+/**
+ * Restore page from URL hash on load, or navigate to default.
+ * Call once after DOM and UI are ready.
+ */
+export function restoreFromHash() {
+  const hash = window.location.hash.replace('#', '');
+  const role = getRole();
+  const defaultPage = role === 's' ? 's-dash' : 'browse';
+
+  if (hash && PAGE_META[hash]) {
+    go(hash);
+  } else {
+    go(defaultPage);
+  }
+
+  // Listen for browser back/forward
+  window.addEventListener('hashchange', () => {
+    if (_suppressHashChange) return;
+    const h = window.location.hash.replace('#', '');
+    if (h && PAGE_META[h]) go(h);
+  });
 }

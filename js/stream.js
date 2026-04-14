@@ -3,7 +3,7 @@
  */
 
 import { STREAMS, TRIGGERS, FOLLOWING_NAMES, USERS, SKINS, RECENT_DROPS_BY_STREAM } from './constants.js';
-import { rnd } from './utils.js';
+import { rnd, esc, refreshIcons } from './utils.js';
 import { go } from './router.js';
 import { getRole } from './state.js';
 
@@ -76,10 +76,10 @@ function wireStreamActions(s) {
     try {
       await window.navigator.clipboard.writeText(profileUrl);
       copyAction.innerHTML = '<i data-lucide="check" class="lc-sm"></i> Copied';
-      if (typeof lucide !== 'undefined') lucide.createIcons();
+      refreshIcons();
       setTimeout(() => {
         copyAction.innerHTML = '<i data-lucide="copy" class="lc-sm"></i> Copy link';
-        if (typeof lucide !== 'undefined') lucide.createIcons();
+        refreshIcons();
       }, 1200);
     } catch {
       window.prompt('Copy streamer card link:', profileUrl);
@@ -127,18 +127,17 @@ function wireStreamActions(s) {
 }
 
 /**
- * Build the ticker strip (fake “who won” scroll).
+ * Build the ticker strip (fake "who won" scroll).
  */
 export function buildTicker() {
   const items = [];
   for (let i = 0; i < 10; i++) {
     const skin = rnd(SKINS);
-    items.push(`<span class="ticker-i"><b>${rnd(USERS)}</b> won <span class="sk-r sk-${skin.rarity}">${skin.name}</span></span><span class="ticker-sep">·</span>`);
+    items.push(`<span class="ticker-i"><b>${esc(rnd(USERS))}</b> won <span class="sk-r sk-${esc(skin.rarity)}">${esc(skin.name)}</span></span><span class="ticker-sep">·</span>`);
   }
   const el = document.getElementById('tickerContent');
   if (el) {
     el.innerHTML = items.join('') + items.join('');
-    // Force animation to start after content is in DOM (fixes no-scroll on reload)
     el.style.animation = 'none';
     el.offsetHeight; // reflow
     el.style.animation = '';
@@ -161,7 +160,6 @@ function applyViewerStreamFilter(streams) {
 
   switch (mode) {
     case 'most-viewers':
-      // Most viewers first
       list.sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
       break;
     case 'fewest-viewers':
@@ -171,19 +169,16 @@ function applyViewerStreamFilter(streams) {
       list.sort((a, b) => (b.totalDrops ?? 0) - (a.totalDrops ?? 0));
       break;
     case 'following-only':
-      // Show only streamers that user follows (still only live streams).
       return list
         .filter((s) => FOLLOWING_NAMES.includes(s.name))
         .sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
     default:
-      // Fallback: Most viewers.
       list.sort((a, b) => (b.viewers ?? 0) - (a.viewers ?? 0));
   }
 
   return list;
 }
 
-/** Offline streams (for carousel “back” / right side) */
 const FOLLOWING_CHIPS_MAX = 7;
 
 /** Build following chips: up to 7 streamers, then "View all" if user follows more. */
@@ -199,7 +194,7 @@ export function buildFollowing() {
     const isLive = liveNames.has(name);
     const id = stream ? stream.id : null;
     const dataId = id ? ` data-stream-id="${id}"` : '';
-    return `<span class="following-chip ${isLive ? 'live' : ''}"${dataId}>${name} ${isLive ? '<span class="chip-dot"></span><span class="chip-status">LIVE</span>' : '<span class="chip-status">Offline</span>'}</span>`;
+    return `<span class="following-chip ${isLive ? 'live' : ''}"${dataId}>${esc(name)} ${isLive ? '<span class="chip-dot"></span><span class="chip-status">LIVE</span>' : '<span class="chip-status">Offline</span>'}</span>`;
   });
   if (hasMore) {
     chips.push(`<span class="following-chip following-chip--viewall" onclick="go('followings')">View all</span>`);
@@ -237,9 +232,9 @@ export function buildFollowingsPage() {
       const followNote = isSearch && !isFollowing ? '<div class="fl-note">Not followed yet</div>' : '';
       return `
       <div class="fl-row" data-stream-id="${stream.id}">
-        <div class="str-ava">${stream.ava}</div>
+        <div class="str-ava">${esc(stream.ava)}</div>
         <div class="fl-info">
-          <div class="str-name">${stream.name}</div>
+          <div class="str-name">${esc(stream.name)}</div>
           ${followNote}
         </div>
         <span class="fl-status ${isLive ? 'on' : 'off'}">${isLive ? 'LIVE' : 'Offline'}</span>
@@ -257,11 +252,11 @@ export function buildFollowingsPage() {
   }
   render();
 
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+  refreshIcons();
 }
 
 /**
- * Build one stream card HTML (live only). Replaces trigger icons with Follow/Following.
+ * Build one stream card HTML (live only).
  */
 function streamCardHtml(s) {
   const isFollowing = FOLLOWING_NAMES.includes(s.name);
@@ -273,8 +268,8 @@ function streamCardHtml(s) {
       <div class="str-pool"><i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins · $${s.poolVal}</div>
     </div>
     <div class="str-meta">
-      <div class="str-ava">${s.ava}</div>
-      <div style="flex:1"><div class="str-name">${s.name}</div></div>
+      <div class="str-ava">${esc(s.ava)}</div>
+      <div style="flex:1"><div class="str-name">${esc(s.name)}</div></div>
       <button type="button" class="${followClass}" data-stream-id="${s.id}" data-following="${isFollowing}" onclick="event.stopPropagation()">${followLabel}</button>
     </div>
   </div>`;
@@ -300,7 +295,7 @@ export function buildStreams() {
   const filteredStreams = applyViewerStreamFilter(liveStreams);
   const cardsHtml = filteredStreams.map((s) => streamCardHtml(s)).join('');
   el.innerHTML = cardsHtml + cardsHtml;
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+  refreshIcons();
   el.querySelectorAll('.str-c').forEach((card) => {
     card.addEventListener('click', () => openStream(parseInt(card.dataset.streamId, 10)));
   });
@@ -323,7 +318,6 @@ export function buildStreams() {
     scrollEl.dataset.viewerScrollBound = '1';
   }
 
-  // Avoid horizontal "shake" when user changes filters by preserving position.
   window.requestAnimationFrame(() => {
     scrollEl.scrollLeft = preserveScroll ? prevScrollLeft : 0;
     scrollEl.dataset.viewerScrollInitialized = '1';
@@ -334,7 +328,6 @@ export function buildStreams() {
 
 /**
  * Open stream detail and navigate to stream page.
- * Viewer-focused profile: hook (name, live, game, Twitch, pool) → trust stats → triggers with ranges → recent drops.
  * @param {number} id - Stream id
  */
 export function openStream(id) {
@@ -386,7 +379,7 @@ export function openStream(id) {
   }
   wireStreamActions(s);
 
-  if (sdPool) sdPool.innerHTML = `<i data-lucide="gift" class="lc-sm"></i> ${s.pool} skins in pool · $${s.poolVal} total value`;
+  if (sdPool) sdPool.innerHTML = `<i data-lucide="gift" class="lc-sm"></i> ${esc(String(s.pool))} skins in pool · $${esc(String(s.poolVal))} total value`;
 
   const totalDrops = s.totalDrops ?? 0;
   const totalVal = s.totalDroppedVal ?? 0;
@@ -402,7 +395,7 @@ export function openStream(id) {
     sdStreamerTriggers.innerHTML = s.triggers.map((t) => {
       const tr = TRIGGERS.find((x) => x.ico === t);
       const range = tr && tr.min != null && tr.max != null ? ` → $${tr.min}–$${tr.max}` : '';
-      return `<div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="${t}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${tr ? tr.n : t}${range}</div></div><span class="st st-on">Active</span></div>`;
+      return `<div class="trig-r"><div class="trig-ico" style="background:var(--rd-s);color:var(--rd)"><i data-lucide="${esc(t)}" class="lc"></i></div><div class="trig-info"><div class="trig-n">${esc(tr ? tr.n : t)}${range}</div></div><span class="st st-on">Active</span></div>`;
     }).join('');
   }
 
@@ -412,11 +405,11 @@ export function openStream(id) {
       sdRecentDrops.innerHTML = '<div class="sd-recent-empty">No recent drops yet. Drops show here once the streamer sends skins.</div>';
     } else {
       sdRecentDrops.innerHTML = recent.map((d) =>
-        `<div class="sd-recent-item"><div class="sd-recent-skin">${d.skin}</div><div class="sd-recent-meta"><span class="sd-recent-winner">${d.winner}</span> · ${d.time}</div></div>`
+        `<div class="sd-recent-item"><div class="sd-recent-skin">${esc(d.skin)}</div><div class="sd-recent-meta"><span class="sd-recent-winner">${esc(d.winner)}</span> · ${esc(d.time)}</div></div>`
       ).join('');
     }
   }
 
   go('stream');
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+  refreshIcons();
 }

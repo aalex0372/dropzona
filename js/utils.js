@@ -1,5 +1,5 @@
 /**
- * DROPZONE — Pure helpers (random pick, price, parse).
+ * DROPZONE — Pure helpers (random pick, price, parse, sanitize, icons).
  */
 
 /**
@@ -39,4 +39,64 @@ export function parsePriceFromCard(cardEl) {
  */
 export function createEventId() {
   return `sim_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
+}
+
+/* ---- HTML sanitization ---- */
+
+const ESC_MAP = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+
+/**
+ * Escape HTML special characters to prevent XSS.
+ * @param {string} str
+ * @returns {string}
+ */
+export function esc(str) {
+  return String(str).replace(/[&<>"']/g, (ch) => ESC_MAP[ch]);
+}
+
+/**
+ * Wrap raw text in <b> (escaped).
+ * @param {string} raw
+ * @returns {string}
+ */
+export function bold(raw) {
+  return `<b>${esc(raw)}</b>`;
+}
+
+/**
+ * Skin name in highlighted span with optional rarity class (escaped).
+ * @param {string} name
+ * @param {string} [rarity]
+ * @returns {string}
+ */
+export function skinHl(name, rarity) {
+  const cls = rarity ? ` sk-${esc(rarity)}` : '';
+  return `<span class="hl${cls}">${esc(name)}</span>`;
+}
+
+/**
+ * Skin name for viewer "sk" style (escaped).
+ * @param {string} name
+ * @param {string} [rarity]
+ * @returns {string}
+ */
+export function skinSk(name, rarity) {
+  const cls = rarity ? ` sk-${esc(rarity)}` : '';
+  return `<span class="sk${cls}">${esc(name)}</span>`;
+}
+
+/* ---- Debounced Lucide icon refresh ---- */
+
+let _iconRafId = 0;
+
+/**
+ * Schedule a single lucide.createIcons() call on the next animation frame.
+ * Multiple calls within the same frame are coalesced into one.
+ */
+export function refreshIcons() {
+  if (_iconRafId) return;
+  _iconRafId = requestAnimationFrame(() => {
+    _iconRafId = 0;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  });
 }

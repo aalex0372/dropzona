@@ -1,7 +1,7 @@
 import js from '@eslint/js';
 
 export default [
-  { ignores: ['js/app.js'] },
+  { ignores: ['js/app.js', 'mobile/**'] },
   js.configs.recommended,
   {
     files: ['js/**/*.js'],
@@ -16,7 +16,11 @@ export default [
         setTimeout: 'readonly',
         setInterval: 'readonly',
         clearTimeout: 'readonly',
-        clearInterval: 'readonly'
+        clearInterval: 'readonly',
+        navigator: 'readonly',
+        HTMLElement: 'readonly',
+        requestAnimationFrame: 'readonly',
+        localStorage: 'readonly'
       }
     },
     rules: {

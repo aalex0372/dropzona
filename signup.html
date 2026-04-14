@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign up | DROPZONE — Live Skin Drops</title>
+  <meta name="description" content="Create your DROPZONE account. Watch live CS2 streams, participate in drops, and win skins for free."/>
+  <link rel="canonical" href="https://dropzona.gg/signup.html"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Sign up | DROPZONE"/>
+  <meta property="og:description" content="Create your free DROPZONE account and start winning CS2 skins."/>
+  <meta property="og:url" content="https://dropzona.gg/signup.html"/>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800;900&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ac:#8b5cf6;--ac2:#7c3aed;--ac3:#6d28d9;
+  --ac-g:rgba(139,92,246,.25);--ac-s:rgba(139,92,246,.06);--ac-s2:rgba(139,92,246,.12);
+  --cy:#22d3ee;--gn:#34d399;
+  --b0:#06060b;--b1:#0c0c14;--b2:#12121c;--b3:#1a1a28;--bc:#111119;
+  --br0:rgba(255,255,255,.04);--br1:rgba(255,255,255,.07);--br2:rgba(255,255,255,.12);
+  --t0:#f1f5f9;--t1:#cbd5e1;--t2:#94a3b8;--t3:#64748b;--t4:#475569;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--b0);color:var(--t1);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+::selection{background:var(--ac);color:#fff}
+
+#gridCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+.orb{position:fixed;border-radius:50%;filter:blur(120px);pointer-events:none;z-index:0}
+.orb-1{width:600px;height:600px;top:-10%;left:-5%;background:rgba(139,92,246,.08);animation:orbFloat 20s ease-in-out infinite}
+.orb-2{width:500px;height:500px;bottom:-15%;right:-10%;background:rgba(34,211,238,.05);animation:orbFloat 25s ease-in-out infinite reverse}
+.orb-3{width:300px;height:300px;top:40%;left:50%;background:rgba(236,72,153,.04);animation:orbFloat 18s ease-in-out infinite 5s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(30px,-40px) scale(1.05)}50%{transform:translate(-20px,30px) scale(.95)}75%{transform:translate(40px,20px) scale(1.02)}}
+.grain{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.35;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E")}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;transition:all .3s}
+.nav.scrolled{background:rgba(6,6,11,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--br0)}
+.nav-in{max-width:900px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--ac),#a78bfa);border-radius:8px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px var(--ac-g);color:#fff}
+.nav-mark svg{width:16px;height:16px}
+.nav-name{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;letter-spacing:3px;color:var(--t0)}
+.nav-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--ac);background:var(--ac-s2);padding:2px 7px;border-radius:4px}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-link{font-size:13px;font-weight:500;color:var(--t3);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--t0)}
+
+.page{position:relative;z-index:2;flex:1;display:flex;align-items:center;justify-content:center;padding:100px 24px 60px}
+
+.auth-card{
+  width:100%;max-width:420px;
+  background:rgba(17,17,25,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid var(--br1);border-radius:20px;
+  padding:40px 36px;position:relative;overflow:hidden;
+  animation:fadeUp .5s ease both;
+}
+.auth-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,92,246,.3),transparent)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.auth-logo{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.auth-logo-mark{width:36px;height:36px;background:linear-gradient(135deg,var(--ac),#a78bfa);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 24px var(--ac-g);color:#fff}
+.auth-logo-mark svg{width:18px;height:18px}
+.auth-logo-name{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:15px;letter-spacing:3px;color:var(--t0)}
+
+.auth-title{font-family:'Unbounded',cursive;font-size:22px;font-weight:800;color:var(--t0);margin-bottom:6px}
+.auth-sub{font-size:14px;color:var(--t3);margin-bottom:28px}
+
+.social-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.social-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:12px;border-radius:10px;border:1px solid var(--br1);
+  background:rgba(255,255,255,.02);color:var(--t1);font-family:'Outfit',sans-serif;
+  font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;
+}
+.social-btn:hover{border-color:var(--br2);background:rgba(255,255,255,.04);transform:translateY(-1px)}
+.social-btn svg{width:18px;height:18px;flex-shrink:0}
+.social-btn.twitch{border-color:rgba(145,70,255,.25);color:#bf94ff}
+.social-btn.twitch:hover{border-color:rgba(145,70,255,.5);background:rgba(145,70,255,.06)}
+
+.divider{display:flex;align-items:center;gap:16px;margin-bottom:24px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--br1)}
+.divider span{font-size:11px;color:var(--t4);font-weight:500;text-transform:uppercase;letter-spacing:1px}
+
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:11px;font-weight:600;color:var(--t4);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px;font-family:'JetBrains Mono',monospace}
+.form-input{
+  width:100%;padding:12px 16px;
+  background:var(--b2);border:1px solid var(--br1);border-radius:10px;
+  color:var(--t0);font-family:'Outfit',sans-serif;font-size:14px;
+  outline:none;transition:all .25s;
+}
+.form-input::placeholder{color:var(--t4)}
+.form-input:focus{border-color:rgba(139,92,246,.4);box-shadow:0 0 0 3px var(--ac-s),0 0 20px rgba(139,92,246,.06)}
+
+.checkbox-group{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px;margin-top:18px;cursor:pointer}
+.checkbox-group input[type="checkbox"]{
+  width:18px;height:18px;margin-top:1px;flex-shrink:0;
+  accent-color:var(--ac);cursor:pointer;
+}
+.checkbox-label{font-size:14px;color:var(--t1);font-weight:500;cursor:pointer}
+.checkbox-hint{font-size:12px;color:var(--t4);margin-left:28px;margin-bottom:4px}
+
+.btn-submit{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;border:none;border-radius:10px;
+  background:var(--ac);color:#fff;font-family:'Outfit',sans-serif;
+  font-size:14px;font-weight:600;cursor:pointer;transition:all .25s;
+  margin-top:20px;
+}
+.btn-submit:hover{background:var(--ac2);box-shadow:0 0 30px var(--ac-g);transform:translateY(-1px)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-submit svg{width:16px;height:16px}
+
+.auth-footer{text-align:center;margin-top:24px;font-size:13px;color:var(--t3)}
+.auth-footer a{color:var(--ac);text-decoration:none;font-weight:600;transition:color .2s}
+.auth-footer a:hover{color:#c084fc}
+
+.auth-error{background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.2);border-radius:8px;padding:10px 14px;font-size:12px;color:#f87171;margin-bottom:14px;display:none}
+
+.foot{position:relative;z-index:2;padding:20px 32px;text-align:center;font-size:11px;color:var(--t4)}
+.foot a{color:var(--t3);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--t0)}
+
+@media(max-width:480px){
+  .auth-card{padding:32px 24px}
+  .page{padding:80px 16px 40px}
+}
+</style>
+</head>
+<body>
+
+<canvas id="gridCanvas"></canvas>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="grain"></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="landing.html" class="nav-brand">
+      <div class="nav-mark"><i data-lucide="zap"></i></div>
+      <span class="nav-name">DROPZONE</span>
+      <span class="nav-tag">BETA</span>
+    </a>
+    <div class="nav-right">
+      <a href="login.html" class="nav-link">Log in</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="auth-logo-mark"><i data-lucide="zap"></i></div>
+      <span class="auth-logo-name">DROPZONE</span>
+    </div>
+    <div class="auth-title">Create your account</div>
+    <div class="auth-sub">Join thousands of CS2 players winning skins on DROPZONE.</div>
+
+    <div class="social-btns">
+      <button class="social-btn twitch" id="btnTwitch">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg>
+        Sign up with Twitch
+      </button>
+      <button class="social-btn steam" id="btnSteam">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 12-5.373 12-12s-5.373-12-12-12z"/></svg>
+        Sign up with Steam
+      </button>
+      <button class="social-btn google" id="btnGoogle">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Sign up with Google
+      </button>
+    </div>
+
+    <div class="divider"><span>or</span></div>
+
+    <div class="auth-error" id="authError"></div>
+
+    <form id="signupForm">
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input type="text" class="form-input" id="username" placeholder="Pick a username" required autocomplete="username" minlength="3" maxlength="24"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input type="email" class="form-input" id="email" placeholder="you@example.com" required autocomplete="email"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <input type="password" class="form-input" id="password" placeholder="At least 8 characters" required autocomplete="new-password" minlength="8"/>
+      </div>
+
+      <label class="checkbox-group">
+        <input type="checkbox" id="isStreamer"/>
+        <span class="checkbox-label">I'm also a streamer</span>
+      </label>
+      <div class="checkbox-hint">You can always switch to streamer mode later.</div>
+
+      <button type="submit" class="btn-submit"><i data-lucide="user-plus"></i> Create account</button>
+    </form>
+
+    <div class="auth-footer">
+      Already have an account? <a href="login.html">Log in</a>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <a href="landing.html">← Home</a> &nbsp;·&nbsp; © 2026 DROPZONE · Not affiliated with Valve
+</div>
+
+<script>
+lucide.createIcons();
+var nav=document.getElementById('nav');
+window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>30)});
+
+// If already logged in, go to app
+if(localStorage.getItem('dropzona_auth')){
+  location.replace('index.html');
+}
+
+// Pre-check streamer if ?streamer=1
+if(new URLSearchParams(location.search).get('streamer')==='1'){
+  document.getElementById('isStreamer').checked=true;
+}
+
+function doSignup(username, email, isStreamer){
+  var initials=username.slice(0,2).toUpperCase();
+  localStorage.setItem('dropzona_user',JSON.stringify({
+    username:username,
+    email:email,
+    isStreamer:isStreamer,
+    avatarInitials:initials,
+    createdAt:new Date().toISOString()
+  }));
+  localStorage.setItem('dropzona_auth','1');
+  if(isStreamer) localStorage.setItem('dropzona_role','s');
+  location.href='index.html';
+}
+
+// Social signup mocks
+document.getElementById('btnTwitch').addEventListener('click',function(){
+  var streamer=document.getElementById('isStreamer').checked;
+  doSignup('TwitchUser'+Math.floor(Math.random()*9000+1000),'twitch@mock.gg',streamer);
+});
+document.getElementById('btnSteam').addEventListener('click',function(){
+  var streamer=document.getElementById('isStreamer').checked;
+  doSignup('SteamPlayer'+Math.floor(Math.random()*9000+1000),'steam@mock.gg',streamer);
+});
+document.getElementById('btnGoogle').addEventListener('click',function(){
+  var streamer=document.getElementById('isStreamer').checked;
+  doSignup('User'+Math.floor(Math.random()*9000+1000),'user@gmail.com',streamer);
+});
+
+// Form signup
+document.getElementById('signupForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var username=document.getElementById('username').value.trim();
+  var email=document.getElementById('email').value.trim();
+  var password=document.getElementById('password').value;
+  var isStreamer=document.getElementById('isStreamer').checked;
+  var err=document.getElementById('authError');
+
+  if(!username||!email||!password){
+    err.textContent='Please fill in all fields.';
+    err.style.display='block';
+    return;
+  }
+  if(username.length<3){
+    err.textContent='Username must be at least 3 characters.';
+    err.style.display='block';
+    return;
+  }
+  if(password.length<8){
+    err.textContent='Password must be at least 8 characters.';
+    err.style.display='block';
+    return;
+  }
+  err.style.display='none';
+  doSignup(username,email,isStreamer);
+});
+</script>
+</body>
+</html>

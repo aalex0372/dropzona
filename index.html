@@ -10,6 +10,9 @@
       if (isMobile && !/\/mobile\/?/.test(location.pathname) && !location.search.includes('desktop=1')) {
         location.replace(location.origin + '/mobile/' + (location.hash || ''));
       }
+      if (!localStorage.getItem('dropzona_auth')) {
+        location.replace('landing.html');
+      }
     })();
   </script>
   <title>DROPZONE — Live Skin Drops</title>
@@ -85,9 +88,9 @@
     </div>
     <div class="s-fill"></div>
     <div class="s-user">
-      <div class="u-ava">XD</div>
+      <div class="u-ava" id="sidebarAva">XD</div>
       <div>
-        <div class="u-name">xDreamer</div>
+        <div class="u-name" id="sidebarName">xDreamer</div>
         <div class="u-role" id="uRole">Viewer</div>
       </div>
     </div>
@@ -381,8 +384,8 @@
 <!-- PROFILE -->
 <div class="page" id="p-profile">
   <div style="display:flex;align-items:center;gap:20px;margin-bottom:24px">
-    <div style="width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--ac),#c084fc);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;box-shadow:0 0 30px var(--ac-g)">XD</div>
-    <div><div style="font-size:22px;font-weight:800;color:var(--t0)">xDreamer</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t3);margin-top:2px">Member since Jan 12, 2026</div></div>
+    <div style="width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--ac),#c084fc);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;box-shadow:0 0 30px var(--ac-g)" id="profileAva">XD</div>
+    <div><div style="font-size:22px;font-weight:800;color:var(--t0)" id="profileName">xDreamer</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t3);margin-top:2px" id="profileSince">Member since Jan 12, 2026</div></div>
   </div>
   <div class="stats stats-4 mb">
     <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">26</div><div class="sc-l">Drops received</div></div>
@@ -407,6 +410,7 @@
         <div class="menu-i" onclick="go('v-settings')"><i data-lucide="settings" class="lc" style="color:var(--t3)"></i> Settings <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
         <a class="menu-i" href="support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></a>
         <div class="menu-i" onclick="setRole('s')"><i data-lucide="radio" class="lc" style="color:var(--t3)"></i> Start Streaming <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
+        <div class="menu-i" onclick="dropzonaLogout()" style="margin-top:8px;border-top:1px solid var(--br1);padding-top:14px"><i data-lucide="log-out" class="lc" style="color:var(--rd)"></i> <span style="color:var(--t3)">Log out</span> <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
       </div>
     </div>
   </div>

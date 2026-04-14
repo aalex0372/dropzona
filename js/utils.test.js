@@ -1,9 +1,9 @@
 /**
- * DROPZONE — Tests for utils (rnd, rndPrice, createEventId, parsePriceFromCard).
+ * DROPZONE — Tests for utils (rnd, rndPrice, createEventId, parsePriceFromCard, esc, bold, skinHl, skinSk).
  */
 
 import { describe, it, expect } from 'vitest';
-import { rnd, rndPrice, createEventId, parsePriceFromCard } from './utils.js';
+import { rnd, rndPrice, createEventId, parsePriceFromCard, esc, bold, skinHl, skinSk } from './utils.js';
 
 describe('rnd', () => {
   it('returns an element from the array', () => {
@@ -65,5 +65,62 @@ describe('parsePriceFromCard', () => {
       querySelector: (sel) => (sel === '.sk-p' ? { textContent: 'N/A' } : null)
     };
     expect(parsePriceFromCard(el)).toBe(0);
+  });
+});
+
+describe('esc', () => {
+  it('escapes HTML special characters', () => {
+    expect(esc('<script>alert("xss")</script>')).toBe('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;');
+  });
+
+  it('escapes ampersands', () => {
+    expect(esc('a & b')).toBe('a &amp; b');
+  });
+
+  it('escapes single quotes', () => {
+    expect(esc("it's")).toBe('it&#39;s');
+  });
+
+  it('returns same string when no special chars', () => {
+    expect(esc('hello world')).toBe('hello world');
+  });
+
+  it('coerces non-strings', () => {
+    expect(esc(42)).toBe('42');
+    expect(esc(null)).toBe('null');
+  });
+});
+
+describe('bold', () => {
+  it('wraps text in <b> with escaping', () => {
+    expect(bold('AlexPlays')).toBe('<b>AlexPlays</b>');
+  });
+
+  it('escapes HTML in the name', () => {
+    expect(bold('<img src=x>')).toBe('<b>&lt;img src=x&gt;</b>');
+  });
+});
+
+describe('skinHl', () => {
+  it('produces highlighted skin span', () => {
+    expect(skinHl('AK-47 | Redline', 'cl')).toBe('<span class="hl sk-cl">AK-47 | Redline</span>');
+  });
+
+  it('works without rarity', () => {
+    expect(skinHl('AK-47 | Redline')).toBe('<span class="hl">AK-47 | Redline</span>');
+  });
+
+  it('escapes skin name', () => {
+    expect(skinHl('<b>bad</b>', 'cv')).toBe('<span class="hl sk-cv">&lt;b&gt;bad&lt;/b&gt;</span>');
+  });
+});
+
+describe('skinSk', () => {
+  it('produces sk-styled skin span', () => {
+    expect(skinSk('AWP | Asiimov', 'cv')).toBe('<span class="sk sk-cv">AWP | Asiimov</span>');
+  });
+
+  it('works without rarity', () => {
+    expect(skinSk('AWP | Asiimov')).toBe('<span class="sk">AWP | Asiimov</span>');
   });
 });

@@ -3,14 +3,14 @@
  */
 
 import { STREAMS, TRIGGERS, USERS, SKINS } from './constants.js';
-import { go, setRole } from './router.js';
+import { go, setRole, restoreFromHash } from './router.js';
 import { addFeedEvent, addSFeedEvent } from './feed.js';
 import { buildTicker, buildStreams, buildFollowing, buildFollowingsPage, openStream } from './stream.js';
 import { wizNext, wizPrev } from './wizard.js';
 import { sortSkinPool } from './skinPool.js';
 import { runDropCycle } from './dropPipeline.js';
 import { incrementDropCounter, setSimInterval } from './state.js';
-import { createEventId } from './utils.js';
+import { createEventId, bold, skinHl, refreshIcons } from './utils.js';
 
 /**
  * Run one simulated drop (trigger → winner → trade → accept/expire).
@@ -36,7 +36,7 @@ function simulateTrigger() {
       addSFeedEvent(accepted ? 'trade' : 'fail', streamerMsg);
     }
   });
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+  refreshIcons();
 }
 
 /**
@@ -47,7 +47,7 @@ function startSim() {
     if (Math.random() > 0.4) simulateTrigger();
     else {
       const u = USERS[Math.floor(Math.random() * USERS.length)];
-      addFeedEvent('join', `<b>${u}</b> joined · Twitch ✓ · Trade URL ✓`);
+      addFeedEvent('join', `${bold(u)} joined · Twitch ✓ · Trade URL ✓`);
     }
   }, 8000);
   setSimInterval(interval);
@@ -107,7 +107,7 @@ function initWalletTopup() {
         ? '<i data-lucide="send" class="lc-sm" style="color:var(--ac)"></i> Withdraw'
         : '<i data-lucide="plus-circle" class="lc-sm" style="color:var(--ac)"></i> Top Up';
     }
-    if (typeof lucide !== 'undefined') lucide.createIcons();
+    refreshIcons();
   };
 
   const syncQuickButtons = (amount) => {
@@ -140,7 +140,7 @@ function initWalletTopup() {
         : 'TXf2mV7k8Jp4a1rN6cB9uL3qW5zY2sDa9K2';
     }
     depositModal.style.display = 'flex';
-    if (typeof lucide !== 'undefined') lucide.createIcons();
+    refreshIcons();
   };
 
   const closeDepositModal = () => {
@@ -191,11 +191,11 @@ function initWalletTopup() {
     const original = btn.innerHTML;
     btn.innerHTML = `<i data-lucide="check" class="lc-sm"></i> ${doneText}`;
     btn.disabled = true;
-    if (typeof lucide !== 'undefined') lucide.createIcons();
+    refreshIcons();
     window.setTimeout(() => {
       btn.innerHTML = original;
       btn.disabled = false;
-      if (typeof lucide !== 'undefined') lucide.createIcons();
+      refreshIcons();
     }, 1400);
   };
 
@@ -271,6 +271,35 @@ function initWalletTopup() {
   updateValues();
 }
 
+/**
+ * Log out: clear auth state and redirect to landing page.
+ */
+function dropzonaLogout() {
+  localStorage.removeItem('dropzona_auth');
+  window.location.href = 'landing.html';
+}
+
+/**
+ * Hydrate sidebar and profile with stored user data.
+ */
+function hydrateUser() {
+  const stored = JSON.parse(localStorage.getItem('dropzona_user') || 'null');
+  if (!stored) return;
+  const sidebarName = document.getElementById('sidebarName');
+  const sidebarAva = document.getElementById('sidebarAva');
+  const profileName = document.getElementById('profileName');
+  const profileAva = document.getElementById('profileAva');
+  const profileSince = document.getElementById('profileSince');
+  if (sidebarName) sidebarName.textContent = stored.username;
+  if (sidebarAva) sidebarAva.textContent = stored.avatarInitials || stored.username.slice(0, 2).toUpperCase();
+  if (profileName) profileName.textContent = stored.username;
+  if (profileAva) profileAva.textContent = stored.avatarInitials || stored.username.slice(0, 2).toUpperCase();
+  if (profileSince && stored.createdAt) {
+    const d = new Date(stored.createdAt);
+    profileSince.textContent = 'Member since ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+}
+
 // Expose for onclick in HTML
 window.go = go;
 window.setRole = setRole;
@@ -279,6 +308,7 @@ window.wizNext = wizNext;
 window.wizPrev = wizPrev;
 window.simulateTrigger = simulateTrigger;
 window.sortSkinPool = sortSkinPool;
+window.dropzonaLogout = dropzonaLogout;
 
 /**
  * Init: bind nav and role, build UI, seed feed, start sim.
@@ -372,32 +402,41 @@ function init() {
   buildFollowingsPage();
   initWalletTopup();
 
-  go('browse');
-
+  // Seed initial feed events (escaped)
   const seedMsgs = [
-    '<b>AlexPlays</b> — Triple kill on Mirage! Drop activated',
-    '<b>xDreamer</b> won <span class="hl sk-cl">AK-47 | Redline</span> from AlexPlays',
-    '<b>NaVi_fan228</b> accepted trade <span class="hl sk-cv">AWP | Asiimov</span> — $14.20',
-    '<b>LunaLive</b> — ACE on Inferno! Drop activated',
-    '<b>pro100_gamer</b> won <span class="hl sk-cl">M4A4 | Desolate Space</span>',
-    '<b>steelskin99</b> joined · Twitch ✓ · Trade URL ✓'
+    `${bold('AlexPlays')} — Triple kill on Mirage! Drop activated`,
+    `${bold('xDreamer')} won ${skinHl('AK-47 | Redline', 'cl')} from AlexPlays`,
+    `${bold('NaVi_fan228')} accepted trade ${skinHl('AWP | Asiimov', 'cv')} — $14.20`,
+    `${bold('LunaLive')} — ACE on Inferno! Drop activated`,
+    `${bold('pro100_gamer')} won ${skinHl('M4A4 | Desolate Space', 'cl')}`,
+    `${bold('steelskin99')} joined · Twitch ✓ · Trade URL ✓`
   ];
   const seedTypes = ['kill', 'drop', 'trade', 'kill', 'drop', 'join'];
   seedTypes.forEach((t, i) => {
     addFeedEvent(t, seedMsgs[i]);
     addSFeedEvent(t, seedMsgs[i]);
   });
-  addSFeedEvent('kill', '<b>Triple kill</b> on Mirage — drop #1047');
-  addSFeedEvent('drop', 'Winner: <b>xDreamer</b> → <span class="hl sk-cl">AK-47 | Redline</span> ($8.40)');
-  addSFeedEvent('trade', '✓ Trade #1047 accepted — <b>xDreamer</b>');
+  addSFeedEvent('kill', `${bold('Triple kill')} on Mirage — drop #1047`);
+  addSFeedEvent('drop', `Winner: ${bold('xDreamer')} → ${skinHl('AK-47 | Redline', 'cl')} ($8.40)`);
+  addSFeedEvent('trade', `✓ Trade #1047 accepted — ${bold('xDreamer')}`);
+
+  // Hydrate user info from localStorage
+  hydrateUser();
+
+  // Restore saved role preference (streamer vs viewer)
+  const savedRole = localStorage.getItem('dropzona_role');
+  if (savedRole === 's') setRole('s');
+
+  // Restore page from URL hash (deep linking / refresh persistence)
+  restoreFromHash();
 
   startSim();
   initGridBackground();
-  if (typeof lucide !== 'undefined') lucide.createIcons();
+  refreshIcons();
 }
 
 /**
- * Animated grid background (same as support page): canvas + mouse-reactive dots & lines.
+ * Animated grid background: canvas + mouse-reactive dots & lines.
  */
 function initGridBackground() {
   const c = document.getElementById('gridCanvas');

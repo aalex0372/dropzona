@@ -5,10 +5,7 @@
 import { getWizStep, setWizStep } from './state.js';
 import { WIZARD_STEPS } from './config.js';
 import { go } from './router.js';
-
-function refreshIcons() {
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-}
+import { refreshIcons } from './utils.js';
 
 /**
  * Advance to next wizard step or finish and go to dashboard.
