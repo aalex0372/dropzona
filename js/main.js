@@ -300,13 +300,6 @@ function hydrateUser() {
     set('profileSince', sinceText);
     set('sProfileSince', sinceText);
   }
-
-  const twitchHandle = (stored.username || '').toLowerCase().replace(/[^a-z0-9_]/g, '');
-  if (twitchHandle) {
-    set('sProfileTwitchHandle', '@' + twitchHandle);
-    const tlink = document.getElementById('sProfileTwitchOpen');
-    if (tlink) tlink.href = 'https://twitch.tv/' + twitchHandle;
-  }
 }
 
 // Expose for onclick in HTML

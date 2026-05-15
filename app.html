@@ -519,97 +519,42 @@
   </div>
 </div>
 
-<!-- STREAMER PROFILE -->
+<!-- STREAMER PROFILE — mirror of viewer profile, streamer stats + Steam Account (no Trade URL) -->
 <div class="page" id="p-s-profile">
   <div style="display:flex;align-items:center;gap:20px;margin-bottom:24px">
     <div style="width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--ac),#c084fc);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;box-shadow:0 0 30px var(--ac-g)" id="sProfileAva">XD</div>
     <div><div style="font-size:22px;font-weight:800;color:var(--t0)" id="sProfileName">xDreamer</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t3);margin-top:2px" id="sProfileSince">Member since Jan 12, 2026</div></div>
   </div>
-  <!-- Lifetime streamer stats (mirrors /app/s/history totals) -->
   <div class="stats stats-4 mb">
-    <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v">847</div><div class="sc-l">Drops given</div></div>
-    <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$12,450</div><div class="sc-l">Total dropped</div></div>
-    <div class="sc"><div class="sc-ico or"><i data-lucide="radio" class="lc"></i></div><div class="sc-v">48</div><div class="sc-l">Streams launched</div></div>
-    <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">97%</div><div class="sc-l">Drop success rate</div></div>
-  </div>
-  <!-- Channel + CS2 Agent -->
-  <div class="g2 mb">
-    <div class="cd">
-      <div class="cd-h"><div class="cd-t"><i data-lucide="twitch" class="lc-sm" style="color:var(--ac)"></i> Channel</div><span class="st st-on">Connected</span></div>
-      <div class="conn">
-        <div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div>
-        <div class="conn-info">
-          <div class="conn-t">Twitch · <span id="sProfileTwitchHandle">@xdreamer</span></div>
-          <div class="conn-d">Public channel page where viewers join your drops</div>
-        </div>
-        <a class="btn btn-p" id="sProfileTwitchOpen" href="https://twitch.tv/xdreamer" target="_blank" rel="noopener" style="font-size:11px"><i data-lucide="external-link" class="lc-sm"></i> Open</a>
-      </div>
-      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-g" style="font-size:11px" onclick="(function(){var l=document.getElementById('sProfileTwitchOpen');if(l&&navigator.clipboard)navigator.clipboard.writeText(l.href);})()"><i data-lucide="link-2" class="lc-sm"></i> Copy public link</button>
-        <button class="btn btn-g" style="font-size:11px" onclick="go('s-dash')"><i data-lucide="layout-dashboard" class="lc-sm"></i> Open Dashboard</button>
-      </div>
+    <div class="sc">
+      <div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div>
+      <div class="sc-v">847</div>
+      <div class="sc-l">Drops given</div>
     </div>
-    <div class="cd">
-      <div class="cd-h"><div class="cd-t"><i data-lucide="cpu" class="lc-sm" style="color:var(--ac)"></i> CS2 Game Agent</div><span class="st st-on">Online</span></div>
-      <div class="conn">
-        <div class="conn-i" style="background:rgba(52,211,153,0.12);color:var(--gn)"><i data-lucide="activity" class="lc"></i></div>
-        <div class="conn-info">
-          <div class="conn-t">GSI heartbeat <span style="color:var(--t3);font-weight:500">— last event 12s ago</span></div>
-          <div class="conn-d">Threshold 5 min · Check <a href="/app/s/health" onclick="go('s-health');return false;" style="color:var(--ac);text-decoration:none">Health</a> for details</div>
-        </div>
-      </div>
-      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-p" style="font-size:11px" onclick="go('s-onboard')"><i data-lucide="rocket" class="lc-sm"></i> Setup Wizard</button>
-        <button class="btn btn-g" style="font-size:11px" onclick="go('s-health')"><i data-lucide="heart-pulse" class="lc-sm"></i> Open Health</button>
-      </div>
+    <div class="sc">
+      <div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div>
+      <div class="sc-v">$12,450</div>
+      <div class="sc-l">Total dropped</div>
+    </div>
+    <div class="sc">
+      <div class="sc-ico or"><i data-lucide="radio" class="lc"></i></div>
+      <div class="sc-v">48</div>
+      <div class="sc-l">Streams launched</div>
+    </div>
+    <div class="sc">
+      <div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div>
+      <div class="sc-v">97%</div>
+      <div class="sc-l">Drop success rate</div>
     </div>
   </div>
-  <!-- Wallet + Triggers snapshots (mirror /app/s/wallet and /app/s/triggers) -->
-  <div class="g2 mb">
-    <div class="cd">
-      <div class="cd-h"><div class="cd-t"><i data-lucide="wallet" class="lc-sm" style="color:var(--ac)"></i> Wallet</div><div class="cd-a" onclick="go('s-wallet')">Open ›</div></div>
-      <div style="padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
-        <div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Current balance</div>
-          <div style="font-size:24px;font-weight:800;color:var(--gn);margin-top:4px">$1,842.50</div>
-          <div class="sc-d up" style="margin-top:2px">↑ +$214.30 this week</div>
-        </div>
-        <div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Pending payouts</div>
-          <div style="font-size:24px;font-weight:800;color:var(--cy);margin-top:4px">$320</div>
-          <div style="font-size:11px;color:var(--t3);margin-top:2px">2 withdrawals processing</div>
-        </div>
-      </div>
-      <div style="padding:14px 20px;border-top:1px solid var(--br1);font-size:11px;color:var(--t3);line-height:1.55">
-        Top up in crypto — we buy the skins and ship them to your viewers when a trigger fires.
-      </div>
-      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-p" style="font-size:11px" onclick="go('s-wallet')"><i data-lucide="arrow-down-circle" class="lc-sm"></i> Top up</button>
-        <button class="btn btn-g" style="font-size:11px" onclick="go('s-wallet')"><i data-lucide="arrow-up-circle" class="lc-sm"></i> Withdraw</button>
-      </div>
-    </div>
-    <div class="cd">
-      <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm" style="color:var(--ac)"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Configure ›</div></div>
-      <div style="padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
-        <div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Active triggers</div>
-          <div style="font-size:24px;font-weight:800;color:var(--t0);margin-top:4px">10</div>
-          <div style="font-size:11px;color:var(--t3);margin-top:2px">CS2 · kill → MVP</div>
-        </div>
-        <div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Top payout</div>
-          <div style="font-size:24px;font-weight:800;color:var(--ac);margin-top:4px">$60–200</div>
-          <div style="font-size:11px;color:var(--t3);margin-top:2px">game win</div>
-        </div>
-      </div>
-      <div style="padding:14px 20px;border-top:1px solid var(--br1);font-size:11px;color:var(--t3);line-height:1.55">
-        Triggers decide which in-game events drop skins and the value range. Funded from your wallet — no skin inventory to manage.
-      </div>
-      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-p" style="font-size:11px" onclick="go('s-triggers')"><i data-lucide="sliders-horizontal" class="lc-sm"></i> Edit triggers</button>
-        <button class="btn btn-g" style="font-size:11px" onclick="go('s-hist')"><i data-lucide="scroll-text" class="lc-sm"></i> Drop history</button>
-      </div>
-    </div>
+  <div class="cd mb">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="ticket" class="lc-sm" style="color:var(--ac)"></i> Drop Participation</div><span class="st st-on">Active</span></div>
+    <div style="padding:16px 20px;font-size:13px;color:var(--t2);line-height:1.5">You're set up to give drops on your streams. Drops are funded from your wallet — we buy the skins and ship them to your viewers when a trigger fires.</div>
+  </div>
+  <div class="cd mb">
+    <div class="cd-h"><div class="cd-t"><i data-lucide="unplug" class="lc-sm" style="color:var(--ac)"></i> Connections</div></div>
+    <div class="conn"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch Account</div><div class="conn-d">Required to run drops on your channel</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+    <div class="conn"><div class="conn-i stm"><i data-lucide="gamepad-2" class="lc"></i></div><div class="conn-info"><div class="conn-t">Steam Account</div><div class="conn-d">Used to verify your identity and link your CS2 in-game events</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
   </div>
   <div class="g2 mb">
     <div class="cd cd-wip">
