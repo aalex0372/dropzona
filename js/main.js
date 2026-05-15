@@ -285,18 +285,28 @@ function dropzonaLogout() {
 function hydrateUser() {
   const stored = JSON.parse(localStorage.getItem('dropzona_user') || 'null');
   if (!stored) return;
-  const sidebarName = document.getElementById('sidebarName');
-  const sidebarAva = document.getElementById('sidebarAva');
-  const profileName = document.getElementById('profileName');
-  const profileAva = document.getElementById('profileAva');
-  const profileSince = document.getElementById('profileSince');
-  if (sidebarName) sidebarName.textContent = stored.username;
-  if (sidebarAva) sidebarAva.textContent = stored.avatarInitials || stored.username.slice(0, 2).toUpperCase();
-  if (profileName) profileName.textContent = stored.username;
-  if (profileAva) profileAva.textContent = stored.avatarInitials || stored.username.slice(0, 2).toUpperCase();
-  if (profileSince && stored.createdAt) {
-    const d = new Date(stored.createdAt);
-    profileSince.textContent = 'Member since ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  const initials = stored.avatarInitials || stored.username.slice(0, 2).toUpperCase();
+  const sinceText = stored.createdAt
+    ? 'Member since ' + new Date(stored.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    : null;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el && val != null) el.textContent = val; };
+  set('sidebarName', stored.username);
+  set('sidebarAva', initials);
+  set('profileName', stored.username);
+  set('profileAva', initials);
+  set('sProfileName', stored.username);
+  set('sProfileAva', initials);
+  if (sinceText) {
+    set('profileSince', sinceText);
+    set('sProfileSince', sinceText);
+  }
+
+  const twitchHandle = (stored.username || '').toLowerCase().replace(/[^a-z0-9_]/g, '');
+  if (twitchHandle) {
+    set('sProfileTwitchHandle', '@' + twitchHandle);
+    const tlink = document.getElementById('sProfileTwitchOpen');
+    if (tlink) tlink.href = 'https://twitch.tv/' + twitchHandle;
   }
 }
 
