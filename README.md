@@ -40,7 +40,6 @@ dropzona/
 │   ├── config.js       # Feed list IDs, max items
 │   ├── utils.js        # rnd, rndPrice, createEventId, parsePriceFromCard
 │   ├── wizard.js       # wizNext, wizPrev
-│   ├── skinPool.js     # sortSkinPool
 │   └── *.test.js       # Vitest tests (dropPipeline, state, utils)
 ├── mobile/             # Mobile-friendly version (same flows, separate HTML/JS/CSS)
 ├── docs/               # AUDIT.md, REFACTOR_REPORT.md
@@ -57,7 +56,7 @@ dropzona/
 
 - **Browse**: Stats (228 streams online, 12.4k drops, 3,722 viewers, $68.8k value), DROPS ticker, following chips, stream grid, event feed.
 - **Skin rarity colors**: Ticker and event feed show skin names in CS2-style colors (Mil-Spec → Restricted → Classified → Covert → Extraordinary).
-- **Viewer / Streamer roles**: Switch in sidebar; Viewer sees browse/my-drops, Streamer sees dashboard, triggers, pool, history, health.
+- **Viewer / Streamer roles**: Switch in sidebar; Viewer sees browse/my-drops, Streamer sees dashboard, triggers, wallet, history, health. Streamers fund drops in crypto via the wallet — the platform sources the skins and ships them to winners (no streamer-side skin inventory).
 - **Support page**: FAQ, Discord card (Open Discord / Send message), direct contact (Send email, Message on X, Message on Instagram).
 - **Simulated drops**: Background sim runs trigger → winner → trade; feed updates with rarity-colored skin names.
 
@@ -72,9 +71,9 @@ dropzona/
 | My Drops      | `p-my-drops`| Won skins history              |
 | Profile       | `p-profile` | Account, connections           |
 | Viewer settings | `p-v-settings` | Notifications, account     |
-| Dashboard     | `p-s-dash`  | Streamer feed, pool, triggers   |
+| Dashboard     | `p-s-dash`  | Streamer feed, quick actions, triggers |
 | Triggers      | `p-s-triggers` | Game event config           |
-| Skin Pool     | `p-s-pool`  | Drop pool                      |
+| Wallet        | `p-s-wallet`| Crypto top-ups / withdrawals — funds drops |
 | History       | `p-s-hist`  | Drops + state machine          |
 | Health        | `p-s-health`| System status                  |
 | Streamer settings | `p-s-settings` | API, bot, overlay          |

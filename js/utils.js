@@ -22,7 +22,7 @@ export function rndPrice() {
 
 /**
  * Parse numeric price from a skin card element (e.g. .sk-p).
- * Used by skin pool sort. Returns 0 if not found or invalid.
+ * Returns 0 if not found or invalid.
  * @param {Element} cardEl - Card containing .sk-p
  * @returns {number}
  */

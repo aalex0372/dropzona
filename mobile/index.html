@@ -281,14 +281,6 @@
         <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm ac"></i> Event Feed <span class="cnt">Live</span></div><button class="btn btn-g small" onclick="simulateTrigger()"><i data-lucide="flask-conical" class="lc-sm"></i> Test Trigger</button></div>
         <div id="sFeedList"></div>
       </div>
-      <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="backpack" class="lc-sm ac"></i> Skin Pool</div><div class="cd-a" onclick="go('s-pool')">Manage ›</div></div>
-        <div class="mstats">
-          <div class="mstat"><div class="mstat-v pu" id="poolCount">34</div><div class="mstat-l">In Pool</div></div>
-          <div class="mstat"><div class="mstat-v gn">$1,240</div><div class="mstat-l">Value</div></div>
-          <div class="mstat"><div class="mstat-v or" id="poolReserved">2</div><div class="mstat-l">Reserved</div></div>
-        </div>
-      </div>
       <div class="cd">
         <div class="cd-h"><div class="cd-t"><i data-lucide="crosshair" class="lc-sm ac"></i> Triggers</div><div class="cd-a" onclick="go('s-triggers')">Configure ›</div></div>
         <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="target" class="lc"></i></div><div class="trig-info"><div class="trig-n">kill</div></div><div class="trig-rng">$2–8</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
@@ -338,33 +330,12 @@
       </div>
     </div>
 
-    <div class="page" id="p-s-pool">
-      <button class="btn btn-g back-btn mb" onclick="go('s-dash')"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
-      <div class="stats stats-4 mb">
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="backpack" class="lc"></i></div><div class="sc-v">34</div><div class="sc-l">In Pool</div></div>
-        <div class="sc"><div class="sc-ico gn"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$1,240</div><div class="sc-l">Total Value</div></div>
-        <div class="sc"><div class="sc-ico or"><i data-lucide="lock" class="lc"></i></div><div class="sc-v">2</div><div class="sc-l">Reserved</div></div>
-        <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">$14.70</div><div class="sc-l">Avg Drop</div></div>
-      </div>
-      <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="package" class="lc-sm ac"></i> Drop Pool <span class="cnt">34 skins</span></div><button class="btn btn-p small"><i data-lucide="plus" class="lc-sm"></i> From Inventory</button></div>
-        <div class="skins-g">
-          <div class="sk-c r-gd"><div class="sk-img"><i data-lucide="sword" class="sk-ico"></i></div><div class="sk-n">Karambit | Doppler</div><div class="sk-w">FN · Phase 2</div><div class="sk-p gd">$420</div><div class="sk-rt rt-gd">★ Rare</div></div>
-          <div class="sk-c r-cv"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">Glock-18 | Fade</div><div class="sk-w">Factory New</div><div class="sk-p cv">$180</div><div class="sk-rt rt-cv">Covert</div></div>
-          <div class="sk-c r-cv reserved"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">Deagle | Blaze</div><div class="sk-w">Factory New</div><div class="sk-p cv">$55.80</div><div class="sk-rt rt-cv">Covert</div></div>
-          <div class="sk-c r-cl"><div class="sk-img"><i data-lucide="crosshair" class="sk-ico"></i></div><div class="sk-n">M4A4 | Desolate Space</div><div class="sk-w">MW</div><div class="sk-p cl">$22.50</div><div class="sk-rt rt-cl">Classified</div></div>
-          <div class="sk-c r-rs"><div class="sk-img"><i data-lucide="bomb" class="sk-ico"></i></div><div class="sk-n">P250 | Muertos</div><div class="sk-w">FN</div><div class="sk-p rs">$3.20</div><div class="sk-rt rt-rs">Restricted</div></div>
-        </div>
-      </div>
-    </div>
-
     <div class="page" id="p-s-onboard">
       <div class="wiz">
         <div class="wiz-steps" id="wizSteps">
           <div class="wiz-step cur"><div class="wiz-num">1</div><div class="wiz-lbl">Twitch</div></div>
           <div class="wiz-step"><div class="wiz-num">2</div><div class="wiz-lbl">Steam Bot</div></div>
           <div class="wiz-step"><div class="wiz-num">3</div><div class="wiz-lbl">CS2 Agent</div></div>
-          <div class="wiz-step"><div class="wiz-num">4</div><div class="wiz-lbl">Skin Pool</div></div>
         </div>
         <div class="wiz-body">
           <div class="wiz-panel" id="wiz-1">
@@ -496,7 +467,6 @@
       <div class="nav-s streamer-nav" id="navS" style="display:none"><div class="nav-l">Streamer</div>
         <div class="ni act" data-p="s-dash"><i data-lucide="layout-dashboard" class="lc-sm"></i> Dashboard</div>
         <div class="ni" data-p="s-triggers"><i data-lucide="crosshair" class="lc-sm"></i> Triggers</div>
-        <div class="ni" data-p="s-pool"><i data-lucide="backpack" class="lc-sm"></i> Skin Pool<span class="badge ac">34</span></div>
         <div class="ni" data-p="s-hist"><i data-lucide="scroll-text" class="lc-sm"></i> History</div>
         <div class="ni" data-p="s-health"><i data-lucide="heart-pulse" class="lc-sm"></i> Health</div>
       </div>

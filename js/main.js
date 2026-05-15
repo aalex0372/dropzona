@@ -7,7 +7,6 @@ import { go, setRole, restoreFromPath } from './router.js';
 import { addFeedEvent, addSFeedEvent } from './feed.js';
 import { buildTicker, buildStreams, buildFollowing, buildFollowingsPage, openStream } from './stream.js';
 import { wizNext, wizPrev } from './wizard.js';
-import { sortSkinPool } from './skinPool.js';
 import { runDropCycle } from './dropPipeline.js';
 import { incrementDropCounter, setSimInterval, getRole } from './state.js';
 import { createEventId, bold, skinHl, refreshIcons } from './utils.js';
@@ -318,7 +317,6 @@ window.openStream = openStream;
 window.wizNext = wizNext;
 window.wizPrev = wizPrev;
 window.simulateTrigger = simulateTrigger;
-window.sortSkinPool = sortSkinPool;
 window.dropzonaLogout = dropzonaLogout;
 
 /**

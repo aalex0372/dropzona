@@ -110,14 +110,13 @@ const PM = {
   'v-settings': ['Settings', 'Notifications & account'],
   's-dash': ['Dashboard', 'Manage your stream in real time'],
   's-triggers': ['Triggers', 'Configure game event drops'],
-  's-pool': ['Skin Pool', 'Inventory for giveaways'],
   's-hist': ['History', 'All drops and payouts'],
   's-health': ['Health', 'System status & errors'],
   's-onboard': ['Setup Wizard', 'Step-by-step onboarding'],
   's-settings': ['Settings', 'API, bot & overlay'],
 };
 
-const STREAMER_PAGES = ['s-dash', 's-triggers', 's-pool', 's-health', 's-settings', 's-onboard', 's-hist'];
+const STREAMER_PAGES = ['s-dash', 's-triggers', 's-health', 's-settings', 's-onboard', 's-hist'];
 
 function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
 function rndPrice() { return (Math.random() * 50 + 3).toFixed(2); }

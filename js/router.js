@@ -23,7 +23,6 @@ const PAGE_TO_PATH = {
   's-dash': '/app/s/dashboard',
   's-wallet': '/app/s/wallet',
   's-triggers': '/app/s/triggers',
-  's-pool': '/app/s/pool',
   's-hist': '/app/s/history',
   's-health': '/app/s/health',
   's-profile': '/app/s/profile',

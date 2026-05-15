@@ -84,7 +84,6 @@ export const PAGE_META = {
   's-dash': ['Dashboard', 'Manage your stream in real time'],
   's-wallet': ['Wallet', 'Top up, withdraw, and track transactions'],
   's-triggers': ['Triggers', 'Configure game event drops'],
-  's-pool': ['Skin Pool', 'Inventory for giveaways'],
   's-hist': ['History', 'All drops and payouts'],
   's-health': ['Health', 'System status & errors'],
   's-onboard': ['Setup Wizard', 'Connect your CS2 game agent'],
