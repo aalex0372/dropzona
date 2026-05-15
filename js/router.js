@@ -128,12 +128,21 @@ export function setRole(r) {
  * Call once after DOM and UI are ready.
  */
 export function restoreFromPath() {
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
   const pageId = pathToPageId(window.location.pathname);
   const role = getRole();
   const defaultPage = role === 's' ? 's-dash' : 'browse';
 
   if (pageId && PAGE_META[pageId]) {
     go(pageId);
+  } else if (path === '/app') {
+    // bare /app — land on the role default
+    go(defaultPage);
+  } else if (path.startsWith('/app/')) {
+    // unknown app sub-path — show 404 instead of silently bouncing to /browse
+    const from = encodeURIComponent(window.location.pathname + window.location.search);
+    window.location.replace('/404.html?from=' + from);
+    return;
   } else {
     go(defaultPage);
   }
@@ -141,6 +150,11 @@ export function restoreFromPath() {
   window.addEventListener('popstate', () => {
     if (_suppressPopstate) return;
     const id = pathToPageId(window.location.pathname);
-    if (id && PAGE_META[id]) go(id);
+    if (id && PAGE_META[id]) {
+      go(id);
+    } else if (window.location.pathname.startsWith('/app/')) {
+      const from = encodeURIComponent(window.location.pathname + window.location.search);
+      window.location.replace('/404.html?from=' + from);
+    }
   });
 }

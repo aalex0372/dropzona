@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content"/>
   <meta name="apple-mobile-web-app-capable" content="yes"/>
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
   <meta name="theme-color" content="#06060b"/>
@@ -192,7 +192,7 @@
               <option value="other">Other</option>
             </select>
             <label class="sd-label" for="sdReportDetails">Details</label>
-            <textarea id="sdReportDetails" class="sd-field sd-field-area" placeholder="Tell us what happened..." maxlength="450"></textarea>
+            <textarea id="sdReportDetails" class="sd-field sd-field-area" placeholder="Tell us what happened..." maxlength="450" autocomplete="off" autocapitalize="sentences" enterkeyhint="done"></textarea>
             <div class="sd-modal-foot">
               <button type="button" class="btn btn-g" id="sdReportCancel">Cancel</button>
               <button type="button" class="btn btn-p" id="sdReportSubmit"><i data-lucide="send" class="lc-sm"></i> Submit report</button>
@@ -321,9 +321,9 @@
           <div class="fg" style="margin-bottom:0">
             <label class="fl">Max wins per viewer per stream</label>
             <div style="display:flex;align-items:center;gap:10px">
-              <input type="number" class="fi" value="1" min="0" step="1" style="width:45%"/>
+              <input type="number" class="fi" value="1" min="0" step="1" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" style="width:45%"/>
               <span style="font-family:'JetBrains Mono', monospace;color:var(--t4);font-weight:700">–</span>
-              <input type="number" class="fi" value="5" min="0" step="1" style="width:45%"/>
+              <input type="number" class="fi" value="5" min="0" step="1" inputmode="numeric" pattern="[0-9]*" enterkeyhint="done" style="width:45%"/>
             </div>
           </div>
         </div>
@@ -348,9 +348,9 @@
           <div class="wiz-panel" id="wiz-2" style="display:none">
             <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm" style="color:var(--cy)"></i> Step 2: Steam Trade Bot</div></div>
               <div class="cd-p"><p class="muted">The bot account sends trade offers to winners. Create a dedicated Steam account for the bot.</p>
-                <div class="fg"><label class="fl">Steam Bot Username</label><input type="text" class="fi" placeholder="dropzone_bot"/></div>
-                <div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" placeholder="From Steam Desktop Authenticator"/></div>
-                <div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" placeholder="For trade confirmation"/></div>
+                <div class="fg"><label class="fl">Steam Bot Username</label><input type="text" class="fi" placeholder="dropzone_bot" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next"/></div>
+                <div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" placeholder="From Steam Desktop Authenticator" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next"/></div>
+                <div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" placeholder="For trade confirmation" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"/></div>
                 <button class="btn btn-p btn-w" onclick="wizNext()" style="margin-top:12px">Next</button></div>
             </div>
           </div>

@@ -841,3 +841,207 @@ body {
 .sd-recent-meta { font-size: 12px; color: var(--t3); }
 .sd-recent-winner { color: var(--ac); font-weight: 600; }
 .sd-recent-empty { padding: 20px; font-size: 14px; color: var(--t3); text-align: center; }
+
+/* =====================================================================
+ * Mobile responsive hardening — iOS + Android, all screen sizes.
+ * Layered after the original rules so they override where they need to.
+ * ===================================================================== */
+
+/* Base: kill tap delay, contain rubber-band, break very long words */
+html, body { overscroll-behavior-y: contain; }
+body { word-break: break-word; }
+a, button, [role="button"], .btn, .menu-btn, .bn-i, .ni, .role-btn, .following-chip, .menu-i, .sw, .sd-action-btn, .sd-modal-close, .drawer-close, .sd-share-tile, .sd-actions-item, .cd-a, select, input, textarea {
+  touch-action: manipulation;
+}
+
+/* Use the dynamic viewport height where the original calc used 100vh */
+.main {
+  min-height: calc(100dvh - 52px - var(--safe-top) - var(--bn-h) - var(--safe-bottom));
+}
+
+/* Top bar: keep the title block from being squeezed by the live chip on
+ * narrow phones (iPhone SE @ 320px) — title is the flex child that should
+ * shrink, live chip + menu button stay fixed-width on the right.
+ */
+.topbar { gap: 10px; }
+.tb-l {
+  flex: 1 1 auto;
+  min-width: 0;
+  flex-wrap: wrap;
+  row-gap: 6px;
+}
+.tb-l > div:first-child { min-width: 0; flex: 1 1 auto; }
+.pg-t {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.pg-sub {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.live-chip { flex-shrink: 0; }
+.menu-btn { flex-shrink: 0; }
+
+/* Horizontal stream list: respect safe-area on left/right so the first
+ * and last card aren't clipped under the notch in landscape, and the
+ * bleed margin matches the real edge padding.
+ */
+.str-list-scroll {
+  margin-left: calc((16px + var(--safe-left)) * -1);
+  margin-right: calc((16px + var(--safe-right)) * -1);
+  padding-left: calc(16px + var(--safe-left));
+  padding-right: calc(16px + var(--safe-right));
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+}
+.str-list-scroll .str-c { scroll-snap-align: start; }
+
+/* Stats grid: 3-column variant breaks on 320px — let it auto-fit. */
+@media (max-width: 360px) {
+  .stats-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Cards: never overflow their container — long names with no spaces. */
+.sc, .cd, .feed-r, .drop-row, .conn, .trig-r, .health-r, .menu-i, .ni {
+  min-width: 0;
+}
+.fm, .trig-info, .drop-skin, .conn-info, .health-info, .feed-r .fm {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Bottom nav: hide while iOS soft keyboard is open (toggled by JS via
+ * the .kb-open class on <html>). Without this the nav floats above the
+ * keyboard area, looks broken, and steals real estate.
+ */
+html.kb-open .bottom-nav { display: none; }
+html.kb-open body { padding-bottom: 0; }
+
+/* Drawer: safe-area padding so notch / home-indicator never clip. */
+.drawer {
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+}
+.drawer-h { padding-right: calc(16px + var(--safe-right)); }
+.drawer-nav { overscroll-behavior: contain; }
+
+/* Drawer & modal: scroll lock target — the JS sets html.lock-scroll. */
+html.lock-scroll, html.lock-scroll body {
+  overflow: hidden !important;
+  /* keep the page from collapsing under fixed top bar when locked */
+  position: static;
+}
+
+/* Tap targets — bump small icon buttons to the iOS 44px minimum. */
+.sd-action-btn {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+}
+.sd-action-icon--share { font-size: 22px; }
+.sd-action-icon--report { font-size: 18px; }
+.sd-modal-close {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+}
+.sd-modal-close-mark { font-size: 22px; }
+
+/* Modal: full safe-area aware padding + body scroll lock is handled in JS.
+ * Card sizing: use dynamic viewport so iOS Safari URL bar doesn't truncate.
+ */
+.sd-modal-backdrop {
+  padding:
+    calc(18px + var(--safe-top))
+    calc(18px + var(--safe-right))
+    calc(18px + var(--safe-bottom))
+    calc(18px + var(--safe-left));
+  overscroll-behavior: contain;
+}
+.sd-modal-card {
+  width: min(520px, 100%);
+  max-height: calc(100dvh - var(--safe-top) - var(--safe-bottom) - 36px);
+  display: flex;
+  flex-direction: column;
+}
+.sd-modal-body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+/* All editable form fields must be ≥16px on iOS to suppress auto-zoom. */
+.sd-field {
+  font-size: 16px;
+  line-height: 1.35;
+  padding: 12px 12px;
+  min-height: 44px;
+}
+.sd-field-area { min-height: 120px; }
+.sd-modal-foot .btn { min-height: 44px; }
+
+/* Stream filter dropdown — keep it readable on small phones but still
+ * compact. min 14px so it doesn't trigger zoom on iOS (selects are less
+ * picky than inputs but better safe).
+ */
+#viewerStreamFilter {
+  font-size: 14px;
+  min-height: 36px;
+}
+
+/* Share-actions menu: prevent off-screen overflow on tiny phones. */
+.sd-actions-menu {
+  max-width: calc(100vw - 20px);
+}
+
+/* Landscape on phones: short viewport — tighten vertical padding so
+ * the main content doesn't push the bottom nav out of view. Tablets
+ * (≥600px) keep the normal spacing.
+ */
+@media (orientation: landscape) and (max-height: 480px) {
+  .topbar { height: auto; min-height: calc(44px + var(--safe-top)); padding-bottom: 8px; }
+  .pg-sub { display: none; }
+  .main { padding-top: 12px; padding-bottom: 12px; }
+  .ticker { margin-bottom: 12px; }
+  .mb { margin-bottom: 12px; }
+  .stats { gap: 8px; margin-bottom: 12px; }
+  .sc { padding: 12px; }
+  .sc-v { font-size: 18px; }
+  .bottom-nav { height: calc(48px + var(--safe-bottom)); }
+  .bn-i { min-height: calc(48px + var(--safe-bottom)); padding-top: 6px; }
+  body { padding-bottom: calc(48px + var(--safe-bottom)); }
+}
+
+/* Tablets / large screens (iPad portrait, foldables unfolded):
+ * cap content width so it doesn't look stretched, and let stats grow.
+ */
+@media (min-width: 700px) {
+  .main { max-width: 760px; margin-left: auto; margin-right: auto; }
+  .stats-4 { grid-template-columns: repeat(4, 1fr); }
+  .skins-g { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 900px) {
+  .skins-g { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Prevent the page from accidentally being wider than the viewport
+ * (catches a stray padding/margin from a third-party fragment).
+ */
+.main > .page { max-width: 100%; }
+img, video, canvas, iframe { max-width: 100%; height: auto; }
+pre, code, kbd { overflow-wrap: anywhere; }
+
+/* Reduced motion respect. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .ticker-scroll { animation: none; }
+}

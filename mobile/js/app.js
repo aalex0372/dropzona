@@ -242,6 +242,8 @@ function wireStreamActions(s) {
     actionsMenu.style.display = 'none';
     if (reportModal) {
       reportModal.style.display = 'flex';
+      reportModal.setAttribute('aria-hidden', 'false');
+      lockBodyScroll();
       if (reportTopic) reportTopic.value = 'suspicious-drops';
       if (reportDetails) reportDetails.value = '';
     }
@@ -264,7 +266,11 @@ function wireStreamActions(s) {
   };
 
   const closeReportModal = () => {
-    if (reportModal) reportModal.style.display = 'none';
+    if (!reportModal) return;
+    if (reportModal.style.display === 'none') return;
+    reportModal.style.display = 'none';
+    reportModal.setAttribute('aria-hidden', 'true');
+    unlockBodyScroll();
   };
   if (reportClose) reportClose.onclick = closeReportModal;
   if (reportCancel) reportCancel.onclick = closeReportModal;
@@ -555,16 +561,102 @@ function go(p) {
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
+/* Body-scroll lock that preserves the scroll position. Stacks across
+ * multiple modals (drawer + report) — only unlocks when count hits 0.
+ */
+let __lockCount = 0;
+let __lockedScrollY = 0;
+function lockBodyScroll() {
+  if (__lockCount === 0) {
+    __lockedScrollY = window.scrollY || window.pageYOffset || 0;
+    document.documentElement.classList.add('lock-scroll');
+    document.body.style.top = `-${__lockedScrollY}px`;
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+  }
+  __lockCount++;
+}
+function unlockBodyScroll() {
+  __lockCount = Math.max(0, __lockCount - 1);
+  if (__lockCount === 0) {
+    document.documentElement.classList.remove('lock-scroll');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, __lockedScrollY);
+  }
+}
+
 function openDrawer() {
-  document.getElementById('overlay')?.classList.add('open');
-  document.getElementById('drawer')?.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  overlay?.classList.add('open');
+  drawer?.classList.add('open');
+  if (drawer) drawer.setAttribute('aria-hidden', 'false');
+  lockBodyScroll();
 }
 
 function closeDrawer() {
-  document.getElementById('overlay')?.classList.remove('open');
-  document.getElementById('drawer')?.classList.remove('open');
-  document.body.style.overflow = '';
+  const drawer = document.getElementById('drawer');
+  const overlay = document.getElementById('overlay');
+  if (!drawer || !drawer.classList.contains('open')) return;
+  overlay?.classList.remove('open');
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden', 'true');
+  unlockBodyScroll();
+}
+
+/* Esc-to-close for drawer + report modal */
+function handleGlobalKeydown(e) {
+  if (e.key !== 'Escape' && e.key !== 'Esc') return;
+  const drawer = document.getElementById('drawer');
+  const reportModal = document.getElementById('sdReportModal');
+  if (reportModal && reportModal.style.display !== 'none') {
+    reportModal.style.display = 'none';
+    reportModal.setAttribute('aria-hidden', 'true');
+    unlockBodyScroll();
+    e.preventDefault();
+    return;
+  }
+  if (drawer && drawer.classList.contains('open')) {
+    closeDrawer();
+    e.preventDefault();
+  }
+}
+
+/* When the iOS / Android soft keyboard opens, the visual viewport
+ * shrinks. Toggle a class so the bottom nav can hide and stop fighting
+ * the keyboard. Falls back to a focusin/focusout heuristic when
+ * visualViewport isn't available (older Android WebViews).
+ */
+function installKeyboardWatcher() {
+  const root = document.documentElement;
+  const setKbOpen = (open) => root.classList.toggle('kb-open', !!open);
+  if (window.visualViewport) {
+    const vv = window.visualViewport;
+    const baseline = window.innerHeight;
+    const check = () => {
+      // Treat a >150px shrink of the visual viewport as "keyboard open".
+      setKbOpen((window.innerHeight - vv.height) > 150);
+    };
+    vv.addEventListener('resize', check);
+    vv.addEventListener('scroll', check);
+    void baseline;
+  } else {
+    document.addEventListener('focusin', (e) => {
+      const t = e.target;
+      if (!t) return;
+      const editable = t.matches?.('input, textarea, [contenteditable], select');
+      if (editable) setKbOpen(true);
+    });
+    document.addEventListener('focusout', () => {
+      setTimeout(() => {
+        const ae = document.activeElement;
+        const stillEditable = ae && ae.matches?.('input, textarea, [contenteditable], select');
+        if (!stillEditable) setKbOpen(false);
+      }, 60);
+    });
+  }
 }
 
 window.go = go;
@@ -585,6 +677,8 @@ function init() {
   document.getElementById('menuBtn')?.addEventListener('click', openDrawer);
   document.getElementById('drawerClose')?.addEventListener('click', closeDrawer);
   document.getElementById('overlay')?.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', handleGlobalKeydown);
+  installKeyboardWatcher();
   document.querySelectorAll('.drawer-nav .ni[data-p]').forEach(el => {
     el.addEventListener('click', () => { go(el.dataset.p); });
   });

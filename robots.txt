@@ -1,4 +1,21 @@
 User-agent: *
 Allow: /
 
+# Disallow logged-in app surface — these rewrites all serve app.html
+Disallow: /app
+Disallow: /app/
+
+# AI crawlers — explicitly allow (remove if you want to block training)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
 Sitemap: https://dropzona.gg/sitemap.xml
