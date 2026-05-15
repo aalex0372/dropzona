@@ -389,8 +389,10 @@ lucide.createIcons();
 
 // Auth-aware back links
 if(localStorage.getItem('dropzona_auth')){
-  var nb=document.getElementById('navBack');if(nb)nb.href='app.html';
-  var fb=document.getElementById('footBack');if(fb)fb.href='app.html';
+  var role=localStorage.getItem('dropzona_role');
+  var dest=role==='s'?'/app/s/dashboard':'/app/browse';
+  var nb=document.getElementById('navBack');if(nb)nb.href=dest;
+  var fb=document.getElementById('footBack');if(fb)fb.href=dest;
 }
 
 // Nav scroll

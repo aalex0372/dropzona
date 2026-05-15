@@ -3,7 +3,7 @@
  */
 
 import { STREAMS, TRIGGERS, USERS, SKINS } from './constants.js';
-import { go, setRole, restoreFromHash } from './router.js';
+import { go, setRole, restoreFromPath } from './router.js';
 import { addFeedEvent, addSFeedEvent } from './feed.js';
 import { buildTicker, buildStreams, buildFollowing, buildFollowingsPage, openStream } from './stream.js';
 import { wizNext, wizPrev } from './wizard.js';
@@ -428,8 +428,8 @@ function init() {
   const savedRole = localStorage.getItem('dropzona_role');
   if (savedRole === 's') setRole('s');
 
-  // Restore page from URL hash (deep linking / refresh persistence)
-  restoreFromHash();
+  // Restore page from URL path (deep linking / refresh persistence)
+  restoreFromPath();
 
   startSim();
   initGridBackground();

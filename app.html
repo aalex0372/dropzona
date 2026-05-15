@@ -8,7 +8,7 @@
       var ua = navigator.userAgent || '';
       var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
       if (isMobile && !/\/mobile\/?/.test(location.pathname) && !location.search.includes('desktop=1')) {
-        location.replace(location.origin + '/mobile/' + (location.hash || ''));
+        location.replace(location.origin + '/mobile/');
       }
       if (!localStorage.getItem('dropzona_auth')) {
         location.replace('/');
@@ -688,7 +688,7 @@
     <div class="wiz-btns gsi-foot">
       <div class="gsi-foot-meta">
         <span class="gsi-foot-counter" id="gsiFootCounter">Step 1 of 3</span>
-        <a class="gsi-foot-skip" href="#s-dash" onclick="go('s-dash'); return false;">Skip for now</a>
+        <a class="gsi-foot-skip" href="/app/s/dashboard" onclick="go('s-dash'); return false;">Skip for now</a>
       </div>
       <div class="gsi-foot-actions">
         <button class="btn btn-g" id="wizPrev" onclick="wizPrev()" style="visibility:hidden"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>

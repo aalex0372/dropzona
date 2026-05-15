@@ -1,26 +1,81 @@
 /**
- * DROPZONE — Router (hash-based) and role switcher.
+ * DROPZONE — Router. Path-based with History API.
+ *
+ * URL structure:
+ *   /app/browse, /app/followings, /app/stream, /app/my-drops, /app/profile
+ *   /app/s/dashboard, /app/s/wallet, /app/s/triggers, /app/s/pool,
+ *   /app/s/history, /app/s/health, /app/s/profile, /app/s/onboard
+ *
+ * Bare /app (or /app/) defaults to the user's role landing page.
  */
 
 import { setCurrentPageId, setRole as setStateRole, getRole } from './state.js';
 import { PAGE_META } from './constants.js';
 import { refreshIcons } from './utils.js';
 
-/** Suppress hash→go loop while we're updating the hash ourselves */
-let _suppressHashChange = false;
+/** pageId → URL path (no trailing slash) */
+const PAGE_TO_PATH = {
+  'browse': '/app/browse',
+  'followings': '/app/followings',
+  'stream': '/app/stream',
+  'my-drops': '/app/my-drops',
+  'profile': '/app/profile',
+  's-dash': '/app/s/dashboard',
+  's-wallet': '/app/s/wallet',
+  's-triggers': '/app/s/triggers',
+  's-pool': '/app/s/pool',
+  's-hist': '/app/s/history',
+  's-health': '/app/s/health',
+  's-profile': '/app/s/profile',
+  's-onboard': '/app/s/onboard',
+};
+
+/** URL path → pageId (built once from PAGE_TO_PATH) */
+const PATH_TO_PAGE = Object.fromEntries(
+  Object.entries(PAGE_TO_PATH).map(([id, path]) => [path, id])
+);
 
 /**
- * Navigate to a page by id. Updates URL hash for deep linking.
+ * Resolve a pageId to its public URL path.
+ * @param {string} pageId
+ * @returns {string}
+ */
+export function pageIdToPath(pageId) {
+  return PAGE_TO_PATH[pageId] || '/app/' + pageId;
+}
+
+/**
+ * Resolve a URL path to a pageId (or null if unknown).
+ * Trailing slashes are tolerated.
+ * @param {string} pathname
+ * @returns {string|null}
+ */
+function pathToPageId(pathname) {
+  const p = pathname.replace(/\/+$/, '') || '/';
+  return PATH_TO_PAGE[p] || null;
+}
+
+/** Suppress popstate→go loop while we're updating history ourselves */
+let _suppressPopstate = false;
+
+/**
+ * Navigate to a page by id. Pushes a real URL into history.
  * @param {string} pageId - Page id (e.g. 'browse', 's-dash')
  */
 export function go(pageId) {
-  if (!PAGE_META[pageId]) return; // ignore unknown pages
+  if (!PAGE_META[pageId]) return;
   setCurrentPageId(pageId);
 
-  // Update URL hash (without triggering hashchange→go loop)
-  _suppressHashChange = true;
-  window.location.hash = pageId;
-  _suppressHashChange = false;
+  const newPath = pageIdToPath(pageId);
+  if (window.location.pathname !== newPath) {
+    _suppressPopstate = true;
+    try {
+      window.history.pushState({ pageId }, '', newPath);
+    } catch {
+      window.location.pathname = newPath;
+    }
+    _suppressPopstate = false;
+  }
 
   document.dispatchEvent(new window.CustomEvent('dropzona:page-change', { detail: { pageId } }));
   document.querySelectorAll('.page').forEach((x) => x.classList.remove('act'));
@@ -70,24 +125,23 @@ export function setRole(r) {
 }
 
 /**
- * Restore page from URL hash on load, or navigate to default.
+ * Restore page from URL path on load, or navigate to role default.
  * Call once after DOM and UI are ready.
  */
-export function restoreFromHash() {
-  const hash = window.location.hash.replace('#', '');
+export function restoreFromPath() {
+  const pageId = pathToPageId(window.location.pathname);
   const role = getRole();
   const defaultPage = role === 's' ? 's-dash' : 'browse';
 
-  if (hash && PAGE_META[hash]) {
-    go(hash);
+  if (pageId && PAGE_META[pageId]) {
+    go(pageId);
   } else {
     go(defaultPage);
   }
 
-  // Listen for browser back/forward
-  window.addEventListener('hashchange', () => {
-    if (_suppressHashChange) return;
-    const h = window.location.hash.replace('#', '');
-    if (h && PAGE_META[h]) go(h);
+  window.addEventListener('popstate', () => {
+    if (_suppressPopstate) return;
+    const id = pathToPageId(window.location.pathname);
+    if (id && PAGE_META[id]) go(id);
   });
 }

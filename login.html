@@ -370,7 +370,7 @@
       localStorage.setItem('dropzona_auth', '1');
       localStorage.setItem('dropzona_role', isStreamer ? 's' : 'v');
     } catch(e){}
-    location.href = 'app.html';
+    location.href = isStreamer ? '/app/s/dashboard' : '/app/browse';
   }
   document.getElementById('viewer-continue').addEventListener('click', finish);
   document.getElementById('streamer-continue').addEventListener('click', finish);
