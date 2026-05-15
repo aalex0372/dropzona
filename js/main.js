@@ -9,7 +9,7 @@ import { buildTicker, buildStreams, buildFollowing, buildFollowingsPage, openStr
 import { wizNext, wizPrev } from './wizard.js';
 import { sortSkinPool } from './skinPool.js';
 import { runDropCycle } from './dropPipeline.js';
-import { incrementDropCounter, setSimInterval } from './state.js';
+import { incrementDropCounter, setSimInterval, getRole } from './state.js';
 import { createEventId, bold, skinHl, refreshIcons } from './utils.js';
 
 /**
@@ -303,6 +303,7 @@ function hydrateUser() {
 // Expose for onclick in HTML
 window.go = go;
 window.setRole = setRole;
+window.goProfile = () => go(getRole() === 's' ? 's-profile' : 'profile');
 window.openStream = openStream;
 window.wizNext = wizNext;
 window.wizPrev = wizPrev;
@@ -389,7 +390,7 @@ function init() {
   });
   document.getElementById('rBtnV')?.addEventListener('click', () => setRole('v'));
   document.getElementById('rBtnS')?.addEventListener('click', () => setRole('s'));
-  document.querySelector('.s-user')?.addEventListener('click', () => go('profile'));
+  document.querySelector('.s-user')?.addEventListener('click', () => go(getRole() === 's' ? 's-profile' : 'profile'));
   const topAct = document.getElementById('topAct');
   if (topAct && !topAct.onclick) topAct.addEventListener('click', () => setRole('s'));
   document.querySelectorAll('.tb-btn[data-go]').forEach((btn) => {

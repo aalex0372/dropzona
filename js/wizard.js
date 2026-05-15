@@ -7,6 +7,11 @@ import { WIZARD_STEPS } from './config.js';
 import { go } from './router.js';
 import { refreshIcons } from './utils.js';
 
+function updateFootCounter(step) {
+  const el = document.getElementById('gsiFootCounter');
+  if (el) el.textContent = 'Step ' + step + ' of ' + WIZARD_STEPS;
+}
+
 /**
  * Advance to next wizard step or finish and go to dashboard.
  */
@@ -29,6 +34,7 @@ export function wizNext() {
     if (wizPrevBtn) wizPrevBtn.style.visibility = 'visible';
     const wizNextBtn = document.getElementById('wizNextBtn');
     if (wizNextBtn) wizNextBtn.innerHTML = nextStep === WIZARD_STEPS ? 'Finish <i data-lucide="check" class="lc-sm"></i>' : 'Next <i data-lucide="arrow-right" class="lc-sm"></i>';
+    updateFootCounter(nextStep);
     refreshIcons();
   } else {
     go('s-dash');
@@ -56,5 +62,6 @@ export function wizPrev() {
   if (wizPrevBtn) wizPrevBtn.style.visibility = prevStep === 1 ? 'hidden' : 'visible';
   const wizNextBtn = document.getElementById('wizNextBtn');
   if (wizNextBtn) wizNextBtn.innerHTML = 'Next <i data-lucide="arrow-right" class="lc-sm"></i>';
+  updateFootCounter(prevStep);
   refreshIcons();
 }

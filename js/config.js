@@ -10,7 +10,7 @@ export const FEED_VIEWER_MAX = 15;
 export const FEED_STREAMER_MAX = 12;
 
 /** Number of wizard steps */
-export const WIZARD_STEPS = 4;
+export const WIZARD_STEPS = 3;
 
 /** Viewer feed list element id */
 export const FEED_LIST_ID = 'feedList';
