@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <base href="/"/>
   <script>
     (function(){
       var ua = navigator.userAgent || '';
@@ -27,7 +28,7 @@
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/main.css"/>
+  <link rel="stylesheet" href="/css/main.css"/>
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
@@ -510,7 +511,7 @@
   </div>
   <div class="cd">
     <div class="cd-h"><div class="cd-t"><i data-lucide="zap" class="lc-sm" style="color:var(--ac)"></i> Account & Actions</div></div>
-    <a class="menu-i" href="support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></a>
+    <a class="menu-i" href="/support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></a>
     <div class="menu-i" onclick="setRole('s')"><i data-lucide="radio" class="lc" style="color:var(--t3)"></i> Start Streaming <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
     <div class="menu-section-h">Danger Zone</div>
     <div class="menu-i menu-i-danger" onclick="if(confirm('Permanently delete your account? This cannot be undone — all drops, connections, and history will be erased.')) alert('Account deletion is not yet wired up.')"><i data-lucide="trash-2" class="lc" style="color:var(--rd)"></i> <span style="color:var(--t3)">Delete Account</span> <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
@@ -524,32 +525,85 @@
     <div style="width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--ac),#c084fc);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:#fff;box-shadow:0 0 30px var(--ac-g)" id="sProfileAva">XD</div>
     <div><div style="font-size:22px;font-weight:800;color:var(--t0)" id="sProfileName">xDreamer</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--t3);margin-top:2px" id="sProfileSince">Member since Jan 12, 2026</div></div>
   </div>
-  <div class="stats-wip-wrap mb">
-    <div class="stats stats-4">
-      <div class="sc"><div class="sc-ico pu"><i data-lucide="trophy" class="lc"></i></div><div class="sc-v">26</div><div class="sc-l">Drops received</div></div>
-      <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$142.80</div><div class="sc-l">Total Value</div></div>
-      <div class="sc"><div class="sc-ico cy"><i data-lucide="coins" class="lc"></i></div><div class="sc-v">$5.49</div><div class="sc-l">Avg. skin cost</div></div>
-      <div class="sc"><div class="sc-ico or"><i data-lucide="radio" class="lc"></i></div><div class="sc-v">12</div><div class="sc-l">Streams joined</div></div>
-    </div>
-    <div class="stats-wip-overlay"><span class="tag tag-wip"><i data-lucide="hard-hat" class="lc-sm"></i> COMING SOON</span></div>
+  <!-- Lifetime streamer stats (mirrors /app/s/history totals) -->
+  <div class="stats stats-4 mb">
+    <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v">847</div><div class="sc-l">Drops given</div></div>
+    <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$12,450</div><div class="sc-l">Total dropped</div></div>
+    <div class="sc"><div class="sc-ico or"><i data-lucide="radio" class="lc"></i></div><div class="sc-v">48</div><div class="sc-l">Streams launched</div></div>
+    <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">97%</div><div class="sc-l">Drop success rate</div></div>
   </div>
+  <!-- Channel + CS2 Agent -->
   <div class="g2 mb">
-    <div>
-      <div class="cd mb">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket" class="lc-sm" style="color:var(--ac)"></i> Drop Participation</div><span class="st st-off">Inactive</span></div>
-        <div style="padding:16px 20px;font-size:13px;color:var(--t2);line-height:1.5">Link your Twitch account and add your Steam Trade URL to participate in skin drops.</div>
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="twitch" class="lc-sm" style="color:var(--ac)"></i> Channel</div><span class="st st-on">Connected</span></div>
+      <div class="conn">
+        <div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div>
+        <div class="conn-info">
+          <div class="conn-t">Twitch · <span id="sProfileTwitchHandle">@xdreamer</span></div>
+          <div class="conn-d">Public channel page where viewers join your drops</div>
+        </div>
+        <a class="btn btn-p" id="sProfileTwitchOpen" href="https://twitch.tv/xdreamer" target="_blank" rel="noopener" style="font-size:11px"><i data-lucide="external-link" class="lc-sm"></i> Open</a>
       </div>
-      <div class="cd">
-        <div class="cd-h"><div class="cd-t"><i data-lucide="unplug" class="lc-sm" style="color:var(--ac)"></i> Connections</div></div>
-        <div class="conn"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch Account</div><div class="conn-d">Required to participate in drops</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
-        <div class="conn"><div class="conn-i stm"><i data-lucide="gamepad-2" class="lc"></i></div><div class="conn-info"><div class="conn-t">Steam Trade URL</div><div class="conn-d">Steam → Inventory → Trade Offers → "Who can send me trade offers?"</div></div><button class="btn btn-p"><i data-lucide="plus" class="lc-sm"></i> Add</button></div>
+      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-g" style="font-size:11px" onclick="(function(){var l=document.getElementById('sProfileTwitchOpen');if(l&&navigator.clipboard)navigator.clipboard.writeText(l.href);})()"><i data-lucide="link-2" class="lc-sm"></i> Copy public link</button>
+        <button class="btn btn-g" style="font-size:11px" onclick="go('s-dash')"><i data-lucide="layout-dashboard" class="lc-sm"></i> Open Dashboard</button>
       </div>
     </div>
-    <div>
-      <div class="cd">
-        <a class="menu-i" href="support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></a>
-        <div class="menu-i" onclick="setRole('v')"><i data-lucide="eye" class="lc" style="color:var(--t3)"></i> Switch to Viewer <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
-        <div class="menu-i" onclick="dropzonaLogout()" style="margin-top:8px;border-top:1px solid var(--br1);padding-top:14px"><i data-lucide="log-out" class="lc" style="color:var(--rd)"></i> <span style="color:var(--t3)">Log out</span> <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="cpu" class="lc-sm" style="color:var(--ac)"></i> CS2 Game Agent</div><span class="st st-on">Online</span></div>
+      <div class="conn">
+        <div class="conn-i" style="background:rgba(52,211,153,0.12);color:var(--gn)"><i data-lucide="activity" class="lc"></i></div>
+        <div class="conn-info">
+          <div class="conn-t">GSI heartbeat <span style="color:var(--t3);font-weight:500">— last event 12s ago</span></div>
+          <div class="conn-d">Threshold 5 min · Check <a href="/app/s/health" onclick="go('s-health');return false;" style="color:var(--ac);text-decoration:none">Health</a> for details</div>
+        </div>
+      </div>
+      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-p" style="font-size:11px" onclick="go('s-onboard')"><i data-lucide="rocket" class="lc-sm"></i> Setup Wizard</button>
+        <button class="btn btn-g" style="font-size:11px" onclick="go('s-health')"><i data-lucide="heart-pulse" class="lc-sm"></i> Open Health</button>
+      </div>
+    </div>
+  </div>
+  <!-- Wallet + Skin Pool snapshots (mirror /app/s/wallet and /app/s/pool) -->
+  <div class="g2 mb">
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="wallet" class="lc-sm" style="color:var(--ac)"></i> Wallet</div><div class="cd-a" onclick="go('s-wallet')">Open ›</div></div>
+      <div style="padding:18px 20px;display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Current balance</div>
+          <div style="font-size:24px;font-weight:800;color:var(--gn);margin-top:4px">$1,842.50</div>
+          <div class="sc-d up" style="margin-top:2px">↑ +$214.30 this week</div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Pending payouts</div>
+          <div style="font-size:24px;font-weight:800;color:var(--cy);margin-top:4px">$320</div>
+          <div style="font-size:11px;color:var(--t3);margin-top:2px">2 withdrawals processing</div>
+        </div>
+      </div>
+      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-p" style="font-size:11px" onclick="go('s-wallet')"><i data-lucide="arrow-down-circle" class="lc-sm"></i> Top up</button>
+        <button class="btn btn-g" style="font-size:11px" onclick="go('s-wallet')"><i data-lucide="arrow-up-circle" class="lc-sm"></i> Withdraw</button>
+      </div>
+    </div>
+    <div class="cd">
+      <div class="cd-h"><div class="cd-t"><i data-lucide="package" class="lc-sm" style="color:var(--ac)"></i> Skin Pool</div><div class="cd-a" onclick="go('s-pool')">Open ›</div></div>
+      <div style="padding:18px 20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">In pool</div>
+          <div style="font-size:22px;font-weight:800;color:var(--t0);margin-top:4px">34</div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Value</div>
+          <div style="font-size:22px;font-weight:800;color:var(--gn);margin-top:4px">$2,847</div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px">Reserved</div>
+          <div style="font-size:22px;font-weight:800;color:var(--or);margin-top:4px">3</div>
+        </div>
+      </div>
+      <div style="padding:14px 20px;border-top:1px solid var(--br1);display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-p" style="font-size:11px" onclick="go('s-pool')"><i data-lucide="plus" class="lc-sm"></i> Add skins</button>
+        <button class="btn btn-g" style="font-size:11px" onclick="go('s-triggers')"><i data-lucide="crosshair" class="lc-sm"></i> Triggers</button>
       </div>
     </div>
   </div>
@@ -606,7 +660,7 @@
   </div>
   <div class="cd">
     <div class="cd-h"><div class="cd-t"><i data-lucide="zap" class="lc-sm" style="color:var(--ac)"></i> Account & Actions</div></div>
-    <a class="menu-i" href="support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></a>
+    <a class="menu-i" href="/support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc" style="color:var(--t3)"></i> Support <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></a>
     <div class="menu-i" onclick="setRole('v')"><i data-lucide="eye" class="lc" style="color:var(--t3)"></i> Switch to Viewer <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
     <div class="menu-section-h">Danger Zone</div>
     <div class="menu-i menu-i-danger" onclick="if(confirm('Permanently delete your account? This cannot be undone — all drops, connections, and history will be erased.')) alert('Account deletion is not yet wired up.')"><i data-lucide="trash-2" class="lc" style="color:var(--rd)"></i> <span style="color:var(--t3)">Delete Account</span> <span class="mi-a"><i data-lucide="chevron-right" class="lc-sm"></i></span></div>
@@ -1428,6 +1482,6 @@
 
   </div>
 
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="/js/main.js"></script>
 </body>
 </html>

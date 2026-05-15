@@ -4,6 +4,18 @@
   "framework": null,
   "rewrites": [
     { "source": "/app", "destination": "/app.html" },
-    { "source": "/app/:path*", "destination": "/app.html" }
+    { "source": "/app/browse", "destination": "/app.html" },
+    { "source": "/app/followings", "destination": "/app.html" },
+    { "source": "/app/stream", "destination": "/app.html" },
+    { "source": "/app/my-drops", "destination": "/app.html" },
+    { "source": "/app/profile", "destination": "/app.html" },
+    { "source": "/app/s/dashboard", "destination": "/app.html" },
+    { "source": "/app/s/wallet", "destination": "/app.html" },
+    { "source": "/app/s/triggers", "destination": "/app.html" },
+    { "source": "/app/s/pool", "destination": "/app.html" },
+    { "source": "/app/s/history", "destination": "/app.html" },
+    { "source": "/app/s/health", "destination": "/app.html" },
+    { "source": "/app/s/profile", "destination": "/app.html" },
+    { "source": "/app/s/onboard", "destination": "/app.html" }
   ]
 }
