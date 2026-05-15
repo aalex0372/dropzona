@@ -23,7 +23,10 @@ Then open **http://localhost:3000**.
 
 ```
 dropzona/
-├── index.html          # Main SPA (browse, stream, my-drops, profile, streamer pages)
+├── index.html          # Marketing homepage (served at /)
+├── app.html            # Main SPA (browse, stream, my-drops, profile, streamer pages)
+├── login.html          # Login flow
+├── signup.html         # Signup flow
 ├── support.html        # Standalone support page (FAQ, Discord, email/X/Instagram)
 ├── css/main.css        # Styles (variables, ticker, stats, feed, skins, rarity colors)
 ├── js/

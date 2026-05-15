@@ -276,7 +276,7 @@ function initWalletTopup() {
  */
 function dropzonaLogout() {
   localStorage.removeItem('dropzona_auth');
-  window.location.href = 'landing.html';
+  window.location.href = '/';
 }
 
 /**

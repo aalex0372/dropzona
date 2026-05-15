@@ -30,7 +30,7 @@
 
     <!-- Top chrome -->
     <header class="relative flex w-full items-center justify-between px-5 py-4 sm:px-8">
-      <a href="landing.html" class="flex items-center gap-2.5">
+      <a href="/" class="flex items-center gap-2.5">
         <div class="from-primary shadow-primary/40 flex size-8 items-center justify-center rounded-lg bg-linear-[135deg] to-[#a78bfa] shadow-[0_0_20px]">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap stroke-white" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg>
         </div>
@@ -370,7 +370,7 @@
       localStorage.setItem('dropzona_auth', '1');
       localStorage.setItem('dropzona_role', isStreamer ? 's' : 'v');
     } catch(e){}
-    location.href = 'index.html';
+    location.href = 'app.html';
   }
   document.getElementById('viewer-continue').addEventListener('click', finish);
   document.getElementById('streamer-continue').addEventListener('click', finish);

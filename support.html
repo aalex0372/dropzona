@@ -269,13 +269,13 @@ textarea.form-input{min-height:100px;line-height:1.5}
 <!-- NAV -->
 <nav class="nav" id="nav">
   <div class="nav-in">
-    <a href="index.html" class="nav-brand">
+    <a href="/" class="nav-brand">
       <div class="nav-mark"><i data-lucide="zap"></i></div>
       <span class="nav-name">DROPZONE</span>
       <span class="nav-tag">BETA</span>
     </a>
     <div class="nav-right">
-      <a href="landing.html" class="nav-back" id="navBack"><i data-lucide="arrow-left"></i> Back to app</a>
+      <a href="/" class="nav-back" id="navBack"><i data-lucide="arrow-left"></i> Back to app</a>
     </div>
   </div>
 </nav>
@@ -381,7 +381,7 @@ textarea.form-input{min-height:100px;line-height:1.5}
 
 <!-- FOOTER -->
 <div class="foot">
-  <a href="landing.html" id="footBack">← Back to app</a> &nbsp;·&nbsp; © 2026 DROPZONE · Not affiliated with Valve
+  <a href="/" id="footBack">← Back to app</a> &nbsp;·&nbsp; © 2026 DROPZONE · Not affiliated with Valve
 </div>
 
 <script>
@@ -389,8 +389,8 @@ lucide.createIcons();
 
 // Auth-aware back links
 if(localStorage.getItem('dropzona_auth')){
-  var nb=document.getElementById('navBack');if(nb)nb.href='index.html';
-  var fb=document.getElementById('footBack');if(fb)fb.href='index.html';
+  var nb=document.getElementById('navBack');if(nb)nb.href='app.html';
+  var fb=document.getElementById('footBack');if(fb)fb.href='app.html';
 }
 
 // Nav scroll
