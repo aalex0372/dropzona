@@ -29,7 +29,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/skeleton/skeleton.css"/>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <script>try{document.documentElement.dataset.loading='true'}catch(_){}</script>
 </head>
 <body>
   <canvas id="gridCanvas"></canvas>
@@ -135,6 +137,7 @@
       </div>
     </div>
 
+<div id="app-skeleton" role="status" aria-busy="true" aria-live="polite" aria-label="Loading"></div>
 <div class="page page-settings-coming act" id="p-browse">
   <div class="settings-coming-in">
     <div class="icon-wrap"><i data-lucide="compass"></i></div>
@@ -1191,6 +1194,12 @@
 
   </div>
 
+  <script type="module">
+    import {mountAppSkeleton, unmountAppSkeleton} from '/skeleton/AppSkeleton.js';
+    import {autoUnmount} from '/skeleton/loader.js';
+    mountAppSkeleton();
+    autoUnmount(unmountAppSkeleton);
+  </script>
   <script type="module" src="/js/main.js"></script>
 </body>
 </html>

@@ -9,7 +9,7 @@
     "dev": "npx serve . -p 3000",
     "test": "node --experimental-vm-modules node_modules/vitest/vitest.mjs run",
     "test:watch": "node --experimental-vm-modules node_modules/vitest/vitest.mjs",
-    "lint": "eslint js/ --no-warn-ignored"
+    "lint": "eslint js/ skeleton/ --no-warn-ignored"
   },
   "devDependencies": {
     "eslint": "^9.0.0",

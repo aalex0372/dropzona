@@ -21,8 +21,11 @@
     .auth-input-error{border-color:rgba(244,63,94,.55)!important;color:rgba(252,165,165,.95)!important}
     .auth-input-error::placeholder{color:rgba(244,63,94,.4)!important}
   </style>
+  <script>try{document.documentElement.dataset.loading='true'}catch(_){}</script>
+  <link rel="stylesheet" href="skeleton/skeleton.css"/>
 </head>
 <body class="antialiased">
+  <div id="login-skeleton" role="status" aria-busy="true" aria-live="polite" aria-label="Loading sign in"></div>
   <main class="from-background to-background-darken relative flex max-h-screen min-h-screen w-full flex-col overflow-y-auto bg-linear-150">
     <!-- Ambient context -->
     <div class="bg-primary/8 pointer-events-none fixed -top-40 left-[15%] -z-10 size-[560px] rounded-full blur-[140px]"></div>
@@ -389,6 +392,12 @@
     }
   })();
 })();
+</script>
+<script type="module">
+import {mountLoginSkeleton, unmountLoginSkeleton} from '/skeleton/LoginSkeleton.js';
+import {autoUnmount} from '/skeleton/loader.js';
+mountLoginSkeleton();
+autoUnmount(unmountLoginSkeleton);
 </script>
 </body>
 </html>

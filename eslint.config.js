@@ -4,7 +4,7 @@ export default [
   { ignores: ['js/app.js', 'mobile/**'] },
   js.configs.recommended,
   {
-    files: ['js/**/*.js'],
+    files: ['js/**/*.js', 'skeleton/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
