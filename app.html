@@ -9,7 +9,11 @@
       var ua = navigator.userAgent || '';
       var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
       if (isMobile && !/\/mobile\/?/.test(location.pathname) && !location.search.includes('desktop=1')) {
-        location.replace(location.origin + '/mobile/');
+        // Preserve the originally requested path so the mobile build can
+        // resolve it (e.g. a friend's link to /app/s/wallet shouldn't dump
+        // the user on the mobile home page).
+        var from = encodeURIComponent(location.pathname + location.search + location.hash);
+        location.replace(location.origin + '/mobile/?from=' + from);
       }
       if (!localStorage.getItem('dropzona_auth')) {
         location.replace('/');

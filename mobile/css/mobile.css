@@ -2,9 +2,11 @@
 :root {
   --ac: #8b5cf6;
   --ac2: #7c3aed;
+  --ac3: #6d28d9;
   --ac-g: rgba(139, 92, 246, 0.25);
   --ac-s: rgba(139, 92, 246, 0.06);
   --ac-s2: rgba(139, 92, 246, 0.12);
+  --br-ac: rgba(139, 92, 246, 0.3);
   --cy: #22d3ee;
   --cy-s: rgba(34, 211, 238, 0.1);
   --gn: #34d399;
@@ -13,12 +15,14 @@
   --rd-s: rgba(244, 63, 94, 0.1);
   --or: #f59e0b;
   --or-s: rgba(245, 158, 11, 0.1);
+  --gd: #fbbf24;
   --pk: #ec4899;
   --b0: #06060b;
   --b1: #0c0c14;
   --b2: #12121c;
   --b3: #1a1a28;
   --bc: #111119;
+  --be: #1e1e2a;
   --br0: rgba(255, 255, 255, 0.04);
   --br1: rgba(255, 255, 255, 0.07);
   --br2: rgba(255, 255, 255, 0.12);
@@ -57,15 +61,33 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.mesh {
+body::after {
+  content: '';
   position: fixed;
-  border-radius: 50%;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
-  z-index: 0;
-  filter: blur(100px);
+  z-index: 9999;
+  opacity: 0.5;
 }
-.mesh-1 { top: -20%; left: -20%; width: 400px; height: 400px; background: rgba(139, 92, 246, 0.06); }
-.mesh-2 { bottom: -20%; right: -20%; width: 300px; height: 300px; background: rgba(34, 211, 238, 0.03); }
+.orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+.orb-1 { width: 380px; height: 380px; top: -10%; left: -25%; background: rgba(139, 92, 246, 0.10); animation: orbFloat 20s ease-in-out infinite; }
+.orb-2 { width: 300px; height: 300px; bottom: -15%; right: -20%; background: rgba(34, 211, 238, 0.06); animation: orbFloat 25s ease-in-out infinite reverse; }
+.orb-3 { width: 220px; height: 220px; top: 45%; left: 40%; background: rgba(236, 72, 153, 0.05); animation: orbFloat 18s ease-in-out infinite 5s; }
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, -30px) scale(1.04); }
+  50% { transform: translate(-15px, 22px) scale(0.97); }
+  75% { transform: translate(28px, 14px) scale(1.02); }
+}
+.grain {
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: 0.3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+/* Honour reduced-motion: kill orb drift */
+@media (prefers-reduced-motion: reduce) {
+  .orb { animation: none; }
+}
 
 .lc { width: 20px; height: 20px; stroke-width: 2; flex-shrink: 0; }
 .lc-sm { width: 16px; height: 16px; stroke-width: 2; }
@@ -1373,4 +1395,155 @@ pre, code, kbd { overflow-wrap: anywhere; }
     transition-duration: 0.001ms !important;
   }
   .ticker-scroll { animation: none; }
+}
+
+/* =====================================================================
+ * Desktop-consistency refactor
+ * Brings mobile components in line with the desktop visual system —
+ * card radii, padding, icon sizes, accent glows, hover/active states.
+ * Appended last so its rules win over the original block above.
+ * ===================================================================== */
+
+/* Topbar — keep title scale tight, gradient-aware live chip */
+.topbar { border-bottom-color: var(--br1); }
+.pg-t { font-size: 17px; letter-spacing: -0.01em; }
+.pg-sub { font-size: 10.5px; }
+.live-chip { padding: 5px 11px; letter-spacing: 0.5px; border-color: rgba(244, 63, 94, 0.2); }
+.menu-btn { width: 40px; height: 40px; border-radius: 10px; }
+
+/* Cards — 16px radius, deeper border presence, refined headers */
+.cd { border-radius: 16px; }
+.cd-h { padding: 16px 18px; }
+.cd-t { font-size: 13px; letter-spacing: 0.1px; }
+.cd-t .ac { color: var(--ac); }
+.cd-t .cnt { padding: 3px 9px; border-radius: 7px; }
+.cd-p { padding: 18px; }
+
+/* Stat cards — bigger value type, larger icon, subtle accent top-line */
+.sc {
+  border-radius: 16px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.sc::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ac-g), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.sc:active { border-color: var(--br2); transform: translateY(-1px); }
+.sc:active::before { opacity: 1; }
+.sc-ico {
+  width: 36px; height: 36px; border-radius: 9px;
+  margin-bottom: 12px;
+}
+.sc-ico .lc { width: 18px; height: 18px; }
+.sc-v { font-size: 24px; line-height: 1; }
+.sc-l { font-size: 11.5px; margin-top: 6px; }
+.sc-d { font-size: 10.5px; margin-top: 8px; }
+
+/* Buttons — match desktop scale + active accent glow */
+.btn { border-radius: 10px; font-size: 13px; padding: 10px 16px; }
+.btn-p:active { background: var(--ac2); box-shadow: 0 0 16px var(--ac-g); }
+.btn-g:active { background: var(--b3); border-color: var(--br2); color: var(--t0); }
+.btn.small { font-size: 11.5px; padding: 6px 12px; min-height: 36px; border-radius: 8px; }
+
+/* Connection rows — desktop spacing & 12px-radius icon tiles */
+.conn { gap: 14px; padding: 16px 18px; transition: background 0.15s; }
+.conn:active { background: rgba(255,255,255,0.015); }
+.conn-i { width: 44px; height: 44px; border-radius: 12px; }
+.conn-t { font-size: 13px; }
+.conn-d { font-size: 11px; margin-top: 2px; line-height: 1.4; }
+
+/* Menu rows — match desktop pad/gap and accent on tap */
+.menu-list { border-radius: 16px; }
+.menu-i { gap: 14px; padding: 14px 18px; transition: background 0.15s; }
+.menu-i:active { background: rgba(255,255,255,0.025); }
+.menu-i .lc { width: 18px; height: 18px; }
+.menu-i .mi-a .lc-sm { width: 14px; height: 14px; }
+
+/* Feed rows — desktop tap feedback */
+.feed-r { padding: 12px 18px; transition: background 0.15s; }
+.feed-r:active { background: rgba(255,255,255,0.02); }
+
+/* Trigger rows — match conn/feed scale */
+.trig-r { padding: 14px 18px; gap: 14px; }
+.trig-ico { width: 36px; height: 36px; border-radius: 9px; }
+.trig-rng { font-size: 11px; padding: 4px 9px; border-radius: 7px; }
+
+/* Health rows */
+.health-r { padding: 14px 18px; gap: 14px; }
+
+/* Drop history rows */
+.drop-row { padding: 14px 18px; gap: 10px; }
+
+/* Profile hero — match desktop's larger gradient avatar with glow */
+.profile-hero {
+  padding: 20px;
+  border-radius: 18px;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(139,92,246,0.06), rgba(139,92,246,0.0)) , var(--bc);
+}
+.profile-ava {
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  font-size: 24px;
+  box-shadow: 0 0 28px var(--ac-g);
+}
+.profile-name { font-size: 20px; font-weight: 800; }
+.profile-meta { font-size: 11.5px; margin-top: 4px; }
+
+/* Sectional gradient text accent (matches desktop's "coming soon" treatment) */
+.settings-coming-title span,
+.profile-name-grad {
+  background: linear-gradient(135deg, var(--ac), #c084fc, var(--cy));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Stream cards — softer border, refined avatar tile */
+.str-c { border-radius: 16px; }
+.str-prev { border-radius: 16px 16px 0 0; }
+.str-meta { padding: 14px 16px; gap: 14px; border-radius: 0 0 16px 16px; }
+.str-ava { width: 42px; height: 42px; border-radius: 11px; font-size: 15px; }
+.str-name { font-size: 14.5px; letter-spacing: -0.01em; }
+
+/* Following chips — slightly chunkier for taps */
+.following-chip { padding: 7px 12px; border-radius: 22px; }
+
+/* Tag-wip / status pills — match desktop letter-spacing & sizing */
+.tag.tag-wip { padding: 6px 13px; letter-spacing: 1px; margin-bottom: 0; }
+.st { padding: 4px 11px; border-radius: 22px; font-size: 10.5px; letter-spacing: 0.3px; }
+
+/* Drawer — slightly larger touch targets + cleaner nav rows */
+.drawer-nav .ni { padding: 12px 14px; border-radius: 10px; font-size: 13.5px; min-height: 44px; }
+.drawer-nav .ni .badge { padding: 3px 9px; border-radius: 12px; font-size: 10px; }
+.drawer-h { padding: 18px 16px; }
+.s-name { font-size: 14px; letter-spacing: 2px; }
+.s-mark { width: 36px; height: 36px; border-radius: 10px; box-shadow: 0 0 18px var(--ac-g); }
+
+/* Bottom nav — refined active state */
+.bottom-nav { border-top-color: var(--br1); }
+.bn-i { font-size: 10px; font-weight: 600; letter-spacing: 0.2px; transition: color 0.15s; }
+.bn-i.active { color: var(--ac); }
+.bn-i.active .bn-ico { filter: drop-shadow(0 0 8px var(--ac-g)); }
+
+/* Form fields — match desktop's focus ring */
+.fi { border-radius: 10px; padding: 12px 14px; transition: border-color 0.2s, box-shadow 0.2s; }
+.fi:focus { border-color: var(--br-ac); box-shadow: 0 0 0 3px var(--ac-s); }
+.fl { letter-spacing: 1.4px; text-transform: uppercase; font-size: 10px; }
+
+/* Drop history mobile-specific header padding bump */
+#p-s-hist .s-hist-date { font-size: 10.5px; }
+
+/* Game chip in wallet — soft gradient when active */
+.game-chip.active {
+  background: linear-gradient(135deg, var(--ac-s2), var(--ac-s));
+  border-color: var(--ac);
+  box-shadow: 0 0 14px var(--ac-g);
 }

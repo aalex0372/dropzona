@@ -604,7 +604,7 @@ function checkGsiConnection() {
   }, 1400);
 }
 
-function setRole(r) {
+function setRole(r, landPageId) {
   role = r;
   localStorage.setItem('dropzona_role', r);
   const roleSl = document.getElementById('roleSl');
@@ -640,8 +640,57 @@ function setRole(r) {
       if (typeof lucide !== 'undefined') lucide.createIcons();
     }
   }
-  go(r === 'v' ? 'browse' : 's-dash');
+  go(landPageId || (r === 'v' ? 'browse' : 's-dash'));
   if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+/**
+ * Resolve a desktop /app URL path to the equivalent mobile pageId so that
+ * shared links land on the right screen instead of dumping the user on
+ * the home page.
+ */
+const DESKTOP_PATH_TO_PAGE = {
+  '/app': 'browse',
+  '/app/browse': 'browse',
+  '/app/followings': 'browse',
+  '/app/stream': 'stream',
+  '/app/my-drops': 'my-drops',
+  '/app/profile': 'profile',
+  '/app/s/dashboard': 's-dash',
+  '/app/s/wallet': 's-wallet',
+  '/app/s/triggers': 's-triggers',
+  '/app/s/history': 's-hist',
+  '/app/s/health': 's-health',
+  '/app/s/profile': 's-profile',
+  '/app/s/onboard': 's-onboard',
+};
+
+function resolveDeepLink() {
+  let from = null;
+  try {
+    from = new URL(window.location.href).searchParams.get('from');
+  } catch (_e) {
+    return;
+  }
+  if (!from) return;
+  let decoded;
+  try { decoded = decodeURIComponent(from); } catch (_e) { return; }
+  const path = decoded.split('?')[0].split('#')[0].replace(/\/+$/, '') || '/';
+  const pageId = DESKTOP_PATH_TO_PAGE[path];
+
+  // Clean the ?from off the URL so refresh doesn't re-route.
+  try {
+    const clean = window.location.origin + window.location.pathname;
+    window.history.replaceState({}, '', clean);
+  } catch (_e) { /* noop */ }
+
+  if (!pageId || !PM[pageId]) return;
+  // Streamer pages: switch role at the same time so the nav matches.
+  if (pageId.startsWith('s-') && role !== 's') {
+    setRole('s', pageId);
+  } else {
+    go(pageId);
+  }
 }
 
 function updateBottomNav() {
@@ -1066,6 +1115,10 @@ function init() {
   // Restore saved role preference (streamer vs viewer)
   const savedRole = localStorage.getItem('dropzona_role');
   if (savedRole === 's') setRole('s');
+
+  // Resolve deep-link from desktop redirect (?from=/app/...) so shared
+  // desktop URLs land on the correct mobile screen.
+  resolveDeepLink();
 
   const msgs = [
     '<b>AlexPlays</b> — Triple kill on Mirage! Drop activated',
