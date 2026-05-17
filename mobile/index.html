@@ -269,13 +269,52 @@
       </div>
     </div>
 
+    <!-- Streamer profile — mirror of viewer profile, streamer-flavored stats + Steam Account (no Trade URL) -->
+    <div class="page" id="p-s-profile">
+      <div class="profile-hero mb">
+        <div class="profile-ava" id="sProfileAva">XD</div>
+        <div class="profile-info">
+          <div class="profile-name" id="sProfileName">xDreamer</div>
+          <div class="profile-meta" id="sProfileSince">Member since Jan 12, 2026</div>
+        </div>
+      </div>
+      <div class="stats-wip-wrap mb">
+        <div class="stats stats-4">
+          <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v">847</div><div class="sc-l">Drops given</div></div>
+          <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$12,450</div><div class="sc-l">Total dropped</div></div>
+          <div class="sc"><div class="sc-ico or"><i data-lucide="radio" class="lc"></i></div><div class="sc-v">48</div><div class="sc-l">Streams launched</div></div>
+          <div class="sc"><div class="sc-ico cy"><i data-lucide="trending-up" class="lc"></i></div><div class="sc-v">97%</div><div class="sc-l">Success rate</div></div>
+        </div>
+        <div class="stats-wip-overlay"><span class="tag tag-wip"><i data-lucide="hard-hat" class="lc-sm"></i> COMING SOON</span></div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="ticket" class="lc-sm ac"></i> Drop Participation</div><span class="st st-on">Active</span></div>
+        <div class="cd-p muted">You're set up to give drops on your streams. Drops are funded from your wallet — we buy the skins and ship them to your viewers when a trigger fires.</div>
+      </div>
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t"><i data-lucide="unplug" class="lc-sm ac"></i> Connections</div></div>
+        <div class="conn"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch Account</div><div class="conn-d">Required to run drops on your channel</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+        <div class="conn"><div class="conn-i stm"><i data-lucide="gamepad-2" class="lc"></i></div><div class="conn-info"><div class="conn-t">Steam Account</div><div class="conn-d">Used to verify your identity and link your CS2 in-game events</div></div><button class="btn btn-p"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+      </div>
+      <div class="menu-list">
+        <a class="menu-i" href="../support.html" style="text-decoration:none;color:inherit;display:flex;align-items:center"><i data-lucide="life-buoy" class="lc"></i> Support <i data-lucide="chevron-right" class="lc-sm mi-a"></i></a>
+        <div class="menu-i" onclick="setRole('v')"><i data-lucide="eye" class="lc"></i> Switch to Viewer <i data-lucide="chevron-right" class="lc-sm mi-a"></i></div>
+        <div class="menu-section-h">Danger Zone</div>
+        <div class="menu-i menu-i-danger" onclick="if(confirm('Permanently delete your account? This cannot be undone — all drops, connections, and history will be erased.')) alert('Account deletion is not yet wired up.')"><i data-lucide="trash-2" class="lc" style="color:var(--rd)"></i> <span style="color:var(--t3)">Delete Account</span> <i data-lucide="chevron-right" class="lc-sm mi-a"></i></div>
+        <div class="menu-i menu-i-danger" onclick="dropzonaLogout()"><i data-lucide="log-out" class="lc" style="color:var(--rd)"></i> <span style="color:var(--t3)">Log out</span> <i data-lucide="chevron-right" class="lc-sm mi-a"></i></div>
+      </div>
+    </div>
+
     <!-- Streamer pages -->
     <div class="page" id="p-s-dash">
-      <div class="stats stats-4 mb">
-        <div class="sc"><div class="sc-ico rd"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" style="color:var(--rd)">LIVE</div><div class="sc-l">Stream Status</div><div class="sc-d up">↑ 1h 23m online</div></div>
-        <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sDashDrops">23</div><div class="sc-l">Drops Today</div><div class="sc-d up">↑ 8 last hour</div></div>
-        <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v" id="sDashVal">$340</div><div class="sc-l">Value Today</div></div>
-        <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="sDashView">1,240</div><div class="sc-l">Viewers</div><div class="sc-d up">↑ 18%</div></div>
+      <div class="stats-wip-wrap mb">
+        <div class="stats stats-4">
+          <div class="sc"><div class="sc-ico rd"><i data-lucide="radio" class="lc"></i></div><div class="sc-v" style="color:var(--rd)">LIVE</div><div class="sc-l">Stream Status</div><div class="sc-d up">↑ 1h 23m online</div></div>
+          <div class="sc"><div class="sc-ico pu"><i data-lucide="gift" class="lc"></i></div><div class="sc-v" id="sDashDrops">23</div><div class="sc-l">Drops Today</div><div class="sc-d up">↑ 8 last hour</div></div>
+          <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v" id="sDashVal">$340</div><div class="sc-l">Value Today</div></div>
+          <div class="sc"><div class="sc-ico or"><i data-lucide="users" class="lc"></i></div><div class="sc-v" id="sDashView">1,240</div><div class="sc-l">Viewers</div><div class="sc-d up">↑ 18%</div></div>
+        </div>
+        <div class="stats-wip-overlay"><span class="tag tag-wip"><i data-lucide="hard-hat" class="lc-sm"></i> COMING SOON</span></div>
       </div>
       <div class="cd mb">
         <div class="cd-h"><div class="cd-t"><i data-lucide="activity" class="lc-sm ac"></i> Event Feed <span class="cnt">Live</span></div><button class="btn btn-g small" onclick="simulateTrigger()"><i data-lucide="flask-conical" class="lc-sm"></i> Test Trigger</button></div>
@@ -293,6 +332,144 @@
         <div class="trig-r"><div class="trig-ico" style="background:var(--cy-s);color:var(--cy)"><i data-lucide="bomb" class="lc"></i></div><div class="trig-info"><div class="trig-n">bomb planted</div></div><div class="trig-rng">$30–90</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         <div class="trig-r"><div class="trig-ico" style="background:var(--gn-s);color:var(--gn)"><i data-lucide="shield-check" class="lc"></i></div><div class="trig-info"><div class="trig-n">Bomb Defused</div></div><div class="trig-rng">$35–100</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
         <div class="trig-r"><div class="trig-ico" style="background:rgba(59,130,246,.1);color:#3b82f6"><i data-lucide="award" class="lc"></i></div><div class="trig-info"><div class="trig-n">MVP</div></div><div class="trig-rng">$45–130</div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+    </div>
+
+    <!-- Streamer wallet -->
+    <div class="page" id="p-s-wallet">
+      <div class="stats stats-4 mb">
+        <div class="sc"><div class="sc-ico gn"><i data-lucide="wallet" class="lc"></i></div><div class="sc-v">$1,842.50</div><div class="sc-l">Current Balance</div><div class="sc-d up">↑ +$214.30 this week</div></div>
+        <div class="sc"><div class="sc-ico pu"><i data-lucide="arrow-down-circle" class="lc"></i></div><div class="sc-v">$3,980</div><div class="sc-l">Top Ups (30d)</div></div>
+        <div class="sc"><div class="sc-ico or"><i data-lucide="arrow-up-circle" class="lc"></i></div><div class="sc-v">$2,410</div><div class="sc-l">Withdrawn (30d)</div></div>
+        <div class="sc"><div class="sc-ico cy"><i data-lucide="clock-3" class="lc"></i></div><div class="sc-v">$320</div><div class="sc-l">Pending Payouts</div></div>
+      </div>
+
+      <div class="cd mb">
+        <div class="cd-h"><div class="cd-t" id="walletModeTitle"><i data-lucide="plus-circle" class="lc-sm ac"></i> Top Up</div></div>
+        <div class="cd-p">
+          <div class="fg">
+            <label class="fl">Choose crypto</label>
+            <div class="wallet-crypto-row">
+              <button type="button" class="game-chip active wallet-crypto-btn" data-crypto="TRC-20" data-rate="1">
+                <span class="game-chip-icon"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ef1f5a'/%3E%3Cpath d='M20 24h40l20 18-30 36-30-54Zm8 7 23 42 21-25-16-14-28-3Zm6 4 20 2 9 8-13 16-16-26Z' fill='none' stroke='%23fff' stroke-width='4' stroke-linejoin='round'/%3E%3C/svg%3E" alt="TRC-20"/></span>
+                <span>TRC-20</span>
+              </button>
+              <button type="button" class="game-chip wallet-crypto-btn" data-crypto="ERC-20" data-rate="1">
+                <span class="game-chip-icon"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 417'%3E%3Cpath fill='%23627EEA' d='M127.9 0 124.8 10.7v272.7l3.1 3.1 127.9-75.6z'/%3E%3Cpath fill='%238CA2F8' d='M127.9 0 0 210.9l127.9 75.6V154.2z'/%3E%3Cpath fill='%23627EEA' d='m127.9 310.8-1.7 2v97.1l1.7 4.9L256 234.7z'/%3E%3Cpath fill='%238CA2F8' d='M127.9 414.8V310.8L0 234.7z'/%3E%3Cpath fill='%23454A75' d='M127.9 286.5 256 210.9 127.9 154.2z'/%3E%3Cpath fill='%235F6FB2' d='m0 210.9 127.9 75.6V154.2z'/%3E%3C/svg%3E" alt="ERC-20"/></span>
+                <span>ERC-20</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="walletTopupView">
+            <div class="fg">
+              <label class="fl">Enter your amount</label>
+              <input id="walletAmountInput" class="fi" type="number" min="10" step="1" value="100" inputmode="decimal" enterkeyhint="done"/>
+              <div class="wallet-hint" id="walletAmountConverted">~ TRC-20 100.0000000</div>
+            </div>
+
+            <div class="wallet-quick-grid">
+              <button type="button" class="btn btn-g wallet-quick-btn" data-amount="20">$20</button>
+              <button type="button" class="btn btn-g wallet-quick-btn" data-amount="40">$40</button>
+              <button type="button" class="btn btn-g wallet-quick-btn" data-amount="80">$80</button>
+              <button type="button" class="btn btn-p wallet-quick-btn" data-amount="100">$100</button>
+              <button type="button" class="btn btn-g wallet-quick-btn" data-amount="150">$150</button>
+              <button type="button" class="btn btn-g wallet-quick-btn" data-amount="200">$200</button>
+              <button type="button" class="btn btn-g wallet-quick-btn" data-amount="250">$250</button>
+              <button type="button" class="btn btn-g wallet-quick-btn" data-amount="300">$300</button>
+            </div>
+
+            <div class="sc wallet-gets-card">
+              <div class="sc-l" style="margin-top:0">Market balance gets</div>
+              <div class="sc-v" id="walletGetsVal" style="font-size:28px;margin-top:6px">$98.27</div>
+            </div>
+
+            <button id="walletDepositBtn" type="button" class="btn btn-p btn-w mb"><i data-lucide="qr-code" class="lc-sm"></i> Generate Deposit Invoice</button>
+            <button id="walletOpenWithdrawBtn" type="button" class="btn btn-g btn-w"><i data-lucide="send" class="lc-sm"></i> Withdraw</button>
+          </div>
+
+          <div id="walletWithdrawView" style="display:none">
+            <div class="fg">
+              <label class="fl">Enter withdrawal amount</label>
+              <input id="walletWithdrawAmountInput" class="fi" type="number" min="10" step="1" value="100" inputmode="decimal" enterkeyhint="done"/>
+              <div class="wallet-hint" id="walletWithdrawConverted">~ TRC-20 100.0000000</div>
+            </div>
+
+            <div class="fg">
+              <label class="fl">Wallet address</label>
+              <input id="walletAddressInput" class="fi wallet-addr-input" type="text" placeholder="Paste your withdrawal wallet address" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"/>
+              <div class="wallet-hint">Only send to a compatible <span id="walletAddressNetworkHint">TRC-20</span> address.</div>
+            </div>
+
+            <div class="wallet-review" aria-live="polite">
+              <div class="wallet-review-row"><span>Network fee</span><strong id="walletFeeVal">$1.73</strong></div>
+              <div class="wallet-review-row"><span>You will receive</span><strong id="walletReceiveVal">$98.27</strong></div>
+            </div>
+
+            <button id="walletBackToTopupBtn" type="button" class="btn btn-g btn-w mb"><i data-lucide="arrow-left" class="lc-sm"></i> Back to Top Up</button>
+            <button id="walletWithdrawBtn" type="button" class="btn btn-p btn-w"><i data-lucide="send" class="lc-sm"></i> Submit Withdrawal</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cd">
+        <div class="cd-h">
+          <div class="cd-t"><i data-lucide="scroll-text" class="lc-sm ac"></i> Wallet Transactions</div>
+          <div style="display:flex;gap:8px"><button class="btn btn-g small"><i data-lucide="filter" class="lc-sm"></i> Filter</button><button class="btn btn-g small"><i data-lucide="download" class="lc-sm"></i> Export</button></div>
+        </div>
+        <div class="wallet-tx-table-wrap">
+          <table class="wallet-tx-table">
+            <thead><tr><th>Time</th><th>Dir</th><th>Hash</th><th>Status</th><th>Amount</th></tr></thead>
+            <tbody>
+              <tr><td class="wallet-tx-time">2026-03-27 13:18</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">9f2a…c1b7</span><button type="button" class="wallet-hash-copy" data-hash="9f2a7cb10ee44f95c8f32f29b1f3aa77c1b7">Copy</button></td><td><span class="st st-on">Confirmed</span></td><td class="wallet-tx-pos">+250.0000 USDT</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-27 09:04</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">b3aa…89d2</span><button type="button" class="wallet-hash-copy" data-hash="b3aa4df71d4f28f1783eafc40b807f3f89d2">Copy</button></td><td><span class="st st-wait">Broadcasting</span></td><td class="wallet-tx-neg">-320.0000 USDT</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-26 22:11</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0x7d2e…14ff</span><button type="button" class="wallet-hash-copy" data-hash="0x7d2e18f0a99278b4fbb11d47cc2e7e9214ff">Copy</button></td><td><span class="st st-on">Confirmed</span></td><td class="wallet-tx-pos">+600.0000 USDC</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-26 17:39</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0x22be…ec61</span><button type="button" class="wallet-hash-copy" data-hash="0x22be64d5a7ec72bc93490e81aa0b39c9ec61">Copy</button></td><td><span class="st st-on">Completed</span></td><td class="wallet-tx-neg">-210.0000 USDT</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-25 20:53</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">f114…a7ce</span><button type="button" class="wallet-hash-copy" data-hash="f11408eac9b4fd1b13a66e7dd9832433a7ce">Copy</button></td><td><span class="st st-on">Confirmed</span></td><td class="wallet-tx-pos">+180.0000 USDT</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-25 11:18</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">6ce1…5d91</span><button type="button" class="wallet-hash-copy" data-hash="6ce188210efa45a31ac2149b5ee446805d91">Copy</button></td><td><span class="st st-wait">Pending</span></td><td class="wallet-tx-neg">-95.0000 USDT</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-24 18:43</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">0xc9d4…7a3e</span><button type="button" class="wallet-hash-copy" data-hash="0xc9d4ac8f2b106ce7112c3ec9f1f58ee07a3e">Copy</button></td><td><span class="st st-on">Confirmed</span></td><td class="wallet-tx-pos">+260.0000 USDC</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-24 12:04</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">ad93…0ee4</span><button type="button" class="wallet-hash-copy" data-hash="ad937f20b41f6af0e143ca34d5f951aa0ee4">Copy</button></td><td><span class="st st-off">Rejected</span></td><td class="wallet-tx-neg">-0.00620 BTC</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-23 16:27</td><td>Deposit</td><td class="wallet-hash-cell"><span class="wallet-hash-val">3a0b…30c6</span><button type="button" class="wallet-hash-copy" data-hash="3a0b02d8617ed26ba9140e8c5c39ab2130c6">Copy</button></td><td><span class="st st-on">Confirmed</span></td><td class="wallet-tx-pos">+340.0000 USDT</td></tr>
+              <tr><td class="wallet-tx-time">2026-03-22 10:12</td><td>Withdraw</td><td class="wallet-hash-cell"><span class="wallet-hash-val">41d0…b88f</span><button type="button" class="wallet-hash-copy" data-hash="41d0f7bba8ce129a5de9bf1c44e9aeb8b88f">Copy</button></td><td><span class="st st-wait">Queued</span></td><td class="wallet-tx-neg">-88.0000 USDT</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="wallet-modal-backdrop" id="walletDepositModal" style="display:none">
+        <div class="wallet-modal-card" role="dialog" aria-modal="true" aria-labelledby="walletDepositTitle">
+          <div class="wallet-modal-warning">
+            <i data-lucide="info" class="lc-sm"></i>
+            <span id="walletDepositWarningText">Only send TRC-20 assets to this address. Other assets will be lost forever.</span>
+          </div>
+          <div class="wallet-modal-body">
+            <h3 id="walletDepositTitle" class="wallet-modal-title">Deposit invoice</h3>
+            <button type="button" class="btn btn-g wallet-modal-close" id="walletDepositClose" aria-label="Close deposit modal">×</button>
+            <div class="wallet-coin-row">
+              <span class="wallet-coin-mark" id="walletDepositCoinMark">T</span>
+              <span class="wallet-coin-ticker" id="walletDepositNetworkLabel">TRC-20</span>
+              <span class="wallet-coin-name" id="walletDepositNetworkName">TRON</span>
+            </div>
+
+            <div class="wallet-qr-card">
+              <div class="wallet-qr-box" aria-hidden="true"><i data-lucide="qr-code" class="lc"></i></div>
+              <div class="wallet-deposit-address" id="walletDepositAddress">TXf2mV...dropzona...a9K2</div>
+            </div>
+
+            <div class="wallet-amount-line">
+              <strong id="walletDepositExpectedCrypto">100 USDT</strong>
+              <span>≈</span>
+              <strong id="walletDepositExpected">$100.00</strong>
+              <button type="button" class="wallet-amount-clear" id="walletDepositCloseInline" aria-label="Close">×</button>
+            </div>
+
+            <div class="wallet-modal-actions">
+              <button type="button" class="wallet-modal-action" id="walletDepositCopyBtn"><i data-lucide="copy" class="lc"></i><span>Copy</span></button>
+              <button type="button" class="wallet-modal-action" id="walletDepositSetAmountBtn"><i data-lucide="arrow-down" class="lc"></i><span>Set Amount</span></button>
+              <button type="button" class="wallet-modal-action" id="walletDepositShareBtn"><i data-lucide="share-2" class="lc"></i><span>Share</span></button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -331,51 +508,91 @@
     </div>
 
     <div class="page" id="p-s-onboard">
-      <div class="wiz">
-        <div class="wiz-steps" id="wizSteps">
-          <div class="wiz-step cur"><div class="wiz-num">1</div><div class="wiz-lbl">Twitch</div></div>
-          <div class="wiz-step"><div class="wiz-num">2</div><div class="wiz-lbl">Steam Bot</div></div>
-          <div class="wiz-step"><div class="wiz-num">3</div><div class="wiz-lbl">CS2 Agent</div></div>
+      <div class="wiz gsi-wiz">
+        <div class="wiz-steps gsi-stepper" id="wizSteps">
+          <div class="wiz-step cur">
+            <div class="wiz-num"><span class="wiz-num-n">1</span><i data-lucide="check" class="lc-sm wiz-num-c"></i></div>
+            <div class="wiz-lbl">Download</div>
+          </div>
+          <div class="wiz-step">
+            <div class="wiz-num"><span class="wiz-num-n">2</span><i data-lucide="check" class="lc-sm wiz-num-c"></i></div>
+            <div class="wiz-lbl">Place file</div>
+          </div>
+          <div class="wiz-step">
+            <div class="wiz-num"><span class="wiz-num-n">3</span><i data-lucide="check" class="lc-sm wiz-num-c"></i></div>
+            <div class="wiz-lbl">Launch CS2</div>
+          </div>
         </div>
+
         <div class="wiz-body">
           <div class="wiz-panel" id="wiz-1">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="twitch" class="lc-sm" style="color:#9146ff"></i> Step 1: Connect Twitch</div></div>
-              <div class="cd-p"><p class="muted">We need access to your Twitch channel to track stream status, viewers, and chat activity.</p>
-                <div class="conn" style="border:1px solid var(--br1);border-radius:12px;padding:16px;margin-bottom:16px"><div class="conn-i tw"><i data-lucide="twitch" class="lc"></i></div><div class="conn-info"><div class="conn-t">Twitch OAuth</div><div class="conn-d">Authorize via Twitch for channel access</div></div><button class="btn btn-p" onclick="wizNext()"><i data-lucide="link" class="lc-sm"></i> Connect</button></div>
+            <div class="cd gsi-step">
+              <div class="cd-h"><div class="cd-t"><i data-lucide="download" class="lc-sm ac"></i> Step 1 · Download the config</div></div>
+              <div class="gsi-step-body">
+                <p class="gsi-step-lead">We've generated a config tied to your account. It contains a private token — don't share it.</p>
+                <button class="btn btn-p gsi-dl-btn" type="button" onclick="downloadGsiConfig()">
+                  <i data-lucide="download" class="lc-sm"></i>
+                  Download <code>gamestate_integration_gsi.cfg</code>
+                </button>
+                <div class="gsi-status gsi-status-ok" id="gsiDlStatus" style="display:none">
+                  <i data-lucide="check" class="lc-sm"></i>
+                  <span>Downloaded. Tap <strong>Next</strong> for the install location.</span>
+                </div>
               </div>
             </div>
           </div>
+
           <div class="wiz-panel" id="wiz-2" style="display:none">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="bot" class="lc-sm" style="color:var(--cy)"></i> Step 2: Steam Trade Bot</div></div>
-              <div class="cd-p"><p class="muted">The bot account sends trade offers to winners. Create a dedicated Steam account for the bot.</p>
-                <div class="fg"><label class="fl">Steam Bot Username</label><input type="text" class="fi" placeholder="dropzone_bot" autocomplete="username" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next"/></div>
-                <div class="fg"><label class="fl">Shared Secret</label><input type="password" class="fi" placeholder="From Steam Desktop Authenticator" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="next"/></div>
-                <div class="fg"><label class="fl">Identity Secret</label><input type="password" class="fi" placeholder="For trade confirmation" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"/></div>
-                <button class="btn btn-p btn-w" onclick="wizNext()" style="margin-top:12px">Next</button></div>
+            <div class="cd gsi-step">
+              <div class="cd-h"><div class="cd-t"><i data-lucide="folder-open" class="lc-sm ac"></i> Step 2 · Move it into your CS2 cfg folder</div></div>
+              <div class="gsi-step-body">
+                <p class="gsi-step-lead">Place the file you just downloaded in this folder. CS2 will pick it up automatically.</p>
+                <div class="gsi-path">
+                  <i data-lucide="folder" class="lc-sm gsi-path-ico"></i>
+                  <code id="gsiPath">C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\game\csgo\cfg</code>
+                  <button type="button" class="btn btn-g gsi-copy-btn" onclick="copyGsiPath(this)"><i data-lucide="copy" class="lc-sm"></i> Copy</button>
+                </div>
+                <div class="gsi-hint">
+                  <i data-lucide="lightbulb" class="lc-sm"></i>
+                  <div><strong>Can't find it?</strong> In Steam, right-click <em>Counter-Strike 2</em> → <em>Manage</em> → <em>Browse local files</em>, then open <code>game\csgo\cfg</code>.</div>
+                </div>
+              </div>
             </div>
           </div>
+
           <div class="wiz-panel" id="wiz-3" style="display:none">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="gamepad-2" class="lc-sm" style="color:var(--or)"></i> Step 3: CS2 Game Agent</div></div>
-              <div class="cd-p"><p class="muted">The agent captures game events (ACE, Triple Kill, Clutch) and sends them to DROPZONE. Without it, drops won't work.</p>
-                <div class="conn" style="border:1px solid var(--br1);border-radius:12px;padding:16px;margin-bottom:12px"><div class="conn-i cs"><i data-lucide="cpu" class="lc"></i></div><div class="conn-info"><div class="conn-t">CS2 Game State Integration</div><div class="conn-d">Add config to your CS2 cfg folder</div></div><button class="btn btn-p"><i data-lucide="download" class="lc-sm"></i> Download</button></div>
-                <div style="background:var(--b2);border:1px solid var(--br1);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--t2);line-height:1.6"><span style="color:var(--t4)">// gamestate_integration_dropzone.cfg</span><br>"DROPZONE" { "uri" "https://api.dropzone.gg/events" "timeout" "5.0" }</div>
-                <button class="btn btn-p btn-w" onclick="wizNext()" style="margin-top:12px">Next</button></div>
-            </div>
-          </div>
-          <div class="wiz-panel" id="wiz-4" style="display:none">
-            <div class="cd"><div class="cd-h"><div class="cd-t"><i data-lucide="package-plus" class="lc-sm ac"></i> Step 4: Add Skins to Pool</div></div>
-              <div class="cd-p"><p class="muted">Load skins from the bot's inventory into the drop pool. Minimum 5 skins required to start.</p>
-                <button class="btn btn-p btn-w" style="margin-bottom:16px"><i data-lucide="package-plus" class="lc-sm"></i> Load from Bot Inventory</button>
-                <div style="text-align:center;padding:16px;color:var(--t3);font-size:13px">Skins added: <b style="color:var(--ac)">0 / 5</b></div>
-                <div class="prog"><div class="prog-fill ac" style="width:0%"></div></div>
-                <button class="btn btn-p btn-w" onclick="wizNext(); go('s-dash');" style="margin-top:16px">Finish</button></div>
+            <div class="cd gsi-step">
+              <div class="cd-h"><div class="cd-t"><i data-lucide="play-circle" class="lc-sm ac"></i> Step 3 · Launch CS2</div></div>
+              <div class="gsi-step-body">
+                <p class="gsi-step-lead">Start (or restart) Counter-Strike 2. As soon as a match begins we'll detect the agent.</p>
+                <div class="gsi-verify" id="gsiVerify">
+                  <div class="gsi-verify-status" id="gsiVerifyStatus">
+                    <div class="gsi-spinner" aria-hidden="true"></div>
+                    <span>Waiting for CS2 agent…</span>
+                  </div>
+                  <button type="button" class="btn btn-g" onclick="checkGsiConnection()"><i data-lucide="refresh-cw" class="lc-sm"></i> Check again</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="wiz-btns">
-          <button class="btn btn-g" id="wizPrev" onclick="wizPrev()" style="visibility:hidden"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
-          <button class="btn btn-p" id="wizNextBtn" onclick="wizNext()">Next <i data-lucide="arrow-right" class="lc-sm"></i></button>
+
+        <div class="wiz-btns gsi-foot">
+          <div class="gsi-foot-meta">
+            <span class="gsi-foot-counter" id="gsiFootCounter">Step 1 of 3</span>
+            <a class="gsi-foot-skip" href="javascript:void(0)" onclick="go('s-dash')">Skip for now</a>
+          </div>
+          <div class="gsi-foot-actions">
+            <button class="btn btn-g" id="wizPrev" onclick="wizPrev()" style="visibility:hidden"><i data-lucide="arrow-left" class="lc-sm"></i> Back</button>
+            <button class="btn btn-p" id="wizNextBtn" onclick="wizNext()">Next <i data-lucide="arrow-right" class="lc-sm"></i></button>
+          </div>
         </div>
+
+        <details class="gsi-preview">
+          <summary><i data-lucide="file-code" class="lc-sm"></i> Preview file contents</summary>
+          <pre id="gsiPreview"></pre>
+          <div class="gsi-preview-hint">Your token lives in the <code>auth</code> block. Anyone with it can post game events as you — keep it private.</div>
+        </details>
       </div>
     </div>
 
@@ -456,21 +673,25 @@
       <button class="role-btn" id="rBtnS" type="button"><i data-lucide="radio" class="lc-sm"></i> Streamer</button>
     </div>
     <div class="drawer-nav">
-      <div class="nav-s"><div class="nav-l">Browse</div>
-        <div class="ni act" data-p="browse"><i data-lucide="compass" class="lc-sm"></i> Live Streams<span class="badge ac">10</span></div>
-        <div class="ni" data-p="my-drops"><i data-lucide="gift" class="lc-sm"></i> My Drops</div>
-      </div>
-      <div class="nav-s"><div class="nav-l">Account</div>
-        <div class="ni" data-p="profile"><i data-lucide="user" class="lc-sm"></i> Profile</div>
-        <div class="ni" data-p="v-settings"><i data-lucide="settings" class="lc-sm"></i> Settings</div>
+      <div id="navV">
+        <div class="nav-s"><div class="nav-l">Browse</div>
+          <div class="ni act" data-p="browse"><i data-lucide="compass" class="lc-sm"></i> Live Streams<span class="badge ac">10</span></div>
+          <div class="ni" data-p="my-drops"><i data-lucide="gift" class="lc-sm"></i> My Drops</div>
+        </div>
+        <div class="nav-s"><div class="nav-l">Account</div>
+          <div class="ni" data-p="profile"><i data-lucide="user" class="lc-sm"></i> Profile</div>
+          <div class="ni" data-p="v-settings"><i data-lucide="settings" class="lc-sm"></i> Settings</div>
+        </div>
       </div>
       <div class="nav-s streamer-nav" id="navS" style="display:none"><div class="nav-l">Streamer</div>
         <div class="ni act" data-p="s-dash"><i data-lucide="layout-dashboard" class="lc-sm"></i> Dashboard</div>
         <div class="ni" data-p="s-triggers"><i data-lucide="crosshair" class="lc-sm"></i> Triggers</div>
+        <div class="ni" data-p="s-wallet"><i data-lucide="wallet" class="lc-sm"></i> Wallet</div>
         <div class="ni" data-p="s-hist"><i data-lucide="scroll-text" class="lc-sm"></i> History</div>
         <div class="ni" data-p="s-health"><i data-lucide="heart-pulse" class="lc-sm"></i> Health</div>
       </div>
       <div class="nav-s streamer-nav" id="navSConfig" style="display:none"><div class="nav-l">Config</div>
+        <div class="ni" data-p="s-profile"><i data-lucide="user" class="lc-sm"></i> Profile</div>
         <div class="ni" data-p="s-onboard"><i data-lucide="rocket" class="lc-sm"></i> Setup Wizard</div>
         <div class="ni" data-p="s-settings"><i data-lucide="sliders-horizontal" class="lc-sm"></i> Settings</div>
       </div>

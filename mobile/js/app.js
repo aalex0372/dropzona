@@ -13,7 +13,13 @@ const STREAMS = [
   { id: 7, name: 'ShadowAim', ava: 'SA', game: 'CS2 · Ranked · Anubis', viewers: 420, pool: 6, poolVal: 140, triggers: ['target', 'swords', 'rocket'], live: false, twitch: 'shadowaim', totalDrops: 288, totalDroppedVal: 3650, successRate: 94 },
   { id: 8, name: 'ElectroGo', ava: 'EG', game: 'CS2 · FaceIT · Vertigo', viewers: 650, pool: 7, poolVal: 220, triggers: ['flame', 'skull', 'flag', 'timer'], live: true, twitch: 'electrogo', totalDrops: 512, totalDroppedVal: 7800, successRate: 97 },
   { id: 9, name: 'RustyAim', ava: 'RA', game: 'CS2 · Ranked · Mirage', viewers: 580, pool: 8, poolVal: 195, triggers: ['target', 'flame', 'crown'], live: true, twitch: 'rustyaim', totalDrops: 398, totalDroppedVal: 5400, successRate: 96 },
-  { id: 10, name: 'TwistPlays', ava: 'TP', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['shield-check', 'trophy'], live: true, twitch: 'twistplays', totalDrops: 267, totalDroppedVal: 3200, successRate: 95 }
+  { id: 10, name: 'TwistPlays', ava: 'TP', game: 'CS2 · Premier · Inferno', viewers: 390, pool: 5, poolVal: 98, triggers: ['shield-check', 'trophy'], live: true, twitch: 'twistplays', totalDrops: 267, totalDroppedVal: 3200, successRate: 95 },
+  { id: 11, name: 'JakeStream', ava: 'JK', game: 'CS2 · Ranked · Mirage', viewers: 412, pool: 6, poolVal: 165, triggers: ['target', 'flame', 'flag'], live: true, twitch: 'jakestream', totalDrops: 189, totalDroppedVal: 2800, successRate: 94 },
+  { id: 12, name: 'MayaPlays', ava: 'MY', game: 'CS2 · FaceIT · Inferno', viewers: 588, pool: 7, poolVal: 198, triggers: ['crown', 'swords', 'rocket'], live: true, twitch: 'mayaplays', totalDrops: 356, totalDroppedVal: 5100, successRate: 97 },
+  { id: 13, name: 'ChrisCS', ava: 'CC', game: 'CS2 · Premier · Dust2', viewers: 721, pool: 9, poolVal: 244, triggers: ['target', 'skull', 'crown', 'flag'], live: true, twitch: 'chriscs', totalDrops: 478, totalDroppedVal: 7200, successRate: 98 },
+  { id: 14, name: 'SamPlays', ava: 'SP', game: 'CS2 · Ranked · Nuke', viewers: 334, pool: 4, poolVal: 89, triggers: ['flame', 'flag'], live: true, twitch: 'samplays', totalDrops: 156, totalDroppedVal: 1900, successRate: 93 },
+  { id: 15, name: 'RileyLive', ava: 'RL', game: 'CS2 · FaceIT · Overpass', viewers: 892, pool: 11, poolVal: 312, triggers: ['skull', 'crown', 'shield-check'], live: true, twitch: 'rileylive', totalDrops: 634, totalDroppedVal: 9500, successRate: 98 },
+  { id: 16, name: 'JordanAim', ava: 'JA', game: 'CS2 · Premier · Ancient', viewers: 556, pool: 8, poolVal: 176, triggers: ['crown', 'timer', 'trophy'], live: true, twitch: 'jordanaim', totalDrops: 312, totalDroppedVal: 4400, successRate: 96 }
 ];
 const SKINS = [
   { name: 'Desert Eagle | Blaze', rarity: 'cv' },
@@ -107,16 +113,19 @@ const PM = {
   'stream': ['Stream', 'Participate in drops in real time'],
   'my-drops': ['My Drops', 'History of won skins'],
   'profile': ['Profile', 'Account & connections'],
+  's-profile': ['Profile', 'Account & connections'],
   'v-settings': ['Settings', 'Notifications & account'],
   's-dash': ['Dashboard', 'Manage your stream in real time'],
+  's-wallet': ['Wallet', 'Top up, withdraw, and track transactions'],
   's-triggers': ['Triggers', 'Configure game event drops'],
   's-hist': ['History', 'All drops and payouts'],
   's-health': ['Health', 'System status & errors'],
-  's-onboard': ['Setup Wizard', 'Step-by-step onboarding'],
+  's-onboard': ['Setup Wizard', 'Connect your CS2 game agent'],
   's-settings': ['Settings', 'API, bot & overlay'],
 };
 
-const STREAMER_PAGES = ['s-dash', 's-triggers', 's-health', 's-settings', 's-onboard', 's-hist'];
+const STREAMER_PAGES = ['s-dash', 's-wallet', 's-triggers', 's-health', 's-settings', 's-onboard', 's-hist', 's-profile'];
+const WIZARD_STEPS = 3;
 
 function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
 function rndPrice() { return (Math.random() * 50 + 3).toFixed(2); }
@@ -448,8 +457,13 @@ function startSim() {
   }, 8000);
 }
 
+function updateWizFootCounter(step) {
+  const el = document.getElementById('gsiFootCounter');
+  if (el) el.textContent = 'Step ' + step + ' of ' + WIZARD_STEPS;
+}
+
 function wizNext() {
-  if (wizStep < 4) {
+  if (wizStep < WIZARD_STEPS) {
     const panel = document.getElementById('wiz-' + wizStep);
     if (panel) panel.style.display = 'none';
     const steps = document.getElementById('wizSteps');
@@ -464,7 +478,8 @@ function wizNext() {
     const wizPrevBtn = document.getElementById('wizPrev');
     if (wizPrevBtn) wizPrevBtn.style.visibility = 'visible';
     const wizNextBtn = document.getElementById('wizNextBtn');
-    if (wizNextBtn) wizNextBtn.innerHTML = wizStep === 4 ? 'Finish <i data-lucide="check" class="lc-sm"></i>' : 'Next <i data-lucide="arrow-right" class="lc-sm"></i>';
+    if (wizNextBtn) wizNextBtn.innerHTML = wizStep === WIZARD_STEPS ? 'Finish <i data-lucide="check" class="lc-sm"></i>' : 'Next <i data-lucide="arrow-right" class="lc-sm"></i>';
+    updateWizFootCounter(wizStep);
     if (typeof lucide !== 'undefined') lucide.createIcons();
   } else {
     go('s-dash');
@@ -488,18 +503,118 @@ function wizPrev() {
     if (wizPrevBtn) wizPrevBtn.style.visibility = wizStep === 1 ? 'hidden' : 'visible';
     const wizNextBtn = document.getElementById('wizNextBtn');
     if (wizNextBtn) wizNextBtn.innerHTML = 'Next <i data-lucide="arrow-right" class="lc-sm"></i>';
+    updateWizFootCounter(wizStep);
     if (typeof lucide !== 'undefined') lucide.createIcons();
   }
 }
 
+/* CS2 Game State Integration onboarding helpers */
+function _generateGsiToken() {
+  const bytes = new Uint8Array(32);
+  (window.crypto || window.msCrypto).getRandomValues(bytes);
+  return Array.prototype.map.call(bytes, (b) => ('0' + b.toString(16)).slice(-2)).join('');
+}
+function _getGsiToken() {
+  let t = localStorage.getItem('dropzona_gsi_token');
+  if (!t) { t = _generateGsiToken(); localStorage.setItem('dropzona_gsi_token', t); }
+  return t;
+}
+function _buildGsiConfig(token) {
+  return [
+    '"Console Sample v.1"',
+    '{',
+    '"uri" "https://localhost:5054/gsi"',
+    '"timeout" "5.0"',
+    '"buffer" "0.0"',
+    '"throttle" "0.1"',
+    '"heartbeat" "60.0"',
+    '"auth"',
+    '{',
+    '"token" "' + token + '"',
+    '}',
+    '"output"',
+    '{',
+    '"precision_time" "3"',
+    '"precision_position" "1"',
+    '"precision_vector" "3"',
+    '}',
+    '"data"',
+    '{',
+    '"provider" "1"',
+    '"map" "1"',
+    '"round" "1"',
+    '"player_id" "1"',
+    '"player_state" "1"',
+    '"player_weapons" "1"',
+    '"player_match_stats" "1"',
+    '"bomb" "1"',
+    '}',
+    '}',
+    ''
+  ].join('\n');
+}
+function refreshGsiPreview() {
+  const pre = document.getElementById('gsiPreview');
+  if (pre) pre.textContent = _buildGsiConfig(_getGsiToken());
+}
+function downloadGsiConfig() {
+  const token = _getGsiToken();
+  const content = _buildGsiConfig(token);
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'gamestate_integration_gsi.cfg';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => { URL.revokeObjectURL(url); }, 1000);
+  const st = document.getElementById('gsiDlStatus');
+  if (st) st.style.display = 'flex';
+  refreshGsiPreview();
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+function copyGsiPath(btn) {
+  const path = (document.getElementById('gsiPath')?.textContent || '').trim();
+  if (!path) return;
+  const done = () => {
+    const orig = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="check" class="lc-sm"></i> Copied!';
+    btn.classList.add('gsi-copied');
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    setTimeout(() => {
+      btn.innerHTML = orig;
+      btn.classList.remove('gsi-copied');
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }, 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(path).then(done, done);
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = path; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (_e) {}
+    document.body.removeChild(ta); done();
+  }
+}
+function checkGsiConnection() {
+  const st = document.getElementById('gsiVerifyStatus');
+  if (!st) return;
+  st.innerHTML = '<div class="gsi-spinner" aria-hidden="true"></div><span>Checking…</span>';
+  setTimeout(() => {
+    st.innerHTML = '<i data-lucide="alert-circle" class="lc-sm" style="color:var(--or)"></i><span>Not detected yet. Make sure CS2 is running with the file in <code>csgo\\cfg</code>.</span>';
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  }, 1400);
+}
+
 function setRole(r) {
   role = r;
+  localStorage.setItem('dropzona_role', r);
   const roleSl = document.getElementById('roleSl');
   if (roleSl) roleSl.classList.toggle('str', r === 's');
   const rBtnV = document.getElementById('rBtnV');
   const rBtnS = document.getElementById('rBtnS');
   if (rBtnV) rBtnV.classList.toggle('active', r === 'v');
   if (rBtnS) rBtnS.classList.toggle('active', r === 's');
+  const navV = document.getElementById('navV');
+  if (navV) navV.style.display = r === 'v' ? 'block' : 'none';
   const navS = document.getElementById('navS');
   if (navS) navS.style.display = r === 's' ? 'block' : 'none';
   const navSConfig = document.getElementById('navSConfig');
@@ -533,14 +648,19 @@ function updateBottomNav() {
   const bn = document.getElementById('bottomNav');
   if (!bn) return;
   const tabs = bn.querySelectorAll('.bn-i');
-  const tab0Pages = role === 's' ? STREAMER_PAGES : ['browse', 'stream'];
+  const tab0Pages = role === 's'
+    ? ['s-dash', 's-wallet', 's-triggers', 's-health', 's-settings', 's-onboard', 's-hist']
+    : ['browse', 'stream'];
   const tab1Pages = ['my-drops'];
-  const tab2Pages = ['profile', 'v-settings'];
+  const tab2Pages = role === 's' ? ['s-profile'] : ['profile', 'v-settings'];
   const groups = [tab0Pages, tab1Pages, tab2Pages];
   tabs.forEach((tab, i) => {
     const pages = groups[i] || [];
     tab.classList.toggle('active', pages.indexOf(curPage) !== -1);
   });
+  // Profile tab routes role-aware
+  const profileTab = tabs[2];
+  if (profileTab) profileTab.dataset.p = role === 's' ? 's-profile' : 'profile';
 }
 
 function go(p) {
@@ -558,6 +678,7 @@ function go(p) {
   if (m && pgS) pgS.textContent = m[1];
   updateBottomNav();
   closeDrawer();
+  document.dispatchEvent(new window.CustomEvent('dropzona:page-change', { detail: { pageId: p } }));
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
@@ -659,12 +780,252 @@ function installKeyboardWatcher() {
   }
 }
 
+/**
+ * Log out: clear auth state and redirect to landing page.
+ */
+function dropzonaLogout() {
+  localStorage.removeItem('dropzona_auth');
+  window.location.href = '/';
+}
+
+/**
+ * Hydrate profile fields with stored user data (best-effort).
+ */
+function hydrateUser() {
+  const stored = JSON.parse(localStorage.getItem('dropzona_user') || 'null');
+  if (!stored) return;
+  const initials = stored.avatarInitials || stored.username.slice(0, 2).toUpperCase();
+  const sinceText = stored.createdAt
+    ? 'Member since ' + new Date(stored.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+    : null;
+  const set = (id, val) => { const el = document.getElementById(id); if (el && val != null) el.textContent = val; };
+  set('sProfileName', stored.username);
+  set('sProfileAva', initials);
+  if (sinceText) set('sProfileSince', sinceText);
+}
+
 window.go = go;
 window.setRole = setRole;
 window.openStream = openStream;
 window.wizNext = wizNext;
 window.wizPrev = wizPrev;
 window.simulateTrigger = simulateTrigger;
+window.downloadGsiConfig = downloadGsiConfig;
+window.copyGsiPath = copyGsiPath;
+window.checkGsiConnection = checkGsiConnection;
+window.dropzonaLogout = dropzonaLogout;
+
+function initWalletTopup() {
+  const modeTitle = document.getElementById('walletModeTitle');
+  const topupView = document.getElementById('walletTopupView');
+  const withdrawView = document.getElementById('walletWithdrawView');
+  const openWithdrawBtn = document.getElementById('walletOpenWithdrawBtn');
+  const backToTopupBtn = document.getElementById('walletBackToTopupBtn');
+  const amountInput = document.getElementById('walletAmountInput');
+  const withdrawAmountInput = document.getElementById('walletWithdrawAmountInput');
+  const converted = document.getElementById('walletAmountConverted');
+  const withdrawConverted = document.getElementById('walletWithdrawConverted');
+  const getsVal = document.getElementById('walletGetsVal');
+  const receiveVal = document.getElementById('walletReceiveVal');
+  const feeVal = document.getElementById('walletFeeVal');
+  const walletAddressInput = document.getElementById('walletAddressInput');
+  const walletAddressNetworkHint = document.getElementById('walletAddressNetworkHint');
+  const cryptoBtns = Array.from(document.querySelectorAll('.wallet-crypto-btn[data-crypto][data-rate]'));
+  const quickBtns = Array.from(document.querySelectorAll('.wallet-quick-btn[data-amount]'));
+  const depositBtn = document.getElementById('walletDepositBtn');
+  const withdrawBtn = document.getElementById('walletWithdrawBtn');
+  const walletTxWrap = document.querySelector('.wallet-tx-table-wrap');
+  const depositModal = document.getElementById('walletDepositModal');
+  const depositModalClose = document.getElementById('walletDepositClose');
+  const depositModalCloseInline = document.getElementById('walletDepositCloseInline');
+  const depositModalCopy = document.getElementById('walletDepositCopyBtn');
+  const depositSetAmountBtn = document.getElementById('walletDepositSetAmountBtn');
+  const depositShareBtn = document.getElementById('walletDepositShareBtn');
+  const depositNetworkLabel = document.getElementById('walletDepositNetworkLabel');
+  const depositNetworkName = document.getElementById('walletDepositNetworkName');
+  const depositCoinMark = document.getElementById('walletDepositCoinMark');
+  const depositWarningText = document.getElementById('walletDepositWarningText');
+  const depositExpected = document.getElementById('walletDepositExpected');
+  const depositExpectedCrypto = document.getElementById('walletDepositExpectedCrypto');
+  const depositAddress = document.getElementById('walletDepositAddress');
+
+  if (!amountInput || !getsVal || !cryptoBtns.length) return;
+
+  const formatCoinAmount = (v) => (v >= 1 ? v.toFixed(2) : v.toFixed(7));
+  const formatUsd = (v) => `$${v.toFixed(2)}`;
+  const getSelectedCryptoBtn = () => cryptoBtns.find((btn) => btn.classList.contains('active')) || cryptoBtns[0];
+  const setSelectedCryptoBtn = (targetBtn) => {
+    cryptoBtns.forEach((btn) => btn.classList.toggle('active', btn === targetBtn));
+  };
+
+  const switchWalletMode = (mode) => {
+    const isWithdraw = mode === 'withdraw';
+    if (topupView) topupView.style.display = isWithdraw ? 'none' : 'block';
+    if (withdrawView) withdrawView.style.display = isWithdraw ? 'block' : 'none';
+    if (modeTitle) {
+      modeTitle.innerHTML = isWithdraw
+        ? '<i data-lucide="send" class="lc-sm ac"></i> Withdraw'
+        : '<i data-lucide="plus-circle" class="lc-sm ac"></i> Top Up';
+    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  };
+
+  const syncQuickButtons = (amount) => {
+    quickBtns.forEach((btn) => {
+      const val = Number(btn.dataset.amount || 0);
+      const isActive = val === amount;
+      btn.classList.toggle('btn-p', isActive);
+      btn.classList.toggle('btn-g', !isActive);
+    });
+  };
+
+  const openDepositModal = () => {
+    if (!depositModal) return;
+    const selectedBtn = getSelectedCryptoBtn();
+    const crypto = selectedBtn.dataset.crypto || 'TRC-20';
+    const amount = Math.max(0, Number(amountInput?.value || 0));
+    const coinName = crypto === 'ERC-20' ? 'Ethereum' : 'TRON';
+    const coinMark = crypto === 'ERC-20' ? 'E' : 'T';
+    const symbol = 'USDT';
+    if (depositNetworkLabel) depositNetworkLabel.textContent = crypto;
+    if (depositNetworkName) depositNetworkName.textContent = coinName;
+    if (depositCoinMark) depositCoinMark.textContent = coinMark;
+    if (depositWarningText) depositWarningText.textContent = `Only send ${crypto} assets to this address. Other assets will be lost forever.`;
+    if (depositExpected) depositExpected.textContent = formatUsd(amount);
+    if (depositExpectedCrypto) depositExpectedCrypto.textContent = `${amount.toFixed(2)} ${symbol}`;
+    if (depositAddress) {
+      depositAddress.textContent = crypto === 'ERC-20'
+        ? '0x4a6b2D3f9A0c4c1E8d72A9f17b3DFe91Aa19Ef'
+        : 'TXf2mV7k8Jp4a1rN6cB9uL3qW5zY2sDa9K2';
+    }
+    depositModal.style.display = 'flex';
+    lockBodyScroll();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+  };
+
+  const closeDepositModal = () => {
+    if (!depositModal || depositModal.style.display === 'none') return;
+    depositModal.style.display = 'none';
+    unlockBodyScroll();
+  };
+
+  const updateValues = () => {
+    const selectedBtn = getSelectedCryptoBtn();
+    const crypto = selectedBtn.dataset.crypto || 'TRC-20';
+    const rate = Number(selectedBtn.dataset.rate || 1);
+    const topupAmount = Math.max(0, Number(amountInput?.value || 0));
+    const withdrawAmount = Math.max(0, Number(withdrawAmountInput?.value || 0));
+    const topupCoinAmount = rate > 0 ? (topupAmount / rate) : 0;
+    const withdrawCoinAmount = rate > 0 ? (withdrawAmount / rate) : 0;
+    const topupNetAmount = topupAmount * 0.9827;
+    const withdrawNetAmount = withdrawAmount * 0.9827;
+    const withdrawFeeAmount = Math.max(0, withdrawAmount - withdrawNetAmount);
+    if (converted) converted.textContent = `~ ${crypto} ${formatCoinAmount(topupCoinAmount)}`;
+    if (withdrawConverted) withdrawConverted.textContent = `~ ${crypto} ${formatCoinAmount(withdrawCoinAmount)}`;
+    if (getsVal) getsVal.textContent = formatUsd(topupNetAmount);
+    if (receiveVal) receiveVal.textContent = formatUsd(withdrawNetAmount);
+    if (feeVal) feeVal.textContent = formatUsd(withdrawFeeAmount);
+    if (walletAddressNetworkHint) walletAddressNetworkHint.textContent = crypto;
+    syncQuickButtons(topupAmount);
+  };
+
+  cryptoBtns.forEach((btn) => {
+    btn.addEventListener('click', () => { setSelectedCryptoBtn(btn); updateValues(); });
+  });
+  amountInput?.addEventListener('input', updateValues);
+  withdrawAmountInput?.addEventListener('input', updateValues);
+  quickBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const amount = Number(btn.dataset.amount || 100);
+      if (amountInput) amountInput.value = String(amount);
+      updateValues();
+    });
+  });
+
+  const flashAction = (btn, doneText) => {
+    if (!btn) return;
+    const original = btn.innerHTML;
+    btn.innerHTML = `<i data-lucide="check" class="lc-sm"></i> ${doneText}`;
+    btn.disabled = true;
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    window.setTimeout(() => {
+      btn.innerHTML = original;
+      btn.disabled = false;
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    }, 1400);
+  };
+
+  depositBtn?.addEventListener('click', openDepositModal);
+  openWithdrawBtn?.addEventListener('click', () => switchWalletMode('withdraw'));
+  backToTopupBtn?.addEventListener('click', () => switchWalletMode('topup'));
+  withdrawBtn?.addEventListener('click', () => {
+    const walletAddress = (walletAddressInput?.value || '').trim();
+    if (!walletAddress) {
+      walletAddressInput?.focus();
+      walletAddressInput?.classList.add('wallet-addr-input--error');
+      window.setTimeout(() => walletAddressInput?.classList.remove('wallet-addr-input--error'), 1200);
+      return;
+    }
+    flashAction(withdrawBtn, 'Withdrawal Started');
+  });
+  depositModalClose?.addEventListener('click', closeDepositModal);
+  depositModalCloseInline?.addEventListener('click', closeDepositModal);
+  depositModalCopy?.addEventListener('click', async () => {
+    const addressText = (depositAddress?.textContent || '').trim();
+    if (!addressText) return;
+    try {
+      await navigator.clipboard.writeText(addressText);
+      flashAction(depositModalCopy, 'Copied');
+    } catch {
+      flashAction(depositModalCopy, 'Copy Failed');
+    }
+  });
+  depositSetAmountBtn?.addEventListener('click', () => {
+    closeDepositModal();
+    amountInput?.focus();
+  });
+  depositShareBtn?.addEventListener('click', async () => {
+    const text = `Deposit ${depositExpectedCrypto?.textContent || ''} to ${depositAddress?.textContent || ''}`;
+    try {
+      if (navigator.share) await navigator.share({ text });
+      else await navigator.clipboard.writeText(text);
+      flashAction(depositShareBtn, 'Shared');
+    } catch {
+      flashAction(depositShareBtn, 'Cancelled');
+    }
+  });
+  depositModal?.addEventListener('click', (e) => {
+    if (e.target === depositModal) closeDepositModal();
+  });
+  walletTxWrap?.addEventListener('click', async (e) => {
+    const target = e.target;
+    if (!(target instanceof HTMLElement)) return;
+    const copyBtn = target.closest('.wallet-hash-copy');
+    if (!copyBtn) return;
+    const hash = copyBtn.getAttribute('data-hash') || '';
+    if (!hash) return;
+    try {
+      await navigator.clipboard.writeText(hash);
+      const prev = copyBtn.textContent;
+      copyBtn.textContent = 'Copied';
+      window.setTimeout(() => { copyBtn.textContent = prev || 'Copy'; }, 900);
+    } catch {
+      const prev = copyBtn.textContent;
+      copyBtn.textContent = 'Failed';
+      window.setTimeout(() => { copyBtn.textContent = prev || 'Copy'; }, 900);
+    }
+  });
+
+  document.addEventListener('dropzona:page-change', (e) => {
+    if (e?.detail?.pageId === 's-wallet') {
+      switchWalletMode('topup');
+      closeDepositModal();
+    }
+  });
+
+  switchWalletMode('topup');
+  updateValues();
+}
 
 function init() {
   document.querySelectorAll('.bn-i').forEach(el => {
@@ -684,7 +1045,10 @@ function init() {
   });
   document.getElementById('rBtnV')?.addEventListener('click', () => setRole('v'));
   document.getElementById('rBtnS')?.addEventListener('click', () => setRole('s'));
-  document.querySelector('.drawer-user')?.addEventListener('click', () => { go('profile'); closeDrawer(); });
+  document.querySelector('.drawer-user')?.addEventListener('click', () => {
+    go(role === 's' ? 's-profile' : 'profile');
+    closeDrawer();
+  });
 
   const filterSel = document.getElementById('viewerStreamFilter');
   if (filterSel && !filterSel.dataset.bound) {
@@ -695,6 +1059,13 @@ function init() {
   buildTicker();
   buildStreams();
   buildFollowing();
+  initWalletTopup();
+  refreshGsiPreview();
+  hydrateUser();
+
+  // Restore saved role preference (streamer vs viewer)
+  const savedRole = localStorage.getItem('dropzona_role');
+  if (savedRole === 's') setRole('s');
 
   const msgs = [
     '<b>AlexPlays</b> — Triple kill on Mirage! Drop activated',
