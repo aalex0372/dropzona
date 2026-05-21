@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>404 · Lost drop | Dropzona</title>
-  <meta name="description" content="That page doesn't exist on Dropzona. Head back to the homepage or browse live CS2 skin drops."/>
+  <meta name="description" content="That page doesn't exist on Dropzona. Head back to the homepage to learn how automated CS2 skin drops work."/>
   <meta name="robots" content="noindex, follow"/>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/%3E%3C/svg%3E" type="image/svg+xml">
   <meta name="theme-color" content="#0b0a12"/>
@@ -403,7 +403,7 @@
 
         <div class="headline">
           <h1>This drop doesn't exist.</h1>
-          <p>The page you're looking for has either expired, been claimed, or never existed. Head back to the home page or hop into a live stream.</p>
+          <p>The page you're looking for has either expired, been moved, or never existed. Head back to the home page or visit support.</p>
           <div id="req-path-row" class="req-path-row">
             <span class="label">Requested</span>
             <code id="req-path" class="req-path"></code>
@@ -415,16 +415,15 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
             <span>Back to home</span>
           </a>
-          <a href="/app/browse" class="btn btn-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-            <span>Browse live streams</span>
+          <a href="/support.html" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/><path d="M12 7v5l3 3"/></svg>
+            <span>Get support</span>
           </a>
         </div>
 
         <div class="shortcuts">
           <span class="label">Shortcuts</span>
           <span class="item"><span class="kbd">H</span> Home</span>
-          <span class="item"><span class="kbd">B</span> Browse</span>
           <span class="item"><span class="kbd">S</span> Support</span>
           <span class="item"><span class="kbd">Esc</span> Home</span>
         </div>
@@ -653,7 +652,6 @@
     if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target && e.target.isContentEditable)) return;
     var k = e.key;
     if (k === 'Escape' || k === 'h' || k === 'H'){ e.preventDefault(); window.location.href = '/'; }
-    else if (k === 'b' || k === 'B'){ e.preventDefault(); window.location.href = '/app/browse'; }
     else if (k === 's' || k === 'S'){ e.preventDefault(); window.location.href = '/support.html'; }
   });
 })();
